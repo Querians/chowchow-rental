@@ -1,0 +1,29 @@
+{
+  "name": "chowchow-rental",
+  "version": "1.0.0",
+  "packageManager": "yarn@1.22.19",
+  "license": "-",
+  "private": true,
+  "scripts": {
+    "start": "docker-compose up",
+    "build": "turbo run build",
+    "dev": "cross-env turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "turbo run format"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "*",
+    "turbo": "^1.9.1"
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": ">=16.0.0"
+  }
+}
