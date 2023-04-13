@@ -33,11 +33,12 @@ services:
     ports:
       - '8000:8000'
     build:
-      context: apps/backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
     volumes:
       - ./apps/backend:/app/apps/backend
       - /app/apps/backend/node_modules
+    # command: yarn start:docker
 
 volumes:
   mysql:

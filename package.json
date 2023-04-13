@@ -5,7 +5,7 @@
   "license": "-",
   "private": true,
   "scripts": {
-    "start": "docker-compose up",
+    "start:docker": "docker-compose up",
     "build": "turbo run build",
     "dev": "cross-env turbo run dev --parallel",
     "lint": "turbo run lint",

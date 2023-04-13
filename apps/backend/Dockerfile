@@ -20,7 +20,7 @@ RUN yarn install
 
 # Build the backend and its dependencies
 COPY --from=base /app/out/full/ .
-COPY --from=base turbo.json turbo.json
+COPY turbo.json turbo.json
 RUN yarn turbo run build --filter=backend...
 
 FROM node:18.15.0 AS runner
