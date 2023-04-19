@@ -2,18 +2,23 @@
   "name": "chowchow-rental",
   "version": "1.0.0",
   "packageManager": "yarn@1.22.19",
-  "license": "-",
   "private": true,
   "scripts": {
-    "start:docker": "docker-compose up",
     "build": "turbo run build",
     "dev": "cross-env turbo run dev --parallel",
+    "dev:frontend": "turbo run dev --filter=frontend",
+    "dev:dashboard": "turbo run dev --filter=dashboard",
+    "dev:admin": "turbo run dev --filter=admin",
+    "db:start": "docker-compose up -d",
+    "db:open": "yarn prisma studio",
     "lint": "turbo run lint",
     "format": "turbo run format"
   },
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "packages/config/*",
+    "packages/shared/*"
   ],
   "dependencies": {
     "cross-env": "^7.0.3"

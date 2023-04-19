@@ -20,10 +20,23 @@
         "cache": false,
         "persistent": true
       },
+      "db:start":{
+        "cache": false
+      },
       "db:generate": {
         "cache": false
       },
       "db:push": {
+        "cache": false
+      },
+      "db:seed": {
+        "cache": false
+      },
+      "db:migrate": {
+        "dependsOn": ["db:start"],
+        "cache": false
+      },
+      "db:open":{
         "cache": false
       }  
     }

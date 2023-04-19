@@ -1,0 +1,23 @@
+{
+    "name": "ui",
+    "version": "1.0.0",
+    "main": "./index.js",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "autoprefixer": "10.4.14",
+        "flowbite": "^1.6.5",
+        "flowbite-react": "^0.4.3",
+        "jotai": "^2.0.4",
+        "next": "13.3.0",
+        "postcss": "8.4.21",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "tailwindcss": "3.3.1",
+        "eslint": "^8.38.0",
+        "eslint-config-custom": "*"
+    }
+}

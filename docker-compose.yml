@@ -24,20 +24,20 @@ services:
       PMA_USER: $DB_USER
       PMA_PASSWORD: $DB_PWD
 
-  backend:
-    links:
-      - mysql
-    depends_on:
-      - mysql
-    container_name: backend
-    ports:
-      - '8000:8000'
-    build:
-      context: .
-      dockerfile: ./apps/backend/Dockerfile
-    volumes:
-      - ./apps/backend:/app/apps/backend
-      - /app/apps/backend/node_modules
+  # backend:
+  #   links:
+  #     - mysql
+  #   depends_on:
+  #     - mysql
+  #   container_name: backend
+  #   ports:
+  #     - '8000:8000'
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/backend/Dockerfile
+  #   volumes:
+  #     - ./apps/backend:/app/apps/backend
+  #     - /app/apps/backend/node_modules
     # command: yarn start:docker
 
 volumes:

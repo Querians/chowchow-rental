@@ -1,7 +1,8 @@
 {
-    "name": "eslint-config-custom",
+    "name": "@chowchow/eslint-config-custom",
     "version": "1.0.0",
     "main": "index.js",
+    "private": true,
     "dependencies": {
         "eslint": "^8.38.0",
         "eslint-config-next": "^13.3.0",

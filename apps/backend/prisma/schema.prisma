@@ -10,28 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Customer {
+  id        String    @id @default(uuid())
+  firstname String    @db.VarChar(30)
+  lastname  String    @db.VarChar(30)
+  dob       DateTime
+  tel       String    @db.VarChar(10)
+  email     String    @unique
+  password  String
+  order     Order[]
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Order {
+  id            String      @id @default(uuid())
+  customer      Customer    @relation(fields: [customerId], references: [id])
+  customerId    String
+  addressDetail String
+  street        String
+  subdistrict   String
+  zipcode       String      @db.VarChar(5)
+  latitude      Decimal     @db.Decimal(8, 6)
+  longitude     Decimal     @db.Decimal(9, 6)
+  receiverTel   String      @db.VarChar(10)
+  totalPrice    Float       @db.Double
+  orderDate     DateTime    @default(now())
+  sendingDate   DateTime?
+  returnDate    DateTime?
+  receiver      String
+  status        OrderStatus @relation(fields: [statusCode], references: [statusCode])
+  statusCode    Int
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+model OrderStatus {
+  statusCode    Int         @id @db.Int
+  statusDef     String      @db.VarChar(30)
+  order         Order[]
 }
