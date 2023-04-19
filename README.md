@@ -81,3 +81,13 @@ yarn format
 - [colorize](https://marketplace.visualstudio.com/items?itemName=kamikillerto.vscode-colorize)
 - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+
+## Our Team
+
+FirstName | LastName | ID
+--- | --- | --- |
+Kanyaluck | Chimchome | 64070501003
+Boonyarit | Samran | 64070501028
+Warisara | Patib | 64070501044
+Chanidapa | Chanama | 64070501090
+Nontawat | Kunlayawuttipong | 64070501093
