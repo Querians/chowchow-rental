@@ -5,14 +5,14 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "cross-env turbo run dev --parallel",
-    "dev:frontend": "turbo run dev --filter=frontend",
-    "dev:dashboard": "turbo run dev --filter=dashboard",
-    "dev:admin": "turbo run dev --filter=admin",
+    "dev": "cross-env turbo run dev --parallel --no-daemon",
+    "dev:frontend": "turbo run dev --filter=frontend --no-daemon",
+    "dev:dashboard": "turbo run dev --filter=dashboard --no-daemon",
+    "dev:admin": "turbo run dev --filter=admin --no-daemon",
     "db:start": "docker-compose up -d",
-    "db:open": "yarn prisma studio",
-    "lint": "turbo run lint",
-    "format": "turbo run format"
+    "db:open": "turbo run db:open --filter=backend --no-daemon",
+    "lint": "turbo run lint --no-daemon",
+    "format": "prettier --write ."
   },
   "workspaces": [
     "apps/*",
@@ -25,7 +25,9 @@
   },
   "devDependencies": {
     "eslint-config-custom": "*",
-    "turbo": "^1.9.1"
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "turbo": "^1.9.3"
   },
   "engines": {
     "npm": "please-use-yarn",

@@ -1,9 +1,5 @@
 import * as React from 'react';
 
 export const EmailInput = () => {
-  return (
-    <>
-
-    </>
-  );
+  return <></>;
 };

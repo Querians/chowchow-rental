@@ -6,8 +6,7 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "format": "eslint --fix --ext .js,.jsx ."
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "dependencies": {
     "autoprefixer": "10.4.14",

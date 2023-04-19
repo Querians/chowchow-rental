@@ -1,43 +1,38 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "globalDependencies": [
-      "**/.env.*local"
-    ],
-    "pipeline": {
-      "build": {
-        "outputs": [
-          ".next/**",
-          "!.next/cache/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "format": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false,
-        "persistent": true
-      },
-      "db:start":{
-        "cache": false
-      },
-      "db:generate": {
-        "cache": false
-      },
-      "db:push": {
-        "cache": false
-      },
-      "db:seed": {
-        "cache": false
-      },
-      "db:migrate": {
-        "dependsOn": ["db:start"],
-        "cache": false
-      },
-      "db:open":{
-        "cache": false
-      }  
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "format": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:start": {
+      "cache": false
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:seed": {
+      "cache": false
+    },
+    "db:migrate": {
+      "dependsOn": ["db:start"],
+      "cache": false
+    },
+    "db:open": {
+      "cache": false
     }
   }
+}

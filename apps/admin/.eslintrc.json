@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["custom", "next/core-web-vitals"] // Tells ESLint to use the "eslint-config-custom" package
+  "extends": ["custom"] // Tells ESLint to use the "eslint-config-custom" package
 }
