@@ -32,7 +32,7 @@ yarn dev
 
 ### Develop Only Customer Page (Store)
 
-You can access customer page is in path '**apps\frontend**'.
+You can access customer page is in path '**[apps/frontend](apps/frontend)**'.
 
 ```bash
 yarn dev:frontend
@@ -40,7 +40,7 @@ yarn dev:frontend
 
 ### Develop Only Staff Page (Admin)
 
-You can access staff page is in path '**apps/admin**'.
+You can access staff page is in path '**[apps/admin](apps/admin)**'.
 
 ```bash
 yarn dev:admin
