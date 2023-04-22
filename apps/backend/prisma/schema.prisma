@@ -1,5 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// To enhance programming experieces in Visual Studio code,
+// please use "Prisma" extension.
 
 generator client {
   provider = "prisma-client-js"
