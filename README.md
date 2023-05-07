@@ -84,10 +84,10 @@ yarn format
 
 ## Our Team
 
-FirstName | LastName | ID
---- | --- | --- |
-Kanyaluck | Chimchome | 64070501003
-Boonyarit | Samran | 64070501028
-Warisara | Patib | 64070501044
-Chanidapa | Chanama | 64070501090
-Nontawat | Kunlayawuttipong | 64070501093
+| FirstName | LastName         | ID          |
+| --------- | ---------------- | ----------- |
+| Kanyaluck | Chimchome        | 64070501003 |
+| Boonyarit | Samran           | 64070501028 |
+| Warisara  | Patib            | 64070501044 |
+| Chanidapa | Chanama          | 64070501090 |
+| Nontawat  | Kunlayawuttipong | 64070501093 |

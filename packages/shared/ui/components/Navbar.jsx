@@ -24,8 +24,8 @@ export const Navbar = () => {
               className="mr-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
               id="user-menu-button"
               aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
+              datadropdowntoggle="user-dropdown"
+              datadropdownplacement="bottom"
             >
               <span className="sr-only">Open user menu</span>
             </button>
@@ -77,7 +77,7 @@ export const Navbar = () => {
               </ul>
             </div>
             <button
-              data-collapse-toggle="mobile-menu-2"
+              datacollapsetoggle="mobile-menu-2"
               type="button"
               className="ml-1 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
               aria-controls="mobile-menu-2"
@@ -92,9 +92,9 @@ export const Navbar = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
