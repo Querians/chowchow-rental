@@ -13,9 +13,9 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
     "prisma": "^4.12.0",
     "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
   },
   "scripts": {
@@ -24,11 +24,12 @@
     "db:push": "prisma db push --skip-generate",
     "db:seed": "prisma db seed",
     "db:open": "prisma studio",
-    "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts --project ./tsconfig.json",
     "gen": "ts-node --transpile-only src/schema.ts"
   },
   "prisma": {
     "seed": "ts-node --transpile-only ./prisma/seed.ts"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "type": "module"
 }
