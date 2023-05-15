@@ -1,21 +1,22 @@
 import * as React from 'react';
 import Image from 'next/image';
+import SearchBar from './SearchBar';
 
 export const Navbar = () => {
   return (
     <>
-      <nav className="w-full border-gray-200 bg-white dark:bg-gray-900">
-        <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+      <nav className="w-full border-[#000000]  border-b-2 bg-[#C3A982] dark:bg-gray-900">
+        <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-start p-4">
           <a href="https://flowbite.com/" className="flex items-center">
             <Image
-              src="https://flowbite.com/docs/images/logo.svg"
+              src="/dog.svg"
               className="mr-3 h-8"
               alt="Flowbite Logo"
-              width="20"
-              height="20"
+              width="30"
+              height="30"
             />
-            <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-              Flowbite
+            <span className="self-center whitespace-nowrap text-2xl font-bold pr-12 dark:text-white">
+              CHOWCHOW
             </span>
           </a>
           <div className="flex items-center md:order-2">
@@ -103,14 +104,14 @@ export const Navbar = () => {
             className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
             id="mobile-menu-2"
           >
-            <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
+            <ul className="mt-4 flex flex-col border border-gray-100 p-4 align-baseline font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 md:dark:bg-gray-900">
               <li>
                 <a
                   href="#"
-                  className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
+                  className="block rounded bg-black-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-[#000000] md:dark:text-blue-500"
                   aria-current="page"
                 >
-                  Home
+                  PRODUCTS
                 </a>
               </li>
               <li>
@@ -118,31 +119,34 @@ export const Navbar = () => {
                   href="#"
                   className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
                 >
-                  About
+                  ABOUT US
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-                >
-                  Services
+                <Searchbar>
+                  
+                </Searchbar>
+              </li>
+              <li>
+                <a href="/profile" className="flex items-center">
+                  <Image
+                    src="/profile.svg"
+                    className="mr-3 h-8"
+                    alt="Flowbite Logo"
+                    width="25"
+                    height="25"
+                  />
                 </a>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-                >
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-                >
-                  Contact
+                <a href="/cart" className="flex items-center">
+                  <Image
+                    src="/cart.svg"
+                    className="mr-3 h-8"
+                    alt="Flowbite Logo"
+                    width="25"
+                    height="25"
+                  />
                 </a>
               </li>
             </ul>
