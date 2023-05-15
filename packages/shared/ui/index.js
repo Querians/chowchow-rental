@@ -8,4 +8,5 @@ export * from './components/EmailInput';
 export * from './components/Header';
 export * from './components/Navbar';
 export * from './components/PasswordInput';
+export * from './components/SearchBar';
 export * from './components/TextInput';
