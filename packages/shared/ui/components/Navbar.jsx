@@ -6,7 +6,7 @@ export const Navbar = () => {
   return (
     <>
       <nav className="w-full border-[#000000]  border-b-2 bg-[#C3A982] dark:bg-gray-900">
-        <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-start p-4">
+        <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
           <a href="https://flowbite.com/" className="flex items-center">
             <Image
               src="/dog.svg"
@@ -101,10 +101,10 @@ export const Navbar = () => {
             </button>
           </div>
           <div
-            className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
+            className="hidden w-full items-center justify-self-end md:order-1 md:flex md:w-auto"
             id="mobile-menu-2"
           >
-            <ul className="mt-4 flex flex-col border border-gray-100 p-4 align-baseline font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 md:dark:bg-gray-900">
+            <ul className="mt-4 flex flex-col border border-gray-100 p-4 align-between font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 md:dark:bg-gray-900">
               <li>
                 <a
                   href="#"
@@ -122,10 +122,14 @@ export const Navbar = () => {
                   ABOUT US
                 </a>
               </li>
-              <li>
-                <Searchbar>
-                  
-                </Searchbar>
+            </ul>
+          </div>
+          <div
+            className="hidden w-full items-end justify-between md:order-1 md:flex md:w-auto"
+            id="mobile-menu-3">
+            <ul className="mt-4 flex flex-col border border-gray-100 p-4 align-baseline font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 md:dark:bg-gray-900">
+            <li>
+                <SearchBar />
               </li>
               <li>
                 <a href="/profile" className="flex items-center">
@@ -151,7 +155,7 @@ export const Navbar = () => {
               </li>
             </ul>
           </div>
-        </div>
+       </ div>
       </nav>
     </>
   );
