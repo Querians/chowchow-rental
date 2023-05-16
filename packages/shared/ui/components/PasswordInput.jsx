@@ -5,6 +5,7 @@ export const PasswordInput = ({
   label = 'Password',
   onChange,
   value,
+  placeholder,
 }) => {
   const [isValid, setIsValid] = useState({});
   const choose = {
@@ -70,6 +71,7 @@ export const PasswordInput = ({
           onCut={(e) => e.preventDefault()}
           id={choose[type] === 2 ? 'confirmPassword' : 'password'}
           className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
+          placeholder={placeholder}
           required
         />
       </div>
