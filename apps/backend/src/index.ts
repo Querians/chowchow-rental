@@ -3,7 +3,13 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-import { schema } from './schema';
+import { schema } from './schema.ts';
+import { context } from './context.ts';
+
+
+interface MyContext {
+  token?: String;
+}
 
 const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
@@ -39,24 +45,12 @@ const resolvers = {
   },
 };
 
-
-// export const server = new ApolloServer({
-//   schema,
-// });
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+const server = new ApolloServer<MyContext>({
+  schema
 });
 
-
-const port = 4000;
-
-// server.startStandaloneServer({ port }).then(({ url }) => {
-//   console.log(`🚀  Server ready at ${url}`);
-// });
-
 const { url } = await startStandaloneServer(server, {
+  context: async ({ req }) => ({ token: req.headers.token }),
   listen: { port: 4000 },
 });
 
