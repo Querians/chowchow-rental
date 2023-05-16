@@ -8,7 +8,6 @@ export const EmailInput = () => {
     if (!(event.target instanceof HTMLInputElement)) return;
     const email = event.target.value;
     reg.test(email) === false ? setIsValid(false) : setIsValid(true);
-    // setObj((prev) => setFormObject(prev, index, name, email));
   };
   return (
     <>
@@ -24,16 +23,16 @@ export const EmailInput = () => {
           type="email"
           onInput={handleChange}
           id="email"
-          className="mb-2.5 block w-full rounded-lg border-2 border-black bg-white p-2.5 text-sm"
+          className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm"
           required
         />
-        {!isValid ? (
-          <span className="text-red-400">
-            The email you entered is incorrect format. Please try again.
-          </span>
-        ) : (
-          <label></label>
-        )}
+        <span
+          className={
+            'text-sm text-[#C26666] ' + (!isValid ? 'visible' : 'invisible')
+          }
+        >
+          The email you entered is incorrect format. Please try again.
+        </span>
       </div>
     </>
   );
