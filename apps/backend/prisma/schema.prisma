@@ -2,6 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 // To enhance programming experieces in Visual Studio code,
 // please use "Prisma" extension.
+// field : camelCase, collection : PascalCase
 
 generator client {
   provider = "prisma-client-js"
@@ -12,39 +13,270 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Promotion {
+  promotionCode   String           @id @default(uuid())
+  discountPercent Float            @db.Float
+  maximumDiscount Float            @db.Float
+  minimumPrice    Float            @db.Float
+  startDate       DateTime         @db.Timestamp(0)
+  endDate         DateTime         @db.Timestamp(0)
+  orderPromotions OrderPromotion[]
+}
+
 model Customer {
-  id        String    @id @default(uuid())
-  firstname String    @db.VarChar(30)
-  lastname  String    @db.VarChar(30)
-  dob       DateTime
-  tel       String    @db.VarChar(10)
-  email     String    @unique
-  password  String
-  order     Order[]
+  customerId String   @id @default(uuid())
+  firstName  String   @db.VarChar(30)
+  lastName   String   @db.VarChar(30)
+  dob        DateTime @db.Date
+  tel        String   @unique @db.VarChar(10)
+  email      String   @unique @db.VarChar(30)
+  password   String   @db.VarChar(60)
+  orders     Order[]
+  carts      Cart[]
+  issues     Issue[]
+}
+
+model OrderPromotion {
+  promotion     Promotion @relation(fields: [promotionCode], references: [promotionCode])
+  promotionCode String    @db.VarChar(12)
+  order         Order     @relation(fields: [orderId], references: [orderId])
+  orderId       String    @db.VarChar(11)
+
+  @@id([promotionCode, orderId])
+}
+
+model OrderTransport {
+  order          Order       @relation(fields: [orderId], references: [orderId])
+  orderId        String      @db.VarChar(11)
+  timeAssign     DateTime    @db.Timestamp()
+  license        VehicleInfo @relation(fields: [vehicleLicense], references: [vehicleLicence])
+  vehicleLicense String      @db.VarChar(10)
+  staff          StaffInfo   @relation(fields: [staffId], references: [staffId])
+  staffId        String      @db.VarChar(11)
+  isReturn       Boolean     @db.TinyInt
+  timeGo         DateTime?   @db.Timestamp(0)
+  timeBack       DateTime?   @db.Timestamp(0)
+
+  @@id([orderId, timeAssign])
+}
+
+model VehicleInfo {
+  vehicleLicence  String           @id @db.VarChar(10)
+  vehicleType     VehicleType      @relation(fields: [vehicleTypeId], references: [vehicleTypeId])
+  vehicleTypeId   String           @db.VarChar(3) //FK
+  brand           String           @db.VarChar(20)
+  model           String           @db.VarChar(40)
+  registerDate    DateTime         @db.Date
+  status          Boolean          @db.TinyInt
+  orderTransports OrderTransport[]
+}
+
+model VehicleType {
+  vehicleTypeId String        @id @db.VarChar(3) //PK
+  vehicleTypeN  String        @db.VarChar(40)
+  vehicleInfos  VehicleInfo[]
 }
 
 model Order {
-  id            String      @id @default(uuid())
-  customer      Customer    @relation(fields: [customerId], references: [id])
-  customerId    String
-  addressDetail String
-  street        String
-  subdistrict   String
+  orderId       String      @id @default(uuid())
+  customer      Customer    @relation(fields: [customerId], references: [customerId])
+  customerId    String      @db.VarChar(11)
+  addressDetail String      @db.Text
+  street        String      @db.Text
+  subdistrict   String      @db.Text
   zipcode       String      @db.VarChar(5)
   latitude      Decimal     @db.Decimal(8, 6)
   longitude     Decimal     @db.Decimal(9, 6)
   receiverTel   String      @db.VarChar(10)
   totalPrice    Float       @db.Double
-  orderDate     DateTime    @default(now())
-  sendingDate   DateTime?
-  returnDate    DateTime?
-  receiver      String
+  orderDate     DateTime    @default(now()) @db.Timestamp(0)
+  sendingDate   DateTime?   @db.Timestamp(0)
+  returnDate    DateTime?   @db.Timestamp(0)
+  receiver      String?     @db.VarChar(30)
   status        OrderStatus @relation(fields: [statusCode], references: [statusCode])
-  statusCode    Int
+  statusCode    Int         @db.Int
+
+  orderPromotions OrderPromotion[]
+  orderTransports OrderTransport[]
+  invoices        Invoice[]
+  subOrders       SubOrder[]
+  orderCarts      OrderCart[]
+  issues          Issue[]
+}
+
+model Invoice {
+  invoiceId     String      @id @default(uuid())
+  paymentType   PaymentType @relation(fields: [paymentTypeId], references: [paymentTypeId])
+  paymentTypeId String      @db.VarChar(4)
+  order         Order       @relation(fields: [orderId], references: [orderId])
+  orderId       String      @db.VarChar(11)
+  costAmount    Float       @db.Double
+  deadlineDate  DateTime    @db.Timestamp(0)
+
+  billings Billing[]
+}
+
+model Billing {
+  billingId       String        @db.VarChar(11)
+  billTimestamp   DateTime      @db.Timestamp(0)
+  invoice         Invoice       @relation(fields: [invoiceId], references: [invoiceId])
+  invoiceId       String        @db.VarChar(11) //FK1
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [paymentMethodId])
+  paymentMethodId String        @db.VarChar(6) //FK2
+  paidAmount      Float         @db.Double
+  firstName       String        @db.VarChar(30)
+  lastName        String        @db.VarChar(30)
+  tel             String        @db.VarChar(10)
+  paymentSlipUrl  String        @db.Text
+
+  @@id([billingId, billTimestamp])
+}
+
+model Cart {
+  cartNo     String   @unique @db.VarChar(11)
+  customer   Customer @relation(fields: [customerId], references: [customerId])
+  customerId String   @db.VarChar(11) //FK1
+  product    Product  @relation(fields: [productId], references: [productId])
+  productId  String   @db.VarChar(6)
+  quantity   Int      @db.Int
+  status     Int      @db.Int
+  timestamp  DateTime @db.Timestamp(0)
+
+  orderCarts OrderCart?
+
+  @@id([cartNo, customerId, productId])
+}
+
+model OrderCart {
+  order   Order  @relation(fields: [orderId], references: [orderId])
+  orderId String @db.VarChar(11)
+  cart    Cart   @relation(fields: [cartNo], references: [cartNo])
+  cartNo  String @unique @db.VarChar(11)
+
+  @@id([orderId, cartNo])
+}
+
+model SubOrder {
+  order   Order  @relation(fields: [orderId], references: [orderId])
+  orderId String @db.VarChar(11)
+  item    Item   @relation(fields: [itemId], references: [itemId])
+  itemId  String @db.VarChar(8)
+
+  @@id([orderId, itemId])
 }
 
 model OrderStatus {
-  statusCode    Int         @id @db.Int
-  statusDef     String      @db.VarChar(30)
-  order         Order[]
+  statusCode Int     @id @db.Int
+  statusDef  String  @db.VarChar(30)
+  orders     Order[]
+}
+
+model PaymentType {
+  paymentTypeId   String @id @db.VarChar(4)
+  paymentTypeName String @db.VarChar(50)
+  interest        Float  @db.Double
+  times           Int    @db.Int
+
+  invoices Invoice[]
+}
+
+model PaymentMethod {
+  paymentMethodId   String @id @db.VarChar(6)
+  paymentMethodName String @db.VarChar(50)
+
+  billings Billing[]
+}
+
+model Category {
+  categoryId   String @id @db.VarChar(4)
+  categoryName String @db.VarChar(30)
+
+  products Product[]
+}
+
+model Product {
+  productId   String   @id @db.VarChar(6)
+  productName String   @db.VarChar(40)
+  category    Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId  String   @db.VarChar(4)
+  pictureUrl  String   @db.Text
+  pricePerDay Float    @db.Double
+  weight      Float    @db.Double
+  height      Float    @db.Double
+  width       Float    @db.Double
+  depth       Float    @db.Double
+  color       String   @db.VarChar(20)
+  material    String   @db.VarChar(30)
+  description String?  @db.Text
+
+  carts Cart[]
+  items Item[]
+}
+
+model Item {
+  itemId           String     @id @db.VarChar(8)
+  product          Product    @relation(fields: [productId], references: [productId])
+  productId        String     @db.VarChar(6)
+  itemRegisterDate DateTime   @db.Timestamp(0)
+  stockAddress     String     @db.VarChar(10)
+  itemStatus       ItemStatus @relation(fields: [itemStatusId], references: [itemStatusId])
+  itemStatusId     String     @db.VarChar(1)
+
+  subOrders SubOrder[]
+}
+
+model ItemStatus {
+  itemStatusId   String @id @db.VarChar(1)
+  itemStatusName String @db.VarChar(15)
+
+  items Item[]
+}
+
+model Issue {
+  issueId           String        @id @default(uuid())
+  customer          Customer      @relation(fields: [customerId], references: [customerId])
+  customerId        String         @db.VarChar(11)
+  order             Order?          @relation(fields: [orderId], references: [orderId])
+  orderId           String?         @db.VarChar(11)
+  description       String          @db.Text
+  staff             StaffInfo       @relation(fields: [staffId], references: [staffId])
+  staffId           String          @db.VarChar(11)
+  timestamp         DateTime        @db.Timestamp(0)
+  status            Int             @db.TinyInt
+  categoryProblem   CategoryProblem @relation(fields: [categoryProblemId], references: [categoryProblemId])
+  categoryProblemId String          @db.VarChar(2)
+}
+
+model CategoryProblem {
+  categoryProblemId String   @id @db.VarChar(2)
+  categoryProblemN  String   @db.Text
+  position          Position @relation(fields: [positionId], references: [positionId])
+  positionId        String   @db.VarChar(3)
+
+  issues Issue[]
+}
+
+model StaffInfo {
+  staffId        String   @id @db.VarChar(11)
+  prefix         String   @db.VarChar(4)
+  staffFirstName String   @db.VarChar(30)
+  staffLastName  String   @db.VarChar(30)
+  position       Position @relation(fields: [positionId], references: [positionId])
+  positionId     String   @db.VarChar(3)
+  tel            String   @db.VarChar(10)
+  startDate      DateTime @db.Date
+  dob            DateTime @db.Date
+  salary         Float    @db.Double
+  password       String   @db.VarChar(60)
+
+  issues          Issue[]
+  orderTransports OrderTransport[]
+}
+
+model Position {
+  positionId String @id @db.VarChar(3)
+  positionN  String @db.VarChar(30)
+
+  staffInfos       StaffInfo[]
+  categoryProblems CategoryProblem[]
 }
