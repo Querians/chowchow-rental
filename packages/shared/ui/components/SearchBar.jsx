@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const SearchBar = () => {
+export const SearchBar = () => {
     return (
     <>
         <form>
@@ -17,4 +17,3 @@ const SearchBar = () => {
     </>);
 };
 
-export default SearchBar;
