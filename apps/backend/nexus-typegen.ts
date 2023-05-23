@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./src/context"
 
 
 
@@ -28,6 +28,11 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
+  OrderStatus: { // root type
+    statusCode: number; // Int!
+    statusDef: string; // String!
+  }
   Query: {};
 }
 
@@ -42,18 +47,38 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    addStage: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+  }
+  OrderStatus: { // field return type
+    statusCode: number; // Int!
+    statusDef: string; // String!
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    allorder: NexusGenRootTypes['OrderStatus'][]; // [OrderStatus!]!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    addStage: 'OrderStatus'
+  }
+  OrderStatus: { // field return type name
+    statusCode: 'Int'
+    statusDef: 'String'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    allorder: 'OrderStatus'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    addStage: { // args
+      statusCode: number; // Int!
+      statusDef: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -87,7 +112,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
