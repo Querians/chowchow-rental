@@ -5,6 +5,6 @@ export interface Context {
     prisma: PrismaClient;
 }
 
-export const context: Context = {
-    prisma
-};
+export const createContext = async () => ({
+    prisma: prisma,
+});

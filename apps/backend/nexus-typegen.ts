@@ -28,10 +28,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Link: { // root type
-    description: string; // String!
-    id: number; // Int!
-    url: string; // String!
+  Mutation: {};
+  OrderStatus: { // root type
+    statusCode: number; // Int!
+    statusDef: string; // String!
   }
   Query: {};
 }
@@ -47,28 +47,38 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  Link: { // field return type
-    description: string; // String!
-    id: number; // Int!
-    url: string; // String!
+  Mutation: { // field return type
+    addStage: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+  }
+  OrderStatus: { // field return type
+    statusCode: number; // Int!
+    statusDef: string; // String!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    allorder: NexusGenRootTypes['OrderStatus'][]; // [OrderStatus!]!
   }
 }
 
 export interface NexusGenFieldTypeNames {
-  Link: { // field return type name
-    description: 'String'
-    id: 'Int'
-    url: 'String'
+  Mutation: { // field return type name
+    addStage: 'OrderStatus'
+  }
+  OrderStatus: { // field return type name
+    statusCode: 'Int'
+    statusDef: 'String'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    allorder: 'OrderStatus'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    addStage: { // args
+      statusCode: number; // Int!
+      statusDef: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {

@@ -2,12 +2,15 @@
 ### Do not make changes to this file directly
 
 
-type Link {
-  description: String!
-  id: Int!
-  url: String!
+type Mutation {
+  addStage(statusCode: Int!, statusDef: String!): OrderStatus!
+}
+
+type OrderStatus {
+  statusCode: Int!
+  statusDef: String!
 }
 
 type Query {
-  ok: Boolean!
+  allorder: [OrderStatus!]!
 }
