@@ -32,7 +32,7 @@ export const PasswordInput = ({
       text: 'atleast 1 special characters',
     },
     atleast8: {
-      reg: /[A-Za-z\d@$!%*?&]{8,}/,
+      reg: /.{8,}/,
       text: 'atleast 8 characters',
     },
   };
