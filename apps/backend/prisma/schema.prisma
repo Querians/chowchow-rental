@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Promotion {
-  promotionCode   String           @id @db.VarChar(12) // not an uuid (can be user-defined)
+  promotionCode   String           @id @default(uuid())
   discountPercent Float            @db.Float
   maximumDiscount Float            @db.Float
   minimumPrice    Float            @db.Float
@@ -24,7 +24,7 @@ model Promotion {
 }
 
 model Customer {
-  customerId String   @id @db.VarChar(11) @default(uuid())
+  customerId String   @id @default(uuid())
   firstName  String   @db.VarChar(30)
   lastName   String   @db.VarChar(30)
   dob        DateTime @db.Date
@@ -78,7 +78,7 @@ model VehicleType {
 }
 
 model Order {
-  orderId       String      @id @default(uuid()) @db.VarChar(11)
+  orderId       String      @id @default(uuid())
   customer      Customer    @relation(fields: [customerId], references: [customerId])
   customerId    String      @db.VarChar(11)
   addressDetail String      @db.Text
@@ -105,7 +105,7 @@ model Order {
 }
 
 model Invoice {
-  invoiceId     String      @id @default(uuid()) @db.VarChar(11)
+  invoiceId     String      @id @default(uuid())
   paymentType   PaymentType @relation(fields: [paymentTypeId], references: [paymentTypeId])
   paymentTypeId String      @db.VarChar(4)
   order         Order       @relation(fields: [orderId], references: [orderId])
@@ -233,11 +233,11 @@ model ItemStatus {
 }
 
 model Issue {
-  issueId           String          @id @default(uuid()) @db.VarChar(11)
-  customer          Customer       @relation(fields: [customerId], references: [customerId])
+  issueId           String        @id @default(uuid())
+  customer          Customer      @relation(fields: [customerId], references: [customerId])
   customerId        String         @db.VarChar(11)
-  order             Order          @relation(fields: [orderId], references: [orderId])
-  orderId           String         @db.VarChar(11)
+  order             Order?          @relation(fields: [orderId], references: [orderId])
+  orderId           String?         @db.VarChar(11)
   description       String          @db.Text
   staff             StaffInfo       @relation(fields: [staffId], references: [staffId])
   staffId           String          @db.VarChar(11)
