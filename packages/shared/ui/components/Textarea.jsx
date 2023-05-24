@@ -20,7 +20,7 @@ export const Textarea = ({
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        className="block w-full rounded-md border-2 border-black p-2.5 text-sm focus:border-blue-500 focus:ring-blue-500"
+        className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm focus:border-blue-500 focus:ring-blue-500"
         required={isRequire}
       />
     </>
