@@ -24,7 +24,7 @@ export const Map = ({
         console.log(error);
       },
     );
-  }, []);
+  }, [isEditable]);
 
   // laod script for google map
   const { isLoaded } = useLoadScript({
