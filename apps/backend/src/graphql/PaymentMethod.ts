@@ -6,7 +6,7 @@ export const PaymentMethod = objectType({
   definition(t) {
     t.nonNull.string('paymentMethodId');
     t.nonNull.string('paymentMethodName');
-    t.field('billings', {
+    t.list.field('billings', {
       type: 'Billing',
       resolve(parent, args, context: Context) {
         return context.prisma.paymentMethod.findUnique({
