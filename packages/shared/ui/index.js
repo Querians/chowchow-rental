@@ -10,3 +10,4 @@ export * from './components/Navbar';
 export * from './components/PasswordInput';
 export * from './components/TextInput';
 export * from './components/Map';
+export * from './components/PhoneInput';
