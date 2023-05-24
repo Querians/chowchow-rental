@@ -9,3 +9,4 @@ export * from './components/Header';
 export * from './components/Navbar';
 export * from './components/PasswordInput';
 export * from './components/TextInput';
+export * from './components/Map';
