@@ -1,14 +1,42 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-export const Button = ({ text, logo, onClick }) => {
+export const Button = ({ logo, onClick, text, type }) => {
   return (
     <>
-        <button className="mb-2 mr-2 h-10 w-full rounded-md border border-2 border-gray-200 border-neutral-900 bg-white px-5 py-2 text-sm font-medium text-gray-900 hover:bg-stone-50 hover:text-red-950 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-100"
-                onClick={onClick}>
+      {type == 'normal' ? (
+        <button
+          className="mb-2 mr-2 h-10 w-full rounded-md border border-2 border-neutral-900 bg-[#C3A982] px-5 py-2 text-sm font-medium text-gray-900 hover:bg-[#89724E] hover:text-white"
+          onClick={onClick}
+        >
           {logo ? <img src={logo} alt="" className="h-8" /> : <></>}
           {text}
         </button>
+      ) : (
+        <></>
+      )}
+      {type == 'submit' ? (
+        <button
+          className="mb-2 mr-2 h-10 w-full rounded-md border border-2 border-neutral-900 bg-[#A4DAAC] px-5 py-2 text-sm font-medium text-gray-900 hover:bg-[#54825B] hover:text-white"
+          onClick={onClick}
+        >
+          {logo ? <img src={logo} alt="" className="h-8" /> : <></>}
+          {text}
+        </button>
+      ) : (
+        <></>
+      )}
+      {type == 'cancel' ? (
+        <button
+          className="mb-2 mr-2 h-10 w-full rounded-md border border-2 border-neutral-900 bg-[#C26666] px-5 py-2 text-sm font-medium text-gray-900 hover:bg-[#8B3B3B] hover:text-white"
+          onClick={onClick}
+        >
+          {logo ? <img src={logo} alt="" className="h-8" /> : <></>}
+          {text}
+        </button>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
