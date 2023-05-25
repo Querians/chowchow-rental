@@ -3,6 +3,7 @@ export const TextInput = ({
   value,
   placeholder,
   label,
+  constraint,
   isRequire = true,
 }) => {
   return (
@@ -15,6 +16,7 @@ export const TextInput = ({
       </label>
       <input
         name={label}
+        pattern={constraint}
         type="text"
         value={value}
         autoComplete="true"
