@@ -9,7 +9,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full bg-[#C3A982] dark:bg-gray-900">
+      <nav className="w-full fixed z-50 bg-[#C3A982] dark:bg-gray-900">
         <div className="m-0 flex w-full flex-wrap items-center justify-around border-b-2 border-[#000000]  p-4">
           <ul className="flex flex-col p-4 align-baseline font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 ">
             <li>
