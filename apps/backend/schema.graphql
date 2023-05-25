@@ -2,15 +2,249 @@
 ### Do not make changes to this file directly
 
 
-type Mutation {
-  addStage(statusCode: Int!, statusDef: String!): OrderStatus!
+type Billing {
+  billTimestamp: DateTime!
+  billingId: String!
+  firstName: String!
+  invoice: Invoice
+  lastName: String!
+  paidAmount: Float!
+  paymentMethod: PaymentMethod!
+  paymentSlipUrl: String!
+  tel: String!
+}
+
+type Cart {
+  cartNo: String!
+  customer: Customer!
+  product: Product!
+  quantity: Int!
+  status: Int!
+  timestamp: DateTime!
+}
+
+type Category {
+  categoryId: String!
+  categoryName: String!
+  products: [Product]
+}
+
+type CategoryProblem {
+  categoryProblemId: String!
+  categoryProblemN: String!
+  issues: [Issue]!
+  position: Position!
+}
+
+type Customer {
+  carts: [Cart]
+  customerId: String!
+  dob: DateTime!
+  email: String!
+  firstName: String!
+  issues: [Issue]
+  lastName: String!
+  orders: [Order]
+  password: String!
+  tel: String!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Invoice {
+  billings: [Billing]
+  costAmount: Float!
+  deadlineDate: DateTime!
+  invoiceId: String!
+  order: Order!
+  paymentType: PaymentType!
+}
+
+type Issue {
+  categoryProblem: CategoryProblem!
+  customer: Customer!
+  description: String!
+  issueId: String!
+  order: Order
+  staff: StaffInfo!
+  status: Boolean!
+  timestamp: DateTime!
+}
+
+type Item {
+  itemId: String!
+  itemRegisterDate: DateTime!
+  itemStatus: ItemStatus!
+  product: Product!
+  stockAddress: String!
+  subOrders: [SubOrder]
+}
+
+type ItemStatus {
+  itemStatusId: String!
+  itemStatusName: String!
+  items: [Item]
+}
+
+type Order {
+  addressDetail: String!
+  customer: Customer!
+  invoices: [Invoice]
+  issues: [Issue]
+  latitude: Float!
+  longitude: Float!
+  orderCarts: [OrderCart]
+  orderDate: DateTime!
+  orderId: ID!
+  orderPromotions: [OrderPromotion]
+  orderTransports: [OrderTransport]
+  receiver: String
+  receiverTel: String!
+  returnDate: DateTime
+  sendingDate: DateTime
+  status: OrderStatus!
+  street: String!
+  subOrders: [SubOrder]
+  subdistrict: String!
+  totalPrice: Float!
+  zipcode: String!
+}
+
+type OrderCart {
+  cart: Cart!
+  order: Order!
+}
+
+type OrderPromotion {
+  order: Order!
+  promotion: Promotion!
 }
 
 type OrderStatus {
+  orders: [Order]
   statusCode: Int!
   statusDef: String!
 }
 
+type OrderTransport {
+  isReturn: Boolean!
+  license: VehicleInfo!
+  order: Order!
+  staff: StaffInfo!
+  timeAssign: DateTime!
+  timeBack: DateTime
+  timeGo: DateTime
+}
+
+type PaymentMethod {
+  billings: [Billing]
+  paymentMethodId: String!
+  paymentMethodName: String!
+}
+
+type PaymentType {
+  interest: Float!
+  invoices: [Invoice]
+  paymentTypeId: ID!
+  paymentTypeName: String!
+  times: Int!
+}
+
+type Position {
+  categoryProblems: [CategoryProblem]
+  positionId: String!
+  positionN: String!
+  staffInfos: [StaffInfo]
+}
+
+type Product {
+  carts: [Cart]
+  category: Category!
+  color: String!
+  depth: Float!
+  description: String
+  height: Float!
+  items: [Item]
+  material: String!
+  pictureUrl: String!
+  pricePerDay: Float!
+  productId: String!
+  productName: String!
+  weight: Float!
+  width: Float!
+}
+
+type Promotion {
+  discountPercent: Float!
+  endDate: DateTime!
+  maximumDiscount: Float!
+  minimumPrice: Float!
+  orderPromotions: [OrderPromotion]!
+  promotionCode: ID!
+  startDate: DateTime!
+}
+
 type Query {
-  allorder: [OrderStatus!]!
+  allBilling: [Billing]
+  allCart: [Cart]
+  allCategory: [Category]
+  allCategoryProblem: [CategoryProblem]
+  allCustomer: [Customer]
+  allInvoice: [Invoice]
+  allIssue: [Issue]
+  allItem: [Item]
+  allItemStatus: [ItemStatus]
+  allOrder: [Order]
+  allOrderCart: [OrderCart]
+  allOrderPromotion: [OrderPromotion]
+  allOrderStatus: [OrderStatus]
+  allOrderTransport: [OrderTransport]
+  allPaymentMethods: [PaymentMethod]
+  allPaymentType: [PaymentType]
+  allPosition: [Position]
+  allProduct: [Product]
+  allPromotion: [Promotion]
+  allStaffInfo: [StaffInfo]
+  allSubOrder: [SubOrder]
+  allVehicleInfo: [VehicleInfo]
+  allVehicleType: [VehicleType]
+}
+
+type StaffInfo {
+  dob: DateTime!
+  issues: [Issue]
+  orderTransports: [OrderTransport]
+  password: String!
+  position: Position!
+  prefix: String!
+  salary: Float!
+  staffFirstName: String!
+  staffId: String!
+  staffLastName: String!
+  startDate: DateTime!
+  tel: String!
+}
+
+type SubOrder {
+  item: Item!
+  order: Order!
+}
+
+type VehicleInfo {
+  brand: String!
+  model: String!
+  orderTransports: [OrderTransport]
+  registerDate: DateTime!
+  status: Boolean!
+  vehicleLicence: ID!
+  vehicleType: VehicleType
+}
+
+type VehicleType {
+  vehicleInfos: [VehicleInfo]
+  vehicleTypeId: ID!
+  vehicleTypeN: String!
 }
