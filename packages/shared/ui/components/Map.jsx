@@ -4,6 +4,7 @@ import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 export const Map = ({
   coordinates = { lat: 13.736988050394881, lng: 100.52436590194702 },
   isEditable = true,
+  height = '300px',
 }) => {
   const [currentLocation, setCurrentLocation] = useState(coordinates);
 
@@ -40,7 +41,7 @@ export const Map = ({
         zoom={16}
         center={currentLocation}
         mapContainerClassName="map"
-        mapContainerStyle={{ width: '100%', height: '600px', margin: 'auto' }}
+        mapContainerStyle={{ width: '100%', height: height, margin: 'auto' }}
         onClick={(e) => {
           if (isEditable) {
             setCurrentLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() });
