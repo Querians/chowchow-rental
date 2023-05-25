@@ -38,21 +38,21 @@ model Customer {
 
 model OrderPromotion {
   promotion     Promotion @relation(fields: [promotionCode], references: [promotionCode])
-  promotionCode String    @db.VarChar(12)
+  promotionCode String    
   order         Order     @relation(fields: [orderId], references: [orderId])
-  orderId       String    @db.VarChar(11)
+  orderId       String    
 
   @@id([promotionCode, orderId])
 }
 
 model OrderTransport {
   order          Order       @relation(fields: [orderId], references: [orderId])
-  orderId        String      @db.VarChar(11)
+  orderId        String      
   timeAssign     DateTime    @db.Timestamp()
   license        VehicleInfo @relation(fields: [vehicleLicense], references: [vehicleLicence])
-  vehicleLicense String      @db.VarChar(10)
+  vehicleLicense String      
   staff          StaffInfo   @relation(fields: [staffId], references: [staffId])
-  staffId        String      @db.VarChar(11)
+  staffId        String      
   isReturn       Boolean     @db.TinyInt
   timeGo         DateTime?   @db.Timestamp(0)
   timeBack       DateTime?   @db.Timestamp(0)
@@ -63,7 +63,7 @@ model OrderTransport {
 model VehicleInfo {
   vehicleLicence  String           @id @db.VarChar(10)
   vehicleType     VehicleType      @relation(fields: [vehicleTypeId], references: [vehicleTypeId])
-  vehicleTypeId   String           @db.VarChar(3) //FK
+  vehicleTypeId   String           
   brand           String           @db.VarChar(20)
   model           String           @db.VarChar(40)
   registerDate    DateTime         @db.Date
@@ -80,7 +80,7 @@ model VehicleType {
 model Order {
   orderId       String      @id @default(uuid())
   customer      Customer    @relation(fields: [customerId], references: [customerId])
-  customerId    String      @db.VarChar(11)
+  customerId    String      
   addressDetail String      @db.Text
   street        String      @db.Text
   subdistrict   String      @db.Text
@@ -94,7 +94,7 @@ model Order {
   returnDate    DateTime?   @db.Timestamp(0)
   receiver      String?     @db.VarChar(30)
   status        OrderStatus @relation(fields: [statusCode], references: [statusCode])
-  statusCode    Int         @db.Int
+  statusCode    Int         
 
   orderPromotions OrderPromotion[]
   orderTransports OrderTransport[]
@@ -107,9 +107,9 @@ model Order {
 model Invoice {
   invoiceId     String      @id @default(uuid())
   paymentType   PaymentType @relation(fields: [paymentTypeId], references: [paymentTypeId])
-  paymentTypeId String      @db.VarChar(4)
+  paymentTypeId String      
   order         Order       @relation(fields: [orderId], references: [orderId])
-  orderId       String      @db.VarChar(11)
+  orderId       String      
   costAmount    Float       @db.Double
   deadlineDate  DateTime    @db.Timestamp(0)
 
@@ -117,12 +117,12 @@ model Invoice {
 }
 
 model Billing {
-  billingId       String        @db.VarChar(11)
+  billingId       String        @default(uuid())
   billTimestamp   DateTime      @db.Timestamp(0)
   invoice         Invoice       @relation(fields: [invoiceId], references: [invoiceId])
-  invoiceId       String        @db.VarChar(11) //FK1
+  invoiceId       String        
   paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [paymentMethodId])
-  paymentMethodId String        @db.VarChar(6) //FK2
+  paymentMethodId String        
   paidAmount      Float         @db.Double
   firstName       String        @db.VarChar(30)
   lastName        String        @db.VarChar(30)
@@ -133,11 +133,11 @@ model Billing {
 }
 
 model Cart {
-  cartNo     String   @unique @db.VarChar(11)
+  cartNo     String   @unique @default(uuid())
   customer   Customer @relation(fields: [customerId], references: [customerId])
-  customerId String   @db.VarChar(11) //FK1
+  customerId String   
   product    Product  @relation(fields: [productId], references: [productId])
-  productId  String   @db.VarChar(6)
+  productId  String   
   quantity   Int      @db.Int
   status     Int      @db.Int
   timestamp  DateTime @db.Timestamp(0)
@@ -149,18 +149,18 @@ model Cart {
 
 model OrderCart {
   order   Order  @relation(fields: [orderId], references: [orderId])
-  orderId String @db.VarChar(11)
+  orderId String 
   cart    Cart   @relation(fields: [cartNo], references: [cartNo])
-  cartNo  String @unique @db.VarChar(11)
+  cartNo  String @unique
 
   @@id([orderId, cartNo])
 }
 
 model SubOrder {
   order   Order  @relation(fields: [orderId], references: [orderId])
-  orderId String @db.VarChar(11)
+  orderId String 
   item    Item   @relation(fields: [itemId], references: [itemId])
-  itemId  String @db.VarChar(8)
+  itemId  String 
 
   @@id([orderId, itemId])
 }
@@ -198,7 +198,7 @@ model Product {
   productId   String   @id @db.VarChar(6)
   productName String   @db.VarChar(40)
   category    Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId  String   @db.VarChar(4)
+  categoryId  String   
   pictureUrl  String   @db.Text
   pricePerDay Float    @db.Double
   weight      Float    @db.Double
@@ -216,11 +216,11 @@ model Product {
 model Item {
   itemId           String     @id @db.VarChar(8)
   product          Product    @relation(fields: [productId], references: [productId])
-  productId        String     @db.VarChar(6)
+  productId        String     
   itemRegisterDate DateTime   @db.Timestamp(0)
   stockAddress     String     @db.VarChar(10)
   itemStatus       ItemStatus @relation(fields: [itemStatusId], references: [itemStatusId])
-  itemStatusId     String     @db.VarChar(1)
+  itemStatusId     String     
 
   subOrders SubOrder[]
 }
@@ -235,34 +235,34 @@ model ItemStatus {
 model Issue {
   issueId           String        @id @default(uuid())
   customer          Customer      @relation(fields: [customerId], references: [customerId])
-  customerId        String         @db.VarChar(11)
+  customerId        String         
   order             Order?          @relation(fields: [orderId], references: [orderId])
-  orderId           String?         @db.VarChar(11)
+  orderId           String?         
   description       String          @db.Text
   staff             StaffInfo       @relation(fields: [staffId], references: [staffId])
-  staffId           String          @db.VarChar(11)
+  staffId           String          
   timestamp         DateTime        @db.Timestamp(0)
   status            Int             @db.TinyInt
   categoryProblem   CategoryProblem @relation(fields: [categoryProblemId], references: [categoryProblemId])
-  categoryProblemId String          @db.VarChar(2)
+  categoryProblemId String          
 }
 
 model CategoryProblem {
   categoryProblemId String   @id @db.VarChar(2)
   categoryProblemN  String   @db.Text
   position          Position @relation(fields: [positionId], references: [positionId])
-  positionId        String   @db.VarChar(3)
+  positionId        String   
 
   issues Issue[]
 }
 
 model StaffInfo {
-  staffId        String   @id @db.VarChar(11)
+  staffId        String   @id @default(uuid())
   prefix         String   @db.VarChar(4)
   staffFirstName String   @db.VarChar(30)
   staffLastName  String   @db.VarChar(30)
   position       Position @relation(fields: [positionId], references: [positionId])
-  positionId     String   @db.VarChar(3)
+  positionId     String   
   tel            String   @db.VarChar(10)
   startDate      DateTime @db.Date
   dob            DateTime @db.Date
