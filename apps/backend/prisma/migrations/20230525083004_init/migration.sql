@@ -100,7 +100,7 @@ CREATE TABLE `Invoice` (
 
 -- CreateTable
 CREATE TABLE `Billing` (
-    `billingId` VARCHAR(11) NOT NULL,
+    `billingId` VARCHAR(191) NOT NULL,
     `billTimestamp` TIMESTAMP(0) NOT NULL,
     `invoiceId` VARCHAR(191) NOT NULL,
     `paymentMethodId` VARCHAR(191) NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE `Billing` (
 
 -- CreateTable
 CREATE TABLE `Cart` (
-    `cartNo` VARCHAR(11) NOT NULL,
+    `cartNo` VARCHAR(191) NOT NULL,
     `customerId` VARCHAR(191) NOT NULL,
     `productId` VARCHAR(191) NOT NULL,
     `quantity` INTEGER NOT NULL,
@@ -239,7 +239,7 @@ CREATE TABLE `CategoryProblem` (
 
 -- CreateTable
 CREATE TABLE `StaffInfo` (
-    `staffId` VARCHAR(11) NOT NULL,
+    `staffId` VARCHAR(191) NOT NULL,
     `prefix` VARCHAR(4) NOT NULL,
     `staffFirstName` VARCHAR(30) NOT NULL,
     `staffLastName` VARCHAR(30) NOT NULL,
