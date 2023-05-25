@@ -4,6 +4,10 @@ import { Button } from './Button';
 import Link from 'next/link';
 
 export const Card = ({ productName, detail, price, pic}) => {
+  const query = () => {
+    
+  };
+
   return (
     <>
       <div class="max-w-xs rounded-lg border border-gray-200 bg-white shadow ring-[#C3A982] hover:ring-2">
@@ -23,9 +27,9 @@ export const Card = ({ productName, detail, price, pic}) => {
           <p class="mb-1 w-full flex justify-center text-xl font-semibold text-red-600">
                 {price} ฿/day
               </p>
-          <Link href="/">
+          <Link href="/productinfo">
             <div className="px-6">
-              <Button type="normal" text={'More Detail'} />
+              <Button type="normal" text={'More Detail'} onClick={query}/>
             </div>
           </Link>
 
