@@ -6,7 +6,7 @@ export const Dropdown = ({
   isRequire = true,
 }) => {
   return (
-    <>
+    <div>
       <label
         htmlFor={label}
         className="mb-2.5 block text-sm font-medium text-black"
@@ -27,6 +27,6 @@ export const Dropdown = ({
           <option value={key}>{options[key]}</option>
         ))}
       </select>
-    </>
+    </div>
   );
 };

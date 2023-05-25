@@ -10,7 +10,7 @@ export const PhoneInput = ({ onChange, value, isRequire = true }) => {
   };
 
   return (
-    <>
+    <div>
       <label
         htmlFor="Phone Number"
         className="mb-2.5 block text-sm font-medium text-black"
@@ -35,6 +35,6 @@ export const PhoneInput = ({ onChange, value, isRequire = true }) => {
       >
         The Phone Number you entered is incorrect format.
       </span>
-    </>
+    </div>
   );
 };

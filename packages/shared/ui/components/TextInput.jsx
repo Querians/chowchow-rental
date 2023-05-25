@@ -6,7 +6,7 @@ export const TextInput = ({
   isRequire = true,
 }) => {
   return (
-    <>
+    <div>
       <label
         htmlFor={label}
         className="mb-2.5 block text-sm font-medium text-black"
@@ -24,6 +24,6 @@ export const TextInput = ({
         placeholder={placeholder}
         required={isRequire}
       />
-    </>
+    </div>
   );
 };
