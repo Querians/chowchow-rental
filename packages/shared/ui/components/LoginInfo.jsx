@@ -19,20 +19,20 @@ export const LoginInfo = () => {
   return (
     <>
     <div className='grid gap-16 lg:grid-cols-8 mt-16'>
-      <div className='2xl:max-w-screen-lg border-2 border-black lg:col-start-2 lg:col-end-8 rounded-md bg-[#E3C291] px-4 py-10 md:grid md:grid-cols-2'>
-        <div className='flex flex-col justify-center items-center mb-2.5'>
-          <div className='tracking-wide flex flex-col justify-center font-bold text-3xl text-center'>
+      <div className=' 2xl:max-w-screen-lg border-2 border-black lg:col-start-2 lg:col-end-8 rounded-md bg-[#E3C291] px-4 py-10 md:grid md:grid-cols-10'>
+        <div className='flex flex-col justify-center items-center mb-4 md:mb-0 md:col-start-1 md:col-end-5'>
+          <div className='mb-4 tracking-wide flex flex-col justify-center font-bold text-2xl xl:text-3xl text-center'>
               <div>CHOW CHOW</div>
               <div>-Online Rental-</div>
           </div>
           <div>
             <svg width="150" height="150" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21.4672 8.16974C21.4672 4.32061 17.3777 1.26623 12.3908 2.15513C5.06996 3.45663 1.72464 18.7867 2.01768 21.5393C2.22514 23.486 6.49108 26.3077 11.4987 24.3084C14.7688 23.0014 16.5815 20.2931 17.5773 17.3855M32.5328 8.16974C32.5328 4.32061 36.6223 1.26623 41.6092 2.15513C48.93 3.45663 52.2754 18.7867 51.9823 21.5393C51.7749 23.486 47.5089 26.3077 42.5013 24.3084C39.2312 23.0014 37.6908 20.2931 36.695 17.3855M16.2807 32.6159V34.0005M37.0269 32.6159V34.0005M24.7088 38.8465H28.5988L26.6538 40.9234L24.7088 38.8465Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M6.99666 24.9924C6.27088 27.9851 5.90488 31.0642 5.90748 34.1556C5.90748 45.7085 15.1966 52.0001 26.6537 52.0001C38.1108 52.0001 47.3999 45.7085 47.3999 34.1556C47.3999 31.2175 46.9798 28.0634 46.1214 24.9924M22.1518 8.15039C23.6345 7.83932 25.1426 7.68627 26.6537 7.69348C28.6764 7.69348 30.5436 7.99255 32.2578 8.54084" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21.4672 8.16974C21.4672 4.32061 17.3777 1.26623 12.3908 2.15513C5.06996 3.45663 1.72464 18.7867 2.01768 21.5393C2.22514 23.486 6.49108 26.3077 11.4987 24.3084C14.7688 23.0014 16.5815 20.2931 17.5773 17.3855M32.5328 8.16974C32.5328 4.32061 36.6223 1.26623 41.6092 2.15513C48.93 3.45663 52.2754 18.7867 51.9823 21.5393C51.7749 23.486 47.5089 26.3077 42.5013 24.3084C39.2312 23.0014 37.6908 20.2931 36.695 17.3855M16.2807 32.6159V34.0005M37.0269 32.6159V34.0005M24.7088 38.8465H28.5988L26.6538 40.9234L24.7088 38.8465Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.99666 24.9924C6.27088 27.9851 5.90488 31.0642 5.90748 34.1556C5.90748 45.7085 15.1966 52.0001 26.6537 52.0001C38.1108 52.0001 47.3999 45.7085 47.3999 34.1556C47.3999 31.2175 46.9798 28.0634 46.1214 24.9924M22.1518 8.15039C23.6345 7.83932 25.1426 7.68627 26.6537 7.69348C28.6764 7.69348 30.5436 7.99255 32.2578 8.54084" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
-        <div className=''>
+        <div className='md:col-start-5 mx-4 md:col-end-11 md:mr-10'>
           <div className='font-bold text-2xl text-center'>
             LOGIN
           </div>
@@ -87,10 +87,10 @@ export const LoginInfo = () => {
             <Link href="#" className='text-xs w-full block text-right underline'>Forgot_password?</Link>
           </div>
 
-          <Link href='#' className='mb-2.5'>
+          <Link href='#'>
             <Button text={"SUBMIT"} type={'submit'}/>
           </Link>
-          <p className='block w-full text-center text-xs'>Need an account? <Link href="/register" className='underline'>SIGN UP</Link></p>
+          <p className='mt-4 block w-full text-center text-xs'>Need an account? <Link href="/register" className='underline'>SIGN UP</Link></p>
 
         </div>
       </div>
