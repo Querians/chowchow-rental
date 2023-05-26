@@ -22,7 +22,7 @@ export const PhoneInput = ({ onChange, value, isRequire = true }) => {
         id="Phone Number"
         type="tel"
         onInput={handleChange}
-        pattern='^[0-9]{10}$'
+        pattern="^[0-9]{10}$"
         onChange={onChange}
         value={value}
         className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
