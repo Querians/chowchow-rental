@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const PhoneInput = ({ onChange, value, isRequire = true }) => {
+export const PhoneInput = ({ label="Phone Number", onChange, value, isRequire = true }) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleChange = (e) => {
@@ -15,7 +15,7 @@ export const PhoneInput = ({ onChange, value, isRequire = true }) => {
         htmlFor="Phone Number"
         className="mb-2.5 block text-sm font-medium text-black"
       >
-        Phone Number
+        {label}
       </label>
       <input
         name="Phone Number"
