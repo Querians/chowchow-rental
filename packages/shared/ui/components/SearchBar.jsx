@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const SearchBar = () => {
+export const SearchBar = ({placeholder}) => {
   return (
     <>
       <form>
@@ -10,7 +10,7 @@ export const SearchBar = () => {
               type="search"
               id="search-dropdown"
               class="z-20 block w-full rounded-lg border-2 border-gray-800 bg-gray-50 p-2.5 pl-4 text-sm text-gray-900 ring-[#C3A982] hover:ring-2"
-              placeholder="Search Products"
+              placeholder={placeholder}
             />
             <button
               type="submit"

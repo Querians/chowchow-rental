@@ -69,7 +69,7 @@ const Product = () => {
                         <h1 className="mb-4 md:mb-0 text-4xl font-bold">Products</h1>
                     </div>
                     <div class="basis-3/4">
-                        <SearchBar />
+                        <SearchBar placeholder="Search Product"/>
                     </div>
                 </div>
                 <div class="md:flex pt-2">
