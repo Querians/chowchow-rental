@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const PhoneInput = ({ label="Phone Number", onChange, value, isRequire = true }) => {
+export const PhoneInput = ({ label="Phone Number", onChange, value, isRequire = true,   type='', defaultValue='', }) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleChange = (e) => {
@@ -17,7 +17,12 @@ export const PhoneInput = ({ label="Phone Number", onChange, value, isRequire = 
       >
         {label}
       </label>
+      {type=='readOnly'
+      ?
       <input
+        disabled
+        readOnly
+        defaultValue = {defaultValue}
         name="Phone Number"
         id="Phone Number"
         type="tel"
@@ -29,13 +34,21 @@ export const PhoneInput = ({ label="Phone Number", onChange, value, isRequire = 
         placeholder="0123456789"
         required={isRequire}
       />
-      {/* <span
-        className={
-          'text-sm text-[#C26666] ' + (!isValid ? 'visible' : 'invisible')
-        }
-      >
-        The Phone Number you entered is incorrect format.
-      </span> */}
+      :
+      <input
+        defaultValue = {defaultValue}
+        name="Phone Number"
+        id="Phone Number"
+        type="tel"
+        onInput={handleChange}
+        pattern="^[0-9]{10}$"
+        onChange={onChange}
+        value={value}
+        className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
+        placeholder="0123456789"
+        required={isRequire}
+      />
+      }
     </div>
   );
 };
