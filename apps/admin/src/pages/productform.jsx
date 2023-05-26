@@ -1,8 +1,9 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
+import Link from 'next/link';
 
 const ProductForm = () => {
     // query category name
-    const catagoryList={
+    const catagoryList = {
         chair: 'chair',
         table: 'table',
         decoration: 'decoration'
@@ -22,7 +23,7 @@ const ProductForm = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="store" first="/store" second_name="Products" second="/products" current="ProductsForm" />
+                    <Breadcrumb first_name="Store" first="/store" second_name="Products" second="/products" current="Products Form" />
                     <h1 className="text-4xl font-bold py-6">Add new product</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
@@ -30,7 +31,7 @@ const ProductForm = () => {
                                 <TextInput placeholder="" label="Product Name" constraint="^.{1,40}$" />
                                 <Dropdown placeholder="" label="Category Name" options={catagoryList} />
                                 <TextInput placeholder="" label="Rental Price Per Day" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
-                                <TextInput placeholder="" label="Picture URL"  />
+                                <TextInput placeholder="" label="Picture URL" />
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
@@ -43,13 +44,15 @@ const ProductForm = () => {
                                     <TextInput placeholder="cm" label="hight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                 </div>
                                 <div>
-                                    <Textarea label="Description" isRequire = {false}/>
+                                    <Textarea label="Description" isRequire={false} />
                                 </div>
                             </div>
 
                             <div class="grid justify-items-center">
                                 <div className="w-1/5">
-                                    <Button type="submit" text="ADD" onClick={onSubmit}/>
+                                    <Link href="/products">
+                                        <Button type="submit" text="ADD" onClick={onSubmit} />
+                                    </Link>
                                 </div>
                             </div>
                         </div>

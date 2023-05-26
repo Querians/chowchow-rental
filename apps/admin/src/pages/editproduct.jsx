@@ -36,8 +36,8 @@ const EditProduct = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="store" first="/store" second_name="Products" second="/products" current="ProductsForm" />
-                    <h1 className="text-4xl font-bold py-6">Add new product</h1>
+                    <Breadcrumb first_name="Store" first="/store" second_name="Products" second="/products" current="Edit Product" />
+                    <h1 className="text-4xl font-bold py-6">Edit product details</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
