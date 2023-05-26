@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Navbar, Header, Breadcrumb, SearchBar, Card, Dropdown } from 'ui';
+import { Navbar, Breadcrumb, SearchBar, Card, Dropdown } from 'ui';
 
 const Product = () => {
     const filter = () => {
