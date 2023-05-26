@@ -111,7 +111,7 @@ export const CartAddress = ({ address }) => {
                   </div>
                   <PhoneInput
                     label={'Tel.'}
-                    value={data.phone}
+                    value={data.receiver_tel}
                     onChange={(e) =>
                       setData({ ...data, ['receiver_tel']: e.target.value })
                     }
