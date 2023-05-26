@@ -1,16 +1,16 @@
 import Image from 'next/image';
-import { Navbar, Header } from 'ui';
+import { Navbar, CartInfo } from 'ui';
 
-const Cart = () => {
+const cart = () => {
+
   return (
     <>
       <Navbar />
       <main className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold">Customer</h1>
-        <Header title="Cart" />
+        <CartInfo/>
       </main>
     </>
   );
 };
 
-export default Cart;
+export default cart;
