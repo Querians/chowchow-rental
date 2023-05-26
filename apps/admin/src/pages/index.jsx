@@ -11,7 +11,7 @@ const Home = () => {
         <Sidebar role={role} />
       </aside>
 
-      <main className="container mx-auto lg:ml-64 px-10">
+      <main className="container mx-auto lg:ml-64 px-10 space-y-4">
 
       </main>
     </>
