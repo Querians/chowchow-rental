@@ -1,4 +1,4 @@
-import { extendType, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
+import { extendType, floatArg, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { Context } from 'vm';
 
 export const Invoice = objectType({
@@ -48,3 +48,72 @@ export const InvoiceQuery = extendType({
     })
   }
 })
+
+export const InvoiceMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addInvoice', {
+      type: 'Invoice',
+      args: {
+        paymentTypeId: nonNull(stringArg()),
+        orderId: nonNull(stringArg()),
+        costAmount: nonNull(floatArg()),
+        deadlineDate: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.invoice.create({
+          data: {
+            paymentTypeId: args.paymentTypeId,
+            orderId: args.orderId,
+            costAmount: args.costAmount,
+            deadlineDate: new Date(args.deadlineDate),
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteInvoice', {
+      type: 'Invoice',
+      args: {
+        invoiceId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.invoice.delete({
+          where: {
+            invoiceId: args.invoiceId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updateInvoice', {
+      type: 'Invoice',
+      args: {
+        invoiceId: nonNull(stringArg()),
+        paymentTypeId: nonNull(stringArg()),
+        orderId: nonNull(stringArg()),
+        costAmount: nonNull(floatArg()),
+        deadlineDate: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.invoice.update({
+          data: {
+            paymentTypeId: args.paymentTypeId,
+            orderId: args.orderId,
+            costAmount: args.costAmount,
+            deadlineDate: new Date(args.deadlineDate),
+          },
+          where: {
+            invoiceId: args.invoiceId
+          }
+        });
+      }
+    });
+
+
+  }
+});

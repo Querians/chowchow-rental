@@ -48,11 +48,107 @@ export const Customer = objectType({
 export const CustomerQuery = extendType({
   type: 'Query',
   definition(t) {
+    // All Customer
     t.list.field('allCustomer', {
       type: 'Customer',
       resolve(parent, args, context: Context, info){
         return context.prisma.customer.findMany();
       }
-    })
+    });
+
+    // Their Profile
+    t.list.field('Profile', {
+      type: 'Customer',
+      // args: {
+      //   customerId: nonNull(stringArg())
+      // },
+      resolve(parent, args, context: Context, info){
+
+        if(!context.userId){
+          throw new Error('Cannot add cart without login');
+        }
+
+        return context.prisma.customer.findMany({
+          where: { customerId: context.userId }
+        });
+      }
+    });
+
   }
 })
+
+export const CustomerMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addCustomer', {
+      type: 'Customer',
+      args: {
+        firstName: nonNull(stringArg()),
+        lastName: nonNull(stringArg()),
+        dob: nonNull(stringArg()),
+        tel: nonNull(stringArg()),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.customer.create({
+          data: {
+            firstName: args.firstName,
+            lastName: args.lastName,
+            dob: new Date(args.dob),
+            tel: args.tel,
+            email: args.email,
+            password: args.password,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteCustomer', {
+      type: 'Customer',
+      args: {
+        customerId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.customer.delete({
+          where: {
+            customerId:args.customerId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updateCustomer', {
+      type: 'Customer',
+      args: {
+        customerId: nonNull(stringArg()),
+        firstName: nonNull(stringArg()),
+        lastName: nonNull(stringArg()),
+        dob: nonNull(stringArg()),
+        tel: nonNull(stringArg()),
+        email: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.customer.update({
+          data: {
+            firstName: args.firstName,
+            lastName: args.lastName,
+            dob: new Date(args.dob),
+            tel: args.tel,
+            email: args.email,
+            password: args.password,
+          },
+          where: {
+            customerId: args.customerId
+          }
+        });
+      }
+    });
+
+  }
+});

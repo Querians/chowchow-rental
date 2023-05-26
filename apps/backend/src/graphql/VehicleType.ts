@@ -28,3 +28,60 @@ export const VehicleTypeQuery = extendType({
     })
   }
 })
+
+export const VehicleTypeMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field("addVehicleType", {
+      type: 'VehicleType',
+      args: {
+        vehicleTypeId: nonNull(stringArg()),
+        vehicleTypeN: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.vehicleType.create({
+          data: {
+            vehicleTypeId: args.vehicleTypeId,
+            vehicleTypeN: args.vehicleTypeN,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field("deleteVehicleType", {
+      type: 'VehicleType',
+      args: {
+        vehicleTypeId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.vehicleType.delete({
+          where: {
+            vehicleTypeId: args.vehicleTypeId,
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field("updateVehicleType", {
+      type: 'VehicleType',
+      args: {
+        vehicleTypeId: nonNull(stringArg()),
+        vehicleTypeN: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.vehicleType.update({
+          where: {
+            vehicleTypeId: args.vehicleTypeId,
+          },
+          data: {
+            vehicleTypeN: args.vehicleTypeN
+          }
+        });
+      }
+    });
+  }
+});

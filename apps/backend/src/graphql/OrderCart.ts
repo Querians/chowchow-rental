@@ -46,3 +46,50 @@ export const OrderCartQuery = extendType({
     })
   }
 })
+
+export const OrderCartMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addOrderCart', {
+      type: 'OrderCart',
+      args: {
+        orderId: nonNull(stringArg()),
+        cartNo: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderCart.create({
+          data: {
+            orderId: args.orderId,
+            cartNo: args.cartNo,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteOrderCart', {
+      type: 'OrderCart',
+      args: {
+        orderId: nonNull(stringArg()),
+        cartNo: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderCart.delete({
+          where: {
+            orderId_cartNo: {
+              orderId: args.orderId,
+              cartNo: args.cartNo
+            }
+          }
+        });
+      }
+    });
+
+
+    // No Update required
+
+
+  }
+});

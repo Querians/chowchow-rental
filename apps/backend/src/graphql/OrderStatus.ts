@@ -29,24 +29,57 @@ export const OrderStatusQuery = extendType({
   },
 });
 
-// export const OrderStatusMutation = extendType({
-//   type: 'Mutation',
-//   definition(t) {
-//     t.nonNull.field("addStage", {
-//       type: 'OrderStatus',
-//       args: {
-//         statusCode: nonNull(intArg()),
-//         statusDef: nonNull(stringArg())
-//       },
-//       resolve(parent, args: any, context: Context){
-//         const newStage = context.prisma.orderStatus.create({
-//           data: {
-//             statusCode: args.statusCode,
-//             statusDef: args.statusDef
-//           }
-//         })
-//         return newStage;
-//       }
-//     })
-//   }
-// });
+export const OrderStatusMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+    t.nonNull.field("addOrderStatus", {
+      type: 'OrderStatus',
+      args: {
+        statusCode: nonNull(intArg()),
+        statusDef: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderStatus.create({
+          data: {
+            statusCode: args.statusCode,
+            statusDef: args.statusDef
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field("deleteOrderStatus", {
+      type: 'OrderStatus',
+      args: {
+        statusCode: nonNull(intArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderStatus.delete({
+          where: {
+            statusCode: args.statusCode
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field("updateOrderStatus", {
+      type: 'OrderStatus',
+      args: {
+        statusCode: nonNull(intArg()),
+        statusDef: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderStatus.update({
+          where: {
+            statusCode: args.statusCode
+          },
+          data: {
+            statusDef: args.statusDef
+          }
+        });
+      }
+    });
+  }
+});

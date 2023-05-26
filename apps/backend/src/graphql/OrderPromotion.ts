@@ -44,3 +44,49 @@ export const OrderPromotionQuery = extendType({
     })
   }
 })
+
+export const OrderPromotionMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addOrderPromotion', {
+      type: 'OrderPromotion',
+      args: {
+        promotionCode: nonNull(stringArg()),
+        orderId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderPromotion.create({
+          data: {
+            promotionCode: args.promotionCode,
+            orderId: args.orderId,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteOrderPromotion', {
+      type: 'OrderPromotion',
+      args: {
+        promotionCode: nonNull(stringArg()),
+        orderId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.orderPromotion.delete({
+          where: {
+            promotionCode_orderId: {
+              promotionCode: args.promotionCode,
+              orderId: args.orderId
+          }
+        }
+        });
+      }
+    });
+
+    // Update
+    // No update required
+
+  }
+});

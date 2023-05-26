@@ -1,4 +1,4 @@
-import { extendType, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
+import { extendType, floatArg, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { Context } from 'vm';
 
 export const PaymentType = objectType({
@@ -31,4 +31,70 @@ export const PaymentTypeQuery = extendType({
       },
     });
   },
+});
+
+export const PaymentTypeMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addPaymentType', {
+      type: 'PaymentType',
+      args: {
+        paymentTypeId: nonNull(stringArg()),
+        paymentTypeName: nonNull(stringArg()),
+        interest: nonNull(floatArg()),
+        times: nonNull(intArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.paymentType.create({
+          data: {
+            paymentTypeId: args.paymentTypeId,
+            paymentTypeName: args.paymentTypeName,
+            interest: args.interest,
+            times: args.times,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deletePaymentType', {
+      type: 'PaymentType',
+      args: {
+        paymentTypeId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.paymentType.delete({
+          where: {
+            paymentTypeId: args.paymentTypeId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updatePaymentType', {
+      type: 'PaymentType',
+      args: {
+        paymentTypeId: nonNull(stringArg()),
+        paymentTypeName: nonNull(stringArg()),
+        interest: nonNull(floatArg()),
+        times: nonNull(intArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.paymentType.update({
+          data: {
+            paymentTypeName: args.paymentTypeName,
+            interest: args.interest,
+            times: args.times,
+          },
+          where: {
+            paymentTypeId: args.paymentTypeId
+          }
+        });
+      }
+    });
+
+  }
 });

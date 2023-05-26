@@ -1,4 +1,4 @@
-import { extendType, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
+import { extendType, idArg, intArg, nonNull, nullable, objectType, stringArg } from 'nexus';
 import { Context } from 'vm';
 
 export const SubOrder = objectType({
@@ -44,3 +44,48 @@ export const SubOrderQuery = extendType({
     })
   }
 })
+
+export const SubOrderMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addSubOrder', {
+      type: 'SubOrder',
+      args: {
+        orderId: nonNull(stringArg()),
+        itemId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.subOrder.create({
+          data: {
+            orderId: args.orderId,
+            itemId: args.itemId,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteSubOrder', {
+      type: 'SubOrder',
+      args: {
+        orderId: nonNull(stringArg()),
+        itemId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context, info) {
+        const retval = context.prisma.subOrder.delete({
+          where: {
+            orderId_itemId: {
+                orderId: args.orderId,
+                itemId: args.itemId
+            },
+          }
+        })
+        return retval;
+        // data wont return back ;-;
+      }
+    });
+
+  }
+});

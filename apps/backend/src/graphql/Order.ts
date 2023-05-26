@@ -1,4 +1,4 @@
-import { extendType, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
+import { extendType, floatArg, idArg, intArg, nonNull, objectType, stringArg } from 'nexus';
 import { Context } from 'vm';
 
 export const Order = objectType({
@@ -101,4 +101,109 @@ export const OrderQuery = extendType({
           }
       });
   },
+});
+
+export const OrderMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addOrder', {
+      type: 'Order',
+      args: {
+        customerId: nonNull(stringArg()),
+        addressDetail: nonNull(stringArg()),
+        street: nonNull(stringArg()),
+        subdistrict: nonNull(stringArg()),
+        zipcode: nonNull(stringArg()),
+        latitude: nonNull(floatArg()),
+        longitude: nonNull(floatArg()),
+        receiverTel: nonNull(stringArg()),
+        totalPrice: nonNull(floatArg()),
+        sendingDate: nonNull(stringArg()),///
+        returnDate: nonNull(stringArg()),///
+        statusCode: nonNull(intArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.order.create({
+          data: {
+            customerId: args.customerId,
+            addressDetail: args.addressDetail,
+            street: args.street,
+            subdistrict: args.subdistrict,
+            zipcode: args.zipcode,
+            latitude: args.latitude,
+            longitude: args.longitude,
+            receiverTel: args.receiverTel,
+            totalPrice: args.totalPrice,
+            sendingDate: new Date(args.sendingDate),
+            returnDate: new Date(args.returnDate),
+            statusCode: args.statusCode,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteOrder', {
+      type: 'Order',
+      args: {
+        orderId : nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.order.delete({
+          where: {
+            orderId: args.orderId
+          }
+        });
+      }
+    });
+
+
+    // Update
+    t.nonNull.field('updateOrder', {
+      type: 'Order',
+      args: {
+        orderId : nonNull(stringArg()),
+        customerId: nonNull(stringArg()),
+        addressDetail: nonNull(stringArg()),
+        street: nonNull(stringArg()),
+        subdistrict: nonNull(stringArg()),
+        zipcode: nonNull(stringArg()),
+        latitude: nonNull(floatArg()),
+        longitude: nonNull(floatArg()),
+        receiverTel: nonNull(stringArg()),
+        totalPrice: nonNull(floatArg()),
+        sendingDate: nonNull(stringArg()),///
+        returnDate: nonNull(stringArg()),///
+        reciever: nonNull(stringArg()),
+        statusCode: nonNull(intArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.order.update({
+          data: {
+            customerId: args.customerId,
+            addressDetail: args.addressDetail,
+            street: args.street,
+            subdistrict: args.subdistrict,
+            zipcode: args.zipcode,
+            latitude: args.latitude,
+            longitude: args.longitude,
+            receiverTel: args.receiverTel,
+            totalPrice: args.totalPrice,
+            sendingDate: new Date(args.sendingDate),
+            returnDate: new Date(args.returnDate),
+            receiver: args.reciever,
+            statusCode: args.statusCode,
+          },
+          where: {
+            orderId: args.orderId
+          }
+        });
+      }
+    });
+
+
+
+  }
 });

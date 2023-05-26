@@ -48,3 +48,74 @@ export const ItemQuery = extendType({
     });
   }
 });
+
+export const ItemMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addItem', {
+      type: 'Item',
+      args: {
+        itemId: nonNull(stringArg()),
+        productId: nonNull(stringArg()),
+        itemRegisterDate: nonNull(stringArg()),
+        stockAddress: nonNull(stringArg()),
+        itemStatusId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.item.create({
+          data: {
+            itemId: args.itemId,
+            productId: args.productId,
+            itemRegisterDate: new Date(args.itemRegisterDate),
+            stockAddress: args.stockAddress,
+            itemStatusId: args.itemStatusId,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteItem', {
+      type: 'Item',
+      args: {
+        itemId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.item.delete({
+          where: {
+            itemId: args.itemId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updateItem', {
+      type: 'Item',
+      args: {
+        itemId: nonNull(stringArg()),
+        productId: nonNull(stringArg()),
+        itemRegisterDate: nonNull(stringArg()),
+        stockAddress: nonNull(stringArg()),
+        itemStatusId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.item.update({
+          where: {
+            itemId: args.itemId
+          },
+          data: {
+            productId: args.productId,
+            itemRegisterDate: new Date(args.itemRegisterDate),
+            stockAddress: args.stockAddress,
+            itemStatusId: args.itemStatusId,
+          }
+        });
+      }
+    });
+
+
+  }
+});

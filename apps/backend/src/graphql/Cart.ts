@@ -40,6 +40,21 @@ export const Cart = objectType({
     t.nonNull.int('quantity');
     t.nonNull.int('status');
     t.nonNull.dateTime('timestamp');        // (timestamp)
+    t.field('orderCarts', {
+      type: 'OrderCart',
+      resolve(parent, args, context: Context){
+        return context.prisma.cart.findUnique({
+          where: {
+            cartNo_customerId_productId :
+            {
+              cartNo  : parent.cartNo,
+              customerId  : parent.customerId,
+              productId  : parent.productId,
+            }
+          }
+        }).orderCarts();
+      }
+    })
   },
 });
 
@@ -52,5 +67,118 @@ export const CartQuery = extendType({
         return context.prisma.cart.findMany();
       }
     });
+  }
+});
+
+export const CartMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addCart', {
+      type: 'Cart',
+      args: {
+        customerId: nonNull(stringArg()),
+        productId: nonNull(stringArg()),
+        quantity: nonNull(intArg()),
+        status: nonNull(intArg()),
+        timestamp: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.cart.create({
+          data: {
+            customerId: args.customerId,
+            productId: args.productId,
+            quantity: args.quantity,
+            status: args.status,
+            timestamp: new Date(args.timestamp)
+          }
+        });
+      }
+    });
+
+    // Add For User Only
+    t.nonNull.field('addUserCart', {
+      type: 'Cart',
+      args: {
+        // customerId: nonNull(stringArg()),
+        productId: nonNull(stringArg()),
+        quantity: nonNull(intArg()),
+        status: nonNull(intArg()),
+        timestamp: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+
+        if(!context.userId){
+          throw new Error('Cannot add cart without login');
+        }
+
+        return context.prisma.cart.create({
+          data: {
+            customerId: context.userId,
+            productId: args.productId,
+            quantity: args.quantity,
+            status: args.status,
+            timestamp: new Date(args.timestamp)
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteCart', {
+      type: 'Cart',
+      args: {
+        cartNo: nonNull(stringArg()),
+        customerId: nonNull(stringArg()),
+        productId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.cart.delete({
+          where: {
+            cartNo_customerId_productId :
+            {
+              cartNo  : args.cartNo,
+              customerId  : args.customerId,
+              productId  : args.productId
+            }
+          }
+        });
+      }
+    });
+
+
+    // Update
+    t.nonNull.field('updateCart', {
+      type: 'Cart',
+      args: {
+        cartNo: nonNull(stringArg()),
+        customerId: nonNull(stringArg()),
+        productId: nonNull(stringArg()),
+        quantity: nonNull(intArg()),
+        status: nonNull(intArg()),
+        timestamp: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.cart.update({
+          data: {
+            quantity: args.quantity,
+            status: args.status,
+            timestamp: new Date(args.timestamp)
+          },
+          where: {
+            cartNo_customerId_productId :
+            {
+              cartNo  : args.cartNo,
+              customerId  : args.customerId,
+              productId  : args.productId
+            }
+          }
+        });
+      }
+    });
+
+
+
   }
 });

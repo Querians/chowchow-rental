@@ -31,3 +31,61 @@ export const ItemStatusQuery = extendType({
   }
 });
 
+export const ItemStatusMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addItemStatus', {
+      type: 'ItemStatus',
+      args: {
+        itemStatusId: nonNull(stringArg()),
+        itemStatusName: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.itemStatus.create({
+          data: {
+            itemStatusId: args.itemStatusId,
+            itemStatusName: args.itemStatusName,
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deleteItemStatus', {
+      type: 'ItemStatus',
+      args: {
+        itemStatusId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.itemStatus.delete({
+          where:{
+            itemStatusId: args.itemStatusId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updateItemStatus', {
+      type: 'ItemStatus',
+      args: {
+        itemStatusId: nonNull(stringArg()),
+        itemStatusName: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.itemStatus.update({
+          data: {
+            itemStatusName: args.itemStatusName
+          },
+          where: {
+            itemStatusId: args.itemStatusId
+          }
+        });
+      }
+    });
+
+
+  }
+});

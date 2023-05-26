@@ -40,3 +40,61 @@ export const PositionQuery = extendType({
     });
   },
 })
+
+export const PositionMutation = extendType({
+  type: 'Mutation',
+  definition(t) {
+
+    // Add
+    t.nonNull.field('addPosition', {
+      type: 'Position',
+      args: {
+        positionId: nonNull(stringArg()),
+        positionN: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.position.create({
+          data: {
+            positionId: args.positionId,
+            positionN: args.positionN
+          }
+        });
+      }
+    });
+
+    // Delete
+    t.nonNull.field('deletePosition', {
+      type: 'Position',
+      args: {
+        positionId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.position.delete({
+          where: {
+            positionId: args.positionId
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updatePosition', {
+      type: 'Position',
+      args: {
+        positionId: nonNull(stringArg()),
+        positionN: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.position.update({
+          data: {
+            positionN: args.positionN
+          },
+          where: {
+            positionId: args.positionId
+          }
+        });
+      }
+    });
+
+  }
+});
