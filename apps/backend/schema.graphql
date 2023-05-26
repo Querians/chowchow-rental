@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  customer: Customer!
+  token: String!
+}
+
 type Billing {
   billTimestamp: DateTime!
   billingId: String!
@@ -17,6 +22,7 @@ type Billing {
 type Cart {
   cartNo: String!
   customer: Customer!
+  orderCarts: OrderCart
   product: Product!
   quantity: Int!
   status: Int!
@@ -87,6 +93,78 @@ type ItemStatus {
   itemStatusId: String!
   itemStatusName: String!
   items: [Item]
+}
+
+type Mutation {
+  addBilling(billTimestamp: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
+  addCart(customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  addCategory(categoryId: String!, categoryName: String!): Category!
+  addCategoryProblem(categoryProblemId: String!, categoryProblemN: String!, positionId: String!): CategoryProblem!
+  addCustomer(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): Customer!
+  addInvoice(costAmount: Float!, deadlineDate: String!, orderId: String!, paymentTypeId: String!): Invoice!
+  addIssue(categoryProblemId: String!, customerId: String!, description: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
+  addItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
+  addItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
+  addOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, receiverTel: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
+  addOrderCart(cartNo: String!, orderId: String!): OrderCart!
+  addOrderPromotion(orderId: String!, promotionCode: String!): OrderPromotion!
+  addOrderStatus(statusCode: Int!, statusDef: String!): OrderStatus!
+  addOrderTransport(isReturn: Boolean!, orderId: String!, staffId: String!, timeAssign: String!, vehicleLicense: String!): OrderTransport!
+  addPaymentMethods(paymentMethodId: String!, paymentMethodName: String!): PaymentMethod!
+  addPaymentType(interest: Float!, paymentTypeId: String!, paymentTypeName: String!, times: Int!): PaymentType!
+  addPosition(positionId: String!, positionN: String!): Position!
+  addProduct(categoryName: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
+  addPromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, startDate: String!): Promotion!
+  addStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
+  addSubOrder(itemId: String!, orderId: String!): SubOrder!
+  addUserCart(productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  addVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
+  addVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
+  deleteBilling(billTimestamp: String!, billingId: String!): Billing!
+  deleteCart(cartNo: String!, customerId: String!, productId: String!): Cart!
+  deleteCategory(categoryId: String!): Category!
+  deleteCategoryProblem(categoryProblemId: String!): CategoryProblem!
+  deleteCustomer(customerId: String!): Customer!
+  deleteInvoice(invoiceId: String!): Invoice!
+  deleteIssue(issueId: String!): Issue!
+  deleteItem(itemId: String!): Item!
+  deleteItemStatus(itemStatusId: String!): ItemStatus!
+  deleteOrder(orderId: String!): Order!
+  deleteOrderCart(cartNo: String!, orderId: String!): OrderCart!
+  deleteOrderPromotion(orderId: String!, promotionCode: String!): OrderPromotion!
+  deleteOrderStatus(statusCode: Int!): OrderStatus!
+  deleteOrderTransport(orderId: String!, timeAssign: String!): OrderTransport!
+  deletePaymentMethods(paymentMethodId: String!): PaymentMethod!
+  deletePaymentType(paymentTypeId: String!): PaymentType!
+  deletePosition(positionId: String!): Position!
+  deleteProduct(productId: String!): Product!
+  deletePromotion(promotionCode: String!): Promotion!
+  deleteStaffInfo(staffId: String!): StaffInfo!
+  deleteSubOrder(itemId: String!, orderId: String!): SubOrder!
+  deleteVehicleInfo(vehicleLicence: String!): VehicleInfo!
+  deleteVehicleType(vehicleTypeId: String!): VehicleType!
+  login(email: String!, password: String!): AuthPayload!
+  signup(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): AuthPayload!
+  updateBilling(billTimestamp: String!, billingId: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
+  updateCart(cartNo: String!, customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  updateCategory(categoryId: String!, categoryName: String!): Category!
+  updateCategoryProblem(categoryProblemId: String!, categoryProblemN: String!, positionId: String!): CategoryProblem!
+  updateCustomer(customerId: String!, dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): Customer!
+  updateInvoice(costAmount: Float!, deadlineDate: String!, invoiceId: String!, orderId: String!, paymentTypeId: String!): Invoice!
+  updateIssue(categoryProblemId: String!, customerId: String!, description: String!, issueId: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
+  updateItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
+  updateItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
+  updateOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, orderId: String!, receiverTel: String!, reciever: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
+  updateOrderStatus(statusCode: Int!, statusDef: String!): OrderStatus!
+  updateOrderTransport(isReturn: Boolean!, orderId: String!, staffId: String!, timeAssign: String!, timeBack: String!, timeGo: String!, vehicleLicense: String!): OrderTransport!
+  updatePaymentMethods(paymentMethodId: String!, paymentMethodName: String!): PaymentMethod!
+  updatePaymentType(interest: Float!, paymentTypeId: String!, paymentTypeName: String!, times: Int!): PaymentType!
+  updatePosition(positionId: String!, positionN: String!): Position!
+  updateProduct(categoryName: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
+  updatePromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, promotionCode: String!, startDate: String!): Promotion!
+  updateStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffId: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
+  updateVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
+  updateVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
 }
 
 type Order {
@@ -188,6 +266,7 @@ type Promotion {
 }
 
 type Query {
+  Profile: [Customer]
   allBilling: [Billing]
   allCart: [Cart]
   allCategory: [Category]
@@ -211,6 +290,7 @@ type Query {
   allSubOrder: [SubOrder]
   allVehicleInfo: [VehicleInfo]
   allVehicleType: [VehicleType]
+  searchProduct(filter: String): [Product]
 }
 
 type StaffInfo {

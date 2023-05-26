@@ -25,6 +25,8 @@ export * from './CategoryProblem.ts';
 export * from './StaffInfo.ts';
 export * from './Position.ts';
 
-export * from './Customer.ts'
+export * from './Customer.ts';
 
 export * from "./scalars/Date.ts";
+
+export * from "./Auth.ts";
