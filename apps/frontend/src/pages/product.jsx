@@ -60,7 +60,7 @@ const Product = () => {
     return (
         <>
             <Navbar />
-            <main className="container pt-32 md:pt-24 mx-auto px-4 pt-4">
+            <main className="container pt-24 md:pt-24 mx-auto px-4">
                 <div className="pb-6">
                     <Breadcrumb first_name="Home" first="/" current="Products" />
                 </div>
