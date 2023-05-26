@@ -31,7 +31,7 @@ export const EmailInput = ({ onChange, value, placeholder }) => {
         />
         <span
           className={
-            'text-sm text-[#C26666] ' + (!isValid ? 'visible' : 'invisible')
+            'text-sm text-[#C26666] ' + (!isValid ? '' : 'hidden')
           }
         >
           The email you entered is incorrect format. Please try again.
