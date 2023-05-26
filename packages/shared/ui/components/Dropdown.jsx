@@ -26,7 +26,9 @@ export const Dropdown = ({
           {placeholder}
         </option>
         {Object.keys(options).map((key) => (
-          <option value={key}>{options[key]}</option>
+          <option key={key} value={key}>
+            {options[key]}
+          </option>
         ))}
       </select>
     </div>
