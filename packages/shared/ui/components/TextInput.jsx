@@ -3,7 +3,9 @@ export const TextInput = ({
   value,
   placeholder,
   label,
+  constraint,
   isRequire = true,
+  type='',
 }) => {
   return (
     <div>
@@ -13,17 +15,36 @@ export const TextInput = ({
       >
         {label}
       </label>
-      <input
-        name={label}
-        type="text"
-        value={value}
-        autoComplete="true"
-        onChange={onChange}
-        id={label}
-        className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
-        placeholder={placeholder}
-        required={isRequire}
-      />
+      { type=='readOnly' ?
+        <input
+          disabled
+          readOnly
+          name={label}
+          pattern={constraint}
+          type="text"
+          value={value}
+          autoComplete="true"
+          onChange={onChange}
+          id={label}
+          className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
+          placeholder={placeholder}
+          required={isRequire}
+        />
+      :
+        <input
+          name={label}
+          pattern={constraint}
+          type="text"
+          value={value}
+          autoComplete="true"
+          onChange={onChange}
+          id={label}
+          className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
+          placeholder={placeholder}
+          required={isRequire}
+        />
+
+      }
     </div>
   );
 };

@@ -3,10 +3,12 @@ export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Checkbox';
-export * from './components/ConfirmAddress';
-export * from './components/ConfirmContact';
-export * from './components/ConfirmInfo';
-export * from './components/ConfirmPayment';
+export * from './components/CartAddress';
+export * from './components/CartContact';
+export * from './components/CartInfo';
+export * from './components/CartPayment';
+export * from './components/CartSummary';
+export * from './components/Counter';
 export * from './components/DateInput';
 export * from './components/Dropdown';
 export * from './components/DropdownCard';
@@ -21,9 +23,3 @@ export * from './components/SearchBar';
 export * from './components/Sidebar';
 export * from './components/Textarea';
 export * from './components/TextInput';
-
-
-
-
-
-
