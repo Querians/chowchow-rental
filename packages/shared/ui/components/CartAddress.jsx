@@ -206,7 +206,7 @@ export const CartAddress = ({ address }) => {
             onChange={(e) =>
               setData({ ...data, ['sending_date']: e.target.value })
             }
-            value={data['return_date']}
+            value={data['sending_date']}
             name="sending_date"
             type="datetime-local"
             autoComplete="true"
