@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { RegisterIsValidContext } from './RegisterInfo';
 
 export const PasswordInput = ({
   type,
@@ -8,6 +9,7 @@ export const PasswordInput = ({
   placeholder,
 }) => {
   const [isValid, setIsValid] = useState({});
+  const { isCorrect, setIsCorrect } = useContext(RegisterIsValidContext);
   const choose = {
     sign_up: 0,
     sign_in: 1,
@@ -48,6 +50,7 @@ export const PasswordInput = ({
       ...isValid,
       ...result,
     });
+    setIsCorrect({...isCorrect , ['PasswordFormat']:Object.values(result).every(x=>x)});
   };
 
   return (
