@@ -4,11 +4,11 @@ import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
 const ProductForm = () => {
 
     const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
-
+    const role = "inventory"
     return (
         <>
             <aside>
-                <Sidebar role="inventory" />
+                <Sidebar role={role} />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
