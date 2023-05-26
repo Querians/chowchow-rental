@@ -7,7 +7,7 @@ export const Button = ({ logo, onClick, text, type }) => {
     <>
       {type == 'normal' ? (
         <button
-          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#C3A982] px-5 py-1 text-base font-bold text-gray-900 hover:bg-[#89724E] hover:text-white"
+          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#C3A982] px-5 py-2 text-base font-bold text-gray-900 hover:bg-[#89724E] hover:text-white"
           onClick={onClick}
         >
           {text}
@@ -17,7 +17,7 @@ export const Button = ({ logo, onClick, text, type }) => {
       )}
       {type == 'submit' ? (
         <button
-          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#A4DAAC] px-5 py-1 text-base font-bold text-gray-900 hover:bg-[#54825B] hover:text-white"
+          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#A4DAAC] px-5 py-2 text-base font-bold text-gray-900 hover:bg-[#54825B] hover:text-white"
           onClick={onClick}
         >
           {text}
@@ -27,7 +27,7 @@ export const Button = ({ logo, onClick, text, type }) => {
       )}
       {type == 'cancel' ? (
         <button
-          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#C26666] px-5 py-1 text-base font-bold text-gray-900 hover:bg-[#8B3B3B] hover:text-white"
+          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#C26666] px-5 py-2 text-base font-bold text-gray-900 hover:bg-[#8B3B3B] hover:text-white"
           onClick={onClick}
         >
           {text}
