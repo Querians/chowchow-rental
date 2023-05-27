@@ -5,17 +5,20 @@ export const CountQuarterVehicleUse = () => {
   const [quarter, setQuarter] = useState(1);
   // lock vehicle type เลยละกันคิดไม่ออก ;-;
   const receive_data = {
-    '4 wheels truck':{
+    '1':{
+      'vehicle_type':'4 wheels truck',
       '2023':23,
       '2022':57,
       '2021':250,
     },
-    '6 wheels truck':{
+    '2':{
+      'vehicle_type':'6 wheels truck',
       '2023':94,
       '2022':234,
       '2021':123,
     },
-    '10 wheels truck':{
+    '3':{
+      'vehicle_type':'10 wheels truck',
       '2023':34,
       '2022':123,
       '2021':234,
@@ -52,8 +55,8 @@ export const CountQuarterVehicleUse = () => {
                 <tbody>
                   {Object.keys(receive_data).map((key) => (
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {key}
+                        <td scope="row" class="bg-[#E3C291] px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {receive_data[key]['vehicle_type']}
                         </td>
                         <td scope="row" class="px-6 py-4">
                           {receive_data[key]['2023']}

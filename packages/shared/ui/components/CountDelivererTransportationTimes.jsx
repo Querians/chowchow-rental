@@ -1,35 +1,35 @@
 export const CountDelivererTransportationTimes = () => {
-  // lock vehicle type เลยละกันคิดไม่ออก ;-;
+
   const receive_data = {
-    'deliverer_1':{
+    '1':{
+      'name':'deliverer_1',
       '2023':23,
       '2022':57,
       '2021':250,
     },
-    'deliverer_2':{
-      '2023':94,
-      '2022':234,
-      '2021':123,
+    '2':{
+      'name':'deliverer_2',
+      '2023':23,
+      '2022':57,
+      '2021':250,
     },
-    'deliverer_3':{
-      '2023':34,
-      '2022':123,
-      '2021':234,
+    '3':{
+      'name':'deliverer_3',
+      '2023':23,
+      '2022':57,
+      '2021':250,
     },
-    'deliverer_4':{
-      '2023':34,
-      '2022':123,
-      '2021':234,
+    '4':{
+      'name':'deliverer_4',
+      '2023':23,
+      '2022':57,
+      '2021':250,
     },
-    'deliverer_5':{
-      '2023':34,
-      '2022':123,
-      '2021':234,
-    },
-    'deliverer_6':{
-      '2023':34,
-      '2022':123,
-      '2021':234,
+    '5':{
+      'name':'deliverer_5',
+      '2023':23,
+      '2022':57,
+      '2021':250,
     },
   }
 
@@ -60,8 +60,8 @@ export const CountDelivererTransportationTimes = () => {
                 <tbody>
                   {Object.keys(receive_data).map((key) => (
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {key}
+                        <td scope="row" class="bg-[#E3C291] px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                          {receive_data[key]['name']}
                         </td>
                         <td scope="row" class="px-6 py-4">
                           {receive_data[key]['2023']}
