@@ -163,7 +163,7 @@ const Promotion = () => {
                 </div>
                 {role == 'sales'||'manager' ? (
                     <div className='grid justify-items-end'>
-                        <Link href="/itemform">
+                        <Link href="/promotionform">
                             <Button type="normal" text="Add Promotion Code" />
                         </Link>
                     </div>) : (
