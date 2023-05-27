@@ -1,7 +1,8 @@
 import { DelivererOrderInput, DelivererVehicleForThisOrderID, Breadcrumb } from 'ui';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
-const DelivererOrderDetail = () => {
+const Transportdetail = () => {
+  const role = 'deliverer';
   // ดึงมา
   const receieveData_currentAddress = { lat: 13.736988050394881, lng: 100.52436590194702 };
 
@@ -16,10 +17,10 @@ const DelivererOrderDetail = () => {
   return (
       <>
         <main className="container mx-auto px-10 pb-8 space-y-4">
-          <Breadcrumb first_name="Delivery" first="/deliverer" current="delivererOrderDetail" />
+          <Breadcrumb first_name="Delivery" first="/deliverer" current="transportdetail" />
           <h1 className="text-4xl font-bold py-6">Order ID Details</h1>
           <DelivererVehicleForThisOrderID />
-          <DelivererOrderInput />
+          <DelivererOrderInput role={role}/>
           <div className="relative flex flex-col items-center justify-center gap-3">
             <GoogleMap
               zoom={16}
@@ -35,5 +36,5 @@ const DelivererOrderDetail = () => {
     );
 };
 
-export default DelivererOrderDetail;
+export default Transportdetail;
 

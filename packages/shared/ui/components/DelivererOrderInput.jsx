@@ -1,10 +1,11 @@
 import {TextInput, Button} from 'ui';
 import { useState } from 'react';
 
-export const DelivererOrderInput = () => {
+export const DelivererOrderInput = ({role}) => {
   const receiveData = {
     customer_name: 'nontawat',
-    arrive_time: '2023-05-30 11.59', //ไม่รู้เก็บยังไงไม่ต้องจัด
+    arrive_time: '2023-01-23 09:52:18',
+    receiver_name: 'zxc',
     receiver_tel: 'receiver_tel',
     sub_district: 'sub_district',
     district: 'district',
@@ -24,7 +25,13 @@ export const DelivererOrderInput = () => {
             <div className="grid grid-cols-2 gap-x-12">
                 <TextInput placeholder="" label="Customer Name" type={'readOnly'} value={receiveData.customer_name}/>
                 <TextInput placeholder="" label="Arrive Time" type={'readOnly'} value={receiveData.arrive_time}/>
-                <TextInput placeholder="" label="Receiver Name" value={returnData.receiver_name} onChange={e => setReturnData({...returnData, ['receiver_name']:e.target.value})}/>
+                {
+                  role=='deliverer'
+                  ?
+                  <TextInput placeholder="" label="Receiver Name" value={returnData.receiver_name} onChange={e => setReturnData({...returnData, ['receiver_name']:e.target.value})}/>
+                  :
+                  <TextInput placeholder="" label="Receiver Name" type={'readOnly'} value={receiveData.receiver_name}/>
+                }
                 <TextInput placeholder="" label="Receiver Tel." type={'readOnly'} value={receiveData.receiver_tel}/>
                 <TextInput placeholder="" label="Sub-District" type={'readOnly'} value={receiveData.sub_district}/>
                 <TextInput placeholder="" label="District" type={'readOnly'} value={receiveData.district}/>
@@ -32,11 +39,16 @@ export const DelivererOrderInput = () => {
                 <TextInput placeholder="" label="Zipcode" type={'readOnly'} value={receiveData.zipcode}/>
             </div>
         </div>
-        <div className='grid grid-cols-3'>
-          <div className='col-start-2'>
+        {
+          role =='deliverer'
+          &&
+          <div className='grid grid-cols-3'>
+            <div className='col-start-2'>
             <Button type="submit" text="DONE" />
+            </div>
           </div>
-        </div>
+
+        }
       </form>
   </>;
 };
