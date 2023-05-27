@@ -13,7 +13,7 @@ export const Navbar = () => {
         <div className="m-0 flex w-full flex-wrap items-center justify-around border-b-2 border-[#000000]  p-0 md:p-3">
           <ul className="flex flex-col p-4 align-baseline font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0 ">
             <li>
-              <a href="https://flowbite.com/" className="flex items-center">
+              <a href="/" className="flex items-center">
                 <Image
                   src="/dog.svg"
                   className="mr-3 h-8"
