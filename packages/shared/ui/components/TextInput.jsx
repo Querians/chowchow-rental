@@ -20,6 +20,7 @@ export const TextInput = ({
         <input
           disabled
           readOnly
+          defaultValue={defaultValue}
           name={label}
           pattern={constraint}
           type="text"

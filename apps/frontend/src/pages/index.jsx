@@ -14,13 +14,13 @@ const Home = () => {
               <div>-Online Rental-</div>
             </div>
             <p className="text-lg md:text-md lg:text-xl" >สัมผัสประสบการณ์เช่าอุปกรณ์จัดงานรื่นเริงในรูปแบบที่ดีกว่าเดิมพร้อมดำเนินการตลอด 24 ชั่วโมง</p>
-            <Link className='w-full' href="SIGN_UP_PATH">
+            <Link className='w-full' href="/login">
               <Button text={'GET STARTED'} type={'normal'}/>
             </Link>
           </div>
             <Image className='w-full md:w-[50%] md:pr-0 md:px-0 lg:basis-1/2 2xl:px-14' src={'/party.svg'} width={400} height={400} quality={100} alt='party image'></Image>
         </div>
-        
+
       </main>
     </div>
   );
