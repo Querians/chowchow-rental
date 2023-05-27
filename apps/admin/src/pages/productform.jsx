@@ -41,7 +41,7 @@ const ProductForm = () => {
                                     <TextInput placeholder="kg" label="weight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                     <TextInput placeholder="cm" label="width" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                     <TextInput placeholder="cm" label="depth" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
-                                    <TextInput placeholder="cm" label="hight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
+                                    <TextInput placeholder="cm" label="height" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                 </div>
                                 <div>
                                     <Textarea label="Description" isRequire={false} />
