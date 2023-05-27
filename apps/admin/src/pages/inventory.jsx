@@ -165,7 +165,7 @@ const Inventory = () => {
                                 <tbody className='z-1'>
                                     {Object.keys(current_stock).map((key) => (
                                         <tr class="bg-white border-b z-2">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <th scope="row" class="px-6 py-4 font-normal">
                                                 {current_stock[key]['category_name']}
                                             </th>
                                             <td class="px-6 py-4">
@@ -226,7 +226,7 @@ const Inventory = () => {
                                 <tbody>
                                     {Object.keys(data_allTime).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <th scope="row" class="px-6 py-4 font-normal">
                                                 {data_allTime[key]['category_name']}
                                             </th>
                                             <td class="px-6 py-4">
