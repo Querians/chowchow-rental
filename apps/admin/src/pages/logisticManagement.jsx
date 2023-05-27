@@ -1,4 +1,4 @@
-import { AddTransport, Breadcrumb } from 'ui';
+import { AddTransport, Breadcrumb, EditTransport, DeleteTransport } from 'ui';
 
 const logisticManagement = () => {
   return (
@@ -7,6 +7,8 @@ const logisticManagement = () => {
           <Breadcrumb first_name="" first="#" current="" />
           <h1 className="text-4xl font-bold py-6">Logistic Management</h1>
           <AddTransport />
+          <EditTransport />
+          <DeleteTransport />
         </main>
       </>
     );
