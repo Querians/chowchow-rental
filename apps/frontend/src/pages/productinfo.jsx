@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Navbar, Header, Breadcrumb, Counter, Button } from 'ui';
+import { Navbar, Breadcrumb, OrderInfo } from 'ui';
 
 const ProductInfo = () => {
 
@@ -15,10 +15,6 @@ const ProductInfo = () => {
         detail: 'เก้าอี้ทรงธรรมดาที่บ้านไหนก็(น่าจะ)มี ไม่ค่อยแน่ใจว่าจะมาเช่าทำไม แต่โอเคมันได้ตังเราพร้อมให้คุณเช่าเสมอ เวลานั่งแล้วรู้สึกเหมือนอยู่ในบ้าน ภายในโลกที่มีเพียงแค่สีขาว ดำ เทา ช่างเหมาะกับคนคูลอย่างเธอจริง ๆ สุดสวยห์/สุดหล่อห์',
         image: '/ikea_black_chair.png',
     }
-
-    const onClick = () => {
-
-    };
 
     return (
         <>
@@ -41,26 +37,7 @@ const ProductInfo = () => {
 
                     <div class="flex flex-col basis-7/10 gap-y-6">
                         <div className="w-full rounded-lg border border-2 border-black p-4">
-                            <div className="sm:flex grid-flow-col justify-between items-end">
-                                <p className="text-start text-3xl text-black font-bold pb-1 justify-items-start">{product['product_name']}</p>
-                                <p className="text-start text-xl text-red-700 font-semibold pb-1 pr-4 justify-items-start">{product['price']} THB/day</p>
-                            </div>
-                            <div className="p-4 pb-0">
-                                <div className="flex flex-col lg:flex-row gap-4">
-                                    <div className="basis-1/2">
-                                        <div className="flex flex-col md:flex-row">
-                                            <p className="text-start text-lg text-black font-bold justify-center">จำนวนสินค้าสั่งเช่า</p>
-                                            <div>
-                                                <Counter />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="basis-1/2">
-                                        <Button type="submit" text="Add To Cart" onClick={onClick} />
-                                    </div>
-                                </div>
-                            </div>
-
+                            <OrderInfo />
                         </div>
                         <div className="w-full rounded-lg border border-2 border-black p-4">
                             <p className="text-start text-2xl text-black font-bold pb-1">รายละเอียดสินค้า</p>
