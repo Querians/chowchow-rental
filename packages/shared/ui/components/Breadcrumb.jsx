@@ -16,7 +16,7 @@ export const Breadcrumb = ({
           <li class="inline-flex items-center">
             <a
               href={first}
-              class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-[#C3A982]"
+              class="inline-flex items-center text-base font-medium text-gray-700 hover:text-[#C3A982]"
             >
               <svg
                 aria-hidden="true"
@@ -48,7 +48,7 @@ export const Breadcrumb = ({
                 </svg>
                 <a
                   href={second}
-                  class="ml-1 text-sm font-medium text-gray-700 hover:text-[#C3A982] md:ml-2 "
+                  class="ml-1 text-base font-medium text-gray-700 hover:text-[#C3A982] md:ml-2 "
                 >
                   {second_name}
                 </a>
@@ -75,7 +75,7 @@ export const Breadcrumb = ({
                 </svg>
                 <a
                   href={third}
-                  class="ml-1 text-sm font-medium text-gray-700 hover:text-[#C3A982] md:ml-2 "
+                  class="ml-1 text-base font-medium text-gray-700 hover:text-[#C3A982] md:ml-2 "
                 >
                   {third_name}
                 </a>
@@ -99,7 +99,7 @@ export const Breadcrumb = ({
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 ">
+              <span class="ml-1 text-base font-medium text-gray-500 md:ml-2 ">
                 {current}
               </span>
             </div>

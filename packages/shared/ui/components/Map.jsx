@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AppContext } from './CartInfo';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
 export const Map = ({
@@ -7,6 +8,7 @@ export const Map = ({
   height = '300px',
 }) => {
   const [currentLocation, setCurrentLocation] = useState(coordinates);
+  const { data, setData } = useContext(AppContext);
 
   useEffect(() => {
     if (!isEditable) {
@@ -20,6 +22,11 @@ export const Map = ({
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
+        setData({
+          ...data,
+          ['lat']: latitude,
+          ['lng']: longitude,
+        });
       },
       (error) => {
         console.log(error);
@@ -44,6 +51,11 @@ export const Map = ({
         mapContainerStyle={{ width: '100%', height: height, margin: 'auto' }}
         onClick={(e) => {
           if (isEditable) {
+            setData({
+              ...data,
+              ['lat']: e.latLng.lat(),
+              ['lng']: e.latLng.lng(),
+            });
             setCurrentLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() });
           }
         }}
