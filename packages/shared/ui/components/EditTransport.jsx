@@ -6,6 +6,7 @@ export const EditTransport = () => {
 
   const [editData, setEditData] = useState({
     order_id:'',
+    is_return:'',
     staff_id:'',
     car_licence:'',
   })
@@ -73,6 +74,7 @@ export const EditTransport = () => {
             <form onSubmit={e => e.preventDefault()}>
               <div className="grid grid-cols-2 gap-x-4">
                 <TextInput onChange={e => setEditData({...editData, ['order_id']:e.target.value})} label={'OrderID'} placeholder={'r786hlidb3g'} />
+                <Dropdown onChange={e => setEditData({...editData, ['is_return']:e.target.value})} defaultValue={'0'} options={{'0':'send', '1':'return'}} label={'send or return'}/>
                 <div className="col-start-1">
                   <label
                     htmlFor={'staff ID'}
