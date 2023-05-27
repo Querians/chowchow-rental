@@ -4,6 +4,7 @@ export const Textarea = ({
   placeholder,
   label,
   isRequire = true,
+  defaultValue='',
 }) => {
   return (
     <div>
@@ -16,6 +17,7 @@ export const Textarea = ({
       <textarea
         name={label}
         id={label}
+        defaultValue={defaultValue}
         rows="4"
         onChange={onChange}
         value={value}

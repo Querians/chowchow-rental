@@ -1,13 +1,15 @@
 import Image from 'next/image';
-import { Navbar, Header } from 'ui';
+import { Sidebar, NavbarFake, StaffLoginInfo } from 'ui';
 
 const Home = () => {
+
+  const role = "inventory"
+
   return (
     <>
-      <Navbar />
-      <main className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold">Staff</h1>
-        <Header title="Home" app="staff" />
+      <NavbarFake />
+      <main className="container mx-auto px-10 space-y-4">
+        <StaffLoginInfo />
       </main>
     </>
   );
