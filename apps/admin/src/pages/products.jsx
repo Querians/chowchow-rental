@@ -192,6 +192,9 @@ const Products = () => {
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
+                                            Product ID
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
                                             Product name
                                         </th>
                                         <th scope="col" class="px-6 py-3">
@@ -242,8 +245,11 @@ const Products = () => {
                                     {Object.keys(data).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {productList[key]['product_name']}
+                                                {productList[key]['product_id']}
                                             </th>
+                                            <td class="px-6 py-4">
+                                                {productList[key]['product_name']}
+                                            </td>
                                             <td class="px-6 py-4">
                                                 {productList[key]['category_id']}
                                             </td>

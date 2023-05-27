@@ -6,7 +6,6 @@ export const Counter = () => {
   const [count, setCount] = useState(1);
   // query max from stock
   const max=31
-  console.log(typeof(max))
   const add = () => {
     // setCount(count + 1)
     if (count+1 <= max) {

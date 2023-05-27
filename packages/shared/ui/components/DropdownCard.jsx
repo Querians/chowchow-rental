@@ -64,7 +64,7 @@ export const DropdownCard = (props) => {
       <div
         className={
           (isGreen[name] ? 'bg-[#A4DAAC]' : '') +
-          ' border-1 mb-4 w-full rounded-md border border-black px-4 py-1'
+          ' border-2 mb-4 w-full rounded-md border border-black px-4 py-1'
         }
       >
         <div className=" flex items-center justify-between">
