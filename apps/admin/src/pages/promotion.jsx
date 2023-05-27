@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Promotion = () => {
 
-    const role = "inventory"
+    const role = "sales"||"manager"
     const itemList = {
         1: {
             promotion_code: 23000121,
@@ -110,13 +110,13 @@ const Promotion = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Total Used
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -142,13 +142,13 @@ const Promotion = () => {
                                             <td scope="row" class="px-6 py-4 font-normal">
                                                 {itemList[key]['total_used']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'sales'||'manager' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'sales'||'manager' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
