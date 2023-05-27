@@ -23,25 +23,6 @@ export const DelivererTransport = () => {
       },
   }
 
-  const order_status = {
-    110: 'payment waiting',
-    120: 'pack waiting',
-    130: 'logistic waiting',
-    131: 'send waiting',
-    132: 'revieve waiting',
-    210: 'payment in progress',
-    220: 'pack in progress',
-    230: 'logistic in progress',
-    231: 'send in progress',
-    232: 'receive in progress',
-    310: 'payment problems',
-    320: 'pack problem',
-    330: 'logistic problem',
-    331: 'receive problem',
-    400: 'finish overall',
-  }
-
-
   return <>
       <div className="text-2xl font-bold py-2 m-0">Order Transport</div>
       <div className="w-full rounded-lg border border-2 border-black p-4 mb-10">
