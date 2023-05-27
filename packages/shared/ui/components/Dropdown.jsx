@@ -4,6 +4,7 @@ export const Dropdown = ({
   options,
   onChange,
   value,
+  defaultValue,
   isRequire = true,
 }) => {
   return (
@@ -16,6 +17,7 @@ export const Dropdown = ({
       </label>
       <select
         name={label}
+        defaultValue={defaultValue}
         id={label}
         onChange={onChange}
         value={value}
