@@ -25,7 +25,7 @@ console.log(returnData)
     <div className="text-2xl font-bold py-2 m-0">CheckOut-CheckIn</div>
     <form onSubmit={e => e.preventDefault()}>
       <div className="w-full rounded-lg border border-2 border-black p-4">
-          <div className="grid grid-cols-2 gap-x-12">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-4">
               <Dropdown options={receiveData.this_delivery_work_not_done} label="Order ID" onChange={e => setReturnData({...returnData, ['order_id']:receiveData.this_delivery_work_not_done[e.target.value]})}/>
               <TextInput type={'readOnly'} label={'Staff ID'} value={receiveData.staff_id}/>
               <Button type="submit" text="Check In" onClick={e => setReturnData({...returnData, ['time_back']:new Date(), ['order_status']:232})}/>
