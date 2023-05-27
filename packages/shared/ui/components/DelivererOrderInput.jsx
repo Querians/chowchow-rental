@@ -19,7 +19,6 @@ export const DelivererOrderInput = () => {
   console.log(returnData)
 
   return <>
-      <h1 className="text-4xl font-bold py-6">Add New Category</h1>
       <form onSubmit={e => e.preventDefault()}>
         <div className="w-full rounded-lg border border-2 border-black p-4 mb-10">
             <div className="grid grid-cols-2 gap-x-12">
