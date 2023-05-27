@@ -95,9 +95,6 @@ const Order_Promotion = () => {
                                             <th scope="row" class="px-6 py-4 font-normal">
                                                 {itemList[key]['promotion_code']}
                                             </th>
-                                          
-                                           
-                                            
                                         </tr>
                                     ))}
                                 </tbody>
@@ -105,14 +102,6 @@ const Order_Promotion = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'sales'||'manager' ? (
-                    <div className='grid justify-items-end'>
-                        <Link href="/itemform">
-                            <Button type="normal" text="Add New Promotion" />
-                        </Link>
-                    </div>) : (
-                    <></>
-                )}
             </main>
         </>
     );
