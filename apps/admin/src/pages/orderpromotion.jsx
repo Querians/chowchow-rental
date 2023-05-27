@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Order_Promotion = () => {
 
-    const role = "inventory"
+    const role = "sales"||"manager"
     const itemList = {
         1: {
             order_id: 23000121,
@@ -84,19 +84,6 @@ const Order_Promotion = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Promotion Code
                                         </th>
-                        
-                                        {role == 'sales'||'manager' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Edit
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                        {role == 'sales'||'manager' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Delete
-                                            </th>) : (
-                                            <></>
-                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,18 +96,8 @@ const Order_Promotion = () => {
                                                 {itemList[key]['promotion_code']}
                                             </th>
                                           
-                                            {role == 'sales'||'manager' ? (
-                                                <td class="px-6 py-4">
-                                                    <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                            {role == 'sales'||'manager' ? (
-                                                <td class="px-6 py-4">
-                                                    <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
+                                           
+                                            
                                         </tr>
                                     ))}
                                 </tbody>
@@ -128,7 +105,7 @@ const Order_Promotion = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
+                {role == 'sales'||'manager' ? (
                     <div className='grid justify-items-end'>
                         <Link href="/itemform">
                             <Button type="normal" text="Add New Promotion" />
