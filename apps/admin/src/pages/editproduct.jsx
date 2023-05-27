@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 const EditProduct = () => {
 
-    const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
     const role = "inventory"
     const catagoryList = {
         chair: 'chair',
@@ -42,6 +41,7 @@ const EditProduct = () => {
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
+                                <TextInput type="readOnly" placeholder="" value={product['product_id']} label="Product ID" />
                                 <TextInput placeholder="" defaultValue={product['product_name']} label="Product Name" constraint=".{1,40}" />
                                 <Dropdown placeholder="" defaultValue={product['category_id']} label="Category Name" options={catagoryList} />
                                 <TextInput placeholder="" defaultValue={product['price_per_day']} label="Rental Price Per Day" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
