@@ -2,51 +2,51 @@ import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb,SearchBar } from 'ui';
 import Link from 'next/link';
 
-const PromotionAna = () => {
+const Promotion = () => {
 
     const role = "sales"||"manager"
     const itemList = {
         1: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         2: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         3: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         4: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         5: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         6: {
-            promotion_code: 'nvjdk415fg5',
-            Q1: '300',
-            Q2: '400',
-            Q3: '500',
-            Q4: '600',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
     };
     const [isShow, setShow] = useState(false);
@@ -64,8 +64,8 @@ const PromotionAna = () => {
                 <Sidebar role={role} showStock="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb current= "Promotion"  />
-                <h1 className="text-4xl font-bold py-6">Promotion Overall</h1>
+                <Breadcrumb first_name="Promotion" first="/promotion" current="Promotion Details" />
+                <h1 className="text-4xl font-bold py-6">Promotion Details</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -99,37 +99,61 @@ const PromotionAna = () => {
                                             Promotion Code
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            2023-Quarter1
+                                            Start Date
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            2023-Quarter2
+                                            End Date
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            2023-Quarter3
+                                            Period Month
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            2023-Quarter4
+                                            Total Used
                                         </th>
+                                        {role == 'sales'||'manager' ? (
+                                            <th scope="col" class="px-6 py-3">
+                                                Edit
+                                            </th>) : (
+                                            <></>
+                                        )}
+                                        {role == 'sales'||'manager' ? (
+                                            <th scope="col" class="px-6 py-3">
+                                                Delete
+                                            </th>) : (
+                                            <></>
+                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="bg-[#E3C291] px-6 py-4 font-normal">
+                                            <th scope="row" class="px-6 py-4 font-normal">
                                                 {itemList[key]['promotion_code']}
                                             </th>
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['Q1']}
+                                                {itemList[key]['start_date']}
                                             </th>
                                             <td scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['Q2']}
+                                                {itemList[key]['end_date']}
                                             </td>
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['Q3']}
+                                                {itemList[key]['period_month']}
                                             </th>
-                                            <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['Q4']}
-                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['total_used']}
+                                            </td>
+                                            {role == 'sales'||'manager' ? (
+                                                <td class="px-6 py-4">
+                                                    <a href="/editpromotion" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                                </td>) : (
+                                                <></>
+                                            )}
+                                            {role == 'sales'||'manager' ? (
+                                                <td class="px-6 py-4">
+                                                    <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
+                                                </td>) : (
+                                                <></>
+                                            )}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -137,9 +161,17 @@ const PromotionAna = () => {
                         </div>
                     </div>
                 </div>
+                {role == 'sales'||'manager' ? (
+                    <div className='grid justify-items-end'>
+                        <Link href="/promotionform">
+                            <Button type="normal" text="Add Promotion Code" />
+                        </Link>
+                    </div>) : (
+                    <></>
+                )}
             </main>
         </>
     );
 };
 
-export default PromotionAna;
+export default Promotion;
