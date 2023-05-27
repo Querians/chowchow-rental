@@ -6,6 +6,7 @@ export const TextInput = ({
   constraint,
   isRequire = true,
   type='',
+  defaultValue='',
 }) => {
   return (
     <div>
@@ -19,6 +20,7 @@ export const TextInput = ({
         <input
           disabled
           readOnly
+          defaultValue={defaultValue}
           name={label}
           pattern={constraint}
           type="text"
@@ -32,6 +34,7 @@ export const TextInput = ({
         />
       :
         <input
+          defaultValue={defaultValue}
           name={label}
           pattern={constraint}
           type="text"
