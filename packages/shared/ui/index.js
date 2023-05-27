@@ -31,3 +31,4 @@ export * from './components/InvoiceInfo';
 export * from './components/DelivererOrderInput';
 export * from './components/DelivererCheckinout';
 export * from './components/DelivererTransport';
+export * from './components/DelivererVehicleForThisOrderID';
