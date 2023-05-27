@@ -1,10 +1,11 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
+import Link from 'next/link';
 
 const EditProduct = () => {
 
     const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
     const role = "inventory"
-    const catagoryList={
+    const catagoryList = {
         chair: 'chair',
         table: 'table',
         decoration: 'decoration'
@@ -31,12 +32,12 @@ const EditProduct = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} />
+                <Sidebar role={role} showStock="true" />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Store" first="/store" second_name="Products" second="/products" current="Edit Product" />
+                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Products" second="/products" current="Edit Product" />
                     <h1 className="text-4xl font-bold py-6">Edit product details</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
@@ -57,14 +58,13 @@ const EditProduct = () => {
                                     <TextInput placeholder="cm" defaultValue={product['hight']} label="hight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                 </div>
                                 <div>
-                                    <Textarea defaultValue={product['description']} label="Description" isRequire = {false} />
+                                    <Textarea defaultValue={product['description']} label="Description" isRequire={false} />
                                 </div>
                             </div>
-
-                            <div class="grid justify-items-center">
-                                <div className="w-1/5">
-                                    <Button type="submit" text="CONFIRM" onClick={onEdit}/>
-                                </div>
+                            <div className='grid justify-items-center'>
+                                <Link href="/products">
+                                    <Button type="submit" text="CONFIRM" onClick={onEdit} />
+                                </Link>
                             </div>
                         </div>
                     </div>

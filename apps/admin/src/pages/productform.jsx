@@ -18,12 +18,12 @@ const ProductForm = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} />
+                <Sidebar role={role} showStock="true"/>
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Store" first="/store" second_name="Products" second="/products" current="Products Form" />
+                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Products" second="/products" current="Products Form" />
                     <h1 className="text-4xl font-bold py-6">Add new product</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
@@ -49,11 +49,9 @@ const ProductForm = () => {
                             </div>
 
                             <div class="grid justify-items-center">
-                                <div className="w-1/5">
                                     <Link href="/products">
                                         <Button type="submit" text="ADD" onClick={onSubmit} />
                                     </Link>
-                                </div>
                             </div>
                         </div>
                     </div>
