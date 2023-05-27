@@ -48,7 +48,7 @@ export const BillingInfo = () => {
               <div className="col-span-2">
                 <TextInput label={'Upload Picture'} onChange={e => setData({...data, ['url']:e.target.value})}/>
               </div>
-              <TextInput label={'Total Amount'} onChange={e => setData({...data, ['date_time_hour']:e.target.value})}/>
+              <TextInput label={'Total Amount'} onChange={e => setData({...data, ['total_amount']:e.target.value})}/>
               <div>
                 <label
                   htmlFor="return_date"
