@@ -23,3 +23,5 @@ export * from './components/SearchBar';
 export * from './components/Sidebar';
 export * from './components/Textarea';
 export * from './components/TextInput';
+export * from './components/NavbarFake';
+export * from './components/StaffLoginInfo';
