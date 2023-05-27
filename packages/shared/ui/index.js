@@ -25,3 +25,4 @@ export * from './components/Textarea';
 export * from './components/TextInput';
 export * from './components/NavbarFake';
 export * from './components/StaffLoginInfo';
+export * from './components/BillingInfo';
