@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb } from 'ui';
+import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
 
 const Items = () => {
@@ -88,6 +88,9 @@ const Items = () => {
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <h1 className="text-xl font-bold">Items</h1>
+                    <div className="pt-2 px-4">
+                        <SearchBar placeholder="Search by Product Name" />
+                    </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
@@ -110,7 +113,13 @@ const Items = () => {
                                         </th>
                                         {role == 'inventory' ? (
                                             <th scope="col" class="px-6 py-3">
-                                                Edit
+                                                Update status
+                                            </th>) : (
+                                            <></>
+                                        )}
+                                        {role == 'inventory' ? (
+                                            <th scope="col" class="px-6 py-3">
+                                                Edit Detail
                                             </th>) : (
                                             <></>
                                         )}
@@ -140,6 +149,12 @@ const Items = () => {
                                             <td class="px-6 py-4">
                                                 {itemList[key]['item_status']}
                                             </td>
+                                            {role == 'inventory' ? (
+                                                <td class="px-6 py-4">
+                                                    <a href="/itemstatus" class="font-medium text-blue-600 hover:underline">Update</a>
+                                                </td>) : (
+                                                <></>
+                                            )}
                                             {role == 'inventory' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
