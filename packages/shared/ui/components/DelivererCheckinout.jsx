@@ -22,16 +22,16 @@ export const DelivererCheckinout = () => {
 console.log(returnData)
 
   return <>
-      <h1 className="text-4xl font-bold py-6">CheckOut-CheckIn</h1>
-      <form onSubmit={e => e.preventDefault()}>
-        <div className="w-full rounded-lg border border-2 border-black p-4 mb-10">
-            <div className="grid grid-cols-2 gap-x-12">
-                <Dropdown options={receiveData.this_delivery_work_not_done} label="Order ID" onChange={e => setReturnData({...returnData, ['order_id']:receiveData.this_delivery_work_not_done[e.target.value]})}/>
-                <TextInput type={'readOnly'} label={'Staff ID'} value={receiveData.staff_id}/>
-                <Button type="submit" text="Check In" onClick={e => setReturnData({...returnData, ['time_back']:new Date(), ['order_status']:232})}/>
-                <Button type="submit" text="Check Out" onClick={e => setReturnData({...returnData, ['time_go']:new Date(), ['order_status']:231})} />
-            </div>
-        </div>
-      </form>
+    <div className="text-2xl font-bold py-2 m-0">CheckOut-CheckIn</div>
+    <form onSubmit={e => e.preventDefault()}>
+      <div className="w-full rounded-lg border border-2 border-black p-4">
+          <div className="grid grid-cols-2 gap-x-12">
+              <Dropdown options={receiveData.this_delivery_work_not_done} label="Order ID" onChange={e => setReturnData({...returnData, ['order_id']:receiveData.this_delivery_work_not_done[e.target.value]})}/>
+              <TextInput type={'readOnly'} label={'Staff ID'} value={receiveData.staff_id}/>
+              <Button type="submit" text="Check In" onClick={e => setReturnData({...returnData, ['time_back']:new Date(), ['order_status']:232})}/>
+              <Button type="submit" text="Check Out" onClick={e => setReturnData({...returnData, ['time_go']:new Date(), ['order_status']:231})} />
+          </div>
+      </div>
+    </form>
   </>;
 };
