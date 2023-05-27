@@ -4,9 +4,8 @@ import Link from "next/link";
 
 export const EditTransport = () => {
 
-  const [addData, setAddData] = useState({
+  const [editData, setEditData] = useState({
     order_id:'',
-    is_return:'',
     staff_id:'',
     car_licence:'',
   })
@@ -30,49 +29,10 @@ export const EditTransport = () => {
     },
   }
 
-  // ดึง or แต่จะ lock ค่าเป็น 3 ตัวนี้ก็ได้นะ5555
-  const vehicle_type = {
-    1:{
-      vehicle_type_n:'4 wheels truck',
-    },
-    2:{
-      vehicle_type_n:'6 wheels truck',
-    },
-    3:{
-      vehicle_type_n:'10 wheels truck',
-    },
-  }
-  // ดึง
-  const free_vehicle = {
-    1:{
-      vehicle_licence:'หข 123',
-    },
-    2:{
-      vehicle_licence:'หข 124',
-    },
-    3:{
-      vehicle_licence:'หข 125',
-    },
-  }
-  // ดึง
-  const deliverer = {
-    1:{
-      staff_id: 'xxxxxxx',
-    },
-    2:{
-      staff_id: 'yyy',
-    },
-    3:{
-      staff_id: 'zzzzz',
-    },
-  }
-
-  console.log(addData)
-
   return (
     <>
       <div>
-      <div className="text-2xl font-bold py-2 m-0">Add transport</div>
+      <div className="text-2xl font-bold py-2 m-0">Edit transport</div>
       <div className="w-full rounded-lg border-2 border-black p-4 mb-10">
         <div className="p-4">
           <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg">
@@ -110,18 +70,49 @@ export const EditTransport = () => {
                   ))}
                 </tbody>
             </table>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Dropdown defaultValue={'0'} options={{'0':'send', '1':'return'}} label={'send or return'}/>
-              <TextInput label={'staff ID'} placeholder={'staff ID'} />
-              <div className="col-start-1">
-                <TextInput label={'vehicle licence'} placeholder={'หฟ 213'} />
+            <form onSubmit={e => e.preventDefault()}>
+              <div className="grid grid-cols-2 gap-x-4">
+                <TextInput onChange={e => setEditData({...editData, ['order_id']:e.target.value})} label={'OrderID'} placeholder={'r786hlidb3g'} />
+                <div className="col-start-1">
+                  <label
+                    htmlFor={'staff ID'}
+                    className="mb-2.5 block text-sm font-medium text-black"
+                  >
+                    {'staff ID'}
+                  </label>
+                  <select
+                    onChange={e => setEditData({...editData, ['staff_id']:e.target.value})}
+                    name={'staff ID'}
+                    className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm text-black invalid:text-gray-500 focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  >
+                    <option hidden disabled selected value={''}>
+                      {''}
+                    </option>
+                    <option value={'133e0aea-bf4f-4daf-9ca4-2fef0aa32471'}>
+                      {'133e0aea-bf4f-4daf-9ca4-2fef0aa32471'}
+                    </option>
+                    <option value={'4e202f12-e53d-436c-a458-39461477cb3d'}>
+                      {'4e202f12-e53d-436c-a458-39461477cb3d'}
+                    </option>
+                    <option value={'5fe43fa1-a720-4db0-97c7-2d04ea52a6af'}>
+                      {'5fe43fa1-a720-4db0-97c7-2d04ea52a6af'}
+                    </option>
+                    <option value={'72f96f78-2abb-43a0-b850-82589a4d1e8a'}>
+                      {'72f96f78-2abb-43a0-b850-82589a4d1e8a'}
+                    </option>
+                  </select>
+                </div>
+                <div className="">
+                  <TextInput onChange={e => setEditData({...editData, ['car_licence']:e.target.value})} label={'vehicle licence'} placeholder={'หฟ 213'} />
+                </div>
+                <div className="grid grid-cols-2 col-start-2">
+                  <div className="col-start-2">
+                    <Button text={'submit'} type={'submit'} />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="grid grid-cols-3">
-              <div className="col-start-2">
-                <Button text={'submit'} type={'submit'} />
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
