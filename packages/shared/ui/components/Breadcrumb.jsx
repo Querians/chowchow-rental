@@ -84,7 +84,7 @@ export const Breadcrumb = ({
           ) : (
             <></>
           )}
-          <li aria-current="page">
+          {current ? (<li aria-current="page">
             <div class="flex items-center">
               <svg
                 aria-hidden="true"
@@ -103,7 +103,7 @@ export const Breadcrumb = ({
                 {current}
               </span>
             </div>
-          </li>
+          </li>) : (<></>)}
         </ol>
       </nav>
     </>
