@@ -18,6 +18,50 @@ const Category = () => {
             category_id: 30060,
             category_name: 'Black Table',
         },
+        4: {
+            category_id: 30030,
+            category_name: 'Black Chair',
+        },
+        5: {
+            category_id: 30040,
+            category_name: 'White Chair',
+        },
+        6: {
+            category_id: 30060,
+            category_name: 'Black Table',
+        },
+        7: {
+            category_id: 30030,
+            category_name: 'Black Chair',
+        },
+        8: {
+            category_id: 30040,
+            category_name: 'White Chair',
+        },
+        9: {
+            category_id: 30060,
+            category_name: 'Black Table',
+        },
+        10: {
+            category_id: 30040,
+            category_name: 'White Chair',
+        },
+        11: {
+            category_id: 30060,
+            category_name: 'Black Table',
+        },
+        12: {
+            category_id: 30030,
+            category_name: 'Black Chair',
+        },
+        13: {
+            category_id: 30040,
+            category_name: 'White Chair',
+        },
+        14: {
+            category_id: 30060,
+            category_name: 'Black Table',
+        },
     };
     const [isShow, setShow] = useState(false);
     const popup = () => {
@@ -31,10 +75,12 @@ const Category = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} />
+                <Sidebar role={role} showStock="true" />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
+                <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Category" />
+                <h1 className="text-4xl font-bold py-6">Category Management</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -55,12 +101,12 @@ const Category = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4">
+                <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <h1 className="text-xl font-bold">Category</h1>
                     <div className="p-4">
-                        <div class="relative overflow-x-auto rounded-lg">
+                        <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
-                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase bg-gray-50">
+                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             Category ID
@@ -68,12 +114,18 @@ const Category = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Category name
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Edit
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Delete
-                                        </th>
+                                        {role == 'inventory' ? (
+                                            <th scope="col" class="px-6 py-3">
+                                                Edit
+                                            </th>) : (
+                                            <></>
+                                        )}
+                                        {role == 'inventory' ? (
+                                            <th scope="col" class="px-6 py-3">
+                                                Delete
+                                            </th>) : (
+                                            <></>
+                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,12 +137,18 @@ const Category = () => {
                                             <td class="px-6 py-4">
                                                 {categoryList[key]['category_name']}
                                             </td>
-                                            <td class="px-6 py-4">
-                                                <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
-                                            </td>
+                                            {role == 'inventory' ? (
+                                                <td class="px-6 py-4">
+                                                    <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                                </td>) : (
+                                                <></>
+                                            )}
+                                            {role == 'inventory' ? (
+                                                <td class="px-6 py-4">
+                                                    <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
+                                                </td>) : (
+                                                <></>
+                                            )}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -98,11 +156,14 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-                <div className='grid justify-items-end'>
-                    <Link href="/categoryform">
-                        <Button type="normal" text="Add New Category" />
-                    </Link>
-                </div>
+                {role == 'inventory' ? (
+                    <div className='grid justify-items-end'>
+                        <Link href="/categoryform">
+                            <Button type="normal" text="Add New Category" />
+                        </Link>
+                    </div>) : (
+                    <></>
+                )}
             </main >
         </>
     );
