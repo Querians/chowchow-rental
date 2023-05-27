@@ -28,3 +28,4 @@ export * from './components/NavbarFake';
 export * from './components/StaffLoginInfo';
 export * from './components/BillingInfo';
 export * from './components/InvoiceInfo';
+export * from './components/DelivererOrderInput';
