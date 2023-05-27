@@ -40,7 +40,7 @@ export const CartAddress = ({ address }) => {
                     type="radio"
                     value={key}
                     required
-                    className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                    className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 text-[#C3A982] focus:ring-[#C3A982] border-[#C3A982]"
                   />
                 </div>
                 <div className="mb-2.5 ml-2 text-sm">
@@ -82,7 +82,7 @@ export const CartAddress = ({ address }) => {
                   aria-describedby="helper-radio-text"
                   type="radio"
                   value="new_address"
-                  className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                  className="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 text-[#C3A982] focus:ring-[#C3A982] border-[#C3A982]"
                 />
               </div>
               <div className="ml-2 text-sm">

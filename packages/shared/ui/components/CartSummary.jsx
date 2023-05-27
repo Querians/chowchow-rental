@@ -10,7 +10,7 @@ export const CartSummary = () => {
 
   return (
     <>
-      <div className=" border-1 mb-4 w-full rounded-md border border-black px-4 py-1">
+      <div className=" border-2 mb-4 w-full rounded-md border border-black px-4 py-1">
         <div className=" flex items-center text-xl font-bold">
           <span className="pr-4">การติดต่อ</span>
           <Image
@@ -31,7 +31,7 @@ export const CartSummary = () => {
           name="email"
           type="text"
           defaultValue={data.email}
-          className="border-1 mb-2.5 block w-full cursor-not-allowed rounded-md border-black bg-[#CDCDCD] p-2.5 text-sm"
+          className="border-2 mb-2.5 block w-full cursor-not-allowed rounded-md border-black bg-[#CDCDCD] p-2.5 text-sm"
           disabled
           readOnly
         />
@@ -45,12 +45,12 @@ export const CartSummary = () => {
           name="Phone"
           type="text"
           defaultValue={data.tel}
-          className="border-1 mb-2.5 block w-full cursor-not-allowed rounded-md border-black bg-[#CDCDCD] p-2.5 text-sm"
+          className="border-2 mb-2.5 block w-full cursor-not-allowed rounded-md border-black bg-[#CDCDCD] p-2.5 text-sm"
           disabled
           readOnly
         />
 
-        <div className=" flex items-center text-xl font-bold">
+        <div className="flex items-center text-xl font-bold">
           <span className="pr-4">การจัดส่ง</span>
           <Image
             className="invisible"
@@ -60,7 +60,7 @@ export const CartSummary = () => {
             alt="check button"
           />
         </div>
-        <div className="mb-2.5 rounded-md border border-black p-2">
+        <div className="mb-2.5 rounded-md border border-2 border-black p-2">
           <div className="flex flex-col">
             <div class="flex">
               <div class="flex h-5 items-center">
@@ -71,7 +71,7 @@ export const CartSummary = () => {
                   aria-describedby="helper-radio-text"
                   type="radio"
                   value=""
-                  class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                  class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 text-[#C3A982] focus:ring-[#C3A982] border-[#C3A982]"
                 />
               </div>
               <div class="ml-2 text-sm">
@@ -103,7 +103,7 @@ export const CartSummary = () => {
             name="sending_date"
             type="text"
             defaultValue={data.sending_date}
-            className="border-1 mb-2.5 block w-full cursor-not-allowed rounded-md border-black p-2.5 text-sm"
+            className="border-2 mb-2.5 block w-full cursor-not-allowed rounded-md border-black p-2.5 text-sm"
             disabled
           />
         </div>
@@ -119,7 +119,7 @@ export const CartSummary = () => {
             name="sending_date"
             type="text"
             value={data.return_date}
-            className="border-1 mb-2.5 block w-full cursor-not-allowed rounded-md border-black p-2.5 text-sm"
+            className="border-2 mb-2.5 block w-full cursor-not-allowed rounded-md border-black p-2.5 text-sm"
             disabled
           />
         </div>
@@ -144,7 +144,7 @@ export const CartSummary = () => {
                 checked
                 type="radio"
                 name="payment_times"
-                class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 text-[#C3A982] focus:ring-[#C3A982] border-[#C3A982]"
               />
               <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 {'แบ่งชำระจ่าย ' + data.payment_times + ' งวด'}
@@ -162,7 +162,7 @@ export const CartSummary = () => {
                 checked
                 type="radio"
                 name="payment_method"
-                class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 text-[#C3A982] focus:ring-[#C3A982] border-[#C3A982]"
               />
               <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                 {data.payment_method}
@@ -171,7 +171,7 @@ export const CartSummary = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-cols justify-end pb-4">
           <div className="">
             <Button
               text={'EDIT'}
@@ -179,15 +179,8 @@ export const CartSummary = () => {
               onClick={(e) => setIsSummary(false)}
             />
           </div>
-          <div className="col-span-2">
-            <Link href="INVOICE_PAGE_PATH">
-              <Button text={'CONFIRM'} type={'submit'} />
-            </Link>
-          </div>
         </div>
-        <p className="text-center text-[#C26666]">
-          *โปรดตรวจสอบข้อมูลทั้งหมดให้ถูกต้องก่อนกด CONFIRM*
-        </p>
+      
       </div>
     </>
   );

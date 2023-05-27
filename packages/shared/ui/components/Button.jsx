@@ -37,7 +37,7 @@ export const Button = ({ logo, onClick, text, type }) => {
       )}
       {type == 'white' ? (
         <button
-          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#FFFFFF] px-5 py-1 text-base font-bold text-gray-900 hover:bg-[#CDCDCD]"
+          className="h-fit w-full rounded-md border border-2 border-neutral-900 bg-[#FFFFFF] px-5 py-2 text-base font-bold text-gray-900 hover:bg-[#CDCDCD]"
           onClick={onClick}
         >
           {text}
