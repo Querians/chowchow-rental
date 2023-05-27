@@ -81,6 +81,9 @@ export const DeleteTransport = () => {
                           staffId
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Detail
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                           Delete
                         </th>
                     </tr>
@@ -102,6 +105,9 @@ export const DeleteTransport = () => {
                         </td>
                         <td class="px-6 py-4">
                           {order_data[key]['staff_fname']}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>

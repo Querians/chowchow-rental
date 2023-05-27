@@ -58,8 +58,9 @@ export const DelivererTransport = () => {
                                     {receive_data_this_delivery_work_not_done[key]['order_status']}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 hover:underline">More detail</a>
+                                    <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                                 </td>
+
                             </tr>
                         ))}
                     </tbody>

@@ -49,6 +49,9 @@ export const EditTransport = () => {
                         <th scope="col" class="px-6 py-3">
                           return_date
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Detail
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,6 +68,9 @@ export const EditTransport = () => {
                         </td>
                         <td class="px-6 py-4">
                           {order_data[key]['return_date']}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                         </td>
                       </tr>
 
