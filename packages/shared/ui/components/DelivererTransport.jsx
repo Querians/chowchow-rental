@@ -86,6 +86,5 @@ export const DelivererTransport = () => {
             </div>
         </div>
       </div>
-      <p className='h-12 w-12 invisible'>you can&apos see me</p>
   </>;
 };
