@@ -32,3 +32,5 @@ export * from './components/DelivererOrderInput';
 export * from './components/DelivererCheckinout';
 export * from './components/DelivererTransport';
 export * from './components/DelivererVehicleForThisOrderID';
+export * from './components/CountQuarterVehicleUse';
+export * from './components/CountDelivererTransportationTimes';
