@@ -240,10 +240,10 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                     {role == 'inventory' || role == 'sales' ? (
                       <li>
                         <a
-                          href="#"
+                          href="orderanalyse"
                           class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
-                          Cart
+                          Order Analysis
                         </a>
                       </li>
                     ) : (
