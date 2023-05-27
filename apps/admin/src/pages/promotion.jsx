@@ -1,5 +1,4 @@
 import { useState } from 'react';
-                        <SearchBar placeholder="Search by Product Name" />
 import { Sidebar, Button, Breadcrumb,SearchBar } from 'ui';
 import Link from 'next/link';
 
@@ -8,28 +7,46 @@ const Promotion = () => {
     const role = "inventory"
     const itemList = {
         1: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         2: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         3: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         4: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         5: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         6: {
-            order_id: 23000121,
-            promotion_code: 230030,
+            promotion_code: 23000121,
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
     };
     const [isShow, setShow] = useState(false);
@@ -70,7 +87,7 @@ const Promotion = () => {
                     </div>
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                        <div className="pt-2 px-4">
+                    <div className="pt-2 px-4">
                             <SearchBar placeholder="Search by Promotion Code" />
                         </div>
                     <div className="p-4">
@@ -79,19 +96,27 @@ const Promotion = () => {
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Order ID
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
                                             Promotion Code
                                         </th>
-                        
-                                        {role == 'sales'||'manager' ? (
+                                        <th scope="col" class="px-6 py-3">
+                                            Start Date
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            End Date
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Period Month
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Total Used
+                                        </th>
+                                        {role == 'inventory' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'sales'||'manager' ? (
+                                        {role == 'inventory' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -102,20 +127,28 @@ const Promotion = () => {
                                 <tbody>
                                     {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {itemList[key]['order_id']}
-                                            </th>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <th scope="row" class="px-6 py-4 font-normal">
                                                 {itemList[key]['promotion_code']}
                                             </th>
-                                          
-                                            {role == 'sales'||'manager' ? (
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['start_date']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['end_date']}
+                                            </td>
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['period_month']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['total_used']}
+                                            </td>
+                                            {role == 'inventory' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'sales'||'manager' ? (
+                                            {role == 'inventory' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -128,10 +161,10 @@ const Promotion = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
+                {role == 'sales'||'manager' ? (
                     <div className='grid justify-items-end'>
                         <Link href="/itemform">
-                            <Button type="normal" text="Add New Promotion" />
+                            <Button type="normal" text="Add Promotion Code" />
                         </Link>
                     </div>) : (
                     <></>
