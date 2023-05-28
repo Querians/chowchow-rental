@@ -27,7 +27,34 @@ export const CategoryQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.category.findMany();
       }
-    })
+    });
+
+    // Query by Search category name
+    t.list.field('searchCategoryByCategoryName', {
+      type: 'Category',
+      args: {
+        categoryName: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.category.findMany({
+          where : {categoryName: {contains : args.categoryName}}
+        });
+      }
+    });
+
+  // Query by Search category Id
+  t.list.field('searchCategoryByCategoryId', {
+    type: 'Category',
+    args: {
+      categoryId: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.category.findMany({
+        where : {categoryId: {contains : args.categoryId}}
+      });
+    }
+  });
+
   }
 })
 

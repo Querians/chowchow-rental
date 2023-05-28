@@ -41,7 +41,27 @@ export const SubOrderQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.subOrder.findMany();
       }
-    })
+    });
+
+
+    t.list.field('searchSubOrderByPKs', {
+      type: 'SubOrder',
+      args: {
+        orderId: stringArg(),
+        itemId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.subOrder.findMany({
+          where : {OR : [args.orderId, args.itemId]} ? {
+            AND: [
+              { orderId: args.orderId },
+              { itemId: args.itemId }
+            ]
+          } : {}
+        });
+      }
+    });
+
   }
 })
 

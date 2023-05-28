@@ -7,6 +7,11 @@ type AuthPayload {
   token: String!
 }
 
+type AuthPayloadStaff {
+  staff: StaffInfo!
+  token: String!
+}
+
 type Billing {
   billTimestamp: DateTime!
   billingId: String!
@@ -40,6 +45,12 @@ type CategoryProblem {
   categoryProblemN: String!
   issues: [Issue]!
   position: Position!
+}
+
+type CountItemA {
+  _count: JSON
+  product: Product
+  productId: String
 }
 
 type Customer {
@@ -95,6 +106,11 @@ type ItemStatus {
   items: [Item]
 }
 
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
 type Mutation {
   addBilling(billTimestamp: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
   addCart(customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
@@ -113,7 +129,7 @@ type Mutation {
   addPaymentMethods(paymentMethodId: String!, paymentMethodName: String!): PaymentMethod!
   addPaymentType(interest: Float!, paymentTypeId: String!, paymentTypeName: String!, times: Int!): PaymentType!
   addPosition(positionId: String!, positionN: String!): Position!
-  addProduct(categoryName: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
+  addProduct(categoryId: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
   addPromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, startDate: String!): Promotion!
   addStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
   addSubOrder(itemId: String!, orderId: String!): SubOrder!
@@ -144,6 +160,7 @@ type Mutation {
   deleteVehicleInfo(vehicleLicence: String!): VehicleInfo!
   deleteVehicleType(vehicleTypeId: String!): VehicleType!
   login(email: String!, password: String!): AuthPayload!
+  loginstaff(password: String!, staffId: String!): AuthPayloadStaff!
   signup(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): AuthPayload!
   updateBilling(billTimestamp: String!, billingId: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
   updateCart(cartNo: String!, customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
@@ -267,6 +284,8 @@ type Promotion {
 
 type Query {
   Profile: [Customer]
+  StaffProfile: [StaffInfo]
+  SummaryAllproduct: [CountItemA]
   allBilling: [Billing]
   allCart: [Cart]
   allCategory: [Category]
@@ -290,7 +309,56 @@ type Query {
   allSubOrder: [SubOrder]
   allVehicleInfo: [VehicleInfo]
   allVehicleType: [VehicleType]
+  searchBillingByBillingId(billingId: String): [Billing]
+  searchBillingByPayerName(firstName: String, lastName: String): [Billing]
+  searchCartByCartNo(cartNo: String): [Cart]
+  searchCartByCustomerId(customerId: String): [Cart]
+  searchCartByStatus(status: Int): [Cart]
+  searchCartByproductId(productId: String): [Cart]
+  searchCategoryByCategoryId(categoryId: String): [Category]
+  searchCategoryByCategoryName(categoryName: String): [Category]
+  searchCategoryProbByCategoryProbId(categoryProblemId: String): [CategoryProblem]
+  searchCategoryProbByCategoryProbName(categoryProblemN: String): [CategoryProblem]
+  searchCustomerByCustomerID(customerId: String): [Customer]
+  searchCustomerByCustomerName(firstName: String, lastName: String): [Customer]
+  searchCustomerByEmail(email: String): [Customer]
+  searchCustomerByOrderID(orderId: String): [Order]
+  searchCustomerByTel(tel: String): [Customer]
+  searchInvoiceByCostAmount(maximum: Float, minimum: Float): [Invoice]
+  searchInvoiceByInvoiceId(invoiceId: String, orderId: String): [Invoice]
+  searchIssueByCategoryProblemId(categoryProblemId: String): [Issue]
+  searchIssueByIssueId_Status(issueId: String, status: Int): [Issue]
+  searchIssueByStaffId(staffId: String): [Issue]
+  searchItemByItemId_ProductId(itemId: String, productId: String): [Item]
+  searchItemByItemStatusId(itemStatusId: String): [Item]
+  searchItemStatusByItemStatusId(itemStatusId: String): [ItemStatus]
+  searchItemStatusByItemStatusName(itemStatusName: String): [ItemStatus]
+  searchOrderByCustomerId(customerId: String): [Order]
+  searchOrderByOrderId(orderId: String): [Order]
+  searchOrderBySenidingDate(sendingDate: String): [Order]
+  searchOrderByStatusCode(statusCode: Int): [Order]
+  searchOrderCartByPKs(cartNo: String, orderId: String): [OrderCart]
+  searchOrderPromotionByPKs(orderId: String, promotionCode: String): [OrderPromotion]
+  searchOrderStatusByStatusCode(statusCode: Int): [OrderStatus]
+  searchOrderStatusByStatusDef(statusDef: String): [OrderStatus]
+  searchOrderTransportByOrderId(orderId: String): [OrderTransport]
+  searchOrderTransportByTimeAssign(timeAssign: String): [OrderTransport]
+  searchPaymentMethodById(paymentMethodId: String): [PaymentMethod]
+  searchPaymentTypeById(paymentTypeId: String): [PaymentType]
+  searchPostionById(positionId: String): [Position]
+  searchPostionByName(positionN: String): [Position]
   searchProduct(filter: String): [Product]
+  searchProductByProductId(productId: String): [Product]
+  searchProductByProductName(productName: String): [Product]
+  searchPromotionByPromotionCode(promotionCode: String): [Promotion]
+  searchStaffInfoByName(staffFirstName: String, staffLastName: String): [StaffInfo]
+  searchStaffInfoByPostionId(positionId: String): [StaffInfo]
+  searchStaffInfoByStaffId(staffId: String): [StaffInfo]
+  searchSubOrderByPKs(itemId: String, orderId: String): [SubOrder]
+  searchVehicleInfoByBrand_Model(brand: String, model: String): [VehicleInfo]
+  searchVehicleInfoByStatus(status: Boolean): [VehicleInfo]
+  searchVehicleInfoVehicleLicence(vehicleLicence: String): [VehicleInfo]
+  searchVehicleTypeByVehicleTypeName(vehicleTypeN: String): [VehicleType]
 }
 
 type StaffInfo {

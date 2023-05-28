@@ -28,6 +28,33 @@ export const ItemStatusQuery = extendType({
         return context.prisma.itemStatus.findMany();
       }
     });
+
+    t.list.field('searchItemStatusByItemStatusName', {
+      type: 'ItemStatus',
+      args: {
+        itemStatusName: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.itemStatus.findMany({
+          where : {itemStatusName : {contains : args.itemStatusName}}
+        });
+      }
+    });
+
+    t.list.field('searchItemStatusByItemStatusId', {
+      type: 'ItemStatus',
+      args: {
+        itemStatusId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.itemStatus.findMany({
+          where : {itemStatusId : {contains : args.itemStatusId}}
+        });
+      }
+    });
+
+
+
   }
 });
 

@@ -38,6 +38,32 @@ export const PositionQuery = extendType({
         return context.prisma.position.findMany();
       }
     });
+
+    t.list.field('searchPostionByName', {
+      type: 'Position',
+      args: {
+        positionN: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.position.findMany({
+          where : {positionN : {contains : args.positionN}}
+        });
+      }
+    });
+
+    t.list.field('searchPostionById', {
+      type: 'Position',
+      args: {
+        positionId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.position.findMany({
+          where : {positionId : {contains : args.positionId}}
+        });
+      }
+    });
+
+
   },
 })
 

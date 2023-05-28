@@ -54,7 +54,40 @@ export const BillingQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.billing.findMany();
       }
-    })
+    });
+
+    // Query by Search payer name
+  t.list.field('searchBillingByPayerName', {
+    type: 'Billing',
+    args: {
+      firstName: stringArg(),
+      lastName: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.billing.findMany({
+        where : {OR: [args.firstName, args.lastName]} ? {
+          AND: [
+            { firstName: { contains: args.firstName } },
+            { lastName: { contains: args.lastName } }
+          ]
+        } : {}
+      });
+    }
+  });
+
+  // query by billing id
+  t.list.field('searchBillingByBillingId', {
+    type: 'Billing',
+    args: {
+      billingId: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.billing.findMany({
+        where : { billingId : args.billingId}
+      });
+    }
+  });
+
   }
 })
 
@@ -144,6 +177,7 @@ export const BillingMutation = extendType({
         });
       }
     });
+
 
   }
 });

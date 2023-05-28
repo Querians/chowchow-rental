@@ -41,7 +41,26 @@ export const OrderPromotionQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.orderPromotion.findMany();
       }
-    })
+    });
+
+    t.list.field('searchOrderPromotionByPKs', {
+      type: 'OrderPromotion',
+      args: {
+        orderId: stringArg(),
+        promotionCode: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.orderPromotion.findMany({
+          where : {OR: [args.orderId, args.promotionCode]} ? {
+            AND: [
+              { orderId:  args.orderId},
+              { promotionCode:  {contains : args.promotionCode}}
+            ]
+          } : {}
+        });
+      }
+    });
+
   }
 })
 

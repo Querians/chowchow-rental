@@ -44,6 +44,23 @@ export const Product = objectType({
   }
 });
 
+export const CountItemA = objectType({
+  name: 'CountItemA',
+  definition(t) {
+    t.json('_count');
+    t.string('productId');
+    t.field('product', {
+      type: 'Product',
+      resolve(parent, args, context: Context){
+        return context.prisma.product.findUnique({
+          where: { productId: parent.productId }
+        }).items();
+      }
+    });
+  }})
+
+
+
 export const ProductQuery = extendType({
   type: 'Query',
   definition(t) {
@@ -73,6 +90,47 @@ export const ProductQuery = extendType({
       }
     });
 
+    // Query by Search product name
+    t.list.field('searchProductByProductName', {
+      type: 'Product',
+      args: {
+        productName: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.product.findMany({
+          where : {productName: {contains: args.productName}}
+        });
+      }
+    });
+
+    // Query by Search productId
+    t.list.field('searchProductByProductId', {
+      type: 'Product',
+      args: {
+        productId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.product.findMany({
+          where : {productId: {contains: args.productId}}
+        });
+      }
+    });
+
+    // Query all Product
+    t.list.field('SummaryAllproduct', {
+    type: 'CountItemA',
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.item.groupBy({
+          by: ['productId'],
+          _count: {
+            itemId: true,
+          }
+        })
+        // + context.prisma.product.findMany()
+    }
+  });
+
+
   },
 });
 
@@ -86,7 +144,7 @@ export const ProductMutation = extendType({
       args: {
         productId: nonNull(stringArg()),
         productName: nonNull(stringArg()),
-        categoryName: nonNull(stringArg()),
+        categoryId: nonNull(stringArg()),
         pictureUrl: nonNull(stringArg()),
         pricePerDay: nonNull(floatArg()),
         weight: nonNull(floatArg()),
@@ -102,7 +160,7 @@ export const ProductMutation = extendType({
           data: args.description ? {
             productId: args.productId,
             productName: args.productName,
-            categoryName: args.categoryName,
+            categoryId: args.categoryId,
             pictureUrl: args.pictureUrl,
             pricePerDay: args.pricePerDay,
             weight: args.weight,
@@ -115,7 +173,7 @@ export const ProductMutation = extendType({
           } : {
             productId: args.productId,
             productName: args.productName,
-            categoryName: args.categoryName,
+            categoryId: args.categoryId,
             pictureUrl: args.pictureUrl,
             pricePerDay: args.pricePerDay,
             weight: args.weight,

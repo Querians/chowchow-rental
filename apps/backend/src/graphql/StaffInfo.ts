@@ -53,7 +53,71 @@ export const StaffInfoQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.staffInfo.findMany();
       }
-    })
+    });
+
+    // Their Profile
+    t.list.field('StaffProfile', {
+      type: 'StaffInfo',
+      // args: {
+      //   staffId: nonNull(stringArg())
+      // },
+      resolve(parent, args, context: Context, info){
+
+        if(!context.userId){
+          throw new Error('Cannot see without login');
+        }
+
+        return context.prisma.staffInfo.findMany({
+          where: { staffId: context.userId }
+        });
+      }
+    });
+
+// Query by Search staffId
+t.list.field('searchStaffInfoByStaffId', {
+  type: 'StaffInfo',
+  args: {
+    staffId: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.staffInfo.findMany({
+      where : {staffId: args.staffId}
+    });
+  }
+});
+
+// Query by Search first and last name
+t.list.field('searchStaffInfoByName', {
+  type: 'StaffInfo',
+  args: {
+    staffFirstName: stringArg(),
+    staffLastName: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.staffInfo.findMany({
+      where : {OR : [args.staffFirstName, args.staffLastName]} ? {
+        AND: [
+          { staffFirstName: { contains: args.staffFirstName } },
+          { staffLastName: { contains: args.staffLastName } }
+        ]
+      } : {}
+    });
+  }
+});
+
+// Query by Search positionId
+t.list.field('searchStaffInfoByPostionId', {
+  type: 'StaffInfo',
+  args: {
+    positionId: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.staffInfo.findMany({
+      where : {positionId: args.positionId}
+    });
+  }
+});
+
   }
 })
 

@@ -36,6 +36,33 @@ export const CategoryProblemQuery = extendType({
         return context.prisma.categoryProblem.findMany();
       }
     });
+
+    // Query by Search category problem name
+    t.list.field('searchCategoryProbByCategoryProbName', {
+      type: 'CategoryProblem',
+      args: {
+        categoryProblemN: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.categoryProblem.findMany({
+          where : {categoryProblemN: {contains : args.categoryProblemN}}
+        });
+      }
+    });
+
+    // Query by Search category problem name
+    t.list.field('searchCategoryProbByCategoryProbId', {
+      type: 'CategoryProblem',
+      args: {
+        categoryProblemId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.categoryProblem.findMany({
+          where : {categoryProblemId: {contains : args.categoryProblemId}}
+        });
+      }
+    });
+
   }
 });
 

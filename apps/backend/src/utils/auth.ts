@@ -1,4 +1,3 @@
-// export const APP_SECRET = "chowchowmaichow";
 import { default as jwt }  from 'jsonwebtoken';
 
 import 'dotenv/config';

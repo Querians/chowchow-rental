@@ -45,7 +45,49 @@ export const InvoiceQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.invoice.findMany();
       }
-    })
+    });
+
+
+    // query invoice by invoice & order id
+    t.list.field('searchInvoiceByInvoiceId', {
+      type: 'Invoice',
+      args: {
+        invoiceId: stringArg(),
+        orderId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.invoice.findMany({
+          where : {OR: [args.invoiceId, args.orderId]} ? {
+            AND: [
+              { invoiceId: args.invoiceId},
+              { orderId: args.orderId }
+            ]
+          } : {}
+        });
+
+      }
+    });
+
+    // query cost_amount
+    t.list.field('searchInvoiceByCostAmount', {
+      type: 'Invoice',
+      args: {
+        minimum: floatArg(),
+        maximum: floatArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.invoice.findMany({
+          where : {OR: [args.minimum, args.maximum]} ? {
+            AND: [
+              { costAmount: { lte? : args.maximum } },
+              { costAmount: { gte? : args.minimum } }
+            ]
+          } : {}
+        });
+
+      }
+    });
+
   }
 })
 

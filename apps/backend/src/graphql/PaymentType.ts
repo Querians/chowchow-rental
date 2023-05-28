@@ -30,6 +30,19 @@ export const PaymentTypeQuery = extendType({
         return context.prisma.paymentType.findMany();
       },
     });
+
+    t.list.field('searchPaymentTypeById', {
+      type: 'PaymentType',
+      args: {
+        paymentTypeId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.paymentType.findMany({
+          where : {paymentTypeId : args.paymentTypeId}
+        });
+      }
+    });
+
   },
 });
 

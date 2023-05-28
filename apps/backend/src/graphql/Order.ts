@@ -100,6 +100,56 @@ export const OrderQuery = extendType({
               return context.prisma.order.findMany();
           }
       });
+
+      t.list.field('searchOrderByOrderId', {
+        type: 'Order',
+        args: {
+          orderId: stringArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.order.findMany({
+            where : {orderId : args.orderId}
+          });
+        }
+      });
+
+      t.list.field('searchOrderBySenidingDate', {
+        type: 'Order',
+        args: {
+          sendingDate: stringArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.order.findMany({
+            where : {sendingDate : new Date(args.sendingDate)}
+          });
+        }
+      });
+
+      t.list.field('searchOrderByCustomerId', {
+        type: 'Order',
+        args: {
+          customerId: stringArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.order.findMany({
+            where : {customerId : args.customerId}
+          });
+        }
+      });
+
+      t.list.field('searchOrderByStatusCode', {
+        type: 'Order',
+        args: {
+          statusCode: intArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.order.findMany({
+            where : {statusCode : args.statusCode}
+          });
+        }
+      });
+
+
   },
 });
 

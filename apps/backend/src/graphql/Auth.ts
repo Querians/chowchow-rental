@@ -16,6 +16,17 @@ export const AuthPayload = objectType({
   },
 });
 
+export const AuthPayloadStaff = objectType({
+  name: 'AuthPayloadStaff',
+  definition(t) {
+    t.nonNull.string('token');
+    t.nonNull.field('staff', {
+      type: 'StaffInfo',
+    });
+  },
+});
+
+
 export const AuthMutation = extendType({
   type: 'Mutation',
   definition(t) {
@@ -68,5 +79,30 @@ export const AuthMutation = extendType({
         return { token, customer };
       },
     });
+
+    //Staff Log In
+    t.nonNull.field('loginstaff', {
+      type: 'AuthPayloadStaff',
+      args: {
+        staffId: nonNull(stringArg()),
+        password: nonNull(stringArg()),
+      },
+      async resolve(parent, args, context: Context) {
+        const staff = await context.prisma.staffInfo.findUnique({
+          where: { staffId: args.staffId },
+        });
+
+        if (!staff) throw new Error('No such user found');
+
+        const valid = await args.password == staff.password;
+
+        if (!valid) throw new Error('No such user found');
+
+        const token = jwt.sign({ userId: staff.staffId }, APP_SECRET);
+        return { token, staff };
+      },
+    });
+
   },
 });
+

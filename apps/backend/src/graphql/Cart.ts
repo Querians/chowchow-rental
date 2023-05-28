@@ -67,8 +67,66 @@ export const CartQuery = extendType({
         return context.prisma.cart.findMany();
       }
     });
+
+  // Query by Search cart status
+  t.list.field('searchCartByStatus', {
+    type: 'Cart',
+    args: {
+      status: intArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.cart.findMany({
+        where : {status: args.status}
+      });
+    }
+  });
+
+  ////
+
+  // Query by customerId
+  t.list.field('searchCartByCustomerId', {
+    type: 'Cart',
+    args: {
+      customerId: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.cart.findMany({
+        where : {customerId : args.customerId}
+      });
+    }
+    });
+
+  // Query by cartNo
+  t.list.field('searchCartByCartNo', {
+    type: 'Cart',
+    args: {
+      cartNo: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.cart.findMany({
+        where : { cartNo : args.cartNo}
+      });
+    }
+    });
+
+
+  // Query by productId
+  t.list.field('searchCartByproductId', {
+    type: 'Cart',
+    args: {
+      productId: stringArg()
+    },
+    resolve(parent, args, context: Context, info) {
+      return context.prisma.cart.findMany({
+        where : {productId : args.productId}
+      });
+    }
+    });
+
   }
 });
+
+
 
 export const CartMutation = extendType({
   type: 'Mutation',

@@ -65,11 +65,77 @@ export const CustomerQuery = extendType({
       resolve(parent, args, context: Context, info){
 
         if(!context.userId){
-          throw new Error('Cannot add cart without login');
+          throw new Error('Cannot see without login');
         }
 
         return context.prisma.customer.findMany({
           where: { customerId: context.userId }
+        });
+      }
+    });
+
+    t.list.field('searchCustomerByCustomerName', {
+      type: 'Customer',
+      args: {
+        firstName: stringArg(),
+        lastName: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.customer.findMany({
+          where : {OR: [args.firstName, args.lastName]} ? {
+            AND: [
+              { firstName: { contains: args.firstName } },
+              { lastName: { contains: args.lastName } }
+            ]
+          } : {}
+        });
+      }
+    });
+
+    t.list.field('searchCustomerByCustomerID', {
+      type: 'Customer',
+      args: {
+        customerId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.customer.findMany({
+          where : {customerId : args.customerId}
+        });
+      }
+    });
+
+    t.list.field('searchCustomerByOrderID', {
+      type: 'Order',
+      args: {
+        orderId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.order.findMany({
+          where : {orderId : args.orderId}
+        });
+      }
+    });
+
+    t.list.field('searchCustomerByEmail', {
+      type: 'Customer',
+      args: {
+        email: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.customer.findMany({
+          where : {email : {contains : args.email}}
+        });
+      }
+    });
+
+    t.list.field('searchCustomerByTel', {
+      type: 'Customer',
+      args: {
+        tel: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.customer.findMany({
+          where : {tel : {contains : args.tel}}
         });
       }
     });

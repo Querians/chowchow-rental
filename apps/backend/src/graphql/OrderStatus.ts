@@ -26,6 +26,32 @@ export const OrderStatusQuery = extendType({
               return context.prisma.orderStatus.findMany();
           }
       });
+
+      t.list.field('searchOrderStatusByStatusDef', {
+        type: 'OrderStatus',
+        args: {
+          statusDef: stringArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.orderStatus.findMany({
+            where : {statusDef : {contains : args.statusDef}}
+          });
+        }
+      });
+
+      t.list.field('searchOrderStatusByStatusCode', {
+        type: 'OrderStatus',
+        args: {
+          statusCode: intArg()
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.orderStatus.findMany({
+            where : {statusCode : args.statusCode}
+          });
+        }
+      });
+
+
   },
 });
 

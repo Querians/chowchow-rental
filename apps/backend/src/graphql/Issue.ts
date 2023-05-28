@@ -64,8 +64,51 @@ export const IssueQuery = extendType({
         return context.prisma.issue.findMany();
       },
     });
-  },
-});
+
+    t.list.field('searchIssueByIssueId_Status', {
+      type: 'Issue',
+      args: {
+        issueId: stringArg(),
+        status: intArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.issue.findMany({
+          where : {OR: [args.issueId, args.status]} ? {
+            AND: [
+              { issueId: { contains : args.issueId}},
+              { status: args.status }
+            ]
+          } : {}
+        });
+      }
+    });
+
+      t.list.field('searchIssueByCategoryProblemId', {
+        type: 'Issue',
+        args: {
+          categoryProblemId: stringArg(),
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.issue.findMany({
+            where : { categoryProblemId : args.categoryProblemId}
+          });
+        },
+      });
+
+      t.list.field('searchIssueByStaffId', {
+        type: 'Issue',
+        args: {
+          staffId: stringArg(),
+        },
+        resolve(parent, args, context: Context, info) {
+          return context.prisma.issue.findMany({
+            where : { staffId : args.staffId}
+          });
+        },
+      });
+
+    }
+  });
 
 export const IssueMutation = extendType({
   type: 'Mutation',

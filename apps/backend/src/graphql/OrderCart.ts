@@ -43,7 +43,27 @@ export const OrderCartQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.orderCart.findMany();
       }
-    })
+    });
+
+    t.list.field('searchOrderCartByPKs', {
+      type: 'OrderCart',
+      args: {
+        orderId: stringArg(),
+        cartNo: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.orderCart.findMany({
+          where : {OR: [args.orderId, args.cartNo]} ? {
+            AND: [
+              { orderId:  args.orderId},
+              { cartNo:  args.cartNo}
+            ]
+          } : {}
+        });
+      }
+    });
+
+
   }
 })
 

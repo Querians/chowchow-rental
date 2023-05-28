@@ -64,7 +64,31 @@ export const OrderTransportQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.orderTransport.findMany();
       }
-    })
+    });
+
+    t.list.field('searchOrderTransportByOrderId', {
+      type: 'OrderTransport',
+      args: {
+        orderId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.orderTransport.findMany({
+          where : {orderId : args.orderId}
+        });
+      }
+    });
+
+    t.list.field('searchOrderTransportByTimeAssign', {
+      type: 'OrderTransport',
+      args: {
+        timeAssign: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.orderTransport.findMany({
+          where : {timeAssign : new Date(args.timeAssign)}
+        });
+      }
+    });
   }
 })
 

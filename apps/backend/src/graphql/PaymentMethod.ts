@@ -28,6 +28,19 @@ export const PaymentMethodQuery = extendType({
         return context.prisma.paymentMethod.findMany();
       }
     });
+
+    t.list.field('searchPaymentMethodById', {
+      type: 'PaymentMethod',
+      args: {
+        paymentMethodId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.paymentMethod.findMany({
+          where : {paymentMethodId : {contains : args.paymentMethodId}}
+        });
+      }
+    });
+
   }
 });
 

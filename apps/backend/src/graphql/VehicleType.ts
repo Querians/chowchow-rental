@@ -25,7 +25,21 @@ export const VehicleTypeQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.vehicleType.findMany();
       }
-    })
+    });
+
+// Query vehicleType by search vehicle type name
+t.list.field('searchVehicleTypeByVehicleTypeName', {
+  type: 'VehicleType',
+  args: {
+    vehicleTypeN: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.vehicleType.findMany({
+      where : {vehicleTypeN : {contains : args.vehicleTypeN}}
+    });
+  }
+});
+
   }
 })
 

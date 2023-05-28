@@ -46,6 +46,38 @@ export const ItemQuery = extendType({
         return context.prisma.item.findMany();
       }
     });
+
+    t.list.field('searchItemByItemId_ProductId', {
+      type: 'Item',
+      args: {
+        itemId: stringArg(),
+        productId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.item.findMany({
+          where : {OR: [args.itemId, args.productId]} ? {
+            AND: [
+              { itemId: { contains : args.itemId}},
+              { productId: { contains : args.productId}}
+            ]
+          } : {}
+        });
+      }
+    });
+
+    t.list.field('searchItemByItemStatusId', {
+      type: 'Item',
+      args: {
+        itemStatusId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.item.findMany({
+          where : {itemStatusId : args.itemStatusId}
+        });
+      }
+    });
+
+
   }
 });
 

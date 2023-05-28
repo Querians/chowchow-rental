@@ -41,6 +41,52 @@ export const VehicleInfoQuery = extendType({
         return context.prisma.vehicleInfo.findMany();
       },
     });
+
+ // Query vehicle by search licence
+ t.list.field('searchVehicleInfoVehicleLicence', {
+  type: 'VehicleInfo',
+  args: {
+    vehicleLicence: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.vehicleInfo.findMany({
+      where : {vehicleLicence : args.vehicleLicence}
+    });
+  }
+});
+
+// Query vehicle by search brand & model
+t.list.field('searchVehicleInfoByBrand_Model', {
+  type: 'VehicleInfo',
+  args: {
+    brand: stringArg(),
+    model: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.vehicleInfo.findMany({
+      where : {OR : [args.brand, args.model]} ? {
+        AND: [
+          { brand: {contains :args.brand} },
+          { model: {contains : args.model} }
+        ]
+      } : {}
+    });
+  }
+});
+
+// Query vehicle by search status
+t.list.field('searchVehicleInfoByStatus', {
+  type: 'VehicleInfo',
+  args: {
+    status: booleanArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.vehicleInfo.findMany({
+      where : {status : args.status}
+    });
+  }
+});
+
   },
 });
 

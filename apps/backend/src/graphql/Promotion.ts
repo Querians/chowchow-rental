@@ -30,7 +30,21 @@ export const PromotionQuery = extendType({
       resolve(parent, args, context: Context, info){
         return context.prisma.promotion.findMany();
       }
-    })
+    });
+
+// Query by Search PromotionCode
+t.list.field('searchPromotionByPromotionCode', {
+  type: 'Promotion',
+  args: {
+    promotionCode: stringArg()
+  },
+  resolve(parent, args, context: Context, info) {
+    return context.prisma.promotion.findMany({
+      where : {promotionCode: args.promotionCode}
+    });
+  }
+});
+
   }
 })
 
