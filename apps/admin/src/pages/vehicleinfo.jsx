@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 const Vehicleinfo = () => {
   const [isShow, setShow] = useState(false);
+  const [vehicleLicence, setVehicleLicence] = useState(''); // use vehicleLicence to query data
+  
   const popup = () => {
     setShow(!isShow);
   };
@@ -69,6 +71,7 @@ const Vehicleinfo = () => {
       model: 'NRL 130',
     },
   };
+
   return (
     <>
       <aside>
@@ -133,7 +136,7 @@ const Vehicleinfo = () => {
         <div className="w-full rounded-lg border-2 border-black p-4">
           <h1 className="text-xl font-bold">Vehicle Licence</h1>
           <div className="px-4 pt-2">
-            <SearchBar placeholder="Search by Vehicle Licence" />
+            <SearchBar onChange={e => setVehicleLicence(e.target.value)} placeholder="Search by Vehicle Licence" />
           </div>
           <div className="p-4">
             <div class="relative h-96 overflow-x-auto rounded-lg">

@@ -5,6 +5,8 @@ import Link from 'next/link';
 const Vehicletype = () => {
   const role='MA'
   const [isShow, setShow] = useState(false);
+  const [vehicleTypeID, setVehicleTypeID] = useState(''); // use vehicleTypeID to query data
+
   const popup = () => {
     setShow(!isShow);
   };
@@ -92,7 +94,7 @@ const Vehicletype = () => {
         <div className="w-full rounded-lg border-2 border-black p-4">
           <h1 className="text-xl font-bold">Vehicle Type ID</h1>
           <div className="px-4 pt-2">
-            <SearchBar placeholder="Search by Vehicle Type ID" />
+            <SearchBar onChange={e => setVehicleTypeID(e.target.value)} placeholder="Search by Vehicle Type ID" />
           </div>
           <div className="p-4">
             <div class="relative h-96 overflow-x-auto rounded-lg">
