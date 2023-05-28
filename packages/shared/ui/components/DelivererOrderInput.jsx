@@ -26,7 +26,7 @@ export const DelivererOrderInput = ({role}) => {
                 <TextInput placeholder="" label="Customer Name" type={'readOnly'} value={receiveData.customer_name}/>
                 <TextInput placeholder="" label="Arrive Time" type={'readOnly'} value={receiveData.arrive_time}/>
                 {
-                  role=='deliverer'
+                  role=='DL'
                   ?
                   <TextInput placeholder="" label="Receiver Name" value={returnData.receiver_name} onChange={e => setReturnData({...returnData, ['receiver_name']:e.target.value})}/>
                   :
@@ -40,7 +40,7 @@ export const DelivererOrderInput = ({role}) => {
             </div>
         </div>
         {
-          role =='deliverer'
+          role =='DL'
           &&
           <div className='grid grid-cols-3'>
             <div className='col-start-2'>
