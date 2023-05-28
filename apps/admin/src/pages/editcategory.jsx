@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Home = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const category = {
         category_id: 30030,
         category_name: 'Black Chair',

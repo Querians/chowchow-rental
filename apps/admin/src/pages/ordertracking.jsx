@@ -1,10 +1,8 @@
-import Image from 'next/image';
-import { useState } from 'react';
-import { Sidebar, SearchBar, Breadcrumb, TextInput, Dropdown } from 'ui';
+import { Sidebar, Breadcrumb, TextInput} from 'ui';
 
 const Ordertracking = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const query = {
         order_id: 342044,
         status_name: "pack waiting",
@@ -62,40 +60,7 @@ const Ordertracking = () => {
             staff_fname: "Doggy",
             staff_lname: "Gogo"
         },
-    }
-    const item_use = {
-        1: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        2: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        3: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        4: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        5: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        6: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-    }
-    
+    }    
 
     return (
         <>
@@ -125,7 +90,7 @@ const Ordertracking = () => {
                                             <th scope="col" class="px-6 py-3">
                                                 Active
                                             </th>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <th scope="col" class="px-6 py-3">
                                                     Check-Out and Check-In
                                                 </th>) : (
@@ -145,7 +110,7 @@ const Ordertracking = () => {
                                                 <td class="px-6 py-4">
                                                     {all_order[key]['active']}
                                                 </td>
-                                                {role == 'inventory' ? (
+                                                {role == 'INV' ? (
                                                     <td class="px-6 py-4">
                                                         <a href="/itemcheckinout" class="font-medium text-red-600 hover:underline">update</a>
                                                     </td>) : (

@@ -1,11 +1,9 @@
-import Image from 'next/image';
 import { useState } from 'react';
 import { Sidebar, Breadcrumb, Button, SearchBar } from 'ui';
-import Link from 'next/link';
 
 const Order = () => {
 
-    const role = "inventory"
+    const role = "DL"
     const all_order = {
         1: {
             order_id: 'dfhdhrreseww',
@@ -92,7 +90,7 @@ const Order = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Sending Date
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'CA' || role == 'SA' || role == 'INV' || role == 'DL' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Update Status
                                             </th>) : (
@@ -115,7 +113,7 @@ const Order = () => {
                                             <td class="px-6 py-4">
                                                 {all_order[key]['sending_date']}
                                             </td>
-                                            {role == 'customer' || role == 'sales' || role == 'inventory' || role == 'deliverer'? (
+                                            {role == 'CA' || role == 'SA' || role == 'INV' || role == 'DL'? (
                                                 <td class="px-6 py-4">
                                                     <a href="/orderstatus" class="font-medium text-blue-600 hover:underline">Update</a>
                                                 </td>) : (

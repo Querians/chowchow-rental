@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const EditProduct = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const catagoryList = {
         chair: 'chair',
         table: 'table',

@@ -2,66 +2,18 @@ import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
 
-const Category = () => {
+const PaymentType = () => {
 
-    const role = "INV"
-    const categoryList = {
+    const role = "SA"
+    const paymentTypeList = {
         1: {
-            category_id: 30030,
-            category_name: 'Black Chair',
+            paymentTypeId: '0004',
+            paymentTypeName: 'superdeal 2023 halfyear offer'
         },
         2: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        3: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        4: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        5: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        6: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        7: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        8: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        9: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        10: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        11: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        12: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        13: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        14: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
+            paymentTypeId: '1000',
+            paymentTypeName: 'One-time purchased'
+        },        
     };
     const [isShow, setShow] = useState(false);
     const popup = () => {
@@ -79,8 +31,8 @@ const Category = () => {
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Category" />
-                <h1 className="text-4xl font-bold py-6">Category Management</h1>
+                <Breadcrumb first_name="Finance" current="Payment Type" />
+                <h1 className="text-4xl font-bold py-6">Payment Type</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -102,28 +54,25 @@ const Category = () => {
                     </div>
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Category</h1>
-                    <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Catagory Name" />
-                    </div>
+                    <h1 className="text-xl font-bold">Payment Type</h1>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Category ID
+                                            Payment Method ID
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Category name
+                                            Payment Method Name
                                         </th>
-                                        {role == 'INV' ? (
+                                        {role == 'SA' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'INV' ? (
+                                        {role == 'SA' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -132,21 +81,21 @@ const Category = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(categoryList).map((key) => (
+                                    {Object.keys(paymentTypeList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {categoryList[key]['category_id']}
+                                                {paymentTypeList[key]['paymentTypeId']}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {categoryList[key]['category_name']}
+                                                {paymentTypeList[key]['paymentTypeName']}
                                             </td>
-                                            {role == 'INV' ? (
+                                            {role == 'SA' ? (
                                                 <td class="px-6 py-4">
-                                                    <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                                    <a href="/editpaymenttype" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'INV' ? (
+                                            {role == 'SA' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -159,10 +108,10 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'INV' ? (
+                {role == 'SA' ? (
                     <div className='grid justify-items-end'>
-                        <Link href="/categoryform">
-                            <Button type="normal" text="Add New Category" />
+                        <Link href="/paymenttypeform">
+                            <Button type="normal" text="Add New Payment Type" />
                         </Link>
                     </div>) : (
                     <></>
@@ -172,4 +121,4 @@ const Category = () => {
     );
 };
 
-export default Category;
+export default PaymentType;

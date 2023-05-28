@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Products = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const data = {
         1: {
             category_name: 'Chair',
@@ -97,70 +97,6 @@ const Products = () => {
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Products" />
                 <h1 className="text-4xl font-bold py-6">Product Management</h1>
-                {/* <div className="w-full rounded-lg border border-2 border-black p-4">
-                    <h1 className="text-xl font-bold">All Time Product Renting</h1>
-                    <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Product Name" />
-                    </div>
-                    <div className="p-4">
-                        <div class="relative overflow-x-auto rounded-lg">
-                            <table class="w-full text-sm text-center text-gray-500">
-                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Category name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Product name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            All Time Renting
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Last Month Renting
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            2022
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            2021
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            2020
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(data).map((key) => (
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {data[key]['category_name']}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {data[key]['product_name']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {data[key]['all_time_renting']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {data[key]['last_month_rentin']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {data[key]['y_2022']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {data[key]['y_2021']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {data[key]['y_2020']}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> */}
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -227,13 +163,13 @@ const Products = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Description
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -280,13 +216,13 @@ const Products = () => {
                                             <td class="px-6 py-4">
                                                 {productList[key]['description']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editproduct" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
