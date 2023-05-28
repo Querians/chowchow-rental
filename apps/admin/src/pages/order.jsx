@@ -10,18 +10,22 @@ const Order = () => {
         1: {
             order_id: 'dfhdhrreseww',
             order_status: 'pack waiting',
+            sending_date: '2023-04-02 06:48:00'
         },
         2: {
             order_id: 'dfhdhrreseww',
             order_status: 'pack waiting',
+            sending_date: '2023-04-02 06:48:00'
         },
         3: {
             order_id: 'dfhdhrreseww',
             order_status: 'pack waiting',
+            sending_date: '2023-04-02 06:48:00'
         },
         4: {
             order_id: 'dfhdhrreseww',
             order_status: 'pack waiting',
+            sending_date: '2023-04-02 06:48:00'
         },
     }
 
@@ -85,6 +89,9 @@ const Order = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Order Status
                                         </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Sending Date
+                                        </th>
                                         {role == 'inventory' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Update Status
@@ -104,6 +111,9 @@ const Order = () => {
                                             </th>
                                             <td class="px-6 py-4">
                                                 {all_order[key]['order_status']}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {all_order[key]['sending_date']}
                                             </td>
                                             {role == 'customer' || role == 'sales' || role == 'inventory' || role == 'deliverer'? (
                                                 <td class="px-6 py-4">
