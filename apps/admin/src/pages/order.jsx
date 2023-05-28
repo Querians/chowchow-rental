@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Order = () => {
 
-    const role = "inventory"
+    const role = "MA"
     const all_order = {
         1: {
             order_id: 'dfhdhrreseww',

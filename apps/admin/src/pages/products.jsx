@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Products = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const data = {
         1: {
             category_name: 'Chair',
@@ -227,13 +227,13 @@ const Products = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Description
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -280,13 +280,13 @@ const Products = () => {
                                             <td class="px-6 py-4">
                                                 {productList[key]['description']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editproduct" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (

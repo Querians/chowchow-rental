@@ -10,7 +10,7 @@ const ProductForm = () => {
     }
 
     const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
-    const role = "inventory"
+    const role = "INV"
     const onSubmit = () => {
 
     }
