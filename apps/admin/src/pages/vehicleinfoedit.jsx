@@ -2,13 +2,19 @@ import { Sidebar, Button, Breadcrumb, TextInput, Dropdown } from 'ui';
 import { useState } from 'react';
 import Link from 'next/link';
 
-const Vehicleinfoadd = () => {
-  const role = 'MA';
-  const [addVehicle, setAddVehicle] = useState({
-    vehicle_licence: '',
-    vehicle_type_id: '',
-    brand: '',
-    model: '',
+const Vehicleinfoedit = () => {
+  const role = 'MA'
+  const this_vehicle_Info = {
+    vehicle_licence:'กฟ 342',
+    vehicle_type_id: '003',
+    brand: 'ISUZU',
+    model: 'NRL 130',
+  }
+  const [editVehicle, setEditVehicle] = useState({
+    vehicle_licence: this_vehicle_Info.vehicle_licence,
+    vehicle_type_id: this_vehicle_Info.vehicle_type_id,
+    brand: this_vehicle_Info.brand,
+    model: this_vehicle_Info.model,
   });
   const receive_data = {
     1: {
@@ -24,7 +30,7 @@ const Vehicleinfoadd = () => {
       vehicle_type_n: '10 wheels truck',
     },
   };
-  console.log(addVehicle);
+
   return (
     <>
       <aside>
@@ -38,22 +44,15 @@ const Vehicleinfoadd = () => {
             first="/logisticAnalyse"
             second_name="Vehicle Info"
             second="/vehicleinfo"
-            current="Add Vehicle Info"
+            current="Edit Vehicle Info"
           />
-          <h1 className="py-6 text-4xl font-bold">Add Vehicle Info</h1>
+          <h1 className="py-6 text-4xl font-bold">
+          Edit Vehicle Info
+          </h1>
           <div className="w-full rounded-lg border-2 border-black p-4">
             <div className="space-y-4">
               <div className="grid grid-flow-row grid-cols-2 gap-4 sm:grid-cols-2">
-                <TextInput
-                  onChange={(e) =>
-                    setAddVehicle({
-                      ...addVehicle,
-                      ['vehicle_licence']: e.target.value,
-                    })
-                  }
-                  placeholder=""
-                  label="Vehicle Licence"
-                />
+                <TextInput type={'readOnly'} value={this_vehicle_Info.vehicle_licence}  onChange={e=>setEditVehicle({...editVehicle, ['vehicle_licence']: e.target.value})} placeholder="" label="Vehicle Licence" />
                 <div>
                   <label
                     htmlFor={'vehicle_type_id'}
@@ -64,9 +63,10 @@ const Vehicleinfoadd = () => {
                   <select
                     name={'vehicle_type_id'}
                     id={'vehicle_type_id'}
+                    value={editVehicle.vehicle_type_id}
                     onChange={(e) =>
-                      setAddVehicle({
-                        ...addVehicle,
+                      setEditVehicle({
+                        ...editVehicle,
                         ['vehicle_type_id']: e.target.value,
                       })
                     }
@@ -85,24 +85,11 @@ const Vehicleinfoadd = () => {
                     ))}
                   </select>
                 </div>
-
-                <TextInput
-                  onChange={(e) =>
-                    setAddVehicle({ ...addVehicle, ['brand']: e.target.value })
-                  }
-                  placeholder=""
-                  label="Brand"
-                />
-                <TextInput
-                  onChange={(e) =>
-                    setAddVehicle({ ...addVehicle, ['model']: e.target.value })
-                  }
-                  placeholder=""
-                  label="Model"
-                />
+                <TextInput defaultValue={this_vehicle_Info.brand} onChange={e=>setEditVehicle({...editVehicle, ['brand']: e.target.value})} placeholder="" label="Brand" />
+                <TextInput defaultValue={this_vehicle_Info.model} onChange={e=>setEditVehicle({...editVehicle, ['model']: e.target.value})} placeholder="" label="Model" />
               </div>
-              <div class="grid grid-cols-3 justify-items-center">
-                <Link href="/vehicleinfo" className="col-start-2 w-full">
+              <div class="grid justify-items-center grid-cols-3">
+                <Link href="/vehicleinfo" className='col-start-2 w-full'>
                   <Button type="submit" text="CONFIRM" />
                 </Link>
               </div>
@@ -114,4 +101,4 @@ const Vehicleinfoadd = () => {
   );
 };
 
-export default Vehicleinfoadd;
+export default Vehicleinfoedit;

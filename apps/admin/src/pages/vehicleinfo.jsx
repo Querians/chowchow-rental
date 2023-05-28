@@ -186,7 +186,7 @@ const Vehicleinfo = () => {
                       {role == 'MA' ? (
                         <td class="px-6 py-4">
                           <a
-                            href="/vehicleinfoadd"
+                            href="/vehicleinfoedit"
                             class="font-medium text-blue-600 hover:underline"
                           >
                             Edit
