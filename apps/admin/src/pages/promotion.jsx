@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const PromotionAna = () => {
 
-    const role = "sales"||"manager"
+    const role = "SA"
     const itemList = {
         1: {
             promotion_code: 'nvjdk415fg5',
@@ -61,10 +61,10 @@ const PromotionAna = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} showPromo="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb current= "Promotion"  />
+                <Breadcrumb first_name="Promotion" current= "Promotion Overall"  />
                 <h1 className="text-4xl font-bold py-6">Promotion Overall</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">

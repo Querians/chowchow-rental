@@ -102,7 +102,7 @@ const Invoiceedit = () => {
   return (
     <>
       <aside>
-        <Sidebar role={role} />
+        <Sidebar role={role} showFinance={"true"} />
       </aside>
 
       <main className="container mx-auto px-10 lg:ml-64">

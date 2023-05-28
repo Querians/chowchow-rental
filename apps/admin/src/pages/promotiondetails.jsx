@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Promotion = () => {
 
-    const role = "sales"||"manager"
+    const role = "SA"
     const itemList = {
         1: {
             promotion_code: '23000121',
@@ -61,7 +61,7 @@ const Promotion = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} showPromo="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Promotion" first="/promotion" current="Promotion Details" />

@@ -85,7 +85,7 @@ const Invoice = () => {
   return (
     <>
       <aside>
-        <Sidebar role={role} />
+        <Sidebar role={role} showFinance={"true"} />
       </aside>
       <main className="container mx-auto space-y-4 px-10 lg:ml-64">
         <Breadcrumb

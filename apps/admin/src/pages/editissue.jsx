@@ -24,7 +24,7 @@ const EditCateprob = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} />
+                <Sidebar role={role} showIssue={true}/>
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
@@ -43,7 +43,7 @@ const EditCateprob = () => {
                                 <TextInput placeholder="" value={issue_data['branch_id']}label="Branch ID" />
                                 <TextInput type='readOnly' placeholder="" value={issue_data['staff_name']}label="Staff Name" />
                                 <TextInput type='readOnly' placeholder="" value={issue_data['customer_tel']}label="Customer Tel." />
-                                <TextInput type='readOnly' placeholder="" value={issue_data['email']}label="Email" />   
+                                <TextInput type='readOnly' placeholder="" value={issue_data['email']}label="Email" />
                             </div>
                             <div>
                             <text> Issue Status </text>

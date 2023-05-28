@@ -34,7 +34,7 @@ const Vehicleinfoedit = () => {
   return (
     <>
       <aside>
-        <Sidebar role={role} />
+        <Sidebar role={role} showDeli="true"/>
       </aside>
 
       <main className="container mx-auto px-10 lg:ml-64">

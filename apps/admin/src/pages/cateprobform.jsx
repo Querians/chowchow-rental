@@ -13,10 +13,10 @@ const category_prob_id = {
     Question_answer: "QA",
     }
     const posi_id = {
-        DL: "DL",
-        MA: "MA",
-        INV: "INV",
-        SA: "SA",
+        DL: "Deliverer",
+        MA: "Manager",
+        INV: "Inventory Management",
+        SA: "Sale",
     }
 const CateprobForm = () => {
 
@@ -38,10 +38,9 @@ const CateprobForm = () => {
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <Dropdown options={category_prob_id} label='Category Problem ID' defaultValue={cateposition["category_prob_id"]}/>
-                                <TextInput type='readOnly' placeholder="" label="Category Problem Name" />
-                                <Dropdown options={posi_id} label='Position ID' defaultValue={cateposition["posi_id"]}/>
-                                <TextInput type='readOnly' placeholder="" label="Position Name" />
+                                <TextInput label='Category Problem ID'/>
+                                <TextInput  placeholder="" label="Category Problem Name" />
+                                <Dropdown options={posi_id} label='Position Name' placeholder="Select Position"/>
                             </div>
                             <div class="grid justify-items-center">
                                     <Link href="/categoryproblem">

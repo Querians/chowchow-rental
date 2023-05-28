@@ -72,7 +72,7 @@ const CategoryProb = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} showIssue="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Issue" current="Category Problem" />

@@ -10,6 +10,12 @@ const EditCateprob = () => {
             position_id: "DL",
             position_name: "Deliverer",
     }
+    const posi_id = {
+        DL: "Deliverer",
+        MA: "Manager",
+        INV: "Inventory Management",
+        SA: "Sale",
+    }
     const onSubmit = () => {
 
     }
@@ -17,7 +23,7 @@ const EditCateprob = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} />
+                <Sidebar role={role} showIssue={'true'}/>
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
@@ -27,10 +33,9 @@ const EditCateprob = () => {
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <TextInput placeholder="" label="Category Problem ID" />
-                                <TextInput placeholder="" label="Category Problem Name" />
-                                <TextInput type = 'readOnly' placeholder="" value={caprob['position_id']}label="Position ID" />
-                                <TextInput placeholder="" label="Position Name" />
+                                <TextInput defaultValue={caprob.category_prob_id} placeholder="" label="Category Problem ID" />
+                                <TextInput defaultValue={caprob.category_prob_name} placeholder="" label="Category Problem Name" />
+                                <Dropdown defaultValue={caprob.position_id} options={posi_id} label='Position Name' placeholder="Select Position"/>
                             </div>
                             <div class="grid justify-items-center">
                                     <Link href="/categoryproblem">
