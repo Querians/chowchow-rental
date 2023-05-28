@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Items = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const itemList = {
         1: {
             item_id: 23000121,
@@ -111,19 +111,19 @@ const Items = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Item_status ID
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Update status
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit Detail
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -149,19 +149,19 @@ const Items = () => {
                                             <td class="px-6 py-4">
                                                 {itemList[key]['item_status']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/itemstatus" class="font-medium text-blue-600 hover:underline">Update</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -174,7 +174,7 @@ const Items = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
+                {role == 'INV' ? (
                     <div className='grid justify-items-end'>
                         <Link href="/itemform">
                             <Button type="normal" text="Add New Item" />
