@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Items = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const itemList = {
         1: {
             item_id: 23000121,
@@ -89,7 +89,7 @@ const Items = () => {
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <h1 className="text-xl font-bold">Items</h1>
                     <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Product Name" />
+                        <SearchBar placeholder="Search by Item ID" />
                     </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
@@ -111,19 +111,19 @@ const Items = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Item_status ID
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Update status
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit Detail
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -149,19 +149,19 @@ const Items = () => {
                                             <td class="px-6 py-4">
                                                 {itemList[key]['item_status']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/itemstatus" class="font-medium text-blue-600 hover:underline">Update</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -174,7 +174,7 @@ const Items = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
+                {role == 'INV' ? (
                     <div className='grid justify-items-end'>
                         <Link href="/itemform">
                             <Button type="normal" text="Add New Item" />

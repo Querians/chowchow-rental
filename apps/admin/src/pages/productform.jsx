@@ -9,8 +9,7 @@ const ProductForm = () => {
         decoration: 'decoration'
     }
 
-    const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
-    const role = "inventory"
+    const role = "INV"
     const onSubmit = () => {
 
     }
@@ -41,7 +40,7 @@ const ProductForm = () => {
                                     <TextInput placeholder="kg" label="weight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                     <TextInput placeholder="cm" label="width" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                     <TextInput placeholder="cm" label="depth" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
-                                    <TextInput placeholder="cm" label="hight" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
+                                    <TextInput placeholder="cm" label="height" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" />
                                 </div>
                                 <div>
                                     <Textarea label="Description" isRequire={false} />

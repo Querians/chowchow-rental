@@ -28,7 +28,7 @@ export const TextInput = ({
           autoComplete="true"
           onChange={onChange}
           id={label}
-          className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm "
+          className="mb-2.5 block w-full rounded-md border-2 border-black p-2.5 text-sm bg-[#E1E1E1]"
           placeholder={placeholder}
           required={isRequire}
         />

@@ -1,66 +1,46 @@
 import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
+import { Sidebar, Button, Breadcrumb,SearchBar, TextInput } from 'ui';
 import Link from 'next/link';
 
-const Category = () => {
+const CategoryProb = () => {
 
-    const role = "INV"
-    const categoryList = {
+    const role = "inventory"
+    const itemList = {
         1: {
-            category_id: 30030,
-            category_name: 'Black Chair',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
         2: {
-            category_id: 30040,
-            category_name: 'White Chair',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
         3: {
-            category_id: 30060,
-            category_name: 'Black Table',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
         4: {
-            category_id: 30030,
-            category_name: 'Black Chair',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
         5: {
-            category_id: 30040,
-            category_name: 'White Chair',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
         6: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        7: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        8: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        9: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        10: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        11: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        12: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        13: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        14: {
-            category_id: 30060,
-            category_name: 'Black Table',
+            category_prob_id: "DP",
+            category_prob_name: "Damaged packaged",
+            position_id: "DL",
+            position_name: "Deliverer",
         },
     };
     const [isShow, setShow] = useState(false);
@@ -70,17 +50,16 @@ const Category = () => {
     const drop = () => {
         popup();
         // code for drop row
-    }
+    };
 
     return (
         <>
             <aside>
                 <Sidebar role={role} showStock="true" />
             </aside>
-
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Category" />
-                <h1 className="text-4xl font-bold py-6">Category Management</h1>
+                <Breadcrumb first_name="Issue" first="/issue" current="Category Problem" />
+                <h1 className="text-4xl font-bold py-6">Category Problem</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -102,28 +81,38 @@ const Category = () => {
                     </div>
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Category</h1>
                     <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Catagory Name" />
-                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
+                                <TextInput type='readOnly' placeholder=""  label="Category Problem ID" />
+                                <TextInput placeholder="Search Category Problem Name" label="Category Problem Name" />
+                                <TextInput placeholder="Search Position ID"  label="Position ID" />
+                                <TextInput type = 'readOnly' placeholder="" label="Position Name" />
+                            </div>
+                        </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Category ID
+                                        Category Problem ID
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Category name
+                                        Category Problem Name
                                         </th>
-                                        {role == 'INV' ? (
+                                        <th scope="col" class="px-6 py-3">
+                                        Position ID
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                        Position Name
+                                        </th>
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'INV' ? (
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -132,21 +121,27 @@ const Category = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(categoryList).map((key) => (
+                                    {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {categoryList[key]['category_id']}
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['category_prob_id']}
                                             </th>
-                                            <td class="px-6 py-4">
-                                                {categoryList[key]['category_name']}
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['category_prob_name']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['position_id']}
                                             </td>
-                                            {role == 'INV' ? (
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['position_name']}
+                                            </th>
+                                            {role == 'inventory' ? (
                                                 <td class="px-6 py-4">
-                                                    <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                                    <a href="/editcateprob" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'INV' ? (
+                                            {role == 'inventory' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -159,17 +154,17 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'INV' ? (
+                {role == 'inventory' ? (
                     <div className='grid justify-items-end'>
-                        <Link href="/categoryform">
-                            <Button type="normal" text="Add New Category" />
+                        <Link href="/cateprobform">
+                            <Button type="normal" text="Add Category Problem" />
                         </Link>
                     </div>) : (
                     <></>
                 )}
-            </main >
+            </main>
         </>
     );
 };
 
-export default Category;
+export default CategoryProb;

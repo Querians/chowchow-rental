@@ -1,31 +1,13 @@
-import Image from 'next/image';
-import { useState } from 'react';
-import { Sidebar, SearchBar, Breadcrumb, TextInput, Dropdown } from 'ui';
+import { Sidebar, Breadcrumb, TextInput} from 'ui';
 
 const Ordertracking = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const query = {
         order_id: 342044,
         status_name: "pack waiting",
     }
-    const order_status = {
-        110: 'payment waiting',
-        120: 'pack waiting',
-        130: 'logistic waiting',
-        131: 'send waiting',
-        132: 'revieve waiting',
-        210: 'payment in progress',
-        220: 'pack in progress',
-        230: 'logistic in progress',
-        231: 'send in progress',
-        232: 'receive in progress',
-        310: 'payment problems',
-        320: 'pack problem',
-        330: 'logistic problem',
-        331: 'receive problem',
-        400: 'finish overall',
-    }
+    
     const all_order = {
         1: {
             order_id: 'dfhdhrreseww',
@@ -78,40 +60,7 @@ const Ordertracking = () => {
             staff_fname: "Doggy",
             staff_lname: "Gogo"
         },
-    }
-    const item_use = {
-        1: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        2: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        3: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        4: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        5: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-        6: {
-            item_id: "23994482",
-            product_name: "White Chair",
-            order_id: "r344xxidb7t"
-        },
-    }
-    
+    }    
 
     return (
         <>
@@ -141,7 +90,7 @@ const Ordertracking = () => {
                                             <th scope="col" class="px-6 py-3">
                                                 Active
                                             </th>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <th scope="col" class="px-6 py-3">
                                                     Check-Out and Check-In
                                                 </th>) : (
@@ -161,7 +110,7 @@ const Ordertracking = () => {
                                                 <td class="px-6 py-4">
                                                     {all_order[key]['active']}
                                                 </td>
-                                                {role == 'inventory' ? (
+                                                {role == 'INV' ? (
                                                     <td class="px-6 py-4">
                                                         <a href="/itemcheckinout" class="font-medium text-red-600 hover:underline">update</a>
                                                     </td>) : (

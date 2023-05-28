@@ -1,16 +1,9 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
 import Link from 'next/link';
 
-const ItemForm = () => {
+const CateprobForm = () => {
 
-    const role = "INV"
-    const item = {
-        item_id: 23000121,
-        product_id: 230030,
-        item_register_date: "2023-01-01 13:30:44",
-        stock_address: "A1-023-122",
-        item_status: "A",
-    }
+    const role = "inventory"
     const onSubmit = () => {
 
     }
@@ -18,21 +11,23 @@ const ItemForm = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Add New Item" />
-                    <h1 className="text-4xl font-bold py-6">Add New Item</h1>
+                    <Breadcrumb first_name="Issue" first="/issue" second_name="Category Problem" second="/categoryproblem" current="Add Category Problem" />
+                    <h1 className="text-4xl font-bold py-6">Add category problem</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <TextInput placeholder="" label="Product ID" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$"/>
-                                <TextInput placeholder="id_floor_row_loc"label="Stock address" />
+                                <TextInput placeholder="" label="Category Problem ID" />
+                                <TextInput placeholder="" label="Category Problem Name" />
+                                <TextInput placeholder="" label="Position ID" />
+                                <TextInput placeholder="" label="Position Name" />
                             </div>
                             <div class="grid justify-items-center">
-                                    <Link href="/items">
+                                    <Link href="/promotiondetails">
                                         <Button type="submit" text="ADD" onClick={onSubmit} />
                                     </Link>
                             </div>
@@ -44,4 +39,4 @@ const ItemForm = () => {
     );
 };
 
-export default ItemForm;
+export default CateprobForm;

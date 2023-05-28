@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 const CheckIn = () => {
 
-    const picurl = "https://www.ikea.com/us/en/images/products/lerhamn-chair-black-brown-vittaryd-beige__0728160_pe736117_s5.jpg?f=s";
     const role = "inventory"
     const item = {
         item_id: 23000121,
@@ -26,8 +25,8 @@ const CheckIn = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Edit Item" />
-                    <h1 className="text-4xl font-bold py-6">Edit item details</h1>
+                    <Breadcrumb first_name="Order Management" second_name="Order" second="/order" third_name="Order Tracking" third="/ordertracking" fourth_name="Edit Item status" fourth="/ordercheckinout" current="Item Check-In" />
+                    <h1 className="text-4xl font-bold py-6">Item Check-In</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
@@ -35,7 +34,7 @@ const CheckIn = () => {
                                 <Dropdown options={item_status} label='Item Status' defaultValue={item["item_status"]}/>
                             </div>
                             <div class="grid justify-items-center">
-                                    <Link href="/items">
+                                    <Link href="/itemcheckinout">
                                         <Button type="submit" text="Check-In" onClick={onSubmit} />
                                     </Link>
                             </div>

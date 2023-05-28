@@ -1,66 +1,52 @@
 import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
+import { Sidebar, Button, Breadcrumb,SearchBar } from 'ui';
 import Link from 'next/link';
 
-const Category = () => {
+const Promotion = () => {
 
-    const role = "INV"
-    const categoryList = {
+    const role = "sales"||"manager"
+    const itemList = {
         1: {
-            category_id: 30030,
-            category_name: 'Black Chair',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         2: {
-            category_id: 30040,
-            category_name: 'White Chair',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         3: {
-            category_id: 30060,
-            category_name: 'Black Table',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         4: {
-            category_id: 30030,
-            category_name: 'Black Chair',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         5: {
-            category_id: 30040,
-            category_name: 'White Chair',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
         6: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        7: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        8: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        9: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        10: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        11: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        12: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        13: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        14: {
-            category_id: 30060,
-            category_name: 'Black Table',
+            promotion_code: '23000121',
+            start_date: "2023-01-01 13:30:44",
+            end_date: "2023-01-01 13:30:44",
+            period_month: 1,
+            total_used: 24,
         },
     };
     const [isShow, setShow] = useState(false);
@@ -70,17 +56,16 @@ const Category = () => {
     const drop = () => {
         popup();
         // code for drop row
-    }
+    };
 
     return (
         <>
             <aside>
                 <Sidebar role={role} showStock="true" />
             </aside>
-
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Category" />
-                <h1 className="text-4xl font-bold py-6">Category Management</h1>
+                <Breadcrumb first_name="Promotion" first="/promotion" current="Promotion Details" />
+                <h1 className="text-4xl font-bold py-6">Promotion Details</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -102,28 +87,36 @@ const Category = () => {
                     </div>
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Category</h1>
                     <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Catagory Name" />
-                    </div>
+                            <SearchBar placeholder="Search by Promotion Code" />
+                        </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Category ID
+                                            Promotion Code
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Category name
+                                            Start Date
                                         </th>
-                                        {role == 'INV' ? (
+                                        <th scope="col" class="px-6 py-3">
+                                            End Date
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Period Month
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Total Used
+                                        </th>
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'INV' ? (
+                                        {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -132,21 +125,30 @@ const Category = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(categoryList).map((key) => (
+                                    {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {categoryList[key]['category_id']}
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['promotion_code']}
                                             </th>
-                                            <td class="px-6 py-4">
-                                                {categoryList[key]['category_name']}
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['start_date']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['end_date']}
                                             </td>
-                                            {role == 'INV' ? (
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['period_month']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['total_used']}
+                                            </td>
+                                            {role == 'sales'||'manager' ? (
                                                 <td class="px-6 py-4">
-                                                    <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                                    <a href="/editpromotion" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'INV' ? (
+                                            {role == 'sales'||'manager' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -159,17 +161,17 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'INV' ? (
+                {role == 'sales'||'manager' ? (
                     <div className='grid justify-items-end'>
-                        <Link href="/categoryform">
-                            <Button type="normal" text="Add New Category" />
+                        <Link href="/promotionform">
+                            <Button type="normal" text="Add Promotion Code" />
                         </Link>
                     </div>) : (
                     <></>
                 )}
-            </main >
+            </main>
         </>
     );
 };
 
-export default Category;
+export default Promotion;
