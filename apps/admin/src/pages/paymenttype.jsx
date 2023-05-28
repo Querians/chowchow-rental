@@ -13,8 +13,28 @@ const PaymentType = () => {
         2: {
             paymentTypeId: '1000',
             paymentTypeName: 'One-time purchased'
-        },        
+        },
     };
+    const paymentAnalyse = {
+        1: {
+            paymentTypeId: '0004',
+            paymentTypeName: 'superdeal 2023 halfyear offer',
+            interest: 0.05,
+            times: 2
+        },
+        2: {
+            paymentTypeId: '0004',
+            paymentTypeName: 'superdeal 2023 halfyear offer',
+            interest: 0.05,
+            times: 2
+        },
+        3: {
+            paymentTypeId: '0004',
+            paymentTypeName: 'superdeal 2023 halfyear offer',
+            interest: 0.05,
+            times: 2
+        },
+    }
     const [isShow, setShow] = useState(false);
     const popup = () => {
         setShow(!isShow);
@@ -33,6 +53,49 @@ const PaymentType = () => {
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Finance" current="Payment Type" />
                 <h1 className="text-4xl font-bold py-6">Payment Type</h1>
+                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                    <h1 className="text-xl font-bold">Payment Type Analysis</h1>
+                    <div className="p-4">
+                        <div class="relative overflow-x-auto overflow-y-auto h-64 rounded-lg">
+                            <table class="w-full text-sm text-center text-gray-500">
+                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Payment Type ID
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Payment Type Name
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Interest
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Times
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(paymentAnalyse).map((key) => (
+                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {paymentAnalyse[key]['paymentTypeId']}
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {paymentAnalyse[key]['paymentTypeName']}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {paymentAnalyse[key]['interest']}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {paymentAnalyse[key]['times']}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -56,7 +119,7 @@ const PaymentType = () => {
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <h1 className="text-xl font-bold">Payment Type</h1>
                     <div className="p-4">
-                        <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
+                        <div class="relative overflow-x-auto overflow-y-auto h-64 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
@@ -109,7 +172,7 @@ const PaymentType = () => {
                     </div>
                 </div>
                 {role == 'SA' ? (
-                    <div className='grid justify-items-end'>
+                    <div className='grid justify-items-end pb-8'>
                         <Link href="/paymenttypeform">
                             <Button type="normal" text="Add New Payment Type" />
                         </Link>
