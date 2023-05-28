@@ -1,8 +1,8 @@
-import { DelivererOrderInput, DelivererVehicleForThisOrderID, Breadcrumb } from 'ui';
+import { DelivererOrderInput, DelivererVehicleForThisOrderID, Breadcrumb, Sidebar } from 'ui';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
 const Transportdetail = () => {
-  const role = 'deliverer';
+  const role = 'DL';
   // ดึงมา
   const receieveData_currentAddress = { lat: 13.736988050394881, lng: 100.52436590194702 };
 
@@ -16,8 +16,17 @@ const Transportdetail = () => {
 
   return (
       <>
-        <main className="container mx-auto px-10 pb-8 space-y-4">
-          <Breadcrumb first_name="Delivery" first="/deliverer" current="transportdetail" />
+        <aside>
+            <Sidebar role={role} showDeli="true"  />
+        </aside>
+        <main className="container mx-auto lg:ml-64 px-10 space-y-4">
+          {
+            role == 'DL'
+            ?
+            <Breadcrumb first_name="Delivery" first="/logisticAnalyse" second="/transport" second_name="Transport Update" current="Order ID Details" />
+            :
+            <Breadcrumb first_name="Delivery" first="/logisticAnalyse" current="Order ID Details" />
+          }
           <h1 className="text-4xl font-bold py-6">Order ID Details</h1>
           <DelivererVehicleForThisOrderID />
           <DelivererOrderInput role={role}/>

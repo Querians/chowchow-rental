@@ -1,13 +1,17 @@
-import { DelivererCheckinout, DelivererTransport } from 'ui';
+import { DelivererCheckinout, DelivererTransport, Sidebar, Breadcrumb } from 'ui';
 
 const Transport = () => {
-  const role = 'deliverer'
+  const role = 'DL'
   return (
       <>
-        <main className="container mx-auto px-10 pb-8 space-y-4">
-          <h1 className="text-4xl font-bold py-6">Delivery</h1>
+        <aside>
+            <Sidebar role={role} showDeli="true" />
+        </aside>
+        <main className="container mx-auto lg:ml-64 px-10 space-y-4">
+          <Breadcrumb first_name="Delivery" first="/logisticAnalyse" current="Transport Update" />
+          <h1 className="text-4xl font-bold py-6">Transport Update</h1>
           {
-            role == 'deliverer' && <DelivererCheckinout />
+            role == 'DL' && <DelivererCheckinout />
           }
           <DelivererTransport />
         </main>
