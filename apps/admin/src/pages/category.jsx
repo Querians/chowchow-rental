@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Category = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const categoryList = {
         1: {
             category_id: 30030,
@@ -117,13 +117,13 @@ const Category = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Category name
                                         </th>
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'inventory' ? (
+                                        {role == 'INV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -140,13 +140,13 @@ const Category = () => {
                                             <td class="px-6 py-4">
                                                 {categoryList[key]['category_name']}
                                             </td>
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'INV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -159,7 +159,7 @@ const Category = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
+                {role == 'INV' ? (
                     <div className='grid justify-items-end'>
                         <Link href="/categoryform">
                             <Button type="normal" text="Add New Category" />

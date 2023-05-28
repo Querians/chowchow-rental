@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Home = () => {
 
-    const role = "inventory"
+    const role = "INV"
     const onSubmit = () => {
 
     }
