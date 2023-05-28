@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFinance, showDeli }) => {
+export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFinance, showIssue, showDeli }) => {
   const [isShow, setShow] = useState(true);
   const onClick = () => {
     setShow(!isShow);
@@ -22,6 +22,10 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
   const [isShowDeli, setShowDeli] = useState(showDeli);
   const onClickDeli = () => {
     setShowDeli(!isShowDeli);
+  };
+  const [isShowIssue, setShowIssue] = useState(showIssue);
+  const onClickIssue = () => {
+    setShowIssue(!isShowIssue);
   };
 
   return (
@@ -394,13 +398,55 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                 )}
               </li>
               <li>
-                <a
-                  href="/issue"
-                  class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
-                >
-                  <span class="pl-2">Issue</span>
-                </a>
-              </li>
+                  <button
+                    type="button"
+                    onClick={onClickIssue}
+                    aria-expanded="false"
+                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                    aria-controls="dropdown-example"
+                    data-collapse-toggle="dropdown-example"
+                  >
+                    <span
+                      class="flex-1 whitespace-nowrap text-left"
+                      sidebar-toggle-item
+                    >
+                      Issue
+                    </span>
+                    <svg
+                      sidebar-toggle-item
+                      class="h-6pr-2 w-6"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                  {isShowIssue && (
+                    <ul id="dropdown-example" class="space-y-2 py-2">
+                      <li>
+                        <a
+                          href="/issue"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Issue
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/catagoryproblem"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Category Problems
+                        </a>
+                      </li>
+                    </ul>
+                  )}
+                </li>
             </ul>
           </div>
         </aside >
