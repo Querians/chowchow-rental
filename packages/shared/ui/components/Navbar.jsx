@@ -70,6 +70,12 @@ export const Navbar = () => {
               >
                 ABOUT US
               </a>
+              <a
+                href="/issue"
+                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:text-slate-50"
+              >
+                ISSUES              
+              </a>
             </div>
           </div>
           <div
