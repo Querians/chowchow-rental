@@ -80,7 +80,7 @@ const Vehicleinfo = () => {
           first="/logisticAnalyse"
           current="Vehicle Info"
         />
-        <h1 className="pb-4 pt-6 text-4xl font-bold">Vehicle Info</h1>
+        <h1 className="pb-4 pt-6 text-4xl font-bold">Vehicle Information</h1>
         {isShow && (
           <div
             id="alert-additional-content-2"
