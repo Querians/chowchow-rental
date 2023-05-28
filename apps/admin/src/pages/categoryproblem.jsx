@@ -1,7 +1,16 @@
 import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb,SearchBar, TextInput } from 'ui';
+import { Sidebar, Button, Breadcrumb,SearchBar, TextInput,Dropdown } from 'ui';
 import Link from 'next/link';
-
+const cateposition = {
+    category_prob_id: "DP",
+    position_id: "DL",
+}
+const posi_id = {
+    DL: "DL",
+    MA: "MA",
+    INV: "INV",
+    SA: "SA",
+}
 const CategoryProb = () => {
 
     const role = "inventory"
@@ -83,10 +92,8 @@ const CategoryProb = () => {
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <div className="pt-2 px-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <TextInput type='readOnly' placeholder=""  label="Category Problem ID" />
                                 <TextInput placeholder="Search Category Problem Name" label="Category Problem Name" />
-                                <TextInput placeholder="Search Position ID"  label="Position ID" />
-                                <TextInput type = 'readOnly' placeholder="" label="Position Name" />
+                                <Dropdown options={posi_id} label='Position Name' defaultValue={cateposition["posi_id"]}/>
                             </div>
                         </div>
                     <div className="p-4">

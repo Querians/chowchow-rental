@@ -33,7 +33,7 @@ const PromotionForm = () => {
                                 <TextInput type = 'readOnly' placeholder="" value={promo['start_date']} label="Start Date" />
                                 <TextInput placeholder="" label="Maximum Discount" />
                                 <TextInput placeholder="" label="End Date" />
-                                <TextInput placeholder="" label="Maximum Price" />
+                                <TextInput placeholder="" label="Minimum Price" />
                             </div>
                             <div class="grid justify-items-center">
                                     <Link href="/promotiondetails">
