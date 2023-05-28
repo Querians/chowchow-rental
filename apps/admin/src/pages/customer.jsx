@@ -74,7 +74,6 @@ const Customer = () => {
       tel: '0123456789',
     },
   };
-  console.log(customerID)
 
   return (
     <>
