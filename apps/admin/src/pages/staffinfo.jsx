@@ -1,7 +1,7 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
 import Link from 'next/link';
 
-const PromotionForm = () => {
+const Staffinfo = () => {
 
     const role = "manager"
     const s_info = {
@@ -50,4 +50,4 @@ const PromotionForm = () => {
     );
 };
 
-export default PromotionForm;
+export default Staffinfo;
