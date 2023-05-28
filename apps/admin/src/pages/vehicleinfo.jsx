@@ -216,7 +216,7 @@ const Vehicleinfo = () => {
         </div>
         {role == 'MA' ? (
           <div className="grid justify-items-end pb-8">
-            <Link href="/vehicleinfoform">
+            <Link href="/vehicleinfoadd">
               <Button type="normal" text="Add New Product" />
             </Link>
           </div>
