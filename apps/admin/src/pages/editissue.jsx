@@ -6,7 +6,7 @@ const EditCateprob = () => {
     const role = "inventory"
     const issue_data = {
             customer_name: "DP",
-            customer_id: "Damaged packaged",
+            issue_id: "ad1snf8w56s",
             order_id: "nvjdk415fg5",
             description: "who threw MY PACKAGE",
             position_name: "Deliverer",
@@ -29,13 +29,13 @@ const EditCateprob = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Issue" second_name="Category Problem" second="/categoryproblem" current="Edit Category Problem" />
-                    <h1 className="text-4xl font-bold py-6">Edit category problem</h1>
+                    <Breadcrumb first_name="Issue" second_name="Issue" second="/issue" current="Edit Issue" />
+                    <h1 className="text-4xl font-bold py-6">Edit Issue and Update status</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput type='readOnly' placeholder="" value={issue_data['customer_name']}label="Customer Name" />
-                                <TextInput type='readOnly' placeholder="" value={issue_data['customer_id']}label="Customer ID" />
+                                <TextInput type='readOnly' placeholder="" value={issue_data['issue_id']}label="Issue ID" />
                                 <TextInput type='readOnly' placeholder="" value={issue_data['order_id']}label="Order ID" />
                                 <TextInput type='readOnly' placeholder="" value={issue_data['description']}label="Description" />
                                 <TextInput type='readOnly' placeholder="" value={issue_data['position_name']}label="Position Name" />
