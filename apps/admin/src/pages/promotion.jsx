@@ -115,7 +115,7 @@ const PromotionAna = () => {
                                 <tbody>
                                     {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="bg-[#E3C291] px-6 py-4 font-normal">
+                                            <th scope="row" class="bg-[#e1e1e1] px-6 py-4 font-normal">
                                                 {itemList[key]['promotion_code']}
                                             </th>
                                             <th scope="row" class="px-6 py-4 font-normal">
