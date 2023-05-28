@@ -6,7 +6,7 @@ import {
 import { useState } from 'react';
 
 const Customer = () => {
-  const [customerID, setCustomerID] = useState('');
+  const [customerID, setCustomerID] = useState(''); // use customerID to query data
   const role = 'MA';
 
   const customer_data = {
