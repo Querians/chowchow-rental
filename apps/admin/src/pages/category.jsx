@@ -104,7 +104,7 @@ const Category = () => {
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <h1 className="text-xl font-bold">Category</h1>
                     <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Product Name" />
+                        <SearchBar placeholder="Search by Catagory Name" />
                     </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
