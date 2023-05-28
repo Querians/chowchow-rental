@@ -1,8 +1,8 @@
-import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
+import { Sidebar, Breadcrumb, TextInput, Dropdown, Button } from 'ui';
 import Link from 'next/link';
 
 const OrderStatus = () => {
-    const role = "inventory"
+    const role = "MA"
     const order = {
         order_id: 23000121,
         order_status: "pack waiting",
@@ -36,8 +36,8 @@ const OrderStatus = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Update Item Status" />
-                    <h1 className="text-4xl font-bold py-6">Update Item Status</h1>
+                    <Breadcrumb first_name="Order Management" second_name="Order" second="/order" current="Update Order Status" />
+                    <h1 className="text-4xl font-bold py-6">Update Order Status</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
