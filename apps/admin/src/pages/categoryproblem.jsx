@@ -5,6 +5,14 @@ const cateposition = {
     category_prob_id: "DP",
     position_id: "DL",
 }
+const category_prob_id = {
+Application_error: "AE",
+Feedback: "FB",
+Improper_service: "IS",
+Late_delivery: "LD",
+Payment_problem: "PP",
+Question_answer: "QA",
+}
 const posi_id = {
     DL: "DL",
     MA: "MA",
@@ -67,7 +75,7 @@ const CategoryProb = () => {
                 <Sidebar role={role} showStock="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Issue" first="/issue" current="Category Problem" />
+                <Breadcrumb first_name="Issue" current="Category Problem" />
                 <h1 className="text-4xl font-bold py-6">Category Problem</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
@@ -92,8 +100,8 @@ const CategoryProb = () => {
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
                     <div className="pt-2 px-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <TextInput placeholder="Search Category Problem Name" label="Category Problem Name" />
-                                <Dropdown options={posi_id} label='Position Name' defaultValue={cateposition["posi_id"]}/>
+                                <Dropdown options={category_prob_id} label='Category Problem ID' defaultValue={cateposition["category_prob_id"]}/>
+                                <Dropdown options={posi_id} label='Position ID' defaultValue={cateposition["posi_id"]}/>
                             </div>
                         </div>
                     <div className="p-4">

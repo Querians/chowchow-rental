@@ -1,7 +1,7 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
 import Link from 'next/link';
 
-const CateprobForm = () => {
+const EditCateprob = () => {
 
     const role = "inventory"
     const caprob = {
@@ -22,7 +22,7 @@ const CateprobForm = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Issue" first="/issue" second_name="Category Problem" second="/categoryproblem" current="Edit Category Problem" />
+                    <Breadcrumb first_name="Issue" second_name="Category Problem" second="/categoryproblem" current="Edit Category Problem" />
                     <h1 className="text-4xl font-bold py-6">Edit category problem</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
@@ -33,8 +33,8 @@ const CateprobForm = () => {
                                 <TextInput placeholder="" label="Position Name" />
                             </div>
                             <div class="grid justify-items-center">
-                                    <Link href="/promotiondetails">
-                                        <Button type="submit" text="ADD" onClick={onSubmit} />
+                                    <Link href="/categoryproblem">
+                                        <Button type="submit" text="EDIT" onClick={onSubmit} />
                                     </Link>
                             </div>
                         </div>
@@ -45,4 +45,4 @@ const CateprobForm = () => {
     );
 };
 
-export default CateprobForm;
+export default EditCateprob;
