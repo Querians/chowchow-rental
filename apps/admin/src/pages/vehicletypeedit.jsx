@@ -21,8 +21,7 @@ const Vehicleinfoedit = () => {
 
       <main className="container mx-auto px-10 lg:ml-64">
           <Breadcrumb
-            first_name="Delivery"
-            first="/logisticAnalyse"
+            first_name="Logistic"
             second_name="Vehicle Type"
             second="/vehicletype"
             current="Edit Vehicle Type"

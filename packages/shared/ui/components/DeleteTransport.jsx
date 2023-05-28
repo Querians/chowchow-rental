@@ -41,7 +41,6 @@ export const DeleteTransport = () => {
   return (
     <>
       <div>
-      <div className="text-2xl font-bold py-2 m-0">Delete transport</div>
       <div className="w-full rounded-lg border-2 border-black p-4 mb-10">
       {isShow && (
           <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
@@ -63,6 +62,7 @@ export const DeleteTransport = () => {
               </div>
           </div>
       )}
+        <div className="text-2xl font-bold m-0">Delete transport</div>
         <div className="p-4">
           <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg">
             <table class="w-full text-sm text-center text-gray-500">

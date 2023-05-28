@@ -8,7 +8,7 @@ const Transport = () => {
             <Sidebar role={role} showDeli="true" />
         </aside>
         <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-          <Breadcrumb first_name="Delivery" first="/logisticAnalyse" current="Transport Update" />
+          <Breadcrumb first_name="Logistic" current="Transport Update" />
           <h1 className="text-4xl font-bold py-6">Transport Update</h1>
           {
             role == 'DL' && <DelivererCheckinout />

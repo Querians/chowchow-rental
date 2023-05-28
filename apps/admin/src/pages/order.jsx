@@ -69,7 +69,7 @@ const Order = () => {
                 <Sidebar role={role} showOrder="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
-                <Breadcrumb first_name="Order Management" first="/order" current="Order" />
+                <Breadcrumb first_name="Order Management" current="Order" />
                 <h1 className="text-4xl font-bold pt-6 pb-4">Order Management</h1>
                 <div className="w-full rounded-lg border border-2 border-black p-4">
                     <h1 className="text-xl font-bold">All Order Receiving</h1>

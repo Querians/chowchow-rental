@@ -34,8 +34,7 @@ const Vehicleinfoadd = () => {
       <main className="container mx-auto px-10 lg:ml-64">
         <form action="">
           <Breadcrumb
-            first_name="Delivery"
-            first="/logisticAnalyse"
+            first_name="Logistic"
             second_name="Vehicle Info"
             second="/vehicleinfo"
             current="Add Vehicle Info"

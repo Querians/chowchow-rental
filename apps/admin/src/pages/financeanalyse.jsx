@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import { useState } from 'react';
-import { Sidebar, Breadcrumb, Button, SearchBar } from 'ui';
-import Link from 'next/link';
+import { Sidebar, Breadcrumb } from 'ui';
+
 
 const FinanceAnalyse = () => {
 
-    const role = "inventory"
+    const role = "SA"
     const issue_sum = {
         1: {
             customer_id: '8239r4i9f',
@@ -69,17 +68,16 @@ const FinanceAnalyse = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showOrder="true" />
+                <Sidebar role={role} showFinance="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
-                <Breadcrumb first_name="Order Management" first="/order" current="Order" />
+                <Breadcrumb first_name="Finance" current="Finance Analysis" />
                 <h1 className="text-4xl font-bold pt-6 pb-4">Finance Analysis</h1>
                 <div className="w-full rounded-lg border border-2 border-black p-4">
                     <h1 className="text-xl font-bold">Accumulated Paid Amount</h1>
                     <div className="p-4">
                         <p className='text-end pr-[35%] bg-[#E3C291] rounded-t-lg text-sm font-medium uppercase text-gray-700 pt-2'>Payment Method Name</p>
-                        <div class="relative overflow-x-auto rounded-b-lg h-60">
-                            
+                        <div class="relative overflow-x-auto rounded-b-lg h-96">
                             <table class="w-full text-sm text-center text-gray-500 ">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>

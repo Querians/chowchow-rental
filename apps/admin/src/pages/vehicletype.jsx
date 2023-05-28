@@ -37,8 +37,7 @@ const Vehicletype = () => {
       </aside>
       <main className="container mx-auto space-y-4 px-10 pb-8 lg:ml-64">
         <Breadcrumb
-          first_name="Delivery"
-          first="/logisticAnalyse"
+          first_name="Logistic"
           current="Vehicle Type"
         />
         <h1 className="pb-4 pt-6 text-4xl font-bold">Vehicle Type</h1>

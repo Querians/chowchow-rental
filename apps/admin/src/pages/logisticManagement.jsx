@@ -7,7 +7,7 @@ const logisticManagement = () => {
             <Sidebar showDeli="true" />
         </aside>
         <main className="container mx-auto lg:ml-64 px-10">
-          <Breadcrumb first_name="Delivery" first="/logisticAnalyse" current="Order ID Details" />
+          <Breadcrumb first_name="Logistic" current="Logistic Management" />
           <h1 className="text-4xl font-bold py-6">Logistic Management</h1>
           <AddTransport />
           <EditTransport />

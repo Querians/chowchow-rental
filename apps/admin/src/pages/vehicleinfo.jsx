@@ -79,9 +79,8 @@ const Vehicleinfo = () => {
       </aside>
       <main className="container mx-auto space-y-4 px-10 pb-8 lg:ml-64">
         <Breadcrumb
-          first_name="Delivery"
-          first="/logisticAnalyse"
-          current="Vehicle Info"
+          first_name="Logistic"
+          current="Vehicle Information"
         />
         <h1 className="pb-4 pt-6 text-4xl font-bold">Vehicle Information</h1>
         {isShow && (

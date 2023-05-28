@@ -23,7 +23,7 @@ const EditProduct = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Edit Item" />
+                    <Breadcrumb first_name="Stock Inventory" second_name="Items" second="/items" current="Edit Item" />
                     <h1 className="text-4xl font-bold py-6">Edit item details</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">

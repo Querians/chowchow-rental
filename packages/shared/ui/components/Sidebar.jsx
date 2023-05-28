@@ -258,6 +258,17 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                   </ul>
                 )}
               </li>
+              {role == 'MA' ||
+                role == 'SA' ? (
+                <li>
+                  <a
+                    href="/promotion"
+                    class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
+                  >
+                    <span class="pl-2">Promotion</span>
+                  </a>
+                </li>
+              ) : (<></>)}
               {role == 'MA' || role == 'SA' ? (
                 <li>
                   <button
@@ -290,6 +301,14 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                   </button>
                   {isShowFinance && (
                     <ul id="dropdown-example" class="space-y-2 py-2">
+                      <li>
+                        <a
+                          href="/financeanalyse"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Finance Analysis
+                        </a>
+                      </li>
                       <li>
                         <a
                           href="/invoice"
@@ -341,7 +360,7 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                     class="flex-1 whitespace-nowrap text-left"
                     sidebar-toggle-item
                   >
-                    Delivery Management
+                    Logistic
                   </span>
                   <svg
                     sidebar-toggle-item
@@ -439,6 +458,14 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                         class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                       >
                         Issue
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/issueanalyse"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Issue Analysis
                       </a>
                     </li>
                     <li>

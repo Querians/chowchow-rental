@@ -33,10 +33,10 @@ export const EditTransport = () => {
   return (
     <>
       <div>
-      <div className="text-2xl font-bold py-2 m-0">Edit transport</div>
       <div className="w-full rounded-lg border-2 border-black p-4 mb-10">
+      <div className="text-2xl font-bold m-0">Edit transport</div>
         <div className="p-4">
-          <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg">
+          <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg space-y-2">
             <table class="w-full text-sm text-center text-gray-500">
                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                     <tr>
