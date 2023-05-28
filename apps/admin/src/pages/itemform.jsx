@@ -23,7 +23,7 @@ const ItemForm = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Add New Item" />
+                    <Breadcrumb first_name="Stock Inventory" second_name="Items" second="/items" current="Add New Item" />
                     <h1 className="text-4xl font-bold py-6">Add New Item</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">

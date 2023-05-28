@@ -69,7 +69,7 @@ const IssueAnalyse = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showOrder="true" />
+                <Sidebar role={role} showIssue="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
                 <Breadcrumb first_name="Order Management" first="/order" current="Order" />
@@ -104,7 +104,7 @@ const IssueAnalyse = () => {
                                 <tbody>
                                     {Object.keys(issue_sum).map((key) => (
                                         <tr class="bg-white border-b">
-                                            <th scope="row" class="px-6 py-4 font-normal bg-[#E3C291]">
+                                            <th scope="row" class="px-6 py-4 font-normal bg-[#E1E1E1]">
                                                 {issue_sum[key]['customer_id']}
                                             </th>
                                             <td class="px-6 py-4">

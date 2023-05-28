@@ -2,7 +2,17 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFinance, showIssue, showDeli }) => {
+export const Sidebar = ({
+  fullName,
+  staffID,
+  role,
+  showStock,
+  showOrder,
+  showFinance,
+  showIssue,
+  showDeli,
+  showPromo,
+}) => {
   const [isShow, setShow] = useState(true);
   const onClick = () => {
     setShow(!isShow);
@@ -26,6 +36,10 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
   const [isShowIssue, setShowIssue] = useState(showIssue);
   const onClickIssue = () => {
     setShowIssue(!isShowIssue);
+  };
+  const [isShowPromo, setShowPromo] = useState(showPromo);
+  const onClickPromo = () => {
+    setShowPromo(!isShowPromo);
   };
 
   return (
@@ -76,7 +90,7 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                   data-drawer-toggle="sidebar-multi-level-sidebar"
                   aria-controls="sidebar-multi-level-sidebar"
                   type="button"
-                  class="ml-3 mt-2 inline-flex items-center rounded-lg p-2 lg:hidden text-sm text-gray-500 hover:bg-gray-100"
+                  class="ml-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 lg:hidden"
                 >
                   <span class="sr-only">Open sidebar</span>
                   <svg
@@ -120,15 +134,22 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                     <span class="pl-2">Staff Management</span>
                   </a>
                 </li>
-              ) : (<></>)}
-              <li>
-                <a
-                  href="/customer"
-                  class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
-                >
-                  <span class="pl-2">Customer</span>
-                </a>
-              </li>
+              ) : (
+                <></>
+              )}
+
+              {role == 'MA' || role == 'SA' || role == 'DL' ? (
+                <li>
+                  <a
+                    href="/customer"
+                    class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
+                  >
+                    <span class="pl-2">Customer</span>
+                  </a>
+                </li>
+              ) : (
+                <></>
+              )}
               <li>
                 <button
                   onClick={onClickStore}
@@ -186,9 +207,7 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                         Category
                       </a>
                     </li>
-                    {role == 'INV' ||
-                      role == 'MA' ||
-                      role == 'DL' ? (
+                    {role == 'INV' || role == 'MA' || role == 'DL' ? (
                       <li>
                         <a
                           href="/items"
@@ -267,6 +286,68 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                       class="flex-1 whitespace-nowrap text-left"
                       sidebar-toggle-item
                     >
+                      Promotion
+                    </span>
+                    <svg
+                      sidebar-toggle-item
+                      class="h-6pr-2 w-6"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                  {isShowPromo && (
+                    <ul id="dropdown-example" class="space-y-2 py-2">
+                      <li>
+                        <a
+                          href="/promotiondetails"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Promotions
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/promotion"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Promotion Overall
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/orderpromotion"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Promotion In Used
+                        </a>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+              ) : (
+                <></>
+              )}
+              {role == 'MA' || role == 'SA' ? (
+                <li>
+                  <button
+                    type="button"
+                    onClick={onClickFinance}
+                    aria-expanded="false"
+                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                    aria-controls="dropdown-example"
+                    data-collapse-toggle="dropdown-example"
+                  >
+                    <span
+                      class="flex-1 whitespace-nowrap text-left"
+                      sidebar-toggle-item
+                    >
                       Finance
                     </span>
                     <svg
@@ -285,6 +366,14 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                   </button>
                   {isShowFinance && (
                     <ul id="dropdown-example" class="space-y-2 py-2">
+                      <li>
+                        <a
+                          href="/financeanalyse"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Finance Analysis
+                        </a>
+                      </li>
                       <li>
                         <a
                           href="/invoice"
@@ -336,7 +425,7 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                     class="flex-1 whitespace-nowrap text-left"
                     sidebar-toggle-item
                   >
-                    Delivery Management
+                    Logistic
                   </span>
                   <svg
                     sidebar-toggle-item
@@ -383,7 +472,7 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                         href="/vehicleinfo"
                         class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                       >
-                        Vehicle Informatiom
+                        Vehicle Information
                       </a>
                     </li>
                     <li>
@@ -398,58 +487,66 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                 )}
               </li>
               <li>
-                  <button
-                    type="button"
-                    onClick={onClickIssue}
-                    aria-expanded="false"
-                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
-                    aria-controls="dropdown-example"
-                    data-collapse-toggle="dropdown-example"
+                <button
+                  type="button"
+                  onClick={onClickIssue}
+                  aria-expanded="false"
+                  class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                  aria-controls="dropdown-example"
+                  data-collapse-toggle="dropdown-example"
+                >
+                  <span
+                    class="flex-1 whitespace-nowrap text-left"
+                    sidebar-toggle-item
                   >
-                    <span
-                      class="flex-1 whitespace-nowrap text-left"
-                      sidebar-toggle-item
-                    >
-                      Issue
-                    </span>
-                    <svg
-                      sidebar-toggle-item
-                      class="h-6pr-2 w-6"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                  {isShowIssue && (
-                    <ul id="dropdown-example" class="space-y-2 py-2">
-                      <li>
-                        <a
-                          href="/issue"
-                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        >
-                          Issue
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="/catagoryproblem"
-                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        >
-                          Category Problems
-                        </a>
-                      </li>
-                    </ul>
-                  )}
-                </li>
+                    Issue
+                  </span>
+                  <svg
+                    sidebar-toggle-item
+                    class="h-6pr-2 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                {isShowIssue && (
+                  <ul id="dropdown-example" class="space-y-2 py-2">
+                    <li>
+                      <a
+                        href="/issue"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Issue
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/issueanalyse"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Issue Analysis
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/categoryproblem"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Category Problems
+                      </a>
+                    </li>
+                  </ul>
+                )}
+              </li>
             </ul>
           </div>
-        </aside >
+        </aside>
       )}
     </>
   );

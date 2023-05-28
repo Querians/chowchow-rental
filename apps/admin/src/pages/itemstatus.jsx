@@ -1,4 +1,4 @@
-import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
+import { Sidebar, Breadcrumb, TextInput, Dropdown, Button } from 'ui';
 import Link from 'next/link';
 
 const ItemStatus = () => {
@@ -27,7 +27,7 @@ const ItemStatus = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Items" second="/items" current="Update Item Status" />
+                    <Breadcrumb first_name="Stock Inventory" second_name="Items" second="/items" current="Update Item Status" />
                     <h1 className="text-4xl font-bold py-6">Update Item Status</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">

@@ -33,10 +33,10 @@ export const EditTransport = () => {
   return (
     <>
       <div>
-      <div className="text-2xl font-bold py-2 m-0">Edit transport</div>
       <div className="w-full rounded-lg border-2 border-black p-4 mb-10">
+      <div className="text-2xl font-bold m-0">Edit transport</div>
         <div className="p-4">
-          <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg">
+          <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg space-y-2">
             <table class="w-full text-sm text-center text-gray-500">
                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                     <tr>
@@ -59,9 +59,7 @@ export const EditTransport = () => {
 
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <Link href={'/ordertracking'}>
                             {order_data[key]['order_id']}
-                          </Link>
                         </td>
                         <td scope="row" class="px-6 py-4">
                           {order_data[key]['arrive_date']}
@@ -70,7 +68,7 @@ export const EditTransport = () => {
                           {order_data[key]['return_date']}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
+                            <a href="./transportdetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                         </td>
                       </tr>
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const PromotionAna = () => {
 
-    const role = "sales"||"manager"
+    const role = "SA"
     const itemList = {
         1: {
             promotion_code: 'nvjdk415fg5',
@@ -61,10 +61,10 @@ const PromotionAna = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} showPromo="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb current= "Promotion"  />
+                <Breadcrumb first_name="Promotion" current= "Promotion Overall"  />
                 <h1 className="text-4xl font-bold py-6">Promotion Overall</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
@@ -115,7 +115,7 @@ const PromotionAna = () => {
                                 <tbody>
                                     {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="bg-[#E3C291] px-6 py-4 font-normal">
+                                            <th scope="row" class="bg-[#e1e1e1] px-6 py-4 font-normal">
                                                 {itemList[key]['promotion_code']}
                                             </th>
                                             <th scope="row" class="px-6 py-4 font-normal">

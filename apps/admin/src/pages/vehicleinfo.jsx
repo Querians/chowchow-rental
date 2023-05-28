@@ -2,78 +2,10 @@ import { SearchBar, Sidebar, Button, Breadcrumb } from 'ui';
 import { useState } from 'react';
 import Link from 'next/link';
 
-const Invoice = () => {
-  const role = 'SA';
-  const [invoiceId, setInvoiceID] = useState('') // use invoiceId to query data
-  const [orderId, setOrderID] = useState('') // use orderId to query data
-  console.log('invoice',invoiceId)
-  console.log('orderid',orderId)
-  const invoiceList = {
-    1: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    2: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    3: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    4: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    4: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    5: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    6: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    7: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-    8: {
-      invoice_id: 'zgfzgfsgs56',
-      order_id: '11111',
-      customer_name: 'Son Hung',
-      status_code: '400',
-      deadline_data: '12-12-12 00:00:00',
-    },
-  };
+const Vehicleinfo = () => {
   const [isShow, setShow] = useState(false);
+  const [vehicleLicence, setVehicleLicence] = useState(''); // use vehicleLicence to query data
+  
   const popup = () => {
     setShow(!isShow);
   };
@@ -82,17 +14,75 @@ const Invoice = () => {
     // code for drop row
   };
 
+  const role = 'MA';
+  const receive_data = {
+    1: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    2: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    3: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    4: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    5: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    6: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    7: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    8: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+    9: {
+      vehicle_licence: 'กข1234',
+      vehicle_type_id: '001',
+      brand: 'ISUZU',
+      model: 'NRL 130',
+    },
+  };
+
   return (
     <>
       <aside>
-        <Sidebar role={role} showFinance={"true"} />
+        <Sidebar role={role} showDeli="true" />
       </aside>
-      <main className="container mx-auto space-y-4 px-10 lg:ml-64">
+      <main className="container mx-auto space-y-4 px-10 pb-8 lg:ml-64">
         <Breadcrumb
-          first_name="Finance"
-          current="Invoice"
+          first_name="Logistic"
+          current="Vehicle Information"
         />
-        <h1 className="py-6 text-4xl font-bold">Invoice</h1>
+        <h1 className="pb-4 pt-6 text-4xl font-bold">Vehicle Information</h1>
         {isShow && (
           <div
             id="alert-additional-content-2"
@@ -117,8 +107,10 @@ const Invoice = () => {
               <h3 class="text-lg font-medium">This is a danger alert</h3>
             </div>
             <div class="mb-4 mt-2 text-sm">
-              {'Are you sure to delete this row. If not please click "Exit" and if'}
-              {'you want to delete please click "Delete".'}
+              {
+                'Are you sure to delete this row. If not please click "Exit" and'
+              }
+              {'if you want to delete please click "Delete".'}
             </div>
             <div class="flex">
               <button
@@ -141,19 +133,9 @@ const Invoice = () => {
           </div>
         )}
         <div className="w-full rounded-lg border-2 border-black p-4">
-          <div className='grid grid-cols-2'>
-            <div>
-              <h1 className="text-xl font-bold">Invoice ID</h1>
-              <div className="px-4 pt-2">
-                <SearchBar onChange={e=>setInvoiceID(e.target.value)} placeholder="Search by Invoice ID" />
-              </div>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold">Order ID</h1>
-              <div className="px-4 pt-2">
-                <SearchBar onChange={e=>setOrderID(e.target.value)} placeholder="Search by Order ID" />
-              </div>
-            </div>
+          <h1 className="text-xl font-bold">Vehicle Licence</h1>
+          <div className="px-4 pt-2">
+            <SearchBar onChange={e => setVehicleLicence(e.target.value)} placeholder="Search by Vehicle Licence" />
           </div>
           <div className="p-4">
             <div class="relative h-96 overflow-x-auto rounded-lg">
@@ -161,28 +143,25 @@ const Invoice = () => {
                 <thead class="sticky top-0 bg-[#E3C291] text-xs uppercase text-gray-700">
                   <tr>
                     <th scope="col" class="px-6 py-3">
-                      invoice id
+                      vehicle_licence
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      order id
+                      vehicle_type_id
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      customer name
+                      brand
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      status code
+                      model
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      deadline date
-                    </th>
-                    {role == 'SA' ? (
+                    {role == 'MA' ? (
                       <th scope="col" class="px-6 py-3">
                         Edit
                       </th>
                     ) : (
                       <></>
                     )}
-                    {role == 'SA' ? (
+                    {role == 'MA' ? (
                       <th scope="col" class="px-6 py-3">
                         Delete
                       </th>
@@ -192,30 +171,24 @@ const Invoice = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(invoiceList).map((key) => (
+                  {Object.keys(receive_data).map((key) => (
                     <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                       <th
                         scope="row"
                         class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                       >
-                        {invoiceList[key]['invoice_id']}
+                        {receive_data[key]['vehicle_licence']}
                       </th>
                       <td class="px-6 py-4">
-                        {invoiceList[key]['order_id']}
+                        {receive_data[key]['vehicle_type_id']}
                       </td>
-                      <td class="px-6 py-4">
-                        {invoiceList[key]['customer_name']}
-                      </td>
-                      <td class="px-6 py-4">
-                        {invoiceList[key]['status_code']}
-                      </td>
-                      <td class="px-6 py-4">
-                        {invoiceList[key]['deadline_data']}
-                      </td>
-                      {role == 'SA' ? (
+                      <td class="px-6 py-4">{receive_data[key]['brand']}</td>
+                      <td class="px-6 py-4">{receive_data[key]['model']}</td>
+
+                      {role == 'MA' ? (
                         <td class="px-6 py-4">
                           <a
-                            href="/invoiceedit"
+                            href="/vehicleinfoedit"
                             class="font-medium text-blue-600 hover:underline"
                           >
                             Edit
@@ -224,7 +197,7 @@ const Invoice = () => {
                       ) : (
                         <></>
                       )}
-                      {role == 'SA' ? (
+                      {role == 'MA' ? (
                         <td class="px-6 py-4">
                           <a
                             class="font-medium text-red-600 hover:underline"
@@ -243,9 +216,18 @@ const Invoice = () => {
             </div>
           </div>
         </div>
+        {role == 'MA' ? (
+          <div className="grid justify-items-end pb-8">
+            <Link href="/vehicleinfoadd">
+              <Button type="normal" text="Add New Vehicle Info" />
+            </Link>
+          </div>
+        ) : (
+          <></>
+        )}
       </main>
     </>
   );
 };
 
-export default Invoice;
+export default Vehicleinfo;

@@ -22,7 +22,7 @@ const Home = () => {
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <form action="">
-                    <Breadcrumb first_name="Stock Inventory" first="/inventory" second_name="Products" second="/products" current="Edit Category" />
+                    <Breadcrumb first_name="Stock Inventory" second_name="Products" second="/products" current="Edit Category" />
                     <h1 className="text-4xl font-bold py-6">Edit Category</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">

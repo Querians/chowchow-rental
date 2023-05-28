@@ -11,7 +11,7 @@ const PaymentTypeForm = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true"/>
+                <Sidebar role={role} showFinance="true"/>
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">

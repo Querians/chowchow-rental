@@ -95,7 +95,7 @@ const Products = () => {
                 <Sidebar role={role} showStock="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Stock Inventory" first="/inventory" current="Products" />
+                <Breadcrumb first_name="Stock Inventory" current="Products" />
                 <h1 className="text-4xl font-bold py-6">Product Management</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">

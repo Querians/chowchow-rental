@@ -41,7 +41,6 @@ export const DeleteTransport = () => {
   return (
     <>
       <div>
-      <div className="text-2xl font-bold py-2 m-0">Delete transport</div>
       <div className="w-full rounded-lg border-2 border-black p-4 mb-10">
       {isShow && (
           <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
@@ -63,6 +62,7 @@ export const DeleteTransport = () => {
               </div>
           </div>
       )}
+        <div className="text-2xl font-bold m-0">Delete transport</div>
         <div className="p-4">
           <div class=" relative overflow-x-auto overflow-y-auto h-50 rounded-lg">
             <table class="w-full text-sm text-center text-gray-500">
@@ -93,9 +93,7 @@ export const DeleteTransport = () => {
 
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <Link href={'/ordertracking'}>
                             {order_data[key]['order_id']}
-                          </Link>
                         </td>
                         <td scope="row" class="px-6 py-4">
                           {order_data[key]['is_return']}
@@ -107,7 +105,7 @@ export const DeleteTransport = () => {
                           {order_data[key]['staff_fname']}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
+                            <a href="./transportdetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>

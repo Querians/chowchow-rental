@@ -17,7 +17,7 @@ const PromotionForm = () => {
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
                     <Breadcrumb first_name="Promotion" first="/promotion" second_name="Promotion Details" second="/promotiondetails" current="Add Promotion Code" />
-                    <h1 className="text-4xl font-bold py-6">Edit promotion code details</h1>
+                    <h1 className="text-4xl font-bold py-6">Add promotion code details</h1>
                     <div className="w-full rounded-lg border border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
@@ -26,7 +26,7 @@ const PromotionForm = () => {
                                 <TextInput placeholder="" label="Start Date" />
                                 <TextInput placeholder="" label="Maximum Discount" />
                                 <TextInput placeholder="" label="End Date" />
-                                <TextInput placeholder="" label="Maximum Price" />
+                                <TextInput placeholder="" label="Minimum Price" />
                             </div>
                             <div class="grid justify-items-center">
                                     <Link href="/promotiondetails">

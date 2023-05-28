@@ -24,8 +24,8 @@ export const DelivererTransport = () => {
   }
 
   return <>
-      <div className="text-2xl font-bold py-2 m-0">Order Transport</div>
       <div className="w-full rounded-lg border border-2 border-black p-4 mb-10">
+        <div className="text-2xl font-bold m-0">Order Transport</div>
         <div className="p-4">
             <div class="relative overflow-x-auto overflow-y-auto h-72 rounded-lg">
                 <table class="w-full text-sm text-center text-gray-500">
@@ -58,7 +58,7 @@ export const DelivererTransport = () => {
                                     {receive_data_this_delivery_work_not_done[key]['order_status']}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
+                                    <a href="./transportdetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                                 </td>
 
                             </tr>

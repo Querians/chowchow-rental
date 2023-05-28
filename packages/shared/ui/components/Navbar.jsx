@@ -70,6 +70,12 @@ export const Navbar = () => {
               >
                 ABOUT US
               </a>
+              <a
+                href="/issue"
+                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:text-slate-50"
+              >
+                ISSUES
+              </a>
             </div>
           </div>
           <div
@@ -100,6 +106,17 @@ export const Navbar = () => {
                     width="25"
                     height="25"
                   />
+                </a>
+              </li>
+              <li>
+                <a href="" className="flex items-center">
+                  <div className="mr-3 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-2 -2 25 25">
+                      <path fill="none" 
+                            stroke="currentColor"   stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M15 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8m4-9l-4-4m4 4l-4 4m4-4H9" />
+                    </svg>
+                  </div>
                 </a>
               </li>
             </ul>

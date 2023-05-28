@@ -1,63 +1,58 @@
 import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb,SearchBar, TextInput,Dropdown } from 'ui';
+import { Sidebar, Button, Breadcrumb,SearchBar } from 'ui';
 import Link from 'next/link';
-const cateposition = {
-    category_prob_id: "DP",
-    position_id: "DL",
-}
-const category_prob_id = {
-Application_error: "AE",
-Feedback: "FB",
-Improper_service: "IS",
-Late_delivery: "LD",
-Payment_problem: "PP",
-Question_answer: "QA",
-}
-const posi_id = {
-    DL: "DL",
-    MA: "MA",
-    INV: "INV",
-    SA: "SA",
-}
-const CategoryProb = () => {
 
-    const role = "inventory"
+const Issue = () => {
+
+    const role = "sales"
     const itemList = {
         1: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: true,
+            timestamp:"2023-01-01 13:30:44",
         },
         2: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: false,
+            timestamp:"2023-01-01 13:30:44",
         },
         3: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: false,
+            timestamp:"2023-01-01 13:30:44",
         },
         4: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: true,
+            timestamp:"2023-01-01 13:30:44",
         },
         5: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: true,
+            timestamp:"2023-01-01 13:30:44",
         },
         6: {
-            category_prob_id: "DP",
-            category_prob_name: "Damaged packaged",
-            position_id: "DL",
-            position_name: "Deliverer",
+            issue_id: 'nvjdk415fg5',
+            customer_name: "Letme Sleep",
+            tel: '0XXXXXXXXX',
+            category_prob_name: "missing order",
+            status: false,
+            timestamp:"2023-01-01 13:30:44",
         },
     };
     const [isShow, setShow] = useState(false);
@@ -75,8 +70,8 @@ const CategoryProb = () => {
                 <Sidebar role={role} showIssue="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
-                <Breadcrumb first_name="Issue" current="Category Problem" />
-                <h1 className="text-4xl font-bold py-6">Category Problem</h1>
+                <Breadcrumb first_name= "Issue" current= "Issue"  />
+                <h1 className="text-4xl font-bold py-6">Issue</h1>
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -98,11 +93,9 @@ const CategoryProb = () => {
                     </div>
                 )}
                 <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <h1 className="text-xl font-bold">Issue ID</h1>
                     <div className="pt-2 px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                                <Dropdown options={category_prob_id} label='Category Problem ID' defaultValue={cateposition["category_prob_id"]}/>
-                                <Dropdown options={posi_id} label='Position ID' defaultValue={cateposition["posi_id"]}/>
-                            </div>
+                            <SearchBar placeholder="Search by Issue ID" />
                         </div>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
@@ -110,24 +103,30 @@ const CategoryProb = () => {
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                        Category Problem ID
+                                            Issue ID
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                        Category Problem Name
+                                            Customer Name
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                        Position ID
+                                            Tel.
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                        Position Name
+                                            Category Problem Name
                                         </th>
-                                        {role == 'sales'||'manager' ? (
+                                        <th scope="col" class="px-6 py-3">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Timestamp
+                                        </th>
+                                        {role == 'sales' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'sales'||'manager' ? (
+                                        {role == 'sales' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
@@ -139,24 +138,32 @@ const CategoryProb = () => {
                                     {Object.keys(itemList).map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['category_prob_id']}
+                                                {itemList[key]['issue_id']}
                                             </th>
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['customer_name']}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['tel']}
+                                            </td>
                                             <th scope="row" class="px-6 py-4 font-normal">
                                                 {itemList[key]['category_prob_name']}
                                             </th>
-                                            <td scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['position_id']}
-                                            </td>
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['position_name']}
+                                                {itemList[key]['status']?
+                                                <input checked id="disabled-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded "/>:
+                                                <input id="disabled-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded "/>}
                                             </th>
-                                            {role == 'inventory' ? (
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                                {itemList[key]['timestamp']}
+                                            </th>
+                                            {role == 'sales' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editcateprob" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'inventory' ? (
+                                            {role == 'sales' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
@@ -169,17 +176,9 @@ const CategoryProb = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'inventory' ? (
-                    <div className='grid justify-items-end'>
-                        <Link href="/cateprobform">
-                            <Button type="normal" text="Add Category Problem" />
-                        </Link>
-                    </div>) : (
-                    <></>
-                )}
             </main>
         </>
     );
 };
 
-export default CategoryProb;
+export default Issue;
