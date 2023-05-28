@@ -93,9 +93,7 @@ export const DeleteTransport = () => {
 
                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <Link href={'/ordertracking'}>
                             {order_data[key]['order_id']}
-                          </Link>
                         </td>
                         <td scope="row" class="px-6 py-4">
                           {order_data[key]['is_return']}
@@ -107,7 +105,7 @@ export const DeleteTransport = () => {
                           {order_data[key]['staff_fname']}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="./delivererOrderDetail" class="font-medium text-blue-600 hover:underline">More detail</a>
+                            <a href="./transportdetail" class="font-medium text-blue-600 hover:underline">More detail</a>
                         </td>
                         <td class="px-6 py-4">
                             <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
