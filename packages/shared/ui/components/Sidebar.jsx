@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFinance }) => {
+export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFinance, showDeli }) => {
   const [isShow, setShow] = useState(true);
   const onClick = () => {
     setShow(!isShow);
@@ -18,6 +18,10 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
   const [isShowFinance, setShowFinance] = useState(showFinance);
   const onClickFinance = () => {
     setShowFinance(!isShowFinance);
+  };
+  const [isShowDeli, setShowDeli] = useState(showDeli);
+  const onClickDeli = () => {
+    setShowDeli(!isShowDeli);
   };
 
   return (
@@ -97,60 +101,61 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
               <li></li>
               <li>
                 <a
-                  href="#"
+                  href="/staffinfo"
+                  class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
+                >
+                  <span class="pl-2">Staff Profile</span>
+                </a>
+              </li>
+              {role == 'MA' ? (
+                <li>
+                  <a
+                    href="/allstaff"
+                    class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
+                  >
+                    <span class="pl-2">Staff Management</span>
+                  </a>
+                </li>
+              ) : (<></>)}
+              <li>
+                <a
+                  href="/customer"
                   class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
                 >
                   <span class="pl-2">Customer</span>
                 </a>
               </li>
-              {role == 'manager' ? (
-                <li>
-                  <a
-                    href="#"
-                    class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
-                  >
-                    <span class="pl-2">Staff</span>
-                  </a>
-                </li>
-              ) : (
-                <a
-                  href="#"
-                  class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
-                >
-                  <span class="pl-2">Staff</span>
-                </a>
-              )}
               <li>
-                  <button
-                    onClick={onClickStore}
-                    type="button"
-                    aria-expanded="false"
-                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
-                    aria-controls="dropdown-example"
-                    data-collapse-toggle="dropdown-example"
+                <button
+                  onClick={onClickStore}
+                  type="button"
+                  aria-expanded="false"
+                  class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                  aria-controls="dropdown-example"
+                  data-collapse-toggle="dropdown-example"
+                >
+                  <span
+                    class="flex-1 whitespace-nowrap text-left"
+                    sidebar-toggle-item
                   >
-                    <span
-                      class="flex-1 whitespace-nowrap text-left"
-                      sidebar-toggle-item
-                    >
-                      Stock Inventory
-                    </span>
-                    <svg
-                      onClick={onClickStore}
-                      sidebar-toggle-item
-                      class="h-6 w-6"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
-                
+                    Stock Inventory
+                  </span>
+                  <svg
+                    onClick={onClickStore}
+                    sidebar-toggle-item
+                    class="h-6 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+
                 {isShowStore && (
                   <ul id="dropdown-example" class="space-y-2 py-2">
                     <li>
@@ -169,21 +174,17 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                         Products
                       </a>
                     </li>
-                    {role == 'inventory' ||
-                      role == 'manager' ? (
-                      <li>
-                        <a
-                          href="/category"
-                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        >
-                          Category
-                        </a>
-                      </li>) : (
-                      <></>
-                    )}
-                    {role == 'inventory' ||
-                      role == 'manager' ||
-                      role == 'deliverer' ? (
+                    <li>
+                      <a
+                        href="/category"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Category
+                      </a>
+                    </li>
+                    {role == 'INV' ||
+                      role == 'MA' ||
+                      role == 'DL' ? (
                       <li>
                         <a
                           href="/items"
@@ -199,34 +200,34 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                 )}
               </li>
               <li>
-                  <button
-                    type="button"
-                    onClick={onClickOrder}
-                    aria-expanded="false"
-                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
-                    aria-controls="dropdown-example"
-                    data-collapse-toggle="dropdown-example"
+                <button
+                  type="button"
+                  onClick={onClickOrder}
+                  aria-expanded="false"
+                  class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                  aria-controls="dropdown-example"
+                  data-collapse-toggle="dropdown-example"
+                >
+                  <span
+                    class="flex-1 whitespace-nowrap text-left"
+                    sidebar-toggle-item
                   >
-                    <span
-                      class="flex-1 whitespace-nowrap text-left"
-                      sidebar-toggle-item
-                    >
-                      Order Management
-                    </span>
-                    <svg
-                      sidebar-toggle-item
-                      class="h-6 w-6"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
+                    Order Management
+                  </span>
+                  <svg
+                    sidebar-toggle-item
+                    class="h-6 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
                 {isShowOrder && (
                   <ul id="dropdown-example" class="space-y-2 py-2">
                     <li>
@@ -237,22 +238,18 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                         Order
                       </a>
                     </li>
-                    {role == 'inventory' || role == 'sales' ? (
-                      <li>
-                        <a
-                          href="orderanalyse"
-                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        >
-                          Order Analysis
-                        </a>
-                      </li>
-                    ) : (
-                      <></>
-                    )}
+                    <li>
+                      <a
+                        href="orderanalyse"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Order Analysis
+                      </a>
+                    </li>
                   </ul>
                 )}
               </li>
-              {role == 'manager' || role == 'sales' ? (
+              {role == 'MA' || role == 'SA' ? (
                 <li>
                   <button
                     type="button"
@@ -286,34 +283,34 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                     <ul id="dropdown-example" class="space-y-2 py-2">
                       <li>
                         <a
-                          href="#"
+                          href="/invoice"
                           class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
-                          Products
+                          Invoice
                         </a>
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="/billing"
                           class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
-                          Item
+                          Billing
                         </a>
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="/paymentmethod"
                           class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
-                          Order
+                          Payment Method
                         </a>
                       </li>
                       <li>
                         <a
-                          href="#"
+                          href="/paymenttype"
                           class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         >
-                          Cart
+                          Payment Type
                         </a>
                       </li>
                     </ul>
@@ -323,16 +320,82 @@ export const Sidebar = ({ fullName, staffID, role, showStock, showOrder, showFin
                 <></>
               )}
               <li>
-                <a
-                  href="#"
-                  class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
+                <button
+                  type="button"
+                  onClick={onClickDeli}
+                  aria-expanded="false"
+                  class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                  aria-controls="dropdown-example"
+                  data-collapse-toggle="dropdown-example"
                 >
-                  <span class="pl-2">Delivery</span>
-                </a>
+                  <span
+                    class="flex-1 whitespace-nowrap text-left"
+                    sidebar-toggle-item
+                  >
+                    Delivery Management
+                  </span>
+                  <svg
+                    sidebar-toggle-item
+                    class="h-6pr-2 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                {isShowDeli && (
+                  <ul id="dropdown-example" class="space-y-2 py-2">
+                    <li>
+                      <a
+                        href="/transport"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Transport Update
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/logisticAnalyse"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Logistic Analyse
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/logisticManagement"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Logistic Management
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/vehicleinfo"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Vehicle Informatiom
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/vehicletype"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                      >
+                        Vehicle Type
+                      </a>
+                    </li>
+                  </ul>
+                )}
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/issue"
                   class="flex items-center rounded-lg py-2 text-gray-900 hover:bg-[#89724E] hover:text-white"
                 >
                   <span class="pl-2">Issue</span>
