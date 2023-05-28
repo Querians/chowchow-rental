@@ -27,7 +27,7 @@ const PaymentType = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showStock="true" />
+                <Sidebar role={role} showFinance="true" />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
@@ -61,10 +61,10 @@ const PaymentType = () => {
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Payment Method ID
+                                            Payment Type ID
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Payment Method Name
+                                            Payment Type Name
                                         </th>
                                         {role == 'SA' ? (
                                             <th scope="col" class="px-6 py-3">
