@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb,SearchBar, TextInput,Dropdown } from 'ui';
 import Link from 'next/link';
+import ClientOnly from '@/components/ClientOnly';
+import { SideBar } from '@/components/SideBar';
 const cateposition = {
     category_prob_id: "DP",
     position_id: "DL",
@@ -19,6 +21,7 @@ const posi_id = {
     INV: "INV",
     SA: "SA",
 }
+
 const CategoryProb = () => {
 
     const role = "inventory"
@@ -71,9 +74,8 @@ const CategoryProb = () => {
 
     return (
         <>
-            <aside>
-                <Sidebar role={role} showIssue="true" />
-            </aside>
+          <ClientOnly>
+              <SideBar showIssue="true" />
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Issue" current="Category Problem" />
                 <h1 className="text-4xl font-bold py-6">Category Problem</h1>
@@ -97,7 +99,7 @@ const CategoryProb = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <div className="w-full rounded-lg border-2 border-black p-4 ">
                     <div className="pt-2 px-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <Dropdown options={category_prob_id} label='Category Problem ID' defaultValue={cateposition["category_prob_id"]}/>
@@ -178,6 +180,7 @@ const CategoryProb = () => {
                     <></>
                 )}
             </main>
+            </ClientOnly>
         </>
     );
 };

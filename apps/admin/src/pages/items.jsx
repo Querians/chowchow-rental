@@ -1,54 +1,12 @@
 import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import ClientOnly from '@/components/ClientOnly';
+import { SideBar } from '@/components/SideBar';
+import { ItemTable } from '@/components/ItemTable';
 
 const Items = () => {
 
-    const role = "INV"
-    const itemList = {
-        1: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-        2: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-        3: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-        4: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-        5: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-        6: {
-            item_id: 23000121,
-            product_id: 230030,
-            item_register_date: "2023-01-01 13:30:44",
-            stock_address: "A1-023-122",
-            item_status: "A",
-        },
-    };
     const [isShow, setShow] = useState(false);
     const popup = () => {
         setShow(!isShow);
@@ -60,9 +18,9 @@ const Items = () => {
 
     return (
         <>
-            <aside>
-                <Sidebar role={role} showStock="true" />
-            </aside>
+            <ClientOnly>
+              <SideBar />
+            </ClientOnly>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Stock Inventory" current="Items" />
                 <h1 className="text-4xl font-bold py-6">Item Management</h1>
@@ -74,7 +32,7 @@ const Items = () => {
                             <h3 class="text-lg font-medium">This is a danger alert</h3>
                         </div>
                         <div class="mt-2 mb-4 text-sm">
-                            Are you sure to delete this row. If not please click "Exit" and if you want to delete please click "Delete".
+                        Are you sure to delete this row. If not please click &quot;Exit&quot; and if you want to delete please click &quot;Delete&quot;.
                         </div>
                         <div class="flex">
                             <button type="button" onClick={popup} class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
@@ -86,102 +44,9 @@ const Items = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Items</h1>
-                    <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Item ID" />
-                    </div>
-                    <div className="p-4">
-                        <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
-                            <table class="w-full text-sm text-center text-gray-500">
-                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Item ID
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Product ID
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Item Register Date
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Stock_address
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Item_status ID
-                                        </th>
-                                        {role == 'INV' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Update status
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                        {role == 'INV' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Edit Detail
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                        {role == 'INV' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Delete
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(itemList).map((key) => (
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                {itemList[key]['item_id']}
-                                            </th>
-                                            <th class="px-6 py-4 font-normal">
-                                                {itemList[key]['product_id']}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {itemList[key]['item_register_date']}
-                                            </td>
-                                            <th class="px-6 py-4 font-normal">
-                                                {itemList[key]['stock_address']}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {itemList[key]['item_status']}
-                                            </td>
-                                            {role == 'INV' ? (
-                                                <td class="px-6 py-4">
-                                                    <a href="/itemstatus" class="font-medium text-blue-600 hover:underline">Update</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                            {role == 'INV' ? (
-                                                <td class="px-6 py-4">
-                                                    <a href="/edititem" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                            {role == 'INV' ? (
-                                                <td class="px-6 py-4">
-                                                    <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {role == 'INV' ? (
-                    <div className='grid justify-items-end'>
-                        <Link href="/itemform">
-                            <Button type="normal" text="Add New Item" />
-                        </Link>
-                    </div>) : (
-                    <></>
-                )}
+              <ClientOnly>
+                <ItemTable popup={popup} />
+              </ClientOnly>
             </main>
         </>
     );

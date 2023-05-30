@@ -151,35 +151,35 @@ export const Sidebar = ({
                 <></>
               )}
               <li>
-                <button
-                  onClick={onClickStore}
-                  type="button"
-                  aria-expanded="false"
-                  class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
-                  aria-controls="dropdown-example"
-                  data-collapse-toggle="dropdown-example"
-                >
-                  <span
-                    class="flex-1 whitespace-nowrap text-left"
-                    sidebar-toggle-item
-                  >
-                    Stock Inventory
-                  </span>
-                  <svg
+                  <button
                     onClick={onClickStore}
-                    sidebar-toggle-item
-                    class="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+                    type="button"
+                    aria-expanded="false"
+                    class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
+                    aria-controls="dropdown-example"
+                    data-collapse-toggle="dropdown-example"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
+                    <span
+                      class="flex-1 whitespace-nowrap text-left"
+                      sidebar-toggle-item
+                    >
+                      Stock Inventory
+                    </span>
+                    <svg
+                      onClick={onClickStore}
+                      sidebar-toggle-item
+                      class="h-6 w-6"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
 
                 {isShowStore && (
                   <ul id="dropdown-example" class="space-y-2 py-2">
@@ -199,15 +199,17 @@ export const Sidebar = ({
                         Products
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="/category"
-                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                      >
-                        Category
-                      </a>
-                    </li>
-                    {role == 'INV' || role == 'MA' || role == 'DL' ? (
+                      <li>
+                        <a
+                          href="/category"
+                          class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        >
+                          Category
+                        </a>
+                      </li>
+                    {role == 'INV' ||
+                      role == 'MA' ||
+                      role == 'DL' ? (
                       <li>
                         <a
                           href="/items"

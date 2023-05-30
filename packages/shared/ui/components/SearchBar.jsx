@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-export const SearchBar = ({placeholder, onChange, value}) => {
+export const SearchBar = ({...prop}) => {
   return (
     <>
-      <form>
+      <form onSubmit={prop?.onSubmit}>
         <div class="flex">
           <div class="relative w-full">
             <input
-              onChange={onChange}
-              value={value}
+              value={prop?.value}
               type="search"
               id="search-dropdown"
               class="z-20 block w-full rounded-lg border-2 border-gray-800 bg-gray-50 p-2.5 pl-4 text-sm text-gray-900 ring-[#C3A982] hover:ring-2"
-              placeholder={placeholder}
+              placeholder={prop?.placeholder}
+              onChange={prop?.onChange}
             />
             <button
               type="submit"

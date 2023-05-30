@@ -1,7 +1,22 @@
 import Image from 'next/image';
-import { Navbar, LoginInfo } from 'ui';
+import { Navbar } from 'ui';
+import { LoginInfo } from '@/components/LoginInfo';
+import { AUTH_TOKEN } from '@/constants';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Login = () => {
+
+  const router = useRouter();
+
+  useEffect(()=>{
+
+    const token = localStorage.getItem(AUTH_TOKEN);
+
+    token ? router.push('/profile') : ""
+
+  }, [router])
+
   return (
     <>
       <Navbar />

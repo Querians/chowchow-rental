@@ -1,68 +1,12 @@
 import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import ClientOnly from '@/components/ClientOnly';
+import { CategoryTable } from '@/components/CategoryTable';
+import { SideBar } from '@/components/SideBar';
 
 const Category = () => {
 
-    const role = "INV"
-    const categoryList = {
-        1: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        2: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        3: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        4: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        5: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        6: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        7: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        8: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        9: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        10: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        11: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-        12: {
-            category_id: 30030,
-            category_name: 'Black Chair',
-        },
-        13: {
-            category_id: 30040,
-            category_name: 'White Chair',
-        },
-        14: {
-            category_id: 30060,
-            category_name: 'Black Table',
-        },
-    };
     const [isShow, setShow] = useState(false);
     const popup = () => {
         setShow(!isShow);
@@ -74,9 +18,10 @@ const Category = () => {
 
     return (
         <>
-            <aside>
-                <Sidebar role={role} showStock="true" />
-            </aside>
+            <ClientOnly>
+              <SideBar />
+            </ClientOnly>
+
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Stock Inventory" current="Category" />
@@ -101,72 +46,10 @@ const Category = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Category</h1>
-                    <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Catagory Name" />
-                    </div>
-                    <div className="p-4">
-                        <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
-                            <table class="w-full text-sm text-center text-gray-500">
-                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Category ID
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Category name
-                                        </th>
-                                        {role == 'INV' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Edit
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                        {role == 'INV' ? (
-                                            <th scope="col" class="px-6 py-3">
-                                                Delete
-                                            </th>) : (
-                                            <></>
-                                        )}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(categoryList).map((key) => (
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {categoryList[key]['category_id']}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {categoryList[key]['category_name']}
-                                            </td>
-                                            {role == 'INV' ? (
-                                                <td class="px-6 py-4">
-                                                    <a href="/editcategory" class="font-medium text-blue-600 hover:underline">Edit</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                            {role == 'INV' ? (
-                                                <td class="px-6 py-4">
-                                                    <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
-                                                </td>) : (
-                                                <></>
-                                            )}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {role == 'INV' ? (
-                    <div className='grid justify-items-end'>
-                        <Link href="/categoryform">
-                            <Button type="normal" text="Add New Category" />
-                        </Link>
-                    </div>) : (
-                    <></>
-                )}
+
+                <ClientOnly>
+                  <CategoryTable />
+                </ClientOnly>
             </main >
         </>
     );

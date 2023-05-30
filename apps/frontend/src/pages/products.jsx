@@ -1,5 +1,7 @@
+import ClientOnly from '@/components/ClientOnly';
 import Image from 'next/image';
 import { Navbar, Header, Breadcrumb, SearchBar, Card, Dropdown } from 'ui';
+import { ProductCard } from '@/components/allProduct'
 
 const Product = () => {
     const filter = () => {
@@ -85,17 +87,9 @@ const Product = () => {
                         </div>
                     </div>
                     <div class="basis-3/4">
-                        <div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                            {Object.keys(productList).map((key) => (
-                                <div class=" ">
-                                    <Card
-                                        productName={productList[key]['product_name']}
-                                        detail={productList[key]['detail']}
-                                        price={productList[key]['price']}
-                                        pic={productList[key]['image']}
-                                    />
-                                </div>
-                            ))}
+                        <ClientOnly>
+                          <ProductCard />
+                        </ClientOnly>
                         </div>
 
                         {/* <Card
@@ -105,7 +99,6 @@ const Product = () => {
                             pic="/ikea_black_chair.png"
                             link="/"
                         /> */}
-                    </div>
                 </div>
             </main>
         </>
