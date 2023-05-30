@@ -30,7 +30,7 @@ const EditCateprob = () => {
                 <form action="">
                     <Breadcrumb first_name="Issue" second_name="Category Problem" second="/categoryproblem" current="Edit Category Problem" />
                     <h1 className="text-4xl font-bold py-6">Edit category problem</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput defaultValue={caprob.category_prob_id} placeholder="" label="Category Problem ID" />

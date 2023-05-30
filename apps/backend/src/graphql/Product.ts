@@ -111,7 +111,7 @@ export const ProductQuery = extendType({
       },
       resolve(parent, args, context: Context, info) {
         return context.prisma.product.findMany({
-          where : {productId: {contains: args.productId}}
+          where : {productId: args.productId}
         });
       }
     });

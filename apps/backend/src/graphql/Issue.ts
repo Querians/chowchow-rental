@@ -83,6 +83,20 @@ export const IssueQuery = extendType({
       }
     });
 
+
+    t.list.field('searchIssueByIssueId', {
+      type: 'Issue',
+      args: {
+        issueId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.issue.findMany({
+          where : { issueId: { contains : args.issueId}}
+        });
+      }
+    });
+
+
       t.list.field('searchIssueByCategoryProblemId', {
         type: 'Issue',
         args: {
@@ -140,6 +154,36 @@ export const IssueMutation = extendType({
       },
     });
 
+    // Add by Customer
+    t.nonNull.field('addIssueByCustomer', {
+      type: 'Issue',
+      args: {
+        // customerId: nonNull(stringArg()),
+        // orderId: (stringArg()),
+        description: nonNull(stringArg()),
+        staffId: nonNull(stringArg()),
+        categoryProblemId: nonNull(stringArg()),
+      },
+      resolve(parent, args, context: Context) {
+
+        if(!context.userId){
+          throw new Error('Cannot add cart without login');
+        }
+
+        return context.prisma.issue.create({
+          data: {
+            customerId: context.userId,
+            // orderId: args.orderId ? args.orderId : null,
+            description: args.description,
+            staffId: args.staffId,
+            timestamp: new Date(),
+            status: 0,
+            categoryProblemId: args.categoryProblemId,
+          },
+        });
+      },
+    });
+
     // Delete
     t.nonNull.field('deleteIssue', {
       type: 'Issue',
@@ -185,5 +229,26 @@ export const IssueMutation = extendType({
         });
       },
     });
+
+    // Update
+    t.nonNull.field('updateStatusOfIssue', {
+      type: 'Issue',
+      args: {
+        issueId: nonNull(stringArg()),
+        status: nonNull(intArg()),
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.issue.update({
+          where: {
+            issueId: args.issueId,
+          },
+          data: {
+            status: args.status,
+          },
+        });
+      },
+    });
+
+
   },
 });

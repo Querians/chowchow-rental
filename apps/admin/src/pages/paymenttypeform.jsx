@@ -38,12 +38,6 @@ const PaymentTypeForm = () => {
       console.log(data)
     }, [data])
 
-    const role = "SA"
-    const onSubmit = (e) => {
-      e.preventDefault();
-      addPaymentType().catch((err) => alert(err))
-    }
-
     const [addPaymentType] = useMutation(ADD_PAYMENTTYPE, {
         variables: {
         'paymentTypeId': data.paymentTypeId,
@@ -56,6 +50,12 @@ const PaymentTypeForm = () => {
         }
       })
 
+      const role = "SA"
+      const onSubmit = (e) => {
+        e.preventDefault();
+        addPaymentType().catch((err) => alert(err))
+      }
+
     return (
         <>
           <ClientOnly>
@@ -65,10 +65,12 @@ const PaymentTypeForm = () => {
                 <form action="">
                     <Breadcrumb first_name="Finance" second_name="Payment Type" second="/paymenttype" current="Add New Payment Type" />
                     <h1 className="text-4xl font-bold py-6">Add New Payment Type</h1>
-                    <div className="w-full rounded-lg border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="grid md:grid-cols-2 gap-4">
                             <TextInput placeholder="" label="Payment Type ID" onChange={e => setData({ ...data, ['paymentTypeId']: e.target.value })}/>
                             <TextInput placeholder="" label="Payment Type Name" onChange={e => setData({ ...data, ['paymentTypeName']: e.target.value })}/>
+                            <TextInput placeholder="" label="Interest" onChange={e => setData({ ...data, ['interest']: e.target.value })}/>
+                            <TextInput placeholder="" label="Times" onChange={e => setData({ ...data, ['times']: e.target.value })}/>
                         </div>
                         <div className='grid justify-items-center'>
                             <Link href="/paymenttype">

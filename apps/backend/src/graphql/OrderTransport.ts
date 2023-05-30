@@ -169,6 +169,53 @@ export const OrderTransportMutation = extendType({
       }
     });
 
+        // Update Timego
+        t.nonNull.field('editTimego', {
+          type: 'OrderTransport',
+          args: {
+            orderId: nonNull(stringArg()),
+            timeAssign: nonNull(stringArg()),
+            timeGo: nonNull(stringArg()),
+          },
+          resolve(parent, args, context: Context) {
+            return context.prisma.orderTransport.update({
+              data: {
+                timeGo: new Date(args.timeGo),
+              },
+              where: {
+                orderId_timeAssign : {
+                  orderId: args.orderId,
+                  timeAssign: new Date(args.timeAssign)
+              }
+            }
+            });
+          }
+        });
+
+        // Update Timeback
+        t.nonNull.field('editTimeback', {
+          type: 'OrderTransport',
+          args: {
+            orderId: nonNull(stringArg()),
+            timeAssign: nonNull(stringArg()),
+            timeBack: nonNull(stringArg()),
+          },
+          resolve(parent, args, context: Context) {
+            return context.prisma.orderTransport.update({
+              data: {
+                timeBack: new Date(args.timeBack),
+              },
+              where: {
+                orderId_timeAssign : {
+                  orderId: args.orderId,
+                  timeAssign: new Date(args.timeAssign)
+              }
+            }
+            });
+          }
+        });
+
+
 
   }
 });

@@ -1,4 +1,5 @@
-import { Navbar, CartInfo, TextInput, Button } from 'ui';
+import { Navbar } from 'ui';
+import { CartInfo } from '../components/CartInfo'
 
 
 const cart = () => {

@@ -1,11 +1,91 @@
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button, SearchBar } from 'ui';
 import Link from 'next/link';
+import ClientOnly from '@/components/ClientOnly';
+import { SideBar } from '@/components/SideBar';
+
+const ITEM_QUERY = gql`
+  query AllProduct {
+  allProduct {
+    items {
+      itemStatus {
+        itemStatusId
+      }
+    }
+    category {
+      categoryName
+    }
+    productName
+  }
+}
+  `
+
+const STAFF_ROLE = gql`
+  query StaffProfile {
+    StaffProfile {
+      position {
+        positionId
+      }
+    }
+  }
+`
+
+
 
 const Inventory = () => {
 
-    const role = "inventory"
+    // const role = "inventory"
+
+    const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+    const { data, loading, error } = useQuery(ITEM_QUERY, {pollInterval: 1000});
+    const [role, setRole] = useState('');
+
+    useEffect(() => {
+      console.log(staff?.StaffProfile[0].position.positionId);
+      setRole(staff?.StaffProfile[0].position.positionId);
+    }, [staff])
+
+    const [isShow, setShow] = useState(false);
+    const popup = () => {
+        setShow(!isShow);
+    };
+    const drop = () => {
+        popup();
+        // code for drop row
+    }
+
+    if (loadingposition) {
+      return (
+        <h2>Loading Data...</h2>
+      );
+    };
+
+    if (errorposition) {
+      console.error(errorposition);
+      return (
+        <h2>Sorry, {errorposition}...</h2>
+      );
+    };
+
+    console.log(staff)
+
+    if (loading) {
+      return (
+        <h2>Loading Data...</h2>
+      );
+    };
+
+    if (error) {
+      console.error(error);
+      return (
+        <h2>Sorry, there&apos;s been an error...</h2>
+      );
+    };
+
+    console.log(data)
+
 
     const current_stock = {
         1: {
@@ -58,88 +138,82 @@ const Inventory = () => {
         },
     }
 
-    const data_allTime = {
-        1: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-        2: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-        3: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-        4: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-        5: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-        6: {
-            category_name: 'Chair',
-            product_name: 'Black Chair',
-            all_time_renting: 392,
-            last_month_renting: 28,
-            y_2022: 120,
-            y_2021: 129,
-            y_2020: 92,
-        },
-    }
+    // const data_allTime = {
+    //     1: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    //     2: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    //     3: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    //     4: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    //     5: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    //     6: {
+    //         category_name: 'Chair',
+    //         product_name: 'Black Chair',
+    //         all_time_renting: 392,
+    //         last_month_renting: 28,
+    //         y_2022: 120,
+    //         y_2021: 129,
+    //         y_2020: 92,
+    //     },
+    // }
 
-    const [isShow, setShow] = useState(false);
-    const popup = () => {
-        setShow(!isShow);
-    };
-    const drop = () => {
-        popup();
-        // code for drop row
-    }
 
     return (
         <>
+        <ClientOnly>
             <aside>
-                <Sidebar role={role} showStock="true"/>
+                <SideBar role={role} showStock="true"/>
             </aside>
-            <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
+            <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8 h-screen">
                 <Breadcrumb first_name="Stock Inventory" current="Inventory Analysis" />
                 <h1 className="text-4xl font-bold py-6">Stock Inventory</h1>
-                <div className="w-full rounded-lg border border-2 border-black p-4">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white h-4/10">
                     <h1 className="text-xl font-bold">Current Stock Summary</h1>
-                    <div className="pt-2 px-4">
+                    <p className="pt-1 px-4">show number product item in each status</p>
+                    {/* <div className="pt-2 px-4">
                         <SearchBar placeholder="Search by Product Name" />
-                    </div>
+                    </div> */}
                     <div className="p-4">
-                        <div class="relative overflow-x-auto rounded-lg h-60">
-                            <table class="w-full text-sm text-center text-gray-500 ">
+                        <div class="relative overflow-x-auto overflow-y-auto rounded-lg h-96">
+                            <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
@@ -163,26 +237,32 @@ const Inventory = () => {
                                     </tr>
                                 </thead>
                                 <tbody className='z-1'>
-                                    {Object.keys(current_stock).map((key) => (
+                                    {data && data.allProduct?.map((pro) => (
                                         <tr class="bg-white border-b z-2">
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {current_stock[key]['category_name']}
+                                                {pro.category['categoryName']}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {current_stock[key]['product_name']}
+                                                {pro['productName']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {current_stock[key]['available']}
+                                                { pro.items != 0 ? pro.items?.filter((e)=>{
+                                                  return e.itemStatus.itemStatusId == 'A'
+                                                 })?.length : 0 }
                                             </td>
                                             <td class="px-6 py-4">
-                                                {current_stock[key]['not_available']}
+                                            { pro.items != 0 ? pro.items?.filter((e)=>{
+                                                  return e.itemStatus.itemStatusId == 'N'
+                                                 })?.length : 0 }
                                             </td>
                                             <td class="px-6 py-4">
-                                                {current_stock[key]['out_of_order']}
+                                            { pro.items != 0 ? pro.items?.filter((e)=>{
+                                                  return e.itemStatus.itemStatusId == 'O'
+                                                 })?.length : 0 }
                                             </td>
                                             <td class="px-6 py-4">
-                                                {current_stock[key]['total']}
-                                            </td>                                            
+                                            { pro.items != 0 ? pro.items?.length : 0 }
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -190,7 +270,7 @@ const Inventory = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full rounded-lg border border-2 border-black p-4">
+                {/* <div className="w-full rounded-lg border border-2 border-black p-4">
                     <h1 className="text-xl font-bold">All Time Product Renting</h1>
                     <div className="pt-2 px-4">
                         <SearchBar placeholder="Search by Product Name" />
@@ -253,8 +333,9 @@ const Inventory = () => {
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </main>
+        </ClientOnly>
         </>
     );
 };

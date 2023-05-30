@@ -2,62 +2,27 @@ import ClientOnly from '@/components/ClientOnly';
 import Image from 'next/image';
 import { Navbar, Header, Breadcrumb, SearchBar, Card, Dropdown } from 'ui';
 import { ProductCard } from '@/components/allProduct'
+import { useQuery, gql } from '@apollo/client';
+
+const PRODUCT_QUERY = gql`
+query AllProduct {
+  allProduct {
+    productName
+    productId
+    pricePerDay
+    description
+    pictureUrl
+  }
+}
+`
+
 
 const Product = () => {
-    const filter = () => {
 
-    };
+  const { data, loading, error } = useQuery(PRODUCT_QUERY);
+  const filter = () => {
 
-    const productList = {
-        product1: {
-            product_name: 'Black Chair',
-            price: '17',
-            detail: 'ikea black light chair',
-            image: '/ikea_black_chair.png',
-        },
-        product2: {
-            product_name: 'table wohoooooooooooooo',
-            price: '13',
-            detail: 'white wooden table',
-            image: '/ikea_black_chair.png',
-        },
-        product3: {
-            product_name: 'Black Chair',
-            price: '17',
-            detail: 'ikea black light chair',
-            image: '/ikea_black_chair.png',
-        },
-        product4: {
-            product_name: 'table',
-            price: '13',
-            detail: 'white wooden table',
-            image: '/ikea_black_chair.png',
-        },
-        product5: {
-            product_name: 'Black Chair',
-            price: '17',
-            detail: 'ikea black light chair',
-            image: '/ikea_black_chair.png',
-        },
-        product6: {
-            product_name: 'table',
-            price: '13',
-            detail: 'white wooden table',
-            image: '/ikea_black_chair.png',
-        },
-        product7: {
-            product_name: 'Black Chair',
-            price: '17',
-            detail: 'ikea black light chair',
-            image: '/ikea_black_chair.png',
-        },
-        product8: {
-            product_name: 'table',
-            price: '13',
-            detail: 'white wooden table',
-            image: '/ikea_black_chair.png',
-        },
-    }
+  };
 
     return (
         <>
@@ -91,14 +56,6 @@ const Product = () => {
                           <ProductCard />
                         </ClientOnly>
                         </div>
-
-                        {/* <Card
-                            productName="Black Chair"
-                            detail="Ikea Chair"
-                            price="32"
-                            pic="/ikea_black_chair.png"
-                            link="/"
-                        /> */}
                 </div>
             </main>
         </>

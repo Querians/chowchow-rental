@@ -65,6 +65,18 @@ export const ItemQuery = extendType({
       }
     });
 
+    t.list.field('searchItemByItemId', {
+      type: 'Item',
+      args: {
+        itemId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.item.findMany({
+          where : { itemId : {contains : args.itemId}}
+        });
+      }
+    });
+
     t.list.field('searchItemByItemStatusId', {
       type: 'Item',
       args: {
@@ -142,6 +154,25 @@ export const ItemMutation = extendType({
             productId: args.productId,
             itemRegisterDate: new Date(args.itemRegisterDate),
             stockAddress: args.stockAddress,
+            itemStatusId: args.itemStatusId,
+          }
+        });
+      }
+    });
+
+    // Update
+    t.nonNull.field('updateItemstatusInItem', {
+      type: 'Item',
+      args: {
+        itemId: nonNull(stringArg()),
+        itemStatusId: nonNull(stringArg())
+      },
+      resolve(parent, args, context: Context) {
+        return context.prisma.item.update({
+          where: {
+            itemId: args.itemId
+          },
+          data: {
             itemStatusId: args.itemStatusId,
           }
         });

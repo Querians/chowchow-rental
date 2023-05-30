@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Sidebar, NavbarFake } from 'ui';
+import { Sidebar, NavbarAdmin } from 'ui';
 import { StaffLoginInfo } from '@/components/StaffLoginInfo';
 import ClientOnly from '@/components/ClientOnly';
 import { AUTH_TOKEN } from '@/constants';
@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
       <>
-        <NavbarFake />
+        <NavbarAdmin />
         <main className="container mx-auto px-10 space-y-4">
           <ClientOnly>
             <StaffLoginInfo />

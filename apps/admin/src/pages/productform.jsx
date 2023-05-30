@@ -110,7 +110,7 @@ const ProductForm = () => {
                 <form action="">
                     <Breadcrumb first_name="Stock Inventory" second_name="Products" second="/products" current="Add New Product" />
                     <h1 className="text-4xl font-bold py-6">Add new product</h1>
-                    <div className="w-full rounded-lg border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput placeholder="" label="Product Name" constraint="^.{1,40}$" onChange={e => setData({ ...data, ['productName']: e.target.value })}  />

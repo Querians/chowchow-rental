@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Button } from './Button';
 import Link from 'next/link';
 
-export const Card = ({ productName, detail, price, pic }) => {
+export const Card = ({ productName, detail, price, pic, goto }) => {
   const query = () => {
 
   };
@@ -29,9 +29,9 @@ export const Card = ({ productName, detail, price, pic }) => {
           <p class="mb-1 w-full flex justify-center text-xl font-semibold text-red-600">
             {price} THB/day
           </p>
-          <Link href="/productinfo">
+          <Link href={`/product/${goto}`}>
             <div className="px-6">
-              <Button type="normal" text={'More Detail'} onClick={query} />
+              <Button type="normal" text={'More Detail'} />
             </div>
           </Link>
 

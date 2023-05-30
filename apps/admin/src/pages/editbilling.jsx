@@ -2,7 +2,7 @@ import { Sidebar, Breadcrumb, TextInput, Button } from 'ui';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const PaymentMethodForm = () => {
+const Editbilling = () => {
 
     const role = "SA"
     const billing = {
@@ -34,7 +34,7 @@ const PaymentMethodForm = () => {
                             <TextInput placeholder="" label="Bill Timestamp" value={billing['tel']} />
                             <TextInput placeholder="" label="Payer's Tel." value={billing['paid_amount']} />
                             <TextInput placeholder="" label="Total Amount" value={billing['bill_timestamp']} />
-                            <TextInput type="readOnly" placeholder="" label="Evidence" value={billing['payment_slip_url']} />                           
+                            <TextInput type="readOnly" placeholder="" label="Evidence" value={billing['payment_slip_url']} />
                         </div>
                         <div className='grid justify-items-center'>
                             <Link href="/billing">
@@ -48,4 +48,5 @@ const PaymentMethodForm = () => {
     );
 };
 
-export default PaymentMethodForm;
+export default Editbilling;
+B

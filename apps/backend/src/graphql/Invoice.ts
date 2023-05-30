@@ -68,6 +68,19 @@ export const InvoiceQuery = extendType({
       }
     });
 
+    t.list.field('searchInvoiceByOrderId', {
+      type: 'Invoice',
+      args: {
+        orderId: stringArg()
+      },
+      resolve(parent, args, context: Context, info) {
+        return context.prisma.invoice.findMany({
+          where : {orderId : {contains : args.orderId}}
+        });
+
+      }
+    });
+
     // query cost_amount
     t.list.field('searchInvoiceByCostAmount', {
       type: 'Invoice',

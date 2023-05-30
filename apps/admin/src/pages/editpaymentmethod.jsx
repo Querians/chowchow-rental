@@ -21,8 +21,8 @@ const PaymentMethodForm = () => {
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <form action="">
                     <Breadcrumb first_name="Finance" second_name="Payment Type" second="/paymenttype" current="Edit Payment Type Detail" />
-                    <h1 className="text-4xl font-bold py-6">Edit Payment Type Detail</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <h1 className="text-4xl font-bold py-6">Edit Payment Method Detail</h1>
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="grid md:grid-cols-2 gap-4">
                             <TextInput placeholder="" label="Payment Type ID" value={paymentMethod['paymentMethodId']} />
                             <TextInput placeholder="" label="Payment Type Name" value={paymentMethod['paymentMethodName']} />

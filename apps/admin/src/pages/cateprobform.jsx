@@ -1,5 +1,6 @@
 import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
 import Link from 'next/link';
+
 import ClientOnly from '@/components/ClientOnly';
 import { gql, useMutation } from '@apollo/client';
 import { SideBar } from '@/components/SideBar';
@@ -58,9 +59,9 @@ const CateprobForm = () => {
 
     const [addCateProb] = useMutation(ADD_CATEPROB, {
         variables: {
-        'categoryProblemId': data.productId,
-        'categoryProblemN': data.productName,
-        'positionId': data.categoryId
+        'categoryProblemId': data.categoryProblemId,
+        'categoryProblemN': data.categoryProblemN,
+        'positionId': data.positionId
         },
         onCompleted: () => {
           router.push('/categoryproblem')
@@ -81,7 +82,7 @@ const CateprobForm = () => {
                 <form action="">
                     <Breadcrumb first_name="Issue" second_name="Category Problem" second="/categoryproblem" current="Add Category Problem" />
                     <h1 className="text-4xl font-bold py-6">Add category problem</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput placeholder="" label="Category Problem ID" onChange={e => setData({ ...data, ['categoryProblemId']: e.target.value })} />

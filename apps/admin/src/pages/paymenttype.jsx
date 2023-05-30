@@ -1,18 +1,97 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import { SideBar } from '@/components/SideBar';
+import ClientOnly from '@/components/ClientOnly';
+
+const ITEM_QUERY = gql`
+  query Query {
+  allPaymentType {
+    interest
+    paymentTypeId
+    paymentTypeName
+    times
+  }
+}
+  `
+
+const STAFF_ROLE = gql`
+  query StaffProfile {
+    StaffProfile {
+      position {
+        positionId
+      }
+    }
+  }
+`
+
 
 const PaymentType = () => {
 
-    const role = "SA"
+
+  const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+  const { data, loading, error } = useQuery(ITEM_QUERY, {pollInterval: 1000});
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    console.log(staff?.StaffProfile[0].position.positionId);
+    setRole(staff?.StaffProfile[0].position.positionId);
+  }, [staff])
+
+
+  const [isShow, setShow] = useState(false);
+  const popup = () => {
+      setShow(!isShow);
+  };
+  const drop = () => {
+      popup();
+      // code for drop row
+  }
+
+
+  if (loadingposition) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (errorposition) {
+    console.error(errorposition);
+    return (
+      <h2>Sorry, {errorposition}...</h2>
+    );
+  };
+
+  console.log(staff)
+
+  if (loading) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (error) {
+    console.error(error);
+    return (
+      <h2>Sorry, there&apos;s been an error...</h2>
+    );
+  };
+
+  console.log(data)
+
     const paymentTypeList = {
         1: {
             paymentTypeId: '0004',
-            paymentTypeName: 'superdeal 2023 halfyear offer'
+            paymentTypeName: 'superdeal 2023 halfyear offer',
+            interest: '1.2',
+            times: 2,
         },
         2: {
             paymentTypeId: '1000',
-            paymentTypeName: 'One-time purchased'
+            paymentTypeName: 'One-time purchased',
+            interest: '1.2',
+            times: 2,
         },
     };
     const paymentAnalyse = {
@@ -35,67 +114,18 @@ const PaymentType = () => {
             times: 2
         },
     }
-    const [isShow, setShow] = useState(false);
-    const popup = () => {
-        setShow(!isShow);
-    };
-    const drop = () => {
-        popup();
-        // code for drop row
-    }
 
     return (
         <>
+        <ClientOnly>
             <aside>
-                <Sidebar role={role} showFinance="true" />
+                <SideBar role={role} showFinance="true" />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Finance" current="Payment Type" />
                 <h1 className="text-4xl font-bold py-6">Payment Type</h1>
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
-                    <h1 className="text-xl font-bold">Payment Type Analysis</h1>
-                    <div className="p-4">
-                        <div class="relative overflow-x-auto overflow-y-auto h-64 rounded-lg">
-                            <table class="w-full text-sm text-center text-gray-500">
-                                <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Payment Type ID
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Payment Type Name
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Interest
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Times
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {Object.keys(paymentAnalyse).map((key) => (
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {paymentAnalyse[key]['paymentTypeId']}
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                {paymentAnalyse[key]['paymentTypeName']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {paymentAnalyse[key]['interest']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {paymentAnalyse[key]['times']}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+
                 {isShow && (
                     <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
                         <div class="flex items-center">
@@ -116,7 +146,7 @@ const PaymentType = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                     <h1 className="text-xl font-bold">Payment Type</h1>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-64 rounded-lg">
@@ -129,41 +159,53 @@ const PaymentType = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Payment Type Name
                                         </th>
-                                        {role == 'SA' ? (
+                                        <th scope="col" class="px-6 py-3">
+                                            Interest
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Times
+                                        </th>
+                                        {/* {role == 'SA' || 'DEV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'SA' ? (
+                                        {role == 'SA' || 'DEV'? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
                                             <></>
-                                        )}
+                                        )} */}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(paymentTypeList).map((key) => (
+                                    {data && data.allPaymentType?.map((pay) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {paymentTypeList[key]['paymentTypeId']}
+                                                {pay['paymentTypeId']}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {paymentTypeList[key]['paymentTypeName']}
+                                                {pay['paymentTypeName']}
                                             </td>
-                                            {role == 'SA' ? (
+                                            <td class="px-6 py-4">
+                                                {pay['interest']}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {pay['times']}
+                                            </td>
+                                            {/* {role == 'SA' || 'DEV'? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editpaymenttype" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'SA' ? (
+                                            {role == 'SA' || 'DEV'? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
+                                            )} */}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -171,7 +213,7 @@ const PaymentType = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'SA' ? (
+                {role == 'SA' || 'DEV' ? (
                     <div className='grid justify-items-end pb-8'>
                         <Link href="/paymenttypeform">
                             <Button type="normal" text="Add New Payment Type" />
@@ -180,6 +222,7 @@ const PaymentType = () => {
                     <></>
                 )}
             </main >
+        </ClientOnly>
         </>
     );
 };

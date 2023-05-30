@@ -1,6 +1,7 @@
 import { Sidebar, Button, Breadcrumb, TextInput, Dropdown } from 'ui';
 import { useState } from 'react';
 import Link from 'next/link';
+import { SideBar } from '@/components/SideBar';
 
 const Vehicleinfoedit = () => {
   const role = 'MA'
@@ -34,7 +35,7 @@ const Vehicleinfoedit = () => {
   return (
     <>
       <aside>
-        <Sidebar role={role} showDeli="true"/>
+        <SideBar role={role} showDeli="true"/>
       </aside>
 
       <main className="container mx-auto px-10 lg:ml-64">

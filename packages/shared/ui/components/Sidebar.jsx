@@ -125,7 +125,7 @@ export const Sidebar = ({
                   <span class="pl-2">Staff Profile</span>
                 </a>
               </li>
-              {role == 'MA' ? (
+              {/* {role == 'MA' ? (
                 <li>
                   <a
                     href="/allstaff"
@@ -136,9 +136,9 @@ export const Sidebar = ({
                 </li>
               ) : (
                 <></>
-              )}
+              )} */}
 
-              {role == 'MA' || role == 'SA' || role == 'DL' ? (
+              {role == 'MA' || role == 'SA' || role == 'DL' || role == 'DEV' ? (
                 <li>
                   <a
                     href="/customer"
@@ -208,8 +208,9 @@ export const Sidebar = ({
                         </a>
                       </li>
                     {role == 'INV' ||
-                      role == 'MA' ||
-                      role == 'DL' ? (
+                     role == 'MA' ||
+                     role == 'DL' ||
+                     role == 'DEV'? (
                       <li>
                         <a
                           href="/items"
@@ -274,11 +275,14 @@ export const Sidebar = ({
                   </ul>
                 )}
               </li>
-              {role == 'MA' || role == 'SA' ? (
+
+              {role == 'MA' ||
+               role == 'SA' ||
+               role == 'DEV'? (
                 <li>
                   <button
                     type="button"
-                    onClick={onClickFinance}
+                    onClick={onClickPromo}
                     aria-expanded="false"
                     class="group flex w-full items-center rounded-lg py-2 pl-2 pr-[3px] text-gray-900 transition duration-75 hover:bg-[#89724E] hover:text-white"
                     aria-controls="dropdown-example"
@@ -336,7 +340,9 @@ export const Sidebar = ({
               ) : (
                 <></>
               )}
-              {role == 'MA' || role == 'SA' ? (
+              {role == 'MA' ||
+               role == 'SA' ||
+               role == 'DEV'? (
                 <li>
                   <button
                     type="button"

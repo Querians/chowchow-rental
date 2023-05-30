@@ -1,4 +1,4 @@
-import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button } from 'ui';
+import { Sidebar, Breadcrumb, TextInput, Textarea, Dropdown, Button, DateInput } from 'ui';
 import Link from 'next/link';
 
 import ClientOnly from '@/components/ClientOnly';
@@ -74,9 +74,11 @@ const PromotionForm = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 {/* <TextInput placeholder="" label="Promotion Code" onChange={e => setData({ ...data, ['promotionCode']: e.target.value })}/> */}
                                 <TextInput placeholder="" label="Discount Percent" onChange={e => setData({ ...data, ['discountPercent']: e.target.value })}/>
-                                <TextInput placeholder="" label="Start Date" onChange={e => setData({ ...data, ['startDate']: e.target.value })}/>
+                                <DateInput label={'Start Date'} onChange={e => setData({ ...data, ['startDate']: e.target.value })}/>
+                                {/* <TextInput placeholder="" label="Start Date" onChange={e => setData({ ...data, ['startDate']: e.target.value })}/> */}
                                 <TextInput placeholder="" label="Maximum Discount" onChange={e => setData({ ...data, ['maximumDiscount']: e.target.value })}/>
-                                <TextInput placeholder="" label="End Date" onChange={e => setData({ ...data, ['endDate']: e.target.value })}/>
+                                <DateInput label={'End Date'} onChange={e => setData({ ...data, ['endDate']: e.target.value })}/>
+                                {/* <TextInput placeholder="" label="End Date" onChange={e => setData({ ...data, ['endDate']: e.target.value })}/> */}
                                 <TextInput placeholder="" label="Minimum Price" onChange={e => setData({ ...data, ['minimumPrice']: e.target.value })}/>
                             </div>
                             <div class="grid justify-items-center">

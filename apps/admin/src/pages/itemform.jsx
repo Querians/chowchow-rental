@@ -76,11 +76,11 @@ const ItemForm = () => {
                 <form action="">
                     <Breadcrumb first_name="Stock Inventory" second_name="Items" second="/items" current="Add New Item" />
                     <h1 className="text-4xl font-bold py-6">Add New Item</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput placeholder="" label="Product ID" constraint="^([0-9]+([.][0-9]*)?|[.][0-9]+)$" onChange={e => setData({ ...data, ['productId']: e.target.value })} />
-                                <TextInput placeholder="id_floor_row_loc"label="Stock address" onChange={e => setData({ ...data, ['stockAddress']: e.target.value })} />
+                                <TextInput placeholder="id_floor-row-loc Example: A1-002-032"label="Stock address" onChange={e => setData({ ...data, ['stockAddress']: e.target.value })} />
                             </div>
                             <div class="grid justify-items-center">
                                     <Link href="/items">

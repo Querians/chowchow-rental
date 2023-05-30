@@ -1,10 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import ClientOnly from '@/components/ClientOnly';
+
+const ITEM_QUERY = gql`
+  query Query {
+    allBilling {
+      billingId
+      firstName
+      lastName
+      tel
+      paidAmount
+      billTimestamp
+      paymentSlipUrl
+    }
+  }
+  `
+
+const STAFF_ROLE = gql`
+  query StaffProfile {
+    StaffProfile {
+      position {
+        positionId
+      }
+    }
+  }
+`
+
 
 const Billing = () => {
 
-    const role = "SA"
+  const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+  const { data, loading, error } = useQuery(ITEM_QUERY, {pollInterval: 1000});
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    console.log(staff?.StaffProfile[0].position.positionId);
+    setRole(staff?.StaffProfile[0].position.positionId);
+  }, [staff])
+
+    // const role = "SA"
     const billingList = {
         1: {
             billing_id: 'ad1snf8w56s',
@@ -50,6 +86,7 @@ const Billing = () => {
 
     return (
         <>
+        <ClientOnly>
             <aside>
                 <Sidebar role={role} showFinance="true" />
             </aside>
@@ -77,11 +114,11 @@ const Billing = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                     <h1 className="text-xl font-bold">Billing</h1>
                     <div className="p-4">
-                        <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
-                            <table class="w-max-50 table-fixed text-sm text-center text-gray-500">
+                    <div class="relative overflow-x-auto rounded-lg h-96">
+                            <table class="w-full text-sm text-center text-gray-500 ">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
@@ -102,53 +139,53 @@ const Billing = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Payment Slip URL
                                         </th>
-                                        {role == 'SA' ? (
+                                        {/* {role == 'SA' || 'DEV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
                                         )}
-                                        {role == 'SA' ? (
+                                        {role == 'SA' || 'DEV' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
                                             <></>
-                                        )}
+                                        )} */}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(billingList).map((key) => (
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {billingList[key]['billing_id']}
+                                    {data && data.allBilling?.map((key) => (
+                                        <tr class="bg-white border-b ">
+                                            <th scope="row" class="px-6 py-4 font-medium ">
+                                                {key['billingId']}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {billingList[key]['payer']}
+                                                {key['firstName'] + ' ' + key['lastName']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {billingList[key]['tel']}
+                                                {key['tel']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {billingList[key]['paid_amount']}
+                                                {key['paidAmount']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {billingList[key]['bill_timestamp']}
+                                                {key['billTimestamp']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {billingList[key]['payment_slip_url']}
+                                                {key['paymentSlipUrl']}
                                             </td>
-                                            {role == 'SA' ? (
+                                            {/* {role == 'SA' || 'DEV' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editbilling" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
                                             )}
-                                            {role == 'SA' ? (
+                                            {role == 'SA' || 'DEV' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
+                                            )} */}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -157,6 +194,7 @@ const Billing = () => {
                     </div>
                 </div>
             </main >
+        </ClientOnly>
         </>
     );
 };
