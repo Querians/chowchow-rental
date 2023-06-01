@@ -161,6 +161,26 @@ export const VehicleInfoMutation = extendType({
       }
     });
 
+        // Update
+        t.nonNull.field('editVehicleStatus', {
+          type: 'VehicleInfo',
+          args: {
+            vehicleLicence: nonNull(stringArg()),
+            status: nonNull(booleanArg()),
+          },
+          resolve(parent, args, context: Context) {
+            return context.prisma.vehicleInfo.update({
+              data: {
+                status: args.status,
+              },
+              where: {
+                vehicleLicence: args.vehicleLicence
+              }
+            });
+          }
+        });
+
+
 
   }
 });

@@ -1,3 +1,4 @@
+import { SideBar } from '@/components/SideBar';
 import Image from 'next/image';
 import { Sidebar, SearchBar, Breadcrumb, TextInput, Dropdown } from 'ui';
 
@@ -63,10 +64,10 @@ const Home = () => {
     }
 
     return (
-        
+
         <>
             <aside>
-                <Sidebar role={role} showOrder="true" />
+                <SideBar role={role} showOrder="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
                 <Breadcrumb first_name="Order Management" second_name="Order" second="/order" current="Order Update status" />

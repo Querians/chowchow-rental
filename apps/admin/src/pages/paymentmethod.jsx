@@ -1,10 +1,73 @@
 import { useState } from 'react';
 import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import ClientOnly from '@/components/ClientOnly';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import { SideBar } from '@/components/SideBar';
+
+const PAYMENT_METHOD = gql`
+query Query {
+    allPaymentMethods {
+      paymentMethodId
+      paymentMethodName
+    }
+  }
+`
+
+const STAFF_ROLE = gql`
+query StaffProfile {
+StaffProfile {
+  position {
+    positionId
+  }
+}
+}
+`
 
 const PaymentMethod = () => {
+    const [isShow, setShow] = useState(false);
+    const [executeSearch, { data, loading, error }] = useLazyQuery(PAYMENT_METHOD, {pollInterval: 1000});
+    // const [productlist, setProductList] = useState('');
+    const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+    const [role, setRole] = useState('');
 
-    const role = "SA"
+    useEffect(() => {
+        executeSearch()
+      }, [executeSearch])
+
+      useEffect(() => {
+        console.log(data)
+      }, [data])
+
+      if (loadingposition) {
+        return (
+          <h2>Loading Data...</h2>
+        );
+      };
+
+      if (errorposition) {
+        console.error(errorposition);
+        return (
+          <h2>Sorry, {errorposition}...</h2>
+        );
+      };
+
+      console.log(staff)
+
+      if (loading) {
+        return (
+          <h2>Loading Data...</h2>
+        );
+      };
+
+      if (error) {
+        console.error(error);
+        return (
+          <h2>Sorry, there&apos;s been an error...</h2>
+        );
+      };
+
     const paymentMethodList = {
         1: {
             paymentMethodId: '0004',
@@ -13,9 +76,9 @@ const PaymentMethod = () => {
         2: {
             paymentMethodId: '0004',
             paymentMethodName: 'superdeal 2023 halfyear offer'
-        },       
+        },
     };
-    const [isShow, setShow] = useState(false);
+
     const popup = () => {
         setShow(!isShow);
     };
@@ -27,7 +90,7 @@ const PaymentMethod = () => {
     return (
         <>
             <aside>
-                <Sidebar role={role} showFinance="true" />
+                <SideBar role={role} showFinance="true" />
             </aside>
 
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
@@ -53,7 +116,7 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                     <h1 className="text-xl font-bold">Payment Method</h1>
                     <div className="p-4">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
@@ -66,41 +129,41 @@ const PaymentMethod = () => {
                                         <th scope="col" class="px-6 py-3">
                                             Payment Method Name
                                         </th>
-                                        {role == 'SA' ? (
+                                        {/* {role == 'SA' || 'DEV'? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
-                                        )}
-                                        {role == 'SA' ? (
+                                        )} */}
+                                        {/* {role == 'SA' || 'DEV'? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
                                             <></>
-                                        )}
+                                        )} */}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(paymentMethodList).map((key) => (
+                                    {data && data.allPaymentMethods?.map((paymentMethod) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {paymentMethodList[key]['paymentMethodId']}
+                                                {paymentMethod.paymentMethodId}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {paymentMethodList[key]['paymentMethodName']}
+                                                {paymentMethod.paymentMethodName}
                                             </td>
-                                            {role == 'SA' ? (
+                                            {/* {role == 'SA' || 'DEV'? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editpaymentmethod" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
-                                            {role == 'SA' ? (
+                                            )} */}
+                                            {/* {role == 'SA' || 'DEV'? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
+                                            )} */}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -108,7 +171,7 @@ const PaymentMethod = () => {
                         </div>
                     </div>
                 </div>
-                {role == 'SA' ? (
+                {role == 'SA' || 'DEV'? (
                     <div className='grid justify-items-end'>
                         <Link href="/paymentmethodform">
                             <Button type="normal" text="Add New Payment Method" />

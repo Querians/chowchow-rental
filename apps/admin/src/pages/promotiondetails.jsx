@@ -1,54 +1,55 @@
-import { useState } from 'react';
-import { Sidebar, Button, Breadcrumb,SearchBar } from 'ui';
+import { useState, useEffect } from 'react';
+import { Sidebar, Button, Breadcrumb, SearchBar } from 'ui';
 import Link from 'next/link';
+import { SideBar } from '@/components/SideBar';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import ClientOnly from '@/components/ClientOnly';
+
+const ITEM_QUERY = gql`
+  query SearchPromotionByPromotionCode($promotionCode: String) {
+  searchPromotionByPromotionCode(promotionCode: $promotionCode) {
+    startDate
+    endDate
+    maximumDiscount
+    minimumPrice
+    orderPromotions {
+      order {
+        orderId
+      }
+    }
+    promotionCode
+    }
+  }
+  `
+
+const STAFF_ROLE = gql`
+  query StaffProfile {
+    StaffProfile {
+      position {
+        positionId
+      }
+    }
+  }
+`
+
 
 const Promotion = () => {
 
-    const role = "SA"
-    const itemList = {
-        1: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-        2: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-        3: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-        4: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-        5: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-        6: {
-            promotion_code: '23000121',
-            start_date: "2023-01-01 13:30:44",
-            end_date: "2023-01-01 13:30:44",
-            period_month: 1,
-            total_used: 24,
-        },
-    };
+    const [searchFilter, setSearchFilter] = useState('');
+    const [executeSearch, { data, loading, error }] = useLazyQuery(ITEM_QUERY, {pollInterval: 1000});
+    const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+    const [role, setRole] = useState('');
+
+    useEffect(() => {
+      executeSearch()
+    }, [executeSearch])
+
+    useEffect(() => {
+      console.log(staff?.StaffProfile[0].position.positionId);
+      setRole(staff?.StaffProfile[0].position.positionId);
+    }, [staff])
+
+
     const [isShow, setShow] = useState(false);
     const popup = () => {
         setShow(!isShow);
@@ -58,10 +59,41 @@ const Promotion = () => {
         // code for drop row
     };
 
+    if (loadingposition) {
+      return (
+        <h2>Loading Data...</h2>
+      );
+    };
+
+    if (errorposition) {
+      console.error(errorposition);
+      return (
+        <h2>Sorry, {errorposition}...</h2>
+      );
+    };
+
+    console.log(staff)
+
+    if (loading) {
+      return (
+        <h2>Loading Data...</h2>
+      );
+    };
+
+    if (error) {
+      console.error(error);
+      return (
+        <h2>Sorry, there&apos;s been an error...</h2>
+      );
+    };
+
+    console.log(data)
+
     return (
         <>
+          <ClientOnly>
             <aside>
-                <Sidebar role={role} showPromo="true" />
+                <SideBar role={role} showPromo="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4">
                 <Breadcrumb first_name="Promotion" first="/promotion" current="Promotion Details" />
@@ -74,7 +106,7 @@ const Promotion = () => {
                             <h3 class="text-lg font-medium">This is a danger alert</h3>
                         </div>
                         <div class="mt-2 mb-4 text-sm">
-                            Are you sure to delete this row. If not please click "Exit" and if you want to delete please click "Delete".
+                            {'Are you sure to delete this row. If not please click "Exit" and if you want to delete please click "Delete".'}
                         </div>
                         <div class="flex">
                             <button type="button" onClick={popup} class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
@@ -86,11 +118,22 @@ const Promotion = () => {
                         </div>
                     </div>
                 )}
-                <div className="w-full rounded-lg border border-2 border-black p-4 ">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
+                <span className="text-red-300 pl-4">Please Input Whole Promotion Code</span>
                     <div className="pt-2 px-4">
-                            <SearchBar placeholder="Search by Promotion Code" />
+                            <SearchBar
+                              placeholder="Search by Promotion Code"
+                              onSubmit={(e) => {
+                                e.preventDefault(true);
+                                executeSearch({
+                                  variables: { promotionCode: searchFilter }
+                                })
+                              }}
+                              onChange={e => setSearchFilter(e.target.value)}
+                            />
                         </div>
-                    <div className="p-4">
+
+                    <div className="p-4 ">
                         <div class="relative overflow-x-auto overflow-y-auto h-96 rounded-lg">
                             <table class="w-full text-sm text-center text-gray-500">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
@@ -105,55 +148,67 @@ const Promotion = () => {
                                             End Date
                                         </th>
                                         <th scope="col" class="px-6 py-3">
+                                            Maximum Discount
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Minimum Price
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
                                             Period Month
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Total Used
                                         </th>
-                                        {role == 'sales'||'manager' ? (
+                                        {/* {role == 'sales'||'manager' ? (
                                             <th scope="col" class="px-6 py-3">
                                                 Edit
                                             </th>) : (
                                             <></>
-                                        )}
-                                        {role == 'sales'||'manager' ? (
+                                        )} */}
+                                        {/* {role == 'SA'||'MA'||'DEV'? (
                                             <th scope="col" class="px-6 py-3">
                                                 Delete
                                             </th>) : (
                                             <></>
-                                        )}
+                                        )} */}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(itemList).map((key) => (
+                                    {data && data.searchPromotionByPromotionCode?.map((key) => (
                                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['promotion_code']}
+                                                {key['promotionCode']}
                                             </th>
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['start_date']}
+                                                {key['startDate']}
                                             </th>
                                             <td scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['end_date']}
+                                                {key['endDate']}
                                             </td>
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['period_month']}
+                                                {key['minimumPrice']}
                                             </th>
                                             <td scope="row" class="px-6 py-4 font-normal">
-                                                {itemList[key]['total_used']}
+                                                {key['maximumDiscount']}
                                             </td>
-                                            {role == 'sales'||'manager' ? (
+                                            <th scope="row" class="px-6 py-4 font-normal">
+                                            {Math.floor(Math.abs(new Date(key['startDate']) - new Date(key.endDate))/(1000*3600*24*30))}
+                                            </th>
+                                            <td scope="row" class="px-6 py-4 font-normal">
+                                                {key.orderPromotions? key.orderPromotions.length: '0'}
+                                            </td>
+                                            {/* {role == 'sales'||'manager' ? (
                                                 <td class="px-6 py-4">
                                                     <a href="/editpromotion" class="font-medium text-blue-600 hover:underline">Edit</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
-                                            {role == 'sales'||'manager' ? (
+                                            )} */}
+                                            {/* {role == 'SA'||'MA' ? (
                                                 <td class="px-6 py-4">
                                                     <a class="font-medium text-red-600 hover:underline" onClick={popup}>Delete</a>
                                                 </td>) : (
                                                 <></>
-                                            )}
+                                            )} */}
                                         </tr>
                                     ))}
                                 </tbody>
@@ -170,6 +225,7 @@ const Promotion = () => {
                     <></>
                 )}
             </main>
+          </ClientOnly>
         </>
     );
 };

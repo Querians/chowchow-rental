@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-size: 30px 30px;
+  background-color: #FFF9F1;
+  background-image:
+    linear-gradient(to right, #EFEFEF 1px, transparent 1px),
+    linear-gradient(to bottom, #EFEFEF 1px, transparent 0.1px);
+}

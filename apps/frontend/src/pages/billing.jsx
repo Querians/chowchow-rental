@@ -1,4 +1,5 @@
-import { Navbar, BillingInfo } from 'ui';
+import { Navbar } from 'ui';
+import { BillingInfo } from '@/components/BillingInfo';
 
 const Billing = () => {
   return (

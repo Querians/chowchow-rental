@@ -1,11 +1,80 @@
 import { SearchBar, Sidebar, Button, Breadcrumb } from 'ui';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import ClientOnly from '@/components/ClientOnly';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
+import { SideBar } from '@/components/SideBar';
+
+const VEHICLETYPE_QUERY = gql`
+query Query($vehicleTypeN: String) {
+  searchVehicleTypeByVehicleTypeName(vehicleTypeN: $vehicleTypeN) {
+    vehicleTypeId
+    vehicleTypeN
+  }
+}
+`
+
+const STAFF_ROLE = gql`
+query StaffProfile {
+StaffProfile {
+  position {
+    positionId
+  }
+}
+}
+`
 
 const Vehicletype = () => {
-  const role='MA'
+
   const [isShow, setShow] = useState(false);
-  const [vehicleTypeID, setVehicleTypeID] = useState(''); // use vehicleTypeID to query data
+
+  const [searchFilter, setSearchFilter] = useState('');
+  const [executeSearch, { data, loading, error }] = useLazyQuery(VEHICLETYPE_QUERY, {pollInterval: 1000});
+  // const [productlist, setProductList] = useState('');
+  const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    executeSearch()
+  }, [executeSearch])
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
+  useEffect(() => {
+    console.log(staff?.StaffProfile[0].position.positionId);
+    setRole(staff?.StaffProfile[0].position.positionId);
+  }, [staff])
+
+  if (loadingposition) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (errorposition) {
+    console.error(errorposition);
+    return (
+      <h2>Sorry, {errorposition}...</h2>
+    );
+  };
+
+  console.log(staff)
+
+  if (loading) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (error) {
+    console.error(error);
+    return (
+      <h2>Sorry, there&apos;s been an error...</h2>
+    );
+  };
 
   const popup = () => {
     setShow(!isShow);
@@ -15,25 +84,10 @@ const Vehicletype = () => {
     // code for drop row
   };
 
-  const receive_data = {
-    1:{
-      vehicle_type_id:'001',
-      vehicle_type_n:'4 wheels truck',
-    },
-    2:{
-      vehicle_type_id:'002',
-      vehicle_type_n:'6 wheels truck',
-    },
-    3:{
-      vehicle_type_id:'003',
-      vehicle_type_n:'10 wheels truck',
-    },
-  }
-
   return (
     <>
       <aside>
-        <Sidebar role={role} showDeli="true" />
+        <SideBar role={role} showDeli="true" />
       </aside>
       <main className="container mx-auto space-y-4 px-10 pb-8 lg:ml-64">
         <Breadcrumb
@@ -90,10 +144,18 @@ const Vehicletype = () => {
             </div>
           </div>
         )}
-        <div className="w-full rounded-lg border-2 border-black p-4">
-          <h1 className="text-xl font-bold">Vehicle Type ID</h1>
+        <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
+          <h1 className="text-xl font-bold">Vehicle Type Name</h1>
           <div className="px-4 pt-2">
-            <SearchBar onChange={e => setVehicleTypeID(e.target.value)} placeholder="Search by Vehicle Type ID" />
+            <SearchBar
+              onSubmit={(e) => {
+              e.preventDefault(true);
+              executeSearch({
+                variables: { vehicleTypeN: searchFilter }
+              })
+            }}
+            onChange={e => setSearchFilter(e.target.value)}
+            placeholder="Search by Vehicle Type Name" />
           </div>
           <div className="p-4">
             <div class="relative h-96 overflow-x-auto rounded-lg">
@@ -107,14 +169,14 @@ const Vehicletype = () => {
                     name
                     </th>
 
-                    {role == 'MA' ? (
+                    {staff.StaffProfile[0].position.positionId == 'MA' ? (
                       <th scope="col" class="px-6 py-3">
                         Edit
                       </th>
                     ) : (
                       <></>
                     )}
-                    {role == 'MA' ? (
+                    {staff.StaffProfile[0].position.positionId == 'MA' ? (
                       <th scope="col" class="px-6 py-3">
                         Delete
                       </th>
@@ -124,15 +186,13 @@ const Vehicletype = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(receive_data).map((key) => (
+                  {data && data.searchVehicleTypeByVehicleTypeName.map((vehicleType) => (
                     <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                       <td class="px-6 py-4">
-                        {receive_data[key]['vehicle_type_id']}
+                        {vehicleType.vehicleTypeId}
                       </td>
-                      <td class="px-6 py-4">{receive_data[key]['vehicle_type_n']}</td>
-
-
-                      {role == 'MA' ? (
+                      <td class="px-6 py-4">{vehicleType.vehicleTypeN}</td>
+                      {staff.StaffProfile[0].position.positionId == 'MA' ? (
                         <td class="px-6 py-4">
                           <a
                             href="/vehicletypeedit"
@@ -144,7 +204,7 @@ const Vehicletype = () => {
                       ) : (
                         <></>
                       )}
-                      {role == 'MA' ? (
+                      {staff.StaffProfile[0].position.positionId == 'MA' ? (
                         <td class="px-6 py-4">
                           <a
                             class="font-medium text-red-600 hover:underline"
@@ -163,7 +223,7 @@ const Vehicletype = () => {
             </div>
           </div>
         </div>
-        {role == 'MA' ? (
+        {staff.StaffProfile[0].position.positionId == 'MA' || 'DEV' ? (
           <div className="grid justify-items-end pb-8">
             <Link href="/vehicletypeadd">
               <Button type="normal" text="Add New Vehicle Type" />

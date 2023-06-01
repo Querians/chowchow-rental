@@ -3,14 +3,14 @@ import { useState } from 'react';
 
 export const DelivererOrderInput = ({role}) => {
   const receiveData = {
-    customer_name: 'nontawat',
-    arrive_time: '2023-01-23 09:52:18',
-    receiver_name: 'zxc',
-    receiver_tel: 'receiver_tel',
-    sub_district: 'sub_district',
-    district: 'district',
-    province: 'province',
-    zipcode: '10140',
+    customer_name: 'john white',
+    arrive_time: '2023-05-25T04:25:23.000Z',
+    receiver_name: 'Mix',
+    receiver_tel: '0959944833',
+    sub_district: 'Thachin',
+    district: 'mung',
+    province: 'Samutsakorn',
+    zipcode: '74000',
   }
 
   const [returnData, setReturnData] = useState({
@@ -21,7 +21,7 @@ export const DelivererOrderInput = ({role}) => {
 
   return <>
       <form onSubmit={e => e.preventDefault()}>
-        <div className="w-full rounded-lg border border-2 border-black p-4 mb-10">
+        <div className="w-full rounded-lg border border-2 border-black p-4 mb-10 bg-white">
             <div className="grid grid-cols-2 gap-x-12">
                 <TextInput placeholder="" label="Customer Name" type={'readOnly'} value={receiveData.customer_name}/>
                 <TextInput placeholder="" label="Arrive Time" type={'readOnly'} value={receiveData.arrive_time}/>

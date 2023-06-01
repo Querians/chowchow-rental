@@ -1,11 +1,83 @@
 import { SearchBar, Sidebar, Button, Breadcrumb } from 'ui';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ClientOnly from '@/components/ClientOnly';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import Link from 'next/link';
+import { SideBar } from '@/components/SideBar';
+
+const VEHICLE_INFO = gql`
+query SearchVehicleInfoVehicleLicence($vehicleLicence: String) {
+  searchVehicleInfoVehicleLicence(vehicleLicence: $vehicleLicence) {
+    vehicleLicence
+    vehicleType {
+      vehicleTypeN
+    }
+    brand
+    model
+  }
+}
+  `
+
+const STAFF_ROLE = gql`
+query StaffProfile {
+StaffProfile {
+  position {
+    positionId
+  }
+}
+}
+`
 
 const Vehicleinfo = () => {
   const [isShow, setShow] = useState(false);
-  const [vehicleLicence, setVehicleLicence] = useState(''); // use vehicleLicence to query data
-  
+
+  const [searchFilter, setSearchFilter] = useState('');
+  const [executeSearch, { data, loading, error }] = useLazyQuery(VEHICLE_INFO, {pollInterval: 1000});
+
+  const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    executeSearch()
+  }, [executeSearch])
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
+  useEffect(() => {
+    console.log(staff?.StaffProfile[0].position.positionId);
+    setRole(staff?.StaffProfile[0].position.positionId);
+  }, [staff])
+
+  if (loadingposition) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (errorposition) {
+    console.error(errorposition);
+    return (
+      <h2>Sorry, {errorposition}...</h2>
+    );
+  };
+
+  console.log(staff)
+
+  if (loading) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (error) {
+    console.error(error);
+    return (
+      <h2>Sorry, there&apos;s been an error...</h2>
+    );
+  };
+
   const popup = () => {
     setShow(!isShow);
   };
@@ -14,68 +86,10 @@ const Vehicleinfo = () => {
     // code for drop row
   };
 
-  const role = 'MA';
-  const receive_data = {
-    1: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    2: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    3: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    4: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    5: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    6: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    7: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    8: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-    9: {
-      vehicle_licence: 'กข1234',
-      vehicle_type_id: '001',
-      brand: 'ISUZU',
-      model: 'NRL 130',
-    },
-  };
-
   return (
     <>
       <aside>
-        <Sidebar role={role} showDeli="true" />
+        <SideBar role={role} showDeli="true" />
       </aside>
       <main className="container mx-auto space-y-4 px-10 pb-8 lg:ml-64">
         <Breadcrumb
@@ -132,10 +146,18 @@ const Vehicleinfo = () => {
             </div>
           </div>
         )}
-        <div className="w-full rounded-lg border-2 border-black p-4">
+        <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
           <h1 className="text-xl font-bold">Vehicle Licence</h1>
+          <span className="text-red-300 pl-4">Please Input Whole Licence</span>
           <div className="px-4 pt-2">
-            <SearchBar onChange={e => setVehicleLicence(e.target.value)} placeholder="Search by Vehicle Licence" />
+            <SearchBar
+            onSubmit={(e) => {
+              e.preventDefault(true);
+              executeSearch({
+                variables: { vehicleLicence: searchFilter }
+              })
+            }}
+            onChange={e => setSearchFilter(e.target.value)} placeholder="Search by Vehicle Licence" />
           </div>
           <div className="p-4">
             <div class="relative h-96 overflow-x-auto rounded-lg">
@@ -146,7 +168,7 @@ const Vehicleinfo = () => {
                       vehicle_licence
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      vehicle_type_id
+                      vehicle_type_name
                     </th>
                     <th scope="col" class="px-6 py-3">
                       brand
@@ -171,19 +193,23 @@ const Vehicleinfo = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(receive_data).map((key) => (
+                  {data && data.searchVehicleInfoVehicleLicence?.map((vehicle) => (
                     <tr class="border-b bg-white dark:border-gray-700 dark:bg-gray-800">
                       <th
                         scope="row"
                         class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
                       >
-                        {receive_data[key]['vehicle_licence']}
+                        {vehicle.vehicleLicence}
                       </th>
                       <td class="px-6 py-4">
-                        {receive_data[key]['vehicle_type_id']}
+                        {vehicle.vehicleType.vehicleTypeN}
                       </td>
-                      <td class="px-6 py-4">{receive_data[key]['brand']}</td>
-                      <td class="px-6 py-4">{receive_data[key]['model']}</td>
+                      <td class="px-6 py-4">
+                        {vehicle.brand}
+                      </td>
+                      <td class="px-6 py-4">
+                        {vehicle.model}
+                      </td>
 
                       {role == 'MA' ? (
                         <td class="px-6 py-4">

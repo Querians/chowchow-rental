@@ -1,93 +1,112 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sidebar, Breadcrumb, Button, SearchBar } from 'ui';
 import Link from 'next/link';
+import { SideBar } from '@/components/SideBar';
+import ClientOnly from '@/components/ClientOnly';
+import { gql, useQuery, useLazyQuery } from '@apollo/client';
+
+const ITEM_QUERY = gql`
+  query Query {
+  allOrder {
+    orderId
+    orderCarts {
+      cart {
+        cartNo
+      }
+    }
+    sendingDate
+    returnDate
+    invoices {
+      billings {
+        billingId
+      }
+      invoiceId
+    }
+  }
+}
+  `
+
+const STAFF_ROLE = gql`
+  query StaffProfile {
+    StaffProfile {
+      position {
+        positionId
+      }
+    }
+  }
+`
+
 
 const OrderAnalyse = () => {
 
-    const role = "inventory"
-    const order_sum = {
-        1: {
-            order_id: 'dfhdhrreseww',
-            total_cart: 3,
-            period_return: 30,
-            bill_count: 4,
-            invoice: 3
-        },
-        2: {
-            order_id: 'dfhdhrreseww',
-            total_cart: 3,
-            period_return: 30,
-            bill_count: 4,
-            invoice: 3
-        },
-        3: {
-            order_id: 'dfhdhrreseww',
-            total_cart: 3,
-            period_return: 30,
-            bill_count: 4,
-            invoice: 3
-        },
-        4: {
-            order_id: 'dfhdhrreseww',
-            total_cart: 3,
-            period_return: 30,
-            bill_count: 4,
-            invoice: 3
-        },
-    };
+  const { data: staff, loading: loadingposition, error: errorposition } = useQuery(STAFF_ROLE);
+  const { data, loading, error } = useQuery(ITEM_QUERY, {pollInterval: 1000});
+  const [role, setRole] = useState('');
 
-    const item_use = {
-        1: {
-            customer_id: "3dd0030",
-            order_count: 3,
-            success_per: 0.25,
-            avg_period: 23,
-            most_create_intval: '12:00-16:00',
-            issue_count:3,
-        },
-        2: {
-            customer_id: "3dd0030",
-            order_count: 3,
-            success_per: 0.25,
-            avg_period: 23,
-            most_create_intval: '12:00-16:00',
-            issue_count:3,
-        },
-        3: {
-            customer_id: "3dd0030",
-            order_count: 3,
-            success_per: 0.25,
-            avg_period: 23,
-            most_create_intval: '12:00-16:00',
-            issue_count:3,
-        },
-    }
-    
-    const [isShow, setShow] = useState(false);
-    const popup = () => {
-        setShow(!isShow);
-    };
-    const drop = () => {
-        popup();
-        // code for drop row
-    }
+  useEffect(() => {
+    console.log(staff?.StaffProfile[0].position.positionId);
+    setRole(staff?.StaffProfile[0].position.positionId);
+  }, [staff])
+
+  const [isShow, setShow] = useState(false);
+  const popup = () => {
+      setShow(!isShow);
+  };
+  const drop = () => {
+      popup();
+      // code for drop row
+  }
+
+  if (loadingposition) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (errorposition) {
+    console.error(errorposition);
+    return (
+      <h2>Sorry, {errorposition}...</h2>
+    );
+  };
+
+
+  console.log(staff)
+
+  if (loading) {
+    return (
+      <h2>Loading Data...</h2>
+    );
+  };
+
+  if (error) {
+    console.error(error);
+    return (
+      <h2>Sorry, there&apos;s been an error...</h2>
+    );
+  };
+
+  console.log(data)
+
+    // const role = "INV"
 
     return (
         <>
             <aside>
-                <Sidebar role={role} showOrder="true" />
+                <SideBar role={role} showOrder="true" />
             </aside>
             <main className="container mx-auto lg:ml-64 px-10 space-y-4 pb-8">
                 <Breadcrumb first_name="Order Management" current="Order" />
                 <h1 className="text-4xl font-bold pt-6 pb-4">Order Analysis</h1>
-                <div className="w-full rounded-lg border border-2 border-black p-4">
+                <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                     <h1 className="text-xl font-bold">Order Descriptive</h1>
+                    <p className="pt-1 px-4">summary of all order to show customer ordering behavior</p>
                     <div className="pt-2 px-4">
-                        <SearchBar placeholder="Search by Order ID" />
+                        {/* <SearchBar placeholder="Search by Order ID" /> */}
                     </div>
                     <div className="p-4">
-                        <div class="relative overflow-x-auto rounded-lg h-60">
+                        <div class="relative overflow-x-auto rounded-lg h-96">
                             <table class="w-full text-sm text-center text-gray-500 ">
                                 <thead class="text-xs text-gray-700 bg-[#E3C291] uppercase sticky top-0">
                                     <tr>
@@ -101,30 +120,24 @@ const OrderAnalyse = () => {
                                             Period From Send To Return (days)
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Bill Count
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Invoice Count
+                                            Invoices Count
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(order_sum).map((key) => (
+                                    {data && data.allOrder?.map((or) => (
                                         <tr class="bg-white border-b">
                                             <th scope="row" class="px-6 py-4 font-normal">
-                                                {order_sum[key]['order_id']}
+                                                {or['orderId']}
                                             </th>
                                             <td class="px-6 py-4">
-                                                {order_sum[key]['total_cart']}
+                                                {or.orderCarts.length}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {order_sum[key]['period_return']}
+                                                {Math.floor(Math.abs(new Date(or.returnDate) - new Date(or.sendingDate))/(1000*3600*24))}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {order_sum[key]['bill_count']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {order_sum[key]['invoice']}
+                                                {or.invoices.length}
                                             </td>
                                         </tr>
                                     ))}
@@ -133,7 +146,7 @@ const OrderAnalyse = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full rounded-lg border border-2 border-black p-4">
+                {/* <div className="w-full rounded-lg border border-2 border-black p-4">
                     <h1 className="text-xl font-bold">Customer Order Statistic</h1>
                     <div className="pt-2 px-4">
                         <SearchBar placeholder="Search by Customer" />
@@ -153,12 +166,6 @@ const OrderAnalyse = () => {
                                             Success Order Per all order
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Average period from send to return
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Most Time Interval That Create Order
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
                                             Issue Count
                                         </th>
                                     </tr>
@@ -176,12 +183,6 @@ const OrderAnalyse = () => {
                                                 {item_use[key]['success_per']}
                                             </td>
                                             <td class="px-6 py-4">
-                                                {item_use[key]['avg_period']}
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                {item_use[key]['most_create_intval']}
-                                            </td>
-                                            <td class="px-6 py-4">
                                                 {item_use[key]['issue_count']}
                                             </td>
                                         </tr>
@@ -190,7 +191,7 @@ const OrderAnalyse = () => {
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </main>
         </>
     );

@@ -1,48 +1,57 @@
 import { Button } from "./Button";
 import Link from 'next/link';
 import Image from 'next/image';
+import { gql, useMutation } from '@apollo/client';
+
+
+const invoiceInfo = gql`
+query SearchInvoiceByOrderId($orderId: String) {
+  searchInvoiceByOrderId(orderId: $orderId) {
+    invoiceId
+  }
+}`
 
 export const InvoiceInfo = () => {
   const orderData = {
-    'order_id':'XXXXXXXXXXX',
-    'order_date':'asdasdasd',
-    'sending_date':'2023/01/30',
-    'return_date':'2023/01/30',
-    'address_detail':'detail',
-    'street':'street',
-    'sub_distruct':'subdis',
-    'distruct':'distruct',
-    'province':'province',
-    'zipcode':'zipcode',
-    'receiver_tel':'0123456789',
+    'order_id':'0d02a456-b5c7-4377-84c7-41848c84e5c3',
+    'order_date':'2023-05-25T04:25:23.000Z',
+    'sending_date':'2023-06-01T12:00:00.000Z',
+    'return_date':'2023-07-04T17:00:00.000Z',
+    'address_detail':'1044/70',
+    'street':'Phetkasem',
+    'sub_distruct':'Nongkangplu',
+    'distruct':'Naongkham',
+    'province':'KrungThep',
+    'zipcode':'10160',
+    'receiver_tel':'0951165489',
   }
   const cartList = {
     1: {
-      product_name: "Black Table",
-      quantity: 3,
-      price_per_day: 66,
+      product_name: "Foot Ball",
+      quantity: 1,
+      price_per_day: 100,
       pic_URL: "/ikea_black_chair.png",
     },
     2: {
-      product_name: "Black Table",
-      quantity: 3,
-      price_per_day: 66,
+      product_name: "ADiDos chair",
+      quantity: 1,
+      price_per_day: 100,
       pic_URL: "/ikea_black_chair.png",
     },
     3: {
-      product_name: "Black Table",
-      quantity: 3,
-      price_per_day: 66,
+      product_name: "ADiDos chair",
+      quantity: 2,
+      price_per_day: 100,
       pic_URL: "/ikea_black_chair.png",
     },
     4: {
-      product_name: "Black Table",
-      quantity: 3,
-      price_per_day: 66,
+      product_name: "Gold balloon",
+      quantity: 1,
+      price_per_day: 100,
       pic_URL: "/ikea_black_chair.png",
     },
     }
-    const deliveryFee = 500;
+    const deliveryFee = 240;
     let priceProduct = 0;
     Object.keys(cartList).map(key=>{
       priceProduct += cartList[key]['quantity']*cartList[key]['price_per_day']
@@ -53,12 +62,16 @@ export const InvoiceInfo = () => {
       deposit:500,
       payment_round:{
         1:{
-          total:670,
+          total:430,
         },
         2:{
-          total:60,
+          total:310,
         },
       },
+    }
+
+    const invoiceInfo = {
+
     }
 
   return (
@@ -157,11 +170,14 @@ export const InvoiceInfo = () => {
 
             <div className="p-4">
               <div class="relative overflow-x-auto rounded-lg">
-                  <table class="w-full text-sm text-center text-black">
+                  <table class="w-full text-sm text-center text-black bg-white">
                       <thead class="text-xs text-gray-700 bg-[#E1E1E1] uppercase">
                           <tr>
                               <th scope="col" class="px-6 py-3">
                                 การแบ่งจ่าย
+                              </th>
+                              <th scope="col" class="px-6 py-3">
+                                Invoice ID
                               </th>
                               <th scope="col" class="px-6 py-3">
                                 Total
@@ -173,6 +189,7 @@ export const InvoiceInfo = () => {
                             <th scope="row" class="px-6 py-4 font-medium font-bold whitespace-nowrap dark:text-white">
                                 มัดจำ
                             </th>
+                            <td></td>
                             <td class="px-6 py-4">
                                 {payment['deposit']}
                             </td>
@@ -182,6 +199,9 @@ export const InvoiceInfo = () => {
                                   <th scope="row" class="px-6 py-4 font-medium font-bold whitespace-nowrap dark:text-white">
                                       แบ่งจ่ายงวดที่ {key}
                                   </th>
+                                  <td class="px-6 py-4">
+                                      {invoiceInfo.invoiceId}
+                                  </td>
                                   <td class="px-6 py-4">
                                       {payment['payment_round'][key]['total']}
                                   </td>

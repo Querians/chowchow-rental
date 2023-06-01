@@ -1,4 +1,4 @@
-export const DateInput = ({ onChange, label, isRequire = true, type='', defaultValue='' }) => {
+export const DateInput = ({ onChange, label, isRequire = true, type='', defaultValue='', value }) => {
   return (
     <div>
       <label
@@ -12,6 +12,7 @@ export const DateInput = ({ onChange, label, isRequire = true, type='', defaultV
       <input
         disabled
         readOnly
+        value={value}
         defaultValue={defaultValue}
         name={label}
         id={label}
@@ -23,6 +24,7 @@ export const DateInput = ({ onChange, label, isRequire = true, type='', defaultV
       :
       <input
         defaultValue={defaultValue}
+        value={value}
         name={label}
         id={label}
         type="date"

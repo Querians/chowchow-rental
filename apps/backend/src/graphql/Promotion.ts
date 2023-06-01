@@ -40,7 +40,7 @@ t.list.field('searchPromotionByPromotionCode', {
   },
   resolve(parent, args, context: Context, info) {
     return context.prisma.promotion.findMany({
-      where : {promotionCode: args.promotionCode}
+      where : {promotionCode: {contains :args.promotionCode}}
     });
   }
 });

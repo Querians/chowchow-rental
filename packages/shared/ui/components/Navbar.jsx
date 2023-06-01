@@ -76,6 +76,12 @@ export const Navbar = () => {
               >
                 ISSUES
               </a>
+              <a
+                href="/invoice"
+                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:text-slate-50"
+              >
+                INVOICE
+              </a>
             </div>
           </div>
           <div
@@ -112,8 +118,8 @@ export const Navbar = () => {
                 <a href="" className="flex items-center">
                   <div className="mr-3 h-8">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-2 -2 25 25">
-                      <path fill="none" 
-                            stroke="currentColor"   stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      <path fill="none"
+                            stroke="currentColor"   stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8m4-9l-4-4m4 4l-4 4m4-4H9" />
                     </svg>
                   </div>
@@ -139,6 +145,22 @@ export const Navbar = () => {
                   class="block bg-[#C3A982] py-2 text-center text-gray-900 hover:bg-gray-100"
                 >
                   PROFILE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/issue"
+                  class="block bg-[#C3A982] py-2 text-center text-gray-900 hover:bg-gray-100"
+                >
+                  ISSUE
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/invoice"
+                  class="block bg-[#C3A982] py-2 text-center text-gray-900 hover:bg-gray-100"
+                >
+                  INVOICE
                 </a>
               </li>
               <li>

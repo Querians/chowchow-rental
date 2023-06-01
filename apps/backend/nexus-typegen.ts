@@ -312,6 +312,7 @@ export interface NexusGenFieldTypes {
     addCustomer: NexusGenRootTypes['Customer']; // Customer!
     addInvoice: NexusGenRootTypes['Invoice']; // Invoice!
     addIssue: NexusGenRootTypes['Issue']; // Issue!
+    addIssueByCustomer: NexusGenRootTypes['Issue']; // Issue!
     addItem: NexusGenRootTypes['Item']; // Item!
     addItemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
     addOrder: NexusGenRootTypes['Order']; // Order!
@@ -327,6 +328,7 @@ export interface NexusGenFieldTypes {
     addStaffInfo: NexusGenRootTypes['StaffInfo']; // StaffInfo!
     addSubOrder: NexusGenRootTypes['SubOrder']; // SubOrder!
     addUserCart: NexusGenRootTypes['Cart']; // Cart!
+    addUserOrder: NexusGenRootTypes['Order']; // Order!
     addVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
     addVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
     deleteBilling: NexusGenRootTypes['Billing']; // Billing!
@@ -352,6 +354,9 @@ export interface NexusGenFieldTypes {
     deleteSubOrder: NexusGenRootTypes['SubOrder']; // SubOrder!
     deleteVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
     deleteVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
+    editTimeback: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    editTimego: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    editVehicleStatus: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     loginstaff: NexusGenRootTypes['AuthPayloadStaff']; // AuthPayloadStaff!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -364,6 +369,7 @@ export interface NexusGenFieldTypes {
     updateIssue: NexusGenRootTypes['Issue']; // Issue!
     updateItem: NexusGenRootTypes['Item']; // Item!
     updateItemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
+    updateItemstatusInItem: NexusGenRootTypes['Item']; // Item!
     updateOrder: NexusGenRootTypes['Order']; // Order!
     updateOrderStatus: NexusGenRootTypes['OrderStatus']; // OrderStatus!
     updateOrderTransport: NexusGenRootTypes['OrderTransport']; // OrderTransport!
@@ -373,6 +379,8 @@ export interface NexusGenFieldTypes {
     updateProduct: NexusGenRootTypes['Product']; // Product!
     updatePromotion: NexusGenRootTypes['Promotion']; // Promotion!
     updateStaffInfo: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    updateStatusOfIssue: NexusGenRootTypes['Issue']; // Issue!
+    updateStatusinOrder: NexusGenRootTypes['Order']; // Order!
     updateVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
     updateVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
   }
@@ -508,9 +516,12 @@ export interface NexusGenFieldTypes {
     searchCustomerByTel: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
     searchInvoiceByCostAmount: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
     searchInvoiceByInvoiceId: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    searchInvoiceByOrderId: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
     searchIssueByCategoryProblemId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchIssueByIssueId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
     searchIssueByIssueId_Status: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
     searchIssueByStaffId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchItemByItemId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
     searchItemByItemId_ProductId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
     searchItemByItemStatusId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
     searchItemStatusByItemStatusId: Array<NexusGenRootTypes['ItemStatus'] | null> | null; // [ItemStatus]
@@ -672,6 +683,7 @@ export interface NexusGenFieldTypeNames {
     addCustomer: 'Customer'
     addInvoice: 'Invoice'
     addIssue: 'Issue'
+    addIssueByCustomer: 'Issue'
     addItem: 'Item'
     addItemStatus: 'ItemStatus'
     addOrder: 'Order'
@@ -687,6 +699,7 @@ export interface NexusGenFieldTypeNames {
     addStaffInfo: 'StaffInfo'
     addSubOrder: 'SubOrder'
     addUserCart: 'Cart'
+    addUserOrder: 'Order'
     addVehicleInfo: 'VehicleInfo'
     addVehicleType: 'VehicleType'
     deleteBilling: 'Billing'
@@ -712,6 +725,9 @@ export interface NexusGenFieldTypeNames {
     deleteSubOrder: 'SubOrder'
     deleteVehicleInfo: 'VehicleInfo'
     deleteVehicleType: 'VehicleType'
+    editTimeback: 'OrderTransport'
+    editTimego: 'OrderTransport'
+    editVehicleStatus: 'VehicleInfo'
     login: 'AuthPayload'
     loginstaff: 'AuthPayloadStaff'
     signup: 'AuthPayload'
@@ -724,6 +740,7 @@ export interface NexusGenFieldTypeNames {
     updateIssue: 'Issue'
     updateItem: 'Item'
     updateItemStatus: 'ItemStatus'
+    updateItemstatusInItem: 'Item'
     updateOrder: 'Order'
     updateOrderStatus: 'OrderStatus'
     updateOrderTransport: 'OrderTransport'
@@ -733,6 +750,8 @@ export interface NexusGenFieldTypeNames {
     updateProduct: 'Product'
     updatePromotion: 'Promotion'
     updateStaffInfo: 'StaffInfo'
+    updateStatusOfIssue: 'Issue'
+    updateStatusinOrder: 'Order'
     updateVehicleInfo: 'VehicleInfo'
     updateVehicleType: 'VehicleType'
   }
@@ -868,9 +887,12 @@ export interface NexusGenFieldTypeNames {
     searchCustomerByTel: 'Customer'
     searchInvoiceByCostAmount: 'Invoice'
     searchInvoiceByInvoiceId: 'Invoice'
+    searchInvoiceByOrderId: 'Invoice'
     searchIssueByCategoryProblemId: 'Issue'
+    searchIssueByIssueId: 'Issue'
     searchIssueByIssueId_Status: 'Issue'
     searchIssueByStaffId: 'Issue'
+    searchItemByItemId: 'Item'
     searchItemByItemId_ProductId: 'Item'
     searchItemByItemStatusId: 'Item'
     searchItemStatusByItemStatusId: 'ItemStatus'
@@ -987,6 +1009,11 @@ export interface NexusGenArgTypes {
       status: number; // Int!
       timestamp: string; // String!
     }
+    addIssueByCustomer: { // args
+      categoryProblemId: string; // String!
+      description: string; // String!
+      staffId: string; // String!
+    }
     addItem: { // args
       itemId: string; // String!
       itemRegisterDate: string; // String!
@@ -1087,6 +1114,19 @@ export interface NexusGenArgTypes {
       status: number; // Int!
       timestamp: string; // String!
     }
+    addUserOrder: { // args
+      addressDetail: string; // String!
+      latitude: number; // Float!
+      longitude: number; // Float!
+      receiverTel: string; // String!
+      returnDate: string; // String!
+      sendingDate: string; // String!
+      statusCode: number; // Int!
+      street: string; // String!
+      subdistrict: string; // String!
+      totalPrice: number; // Float!
+      zipcode: string; // String!
+    }
     addVehicleInfo: { // args
       brand: string; // String!
       model: string; // String!
@@ -1175,6 +1215,20 @@ export interface NexusGenArgTypes {
     deleteVehicleType: { // args
       vehicleTypeId: string; // String!
     }
+    editTimeback: { // args
+      orderId: string; // String!
+      timeAssign: string; // String!
+      timeBack: string; // String!
+    }
+    editTimego: { // args
+      orderId: string; // String!
+      timeAssign: string; // String!
+      timeGo: string; // String!
+    }
+    editVehicleStatus: { // args
+      status: boolean; // Boolean!
+      vehicleLicence: string; // String!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
@@ -1256,6 +1310,10 @@ export interface NexusGenArgTypes {
       itemStatusId: string; // String!
       itemStatusName: string; // String!
     }
+    updateItemstatusInItem: { // args
+      itemId: string; // String!
+      itemStatusId: string; // String!
+    }
     updateOrder: { // args
       addressDetail: string; // String!
       customerId: string; // String!
@@ -1333,6 +1391,14 @@ export interface NexusGenArgTypes {
       startDate: string; // String!
       tel: string; // String!
     }
+    updateStatusOfIssue: { // args
+      issueId: string; // String!
+      status: number; // Int!
+    }
+    updateStatusinOrder: { // args
+      orderId: string; // String!
+      statusCode: number; // Int!
+    }
     updateVehicleInfo: { // args
       brand: string; // String!
       model: string; // String!
@@ -1402,8 +1468,14 @@ export interface NexusGenArgTypes {
       invoiceId?: string | null; // String
       orderId?: string | null; // String
     }
+    searchInvoiceByOrderId: { // args
+      orderId?: string | null; // String
+    }
     searchIssueByCategoryProblemId: { // args
       categoryProblemId?: string | null; // String
+    }
+    searchIssueByIssueId: { // args
+      issueId?: string | null; // String
     }
     searchIssueByIssueId_Status: { // args
       issueId?: string | null; // String
@@ -1411,6 +1483,9 @@ export interface NexusGenArgTypes {
     }
     searchIssueByStaffId: { // args
       staffId?: string | null; // String
+    }
+    searchItemByItemId: { // args
+      itemId?: string | null; // String
     }
     searchItemByItemId_ProductId: { // args
       itemId?: string | null; // String

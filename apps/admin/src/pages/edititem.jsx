@@ -25,7 +25,7 @@ const EditProduct = () => {
                 <form action="">
                     <Breadcrumb first_name="Stock Inventory" second_name="Items" second="/items" current="Edit Item" />
                     <h1 className="text-4xl font-bold py-6">Edit item details</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput type="readOnly" placeholder="" value={item['item_id']} label="Item ID" />

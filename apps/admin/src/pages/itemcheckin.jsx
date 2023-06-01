@@ -25,9 +25,9 @@ const CheckIn = () => {
 
             <main className="container mx-auto lg:ml-64 px-10">
                 <form action="">
-                    <Breadcrumb first_name="Order Management" second_name="Order" second="/order" third_name="Order Tracking" third="/ordertracking" fourth_name="Edit Item status" fourth="/ordercheckinout" current="Item Check-In" />
+                    <Breadcrumb first_name="Order Management" second_name="Order" second="/order" third_name="Order Tracking" third="/ordertracking" fourth_name="Edit Item status" fourth="/itemcheckinout" current="Item Check-In" />
                     <h1 className="text-4xl font-bold py-6">Item Check-In</h1>
-                    <div className="w-full rounded-lg border border-2 border-black p-4">
+                    <div className="w-full rounded-lg border-2 border-black p-4 bg-white">
                         <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                                 <TextInput type="readOnly" defaultValue={item["item_id"]} label="Item ID" />

@@ -119,6 +119,7 @@ type Mutation {
   addCustomer(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): Customer!
   addInvoice(costAmount: Float!, deadlineDate: String!, orderId: String!, paymentTypeId: String!): Invoice!
   addIssue(categoryProblemId: String!, customerId: String!, description: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
+  addIssueByCustomer(categoryProblemId: String!, description: String!, staffId: String!): Issue!
   addItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
   addItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
   addOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, receiverTel: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
@@ -134,6 +135,7 @@ type Mutation {
   addStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
   addSubOrder(itemId: String!, orderId: String!): SubOrder!
   addUserCart(productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  addUserOrder(addressDetail: String!, latitude: Float!, longitude: Float!, receiverTel: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
   addVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
   addVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
   deleteBilling(billTimestamp: String!, billingId: String!): Billing!
@@ -159,6 +161,9 @@ type Mutation {
   deleteSubOrder(itemId: String!, orderId: String!): SubOrder!
   deleteVehicleInfo(vehicleLicence: String!): VehicleInfo!
   deleteVehicleType(vehicleTypeId: String!): VehicleType!
+  editTimeback(orderId: String!, timeAssign: String!, timeBack: String!): OrderTransport!
+  editTimego(orderId: String!, timeAssign: String!, timeGo: String!): OrderTransport!
+  editVehicleStatus(status: Boolean!, vehicleLicence: String!): VehicleInfo!
   login(email: String!, password: String!): AuthPayload!
   loginstaff(password: String!, staffId: String!): AuthPayloadStaff!
   signup(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): AuthPayload!
@@ -171,6 +176,7 @@ type Mutation {
   updateIssue(categoryProblemId: String!, customerId: String!, description: String!, issueId: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
   updateItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
   updateItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
+  updateItemstatusInItem(itemId: String!, itemStatusId: String!): Item!
   updateOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, orderId: String!, receiverTel: String!, reciever: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
   updateOrderStatus(statusCode: Int!, statusDef: String!): OrderStatus!
   updateOrderTransport(isReturn: Boolean!, orderId: String!, staffId: String!, timeAssign: String!, timeBack: String!, timeGo: String!, vehicleLicense: String!): OrderTransport!
@@ -180,6 +186,8 @@ type Mutation {
   updateProduct(categoryName: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
   updatePromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, promotionCode: String!, startDate: String!): Promotion!
   updateStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffId: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
+  updateStatusOfIssue(issueId: String!, status: Int!): Issue!
+  updateStatusinOrder(orderId: String!, statusCode: Int!): Order!
   updateVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
   updateVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
 }
@@ -326,9 +334,12 @@ type Query {
   searchCustomerByTel(tel: String): [Customer]
   searchInvoiceByCostAmount(maximum: Float, minimum: Float): [Invoice]
   searchInvoiceByInvoiceId(invoiceId: String, orderId: String): [Invoice]
+  searchInvoiceByOrderId(orderId: String): [Invoice]
   searchIssueByCategoryProblemId(categoryProblemId: String): [Issue]
+  searchIssueByIssueId(issueId: String): [Issue]
   searchIssueByIssueId_Status(issueId: String, status: Int): [Issue]
   searchIssueByStaffId(staffId: String): [Issue]
+  searchItemByItemId(itemId: String): [Item]
   searchItemByItemId_ProductId(itemId: String, productId: String): [Item]
   searchItemByItemStatusId(itemStatusId: String): [Item]
   searchItemStatusByItemStatusId(itemStatusId: String): [ItemStatus]
