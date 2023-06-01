@@ -13,6 +13,17 @@ services:
     volumes:
       - mysql:/var/lib/mysql
 
+  db_seeder:
+    image: mysql:latest
+    volumes:
+      - ./init/mysql.sql:/mysql.sql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=$DB_USER --host=mysql --port=3306 $DB_NAME < /mysql.sql && exit"]
+    depends_on:
+      - mysql
+
+
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin:latest
