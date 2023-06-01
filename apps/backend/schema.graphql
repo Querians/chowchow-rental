@@ -2,6 +2,408 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  customer: Customer!
+  token: String!
+}
+
+type AuthPayloadStaff {
+  staff: StaffInfo!
+  token: String!
+}
+
+type Billing {
+  billTimestamp: DateTime!
+  billingId: String!
+  firstName: String!
+  invoice: Invoice
+  lastName: String!
+  paidAmount: Float!
+  paymentMethod: PaymentMethod!
+  paymentSlipUrl: String!
+  tel: String!
+}
+
+type Cart {
+  cartNo: String!
+  customer: Customer!
+  orderCarts: OrderCart
+  product: Product!
+  quantity: Int!
+  status: Int!
+  timestamp: DateTime!
+}
+
+type Category {
+  categoryId: String!
+  categoryName: String!
+  products: [Product]
+}
+
+type CategoryProblem {
+  categoryProblemId: String!
+  categoryProblemN: String!
+  issues: [Issue]!
+  position: Position!
+}
+
+type CountItemA {
+  _count: JSON
+  product: Product
+  productId: String
+}
+
+type Customer {
+  carts: [Cart]
+  customerId: String!
+  dob: DateTime!
+  email: String!
+  firstName: String!
+  issues: [Issue]
+  lastName: String!
+  orders: [Order]
+  password: String!
+  tel: String!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Invoice {
+  billings: [Billing]
+  costAmount: Float!
+  deadlineDate: DateTime!
+  invoiceId: String!
+  order: Order!
+  paymentType: PaymentType!
+}
+
+type Issue {
+  categoryProblem: CategoryProblem!
+  customer: Customer!
+  description: String!
+  issueId: String!
+  order: Order
+  staff: StaffInfo!
+  status: Boolean!
+  timestamp: DateTime!
+}
+
+type Item {
+  itemId: String!
+  itemRegisterDate: DateTime!
+  itemStatus: ItemStatus!
+  product: Product!
+  stockAddress: String!
+  subOrders: [SubOrder]
+}
+
+type ItemStatus {
+  itemStatusId: String!
+  itemStatusName: String!
+  items: [Item]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type Mutation {
+  addBilling(billTimestamp: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
+  addCart(customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  addCategory(categoryId: String!, categoryName: String!): Category!
+  addCategoryProblem(categoryProblemId: String!, categoryProblemN: String!, positionId: String!): CategoryProblem!
+  addCustomer(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): Customer!
+  addInvoice(costAmount: Float!, deadlineDate: String!, orderId: String!, paymentTypeId: String!): Invoice!
+  addIssue(categoryProblemId: String!, customerId: String!, description: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
+  addIssueByCustomer(categoryProblemId: String!, description: String!, staffId: String!): Issue!
+  addItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
+  addItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
+  addOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, receiverTel: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
+  addOrderCart(cartNo: String!, orderId: String!): OrderCart!
+  addOrderPromotion(orderId: String!, promotionCode: String!): OrderPromotion!
+  addOrderStatus(statusCode: Int!, statusDef: String!): OrderStatus!
+  addOrderTransport(isReturn: Boolean!, orderId: String!, staffId: String!, timeAssign: String!, vehicleLicense: String!): OrderTransport!
+  addPaymentMethods(paymentMethodId: String!, paymentMethodName: String!): PaymentMethod!
+  addPaymentType(interest: Float!, paymentTypeId: String!, paymentTypeName: String!, times: Int!): PaymentType!
+  addPosition(positionId: String!, positionN: String!): Position!
+  addProduct(categoryId: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
+  addPromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, startDate: String!): Promotion!
+  addStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
+  addSubOrder(itemId: String!, orderId: String!): SubOrder!
+  addUserCart(productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  addUserOrder(addressDetail: String!, latitude: Float!, longitude: Float!, receiverTel: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
+  addVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
+  addVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
+  deleteBilling(billTimestamp: String!, billingId: String!): Billing!
+  deleteCart(cartNo: String!, customerId: String!, productId: String!): Cart!
+  deleteCategory(categoryId: String!): Category!
+  deleteCategoryProblem(categoryProblemId: String!): CategoryProblem!
+  deleteCustomer(customerId: String!): Customer!
+  deleteInvoice(invoiceId: String!): Invoice!
+  deleteIssue(issueId: String!): Issue!
+  deleteItem(itemId: String!): Item!
+  deleteItemStatus(itemStatusId: String!): ItemStatus!
+  deleteOrder(orderId: String!): Order!
+  deleteOrderCart(cartNo: String!, orderId: String!): OrderCart!
+  deleteOrderPromotion(orderId: String!, promotionCode: String!): OrderPromotion!
+  deleteOrderStatus(statusCode: Int!): OrderStatus!
+  deleteOrderTransport(orderId: String!, timeAssign: String!): OrderTransport!
+  deletePaymentMethods(paymentMethodId: String!): PaymentMethod!
+  deletePaymentType(paymentTypeId: String!): PaymentType!
+  deletePosition(positionId: String!): Position!
+  deleteProduct(productId: String!): Product!
+  deletePromotion(promotionCode: String!): Promotion!
+  deleteStaffInfo(staffId: String!): StaffInfo!
+  deleteSubOrder(itemId: String!, orderId: String!): SubOrder!
+  deleteVehicleInfo(vehicleLicence: String!): VehicleInfo!
+  deleteVehicleType(vehicleTypeId: String!): VehicleType!
+  editTimeback(orderId: String!, timeAssign: String!, timeBack: String!): OrderTransport!
+  editTimego(orderId: String!, timeAssign: String!, timeGo: String!): OrderTransport!
+  editVehicleStatus(status: Boolean!, vehicleLicence: String!): VehicleInfo!
+  login(email: String!, password: String!): AuthPayload!
+  loginstaff(password: String!, staffId: String!): AuthPayloadStaff!
+  signup(dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): AuthPayload!
+  updateBilling(billTimestamp: String!, billingId: String!, firstName: String!, invoiceId: String!, lastName: String!, paidAmount: Float!, paymentMethodId: String!, paymentSlipUrl: String!, tel: String!): Billing!
+  updateCart(cartNo: String!, customerId: String!, productId: String!, quantity: Int!, status: Int!, timestamp: String!): Cart!
+  updateCategory(categoryId: String!, categoryName: String!): Category!
+  updateCategoryProblem(categoryProblemId: String!, categoryProblemN: String!, positionId: String!): CategoryProblem!
+  updateCustomer(customerId: String!, dob: String!, email: String!, firstName: String!, lastName: String!, password: String!, tel: String!): Customer!
+  updateInvoice(costAmount: Float!, deadlineDate: String!, invoiceId: String!, orderId: String!, paymentTypeId: String!): Invoice!
+  updateIssue(categoryProblemId: String!, customerId: String!, description: String!, issueId: String!, orderId: String, staffId: String!, status: Int!, timestamp: String!): Issue!
+  updateItem(itemId: String!, itemRegisterDate: String!, itemStatusId: String!, productId: String!, stockAddress: String!): Item!
+  updateItemStatus(itemStatusId: String!, itemStatusName: String!): ItemStatus!
+  updateItemstatusInItem(itemId: String!, itemStatusId: String!): Item!
+  updateOrder(addressDetail: String!, customerId: String!, latitude: Float!, longitude: Float!, orderId: String!, receiverTel: String!, reciever: String!, returnDate: String!, sendingDate: String!, statusCode: Int!, street: String!, subdistrict: String!, totalPrice: Float!, zipcode: String!): Order!
+  updateOrderStatus(statusCode: Int!, statusDef: String!): OrderStatus!
+  updateOrderTransport(isReturn: Boolean!, orderId: String!, staffId: String!, timeAssign: String!, timeBack: String!, timeGo: String!, vehicleLicense: String!): OrderTransport!
+  updatePaymentMethods(paymentMethodId: String!, paymentMethodName: String!): PaymentMethod!
+  updatePaymentType(interest: Float!, paymentTypeId: String!, paymentTypeName: String!, times: Int!): PaymentType!
+  updatePosition(positionId: String!, positionN: String!): Position!
+  updateProduct(categoryName: String!, color: String!, depth: Float!, description: String, height: Float!, material: String!, pictureUrl: String!, pricePerDay: Float!, productId: String!, productName: String!, weight: Float!, width: Float!): Product!
+  updatePromotion(discountPercent: Float!, endDate: String!, maximumDiscount: Float!, minimumPrice: Float!, promotionCode: String!, startDate: String!): Promotion!
+  updateStaffInfo(dob: String!, password: String!, positionId: String!, prefix: String!, salary: Float!, staffFirstName: String!, staffId: String!, staffLastName: String!, startDate: String!, tel: String!): StaffInfo!
+  updateStatusOfIssue(issueId: String!, status: Int!): Issue!
+  updateStatusinOrder(orderId: String!, statusCode: Int!): Order!
+  updateVehicleInfo(brand: String!, model: String!, registerDate: String!, status: Boolean!, vehicleLicence: String!, vehicleTypeId: String!): VehicleInfo!
+  updateVehicleType(vehicleTypeId: String!, vehicleTypeN: String!): VehicleType!
+}
+
+type Order {
+  addressDetail: String!
+  customer: Customer!
+  invoices: [Invoice]
+  issues: [Issue]
+  latitude: Float!
+  longitude: Float!
+  orderCarts: [OrderCart]
+  orderDate: DateTime!
+  orderId: ID!
+  orderPromotions: [OrderPromotion]
+  orderTransports: [OrderTransport]
+  receiver: String
+  receiverTel: String!
+  returnDate: DateTime
+  sendingDate: DateTime
+  status: OrderStatus!
+  street: String!
+  subOrders: [SubOrder]
+  subdistrict: String!
+  totalPrice: Float!
+  zipcode: String!
+}
+
+type OrderCart {
+  cart: Cart!
+  order: Order!
+}
+
+type OrderPromotion {
+  order: Order!
+  promotion: Promotion!
+}
+
+type OrderStatus {
+  orders: [Order]
+  statusCode: Int!
+  statusDef: String!
+}
+
+type OrderTransport {
+  isReturn: Boolean!
+  license: VehicleInfo!
+  order: Order!
+  staff: StaffInfo!
+  timeAssign: DateTime!
+  timeBack: DateTime
+  timeGo: DateTime
+}
+
+type PaymentMethod {
+  billings: [Billing]
+  paymentMethodId: String!
+  paymentMethodName: String!
+}
+
+type PaymentType {
+  interest: Float!
+  invoices: [Invoice]
+  paymentTypeId: ID!
+  paymentTypeName: String!
+  times: Int!
+}
+
+type Position {
+  categoryProblems: [CategoryProblem]
+  positionId: String!
+  positionN: String!
+  staffInfos: [StaffInfo]
+}
+
+type Product {
+  carts: [Cart]
+  category: Category!
+  color: String!
+  depth: Float!
+  description: String
+  height: Float!
+  items: [Item]
+  material: String!
+  pictureUrl: String!
+  pricePerDay: Float!
+  productId: String!
+  productName: String!
+  weight: Float!
+  width: Float!
+}
+
+type Promotion {
+  discountPercent: Float!
+  endDate: DateTime!
+  maximumDiscount: Float!
+  minimumPrice: Float!
+  orderPromotions: [OrderPromotion]!
+  promotionCode: ID!
+  startDate: DateTime!
+}
+
 type Query {
-  ok: Boolean!
+  Profile: [Customer]
+  StaffProfile: [StaffInfo]
+  SummaryAllproduct: [CountItemA]
+  allBilling: [Billing]
+  allCart: [Cart]
+  allCategory: [Category]
+  allCategoryProblem: [CategoryProblem]
+  allCustomer: [Customer]
+  allInvoice: [Invoice]
+  allIssue: [Issue]
+  allItem: [Item]
+  allItemStatus: [ItemStatus]
+  allOrder: [Order]
+  allOrderCart: [OrderCart]
+  allOrderPromotion: [OrderPromotion]
+  allOrderStatus: [OrderStatus]
+  allOrderTransport: [OrderTransport]
+  allPaymentMethods: [PaymentMethod]
+  allPaymentType: [PaymentType]
+  allPosition: [Position]
+  allProduct: [Product]
+  allPromotion: [Promotion]
+  allStaffInfo: [StaffInfo]
+  allSubOrder: [SubOrder]
+  allVehicleInfo: [VehicleInfo]
+  allVehicleType: [VehicleType]
+  searchBillingByBillingId(billingId: String): [Billing]
+  searchBillingByPayerName(firstName: String, lastName: String): [Billing]
+  searchCartByCartNo(cartNo: String): [Cart]
+  searchCartByCustomerId(customerId: String): [Cart]
+  searchCartByStatus(status: Int): [Cart]
+  searchCartByproductId(productId: String): [Cart]
+  searchCategoryByCategoryId(categoryId: String): [Category]
+  searchCategoryByCategoryName(categoryName: String): [Category]
+  searchCategoryProbByCategoryProbId(categoryProblemId: String): [CategoryProblem]
+  searchCategoryProbByCategoryProbName(categoryProblemN: String): [CategoryProblem]
+  searchCustomerByCustomerID(customerId: String): [Customer]
+  searchCustomerByCustomerName(firstName: String, lastName: String): [Customer]
+  searchCustomerByEmail(email: String): [Customer]
+  searchCustomerByOrderID(orderId: String): [Order]
+  searchCustomerByTel(tel: String): [Customer]
+  searchInvoiceByCostAmount(maximum: Float, minimum: Float): [Invoice]
+  searchInvoiceByInvoiceId(invoiceId: String, orderId: String): [Invoice]
+  searchInvoiceByOrderId(orderId: String): [Invoice]
+  searchIssueByCategoryProblemId(categoryProblemId: String): [Issue]
+  searchIssueByIssueId(issueId: String): [Issue]
+  searchIssueByIssueId_Status(issueId: String, status: Int): [Issue]
+  searchIssueByStaffId(staffId: String): [Issue]
+  searchItemByItemId(itemId: String): [Item]
+  searchItemByItemId_ProductId(itemId: String, productId: String): [Item]
+  searchItemByItemStatusId(itemStatusId: String): [Item]
+  searchItemStatusByItemStatusId(itemStatusId: String): [ItemStatus]
+  searchItemStatusByItemStatusName(itemStatusName: String): [ItemStatus]
+  searchOrderByCustomerId(customerId: String): [Order]
+  searchOrderByOrderId(orderId: String): [Order]
+  searchOrderBySenidingDate(sendingDate: String): [Order]
+  searchOrderByStatusCode(statusCode: Int): [Order]
+  searchOrderCartByPKs(cartNo: String, orderId: String): [OrderCart]
+  searchOrderPromotionByPKs(orderId: String, promotionCode: String): [OrderPromotion]
+  searchOrderStatusByStatusCode(statusCode: Int): [OrderStatus]
+  searchOrderStatusByStatusDef(statusDef: String): [OrderStatus]
+  searchOrderTransportByOrderId(orderId: String): [OrderTransport]
+  searchOrderTransportByTimeAssign(timeAssign: String): [OrderTransport]
+  searchPaymentMethodById(paymentMethodId: String): [PaymentMethod]
+  searchPaymentTypeById(paymentTypeId: String): [PaymentType]
+  searchPostionById(positionId: String): [Position]
+  searchPostionByName(positionN: String): [Position]
+  searchProduct(filter: String): [Product]
+  searchProductByProductId(productId: String): [Product]
+  searchProductByProductName(productName: String): [Product]
+  searchPromotionByPromotionCode(promotionCode: String): [Promotion]
+  searchStaffInfoByName(staffFirstName: String, staffLastName: String): [StaffInfo]
+  searchStaffInfoByPostionId(positionId: String): [StaffInfo]
+  searchStaffInfoByStaffId(staffId: String): [StaffInfo]
+  searchSubOrderByPKs(itemId: String, orderId: String): [SubOrder]
+  searchVehicleInfoByBrand_Model(brand: String, model: String): [VehicleInfo]
+  searchVehicleInfoByStatus(status: Boolean): [VehicleInfo]
+  searchVehicleInfoVehicleLicence(vehicleLicence: String): [VehicleInfo]
+  searchVehicleTypeByVehicleTypeName(vehicleTypeN: String): [VehicleType]
+}
+
+type StaffInfo {
+  dob: DateTime!
+  issues: [Issue]
+  orderTransports: [OrderTransport]
+  password: String!
+  position: Position!
+  prefix: String!
+  salary: Float!
+  staffFirstName: String!
+  staffId: String!
+  staffLastName: String!
+  startDate: DateTime!
+  tel: String!
+}
+
+type SubOrder {
+  item: Item!
+  order: Order!
+}
+
+type VehicleInfo {
+  brand: String!
+  model: String!
+  orderTransports: [OrderTransport]
+  registerDate: DateTime!
+  status: Boolean!
+  vehicleLicence: ID!
+  vehicleType: VehicleType
+}
+
+type VehicleType {
+  vehicleInfos: [VehicleInfo]
+  vehicleTypeId: ID!
+  vehicleTypeN: String!
 }
