@@ -9,7 +9,7 @@
     "dev:frontend": "turbo run dev --filter=frontend --no-daemon",
     "dev:dashboard": "turbo run dev --filter=dashboard --no-daemon",
     "dev:admin": "turbo run dev --filter=admin --no-daemon",
-    "dev:backend": "turbo run dev --parallel --filter=backend --no-daemon",
+    "dev:backend": "turbo run dev --parallel --filter=backend --filter=admin --filter=frontend --no-daemon db:open --filter=backend",
     "gen:backend": "turbo run gen --parallel --filter=backend --no-daemon",
     "db:start": "docker-compose up -d",
     "db:open": "turbo run db:open --filter=backend --no-daemon",

@@ -4,9 +4,32 @@
  */
 
 
-
-
-
+import type { Context } from "./src/context"
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+    /**
+     * The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "JSON";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+    /**
+     * The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "JSON";
+  }
+}
 
 
 declare global {
@@ -25,10 +48,162 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
+  JSON: any
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    customer: NexusGenRootTypes['Customer']; // Customer!
+    token: string; // String!
+  }
+  AuthPayloadStaff: { // root type
+    staff: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    token: string; // String!
+  }
+  Billing: { // root type
+    billTimestamp: NexusGenScalars['DateTime']; // DateTime!
+    billingId: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
+    paidAmount: number; // Float!
+    paymentSlipUrl: string; // String!
+    tel: string; // String!
+  }
+  Cart: { // root type
+    cartNo: string; // String!
+    quantity: number; // Int!
+    status: number; // Int!
+    timestamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Category: { // root type
+    categoryId: string; // String!
+    categoryName: string; // String!
+  }
+  CategoryProblem: { // root type
+    categoryProblemId: string; // String!
+    categoryProblemN: string; // String!
+  }
+  CountItemA: { // root type
+    _count?: NexusGenScalars['JSON'] | null; // JSON
+    productId?: string | null; // String
+  }
+  Customer: { // root type
+    customerId: string; // String!
+    dob: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
+    password: string; // String!
+    tel: string; // String!
+  }
+  Invoice: { // root type
+    costAmount: number; // Float!
+    deadlineDate: NexusGenScalars['DateTime']; // DateTime!
+    invoiceId: string; // String!
+  }
+  Issue: { // root type
+    description: string; // String!
+    issueId: string; // String!
+    status: boolean; // Boolean!
+    timestamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Item: { // root type
+    itemId: string; // String!
+    itemRegisterDate: NexusGenScalars['DateTime']; // DateTime!
+    stockAddress: string; // String!
+  }
+  ItemStatus: { // root type
+    itemStatusId: string; // String!
+    itemStatusName: string; // String!
+  }
+  Mutation: {};
+  Order: { // root type
+    addressDetail: string; // String!
+    latitude: number; // Float!
+    longitude: number; // Float!
+    orderDate: NexusGenScalars['DateTime']; // DateTime!
+    orderId: string; // ID!
+    receiver?: string | null; // String
+    receiverTel: string; // String!
+    returnDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    sendingDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    street: string; // String!
+    subdistrict: string; // String!
+    totalPrice: number; // Float!
+    zipcode: string; // String!
+  }
+  OrderCart: {};
+  OrderPromotion: {};
+  OrderStatus: { // root type
+    statusCode: number; // Int!
+    statusDef: string; // String!
+  }
+  OrderTransport: { // root type
+    isReturn: boolean; // Boolean!
+    timeAssign: NexusGenScalars['DateTime']; // DateTime!
+    timeBack?: NexusGenScalars['DateTime'] | null; // DateTime
+    timeGo?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  PaymentMethod: { // root type
+    paymentMethodId: string; // String!
+    paymentMethodName: string; // String!
+  }
+  PaymentType: { // root type
+    interest: number; // Float!
+    paymentTypeId: string; // ID!
+    paymentTypeName: string; // String!
+    times: number; // Int!
+  }
+  Position: { // root type
+    positionId: string; // String!
+    positionN: string; // String!
+  }
+  Product: { // root type
+    color: string; // String!
+    depth: number; // Float!
+    description?: string | null; // String
+    height: number; // Float!
+    material: string; // String!
+    pictureUrl: string; // String!
+    pricePerDay: number; // Float!
+    productId: string; // String!
+    productName: string; // String!
+    weight: number; // Float!
+    width: number; // Float!
+  }
+  Promotion: { // root type
+    discountPercent: number; // Float!
+    endDate: NexusGenScalars['DateTime']; // DateTime!
+    maximumDiscount: number; // Float!
+    minimumPrice: number; // Float!
+    promotionCode: string; // ID!
+    startDate: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: {};
+  StaffInfo: { // root type
+    dob: NexusGenScalars['DateTime']; // DateTime!
+    password: string; // String!
+    prefix: string; // String!
+    salary: number; // Float!
+    staffFirstName: string; // String!
+    staffId: string; // String!
+    staffLastName: string; // String!
+    startDate: NexusGenScalars['DateTime']; // DateTime!
+    tel: string; // String!
+  }
+  SubOrder: {};
+  VehicleInfo: { // root type
+    brand: string; // String!
+    model: string; // String!
+    registerDate: NexusGenScalars['DateTime']; // DateTime!
+    status: boolean; // Boolean!
+    vehicleLicence: string; // ID!
+  }
+  VehicleType: { // root type
+    vehicleTypeId: string; // ID!
+    vehicleTypeN: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -42,18 +217,1373 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    customer: NexusGenRootTypes['Customer']; // Customer!
+    token: string; // String!
+  }
+  AuthPayloadStaff: { // field return type
+    staff: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    token: string; // String!
+  }
+  Billing: { // field return type
+    billTimestamp: NexusGenScalars['DateTime']; // DateTime!
+    billingId: string; // String!
+    firstName: string; // String!
+    invoice: NexusGenRootTypes['Invoice'] | null; // Invoice
+    lastName: string; // String!
+    paidAmount: number; // Float!
+    paymentMethod: NexusGenRootTypes['PaymentMethod']; // PaymentMethod!
+    paymentSlipUrl: string; // String!
+    tel: string; // String!
+  }
+  Cart: { // field return type
+    cartNo: string; // String!
+    customer: NexusGenRootTypes['Customer']; // Customer!
+    orderCarts: NexusGenRootTypes['OrderCart'] | null; // OrderCart
+    product: NexusGenRootTypes['Product']; // Product!
+    quantity: number; // Int!
+    status: number; // Int!
+    timestamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Category: { // field return type
+    categoryId: string; // String!
+    categoryName: string; // String!
+    products: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+  }
+  CategoryProblem: { // field return type
+    categoryProblemId: string; // String!
+    categoryProblemN: string; // String!
+    issues: Array<NexusGenRootTypes['Issue'] | null>; // [Issue]!
+    position: NexusGenRootTypes['Position']; // Position!
+  }
+  CountItemA: { // field return type
+    _count: NexusGenScalars['JSON'] | null; // JSON
+    product: NexusGenRootTypes['Product'] | null; // Product
+    productId: string | null; // String
+  }
+  Customer: { // field return type
+    carts: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    customerId: string; // String!
+    dob: NexusGenScalars['DateTime']; // DateTime!
+    email: string; // String!
+    firstName: string; // String!
+    issues: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    lastName: string; // String!
+    orders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    password: string; // String!
+    tel: string; // String!
+  }
+  Invoice: { // field return type
+    billings: Array<NexusGenRootTypes['Billing'] | null> | null; // [Billing]
+    costAmount: number; // Float!
+    deadlineDate: NexusGenScalars['DateTime']; // DateTime!
+    invoiceId: string; // String!
+    order: NexusGenRootTypes['Order']; // Order!
+    paymentType: NexusGenRootTypes['PaymentType']; // PaymentType!
+  }
+  Issue: { // field return type
+    categoryProblem: NexusGenRootTypes['CategoryProblem']; // CategoryProblem!
+    customer: NexusGenRootTypes['Customer']; // Customer!
+    description: string; // String!
+    issueId: string; // String!
+    order: NexusGenRootTypes['Order'] | null; // Order
+    staff: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    status: boolean; // Boolean!
+    timestamp: NexusGenScalars['DateTime']; // DateTime!
+  }
+  Item: { // field return type
+    itemId: string; // String!
+    itemRegisterDate: NexusGenScalars['DateTime']; // DateTime!
+    itemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
+    product: NexusGenRootTypes['Product']; // Product!
+    stockAddress: string; // String!
+    subOrders: Array<NexusGenRootTypes['SubOrder'] | null> | null; // [SubOrder]
+  }
+  ItemStatus: { // field return type
+    itemStatusId: string; // String!
+    itemStatusName: string; // String!
+    items: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+  }
+  Mutation: { // field return type
+    addBilling: NexusGenRootTypes['Billing']; // Billing!
+    addCart: NexusGenRootTypes['Cart']; // Cart!
+    addCategory: NexusGenRootTypes['Category']; // Category!
+    addCategoryProblem: NexusGenRootTypes['CategoryProblem']; // CategoryProblem!
+    addCustomer: NexusGenRootTypes['Customer']; // Customer!
+    addInvoice: NexusGenRootTypes['Invoice']; // Invoice!
+    addIssue: NexusGenRootTypes['Issue']; // Issue!
+    addIssueByCustomer: NexusGenRootTypes['Issue']; // Issue!
+    addItem: NexusGenRootTypes['Item']; // Item!
+    addItemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
+    addOrder: NexusGenRootTypes['Order']; // Order!
+    addOrderCart: NexusGenRootTypes['OrderCart']; // OrderCart!
+    addOrderPromotion: NexusGenRootTypes['OrderPromotion']; // OrderPromotion!
+    addOrderStatus: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+    addOrderTransport: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    addPaymentMethods: NexusGenRootTypes['PaymentMethod']; // PaymentMethod!
+    addPaymentType: NexusGenRootTypes['PaymentType']; // PaymentType!
+    addPosition: NexusGenRootTypes['Position']; // Position!
+    addProduct: NexusGenRootTypes['Product']; // Product!
+    addPromotion: NexusGenRootTypes['Promotion']; // Promotion!
+    addStaffInfo: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    addSubOrder: NexusGenRootTypes['SubOrder']; // SubOrder!
+    addUserCart: NexusGenRootTypes['Cart']; // Cart!
+    addUserOrder: NexusGenRootTypes['Order']; // Order!
+    addVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
+    addVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
+    deleteBilling: NexusGenRootTypes['Billing']; // Billing!
+    deleteCart: NexusGenRootTypes['Cart']; // Cart!
+    deleteCategory: NexusGenRootTypes['Category']; // Category!
+    deleteCategoryProblem: NexusGenRootTypes['CategoryProblem']; // CategoryProblem!
+    deleteCustomer: NexusGenRootTypes['Customer']; // Customer!
+    deleteInvoice: NexusGenRootTypes['Invoice']; // Invoice!
+    deleteIssue: NexusGenRootTypes['Issue']; // Issue!
+    deleteItem: NexusGenRootTypes['Item']; // Item!
+    deleteItemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
+    deleteOrder: NexusGenRootTypes['Order']; // Order!
+    deleteOrderCart: NexusGenRootTypes['OrderCart']; // OrderCart!
+    deleteOrderPromotion: NexusGenRootTypes['OrderPromotion']; // OrderPromotion!
+    deleteOrderStatus: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+    deleteOrderTransport: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    deletePaymentMethods: NexusGenRootTypes['PaymentMethod']; // PaymentMethod!
+    deletePaymentType: NexusGenRootTypes['PaymentType']; // PaymentType!
+    deletePosition: NexusGenRootTypes['Position']; // Position!
+    deleteProduct: NexusGenRootTypes['Product']; // Product!
+    deletePromotion: NexusGenRootTypes['Promotion']; // Promotion!
+    deleteStaffInfo: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    deleteSubOrder: NexusGenRootTypes['SubOrder']; // SubOrder!
+    deleteVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
+    deleteVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
+    editTimeback: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    editTimego: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    editVehicleStatus: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    loginstaff: NexusGenRootTypes['AuthPayloadStaff']; // AuthPayloadStaff!
+    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    updateBilling: NexusGenRootTypes['Billing']; // Billing!
+    updateCart: NexusGenRootTypes['Cart']; // Cart!
+    updateCategory: NexusGenRootTypes['Category']; // Category!
+    updateCategoryProblem: NexusGenRootTypes['CategoryProblem']; // CategoryProblem!
+    updateCustomer: NexusGenRootTypes['Customer']; // Customer!
+    updateInvoice: NexusGenRootTypes['Invoice']; // Invoice!
+    updateIssue: NexusGenRootTypes['Issue']; // Issue!
+    updateItem: NexusGenRootTypes['Item']; // Item!
+    updateItemStatus: NexusGenRootTypes['ItemStatus']; // ItemStatus!
+    updateItemstatusInItem: NexusGenRootTypes['Item']; // Item!
+    updateOrder: NexusGenRootTypes['Order']; // Order!
+    updateOrderStatus: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+    updateOrderTransport: NexusGenRootTypes['OrderTransport']; // OrderTransport!
+    updatePaymentMethods: NexusGenRootTypes['PaymentMethod']; // PaymentMethod!
+    updatePaymentType: NexusGenRootTypes['PaymentType']; // PaymentType!
+    updatePosition: NexusGenRootTypes['Position']; // Position!
+    updateProduct: NexusGenRootTypes['Product']; // Product!
+    updatePromotion: NexusGenRootTypes['Promotion']; // Promotion!
+    updateStaffInfo: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    updateStatusOfIssue: NexusGenRootTypes['Issue']; // Issue!
+    updateStatusinOrder: NexusGenRootTypes['Order']; // Order!
+    updateVehicleInfo: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
+    updateVehicleType: NexusGenRootTypes['VehicleType']; // VehicleType!
+  }
+  Order: { // field return type
+    addressDetail: string; // String!
+    customer: NexusGenRootTypes['Customer']; // Customer!
+    invoices: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    issues: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    latitude: number; // Float!
+    longitude: number; // Float!
+    orderCarts: Array<NexusGenRootTypes['OrderCart'] | null> | null; // [OrderCart]
+    orderDate: NexusGenScalars['DateTime']; // DateTime!
+    orderId: string; // ID!
+    orderPromotions: Array<NexusGenRootTypes['OrderPromotion'] | null> | null; // [OrderPromotion]
+    orderTransports: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    receiver: string | null; // String
+    receiverTel: string; // String!
+    returnDate: NexusGenScalars['DateTime'] | null; // DateTime
+    sendingDate: NexusGenScalars['DateTime'] | null; // DateTime
+    status: NexusGenRootTypes['OrderStatus']; // OrderStatus!
+    street: string; // String!
+    subOrders: Array<NexusGenRootTypes['SubOrder'] | null> | null; // [SubOrder]
+    subdistrict: string; // String!
+    totalPrice: number; // Float!
+    zipcode: string; // String!
+  }
+  OrderCart: { // field return type
+    cart: NexusGenRootTypes['Cart']; // Cart!
+    order: NexusGenRootTypes['Order']; // Order!
+  }
+  OrderPromotion: { // field return type
+    order: NexusGenRootTypes['Order']; // Order!
+    promotion: NexusGenRootTypes['Promotion']; // Promotion!
+  }
+  OrderStatus: { // field return type
+    orders: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    statusCode: number; // Int!
+    statusDef: string; // String!
+  }
+  OrderTransport: { // field return type
+    isReturn: boolean; // Boolean!
+    license: NexusGenRootTypes['VehicleInfo']; // VehicleInfo!
+    order: NexusGenRootTypes['Order']; // Order!
+    staff: NexusGenRootTypes['StaffInfo']; // StaffInfo!
+    timeAssign: NexusGenScalars['DateTime']; // DateTime!
+    timeBack: NexusGenScalars['DateTime'] | null; // DateTime
+    timeGo: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  PaymentMethod: { // field return type
+    billings: Array<NexusGenRootTypes['Billing'] | null> | null; // [Billing]
+    paymentMethodId: string; // String!
+    paymentMethodName: string; // String!
+  }
+  PaymentType: { // field return type
+    interest: number; // Float!
+    invoices: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    paymentTypeId: string; // ID!
+    paymentTypeName: string; // String!
+    times: number; // Int!
+  }
+  Position: { // field return type
+    categoryProblems: Array<NexusGenRootTypes['CategoryProblem'] | null> | null; // [CategoryProblem]
+    positionId: string; // String!
+    positionN: string; // String!
+    staffInfos: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+  }
+  Product: { // field return type
+    carts: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    category: NexusGenRootTypes['Category']; // Category!
+    color: string; // String!
+    depth: number; // Float!
+    description: string | null; // String
+    height: number; // Float!
+    items: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+    material: string; // String!
+    pictureUrl: string; // String!
+    pricePerDay: number; // Float!
+    productId: string; // String!
+    productName: string; // String!
+    weight: number; // Float!
+    width: number; // Float!
+  }
+  Promotion: { // field return type
+    discountPercent: number; // Float!
+    endDate: NexusGenScalars['DateTime']; // DateTime!
+    maximumDiscount: number; // Float!
+    minimumPrice: number; // Float!
+    orderPromotions: Array<NexusGenRootTypes['OrderPromotion'] | null>; // [OrderPromotion]!
+    promotionCode: string; // ID!
+    startDate: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    Profile: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    StaffProfile: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+    SummaryAllproduct: Array<NexusGenRootTypes['CountItemA'] | null> | null; // [CountItemA]
+    allBilling: Array<NexusGenRootTypes['Billing'] | null> | null; // [Billing]
+    allCart: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    allCategory: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    allCategoryProblem: Array<NexusGenRootTypes['CategoryProblem'] | null> | null; // [CategoryProblem]
+    allCustomer: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    allInvoice: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    allIssue: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    allItem: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+    allItemStatus: Array<NexusGenRootTypes['ItemStatus'] | null> | null; // [ItemStatus]
+    allOrder: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    allOrderCart: Array<NexusGenRootTypes['OrderCart'] | null> | null; // [OrderCart]
+    allOrderPromotion: Array<NexusGenRootTypes['OrderPromotion'] | null> | null; // [OrderPromotion]
+    allOrderStatus: Array<NexusGenRootTypes['OrderStatus'] | null> | null; // [OrderStatus]
+    allOrderTransport: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    allPaymentMethods: Array<NexusGenRootTypes['PaymentMethod'] | null> | null; // [PaymentMethod]
+    allPaymentType: Array<NexusGenRootTypes['PaymentType'] | null> | null; // [PaymentType]
+    allPosition: Array<NexusGenRootTypes['Position'] | null> | null; // [Position]
+    allProduct: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    allPromotion: Array<NexusGenRootTypes['Promotion'] | null> | null; // [Promotion]
+    allStaffInfo: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+    allSubOrder: Array<NexusGenRootTypes['SubOrder'] | null> | null; // [SubOrder]
+    allVehicleInfo: Array<NexusGenRootTypes['VehicleInfo'] | null> | null; // [VehicleInfo]
+    allVehicleType: Array<NexusGenRootTypes['VehicleType'] | null> | null; // [VehicleType]
+    searchBillingByBillingId: Array<NexusGenRootTypes['Billing'] | null> | null; // [Billing]
+    searchBillingByPayerName: Array<NexusGenRootTypes['Billing'] | null> | null; // [Billing]
+    searchCartByCartNo: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    searchCartByCustomerId: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    searchCartByStatus: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    searchCartByproductId: Array<NexusGenRootTypes['Cart'] | null> | null; // [Cart]
+    searchCategoryByCategoryId: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    searchCategoryByCategoryName: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
+    searchCategoryProbByCategoryProbId: Array<NexusGenRootTypes['CategoryProblem'] | null> | null; // [CategoryProblem]
+    searchCategoryProbByCategoryProbName: Array<NexusGenRootTypes['CategoryProblem'] | null> | null; // [CategoryProblem]
+    searchCustomerByCustomerID: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    searchCustomerByCustomerName: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    searchCustomerByEmail: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    searchCustomerByOrderID: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    searchCustomerByTel: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
+    searchInvoiceByCostAmount: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    searchInvoiceByInvoiceId: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    searchInvoiceByOrderId: Array<NexusGenRootTypes['Invoice'] | null> | null; // [Invoice]
+    searchIssueByCategoryProblemId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchIssueByIssueId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchIssueByIssueId_Status: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchIssueByStaffId: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    searchItemByItemId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+    searchItemByItemId_ProductId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+    searchItemByItemStatusId: Array<NexusGenRootTypes['Item'] | null> | null; // [Item]
+    searchItemStatusByItemStatusId: Array<NexusGenRootTypes['ItemStatus'] | null> | null; // [ItemStatus]
+    searchItemStatusByItemStatusName: Array<NexusGenRootTypes['ItemStatus'] | null> | null; // [ItemStatus]
+    searchOrderByCustomerId: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    searchOrderByOrderId: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    searchOrderBySenidingDate: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    searchOrderByStatusCode: Array<NexusGenRootTypes['Order'] | null> | null; // [Order]
+    searchOrderCartByPKs: Array<NexusGenRootTypes['OrderCart'] | null> | null; // [OrderCart]
+    searchOrderPromotionByPKs: Array<NexusGenRootTypes['OrderPromotion'] | null> | null; // [OrderPromotion]
+    searchOrderStatusByStatusCode: Array<NexusGenRootTypes['OrderStatus'] | null> | null; // [OrderStatus]
+    searchOrderStatusByStatusDef: Array<NexusGenRootTypes['OrderStatus'] | null> | null; // [OrderStatus]
+    searchOrderTransportByOrderId: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    searchOrderTransportByTimeAssign: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    searchPaymentMethodById: Array<NexusGenRootTypes['PaymentMethod'] | null> | null; // [PaymentMethod]
+    searchPaymentTypeById: Array<NexusGenRootTypes['PaymentType'] | null> | null; // [PaymentType]
+    searchPostionById: Array<NexusGenRootTypes['Position'] | null> | null; // [Position]
+    searchPostionByName: Array<NexusGenRootTypes['Position'] | null> | null; // [Position]
+    searchProduct: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    searchProductByProductId: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    searchProductByProductName: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
+    searchPromotionByPromotionCode: Array<NexusGenRootTypes['Promotion'] | null> | null; // [Promotion]
+    searchStaffInfoByName: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+    searchStaffInfoByPostionId: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+    searchStaffInfoByStaffId: Array<NexusGenRootTypes['StaffInfo'] | null> | null; // [StaffInfo]
+    searchSubOrderByPKs: Array<NexusGenRootTypes['SubOrder'] | null> | null; // [SubOrder]
+    searchVehicleInfoByBrand_Model: Array<NexusGenRootTypes['VehicleInfo'] | null> | null; // [VehicleInfo]
+    searchVehicleInfoByStatus: Array<NexusGenRootTypes['VehicleInfo'] | null> | null; // [VehicleInfo]
+    searchVehicleInfoVehicleLicence: Array<NexusGenRootTypes['VehicleInfo'] | null> | null; // [VehicleInfo]
+    searchVehicleTypeByVehicleTypeName: Array<NexusGenRootTypes['VehicleType'] | null> | null; // [VehicleType]
+  }
+  StaffInfo: { // field return type
+    dob: NexusGenScalars['DateTime']; // DateTime!
+    issues: Array<NexusGenRootTypes['Issue'] | null> | null; // [Issue]
+    orderTransports: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    password: string; // String!
+    position: NexusGenRootTypes['Position']; // Position!
+    prefix: string; // String!
+    salary: number; // Float!
+    staffFirstName: string; // String!
+    staffId: string; // String!
+    staffLastName: string; // String!
+    startDate: NexusGenScalars['DateTime']; // DateTime!
+    tel: string; // String!
+  }
+  SubOrder: { // field return type
+    item: NexusGenRootTypes['Item']; // Item!
+    order: NexusGenRootTypes['Order']; // Order!
+  }
+  VehicleInfo: { // field return type
+    brand: string; // String!
+    model: string; // String!
+    orderTransports: Array<NexusGenRootTypes['OrderTransport'] | null> | null; // [OrderTransport]
+    registerDate: NexusGenScalars['DateTime']; // DateTime!
+    status: boolean; // Boolean!
+    vehicleLicence: string; // ID!
+    vehicleType: NexusGenRootTypes['VehicleType'] | null; // VehicleType
+  }
+  VehicleType: { // field return type
+    vehicleInfos: Array<NexusGenRootTypes['VehicleInfo'] | null> | null; // [VehicleInfo]
+    vehicleTypeId: string; // ID!
+    vehicleTypeN: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    customer: 'Customer'
+    token: 'String'
+  }
+  AuthPayloadStaff: { // field return type name
+    staff: 'StaffInfo'
+    token: 'String'
+  }
+  Billing: { // field return type name
+    billTimestamp: 'DateTime'
+    billingId: 'String'
+    firstName: 'String'
+    invoice: 'Invoice'
+    lastName: 'String'
+    paidAmount: 'Float'
+    paymentMethod: 'PaymentMethod'
+    paymentSlipUrl: 'String'
+    tel: 'String'
+  }
+  Cart: { // field return type name
+    cartNo: 'String'
+    customer: 'Customer'
+    orderCarts: 'OrderCart'
+    product: 'Product'
+    quantity: 'Int'
+    status: 'Int'
+    timestamp: 'DateTime'
+  }
+  Category: { // field return type name
+    categoryId: 'String'
+    categoryName: 'String'
+    products: 'Product'
+  }
+  CategoryProblem: { // field return type name
+    categoryProblemId: 'String'
+    categoryProblemN: 'String'
+    issues: 'Issue'
+    position: 'Position'
+  }
+  CountItemA: { // field return type name
+    _count: 'JSON'
+    product: 'Product'
+    productId: 'String'
+  }
+  Customer: { // field return type name
+    carts: 'Cart'
+    customerId: 'String'
+    dob: 'DateTime'
+    email: 'String'
+    firstName: 'String'
+    issues: 'Issue'
+    lastName: 'String'
+    orders: 'Order'
+    password: 'String'
+    tel: 'String'
+  }
+  Invoice: { // field return type name
+    billings: 'Billing'
+    costAmount: 'Float'
+    deadlineDate: 'DateTime'
+    invoiceId: 'String'
+    order: 'Order'
+    paymentType: 'PaymentType'
+  }
+  Issue: { // field return type name
+    categoryProblem: 'CategoryProblem'
+    customer: 'Customer'
+    description: 'String'
+    issueId: 'String'
+    order: 'Order'
+    staff: 'StaffInfo'
+    status: 'Boolean'
+    timestamp: 'DateTime'
+  }
+  Item: { // field return type name
+    itemId: 'String'
+    itemRegisterDate: 'DateTime'
+    itemStatus: 'ItemStatus'
+    product: 'Product'
+    stockAddress: 'String'
+    subOrders: 'SubOrder'
+  }
+  ItemStatus: { // field return type name
+    itemStatusId: 'String'
+    itemStatusName: 'String'
+    items: 'Item'
+  }
+  Mutation: { // field return type name
+    addBilling: 'Billing'
+    addCart: 'Cart'
+    addCategory: 'Category'
+    addCategoryProblem: 'CategoryProblem'
+    addCustomer: 'Customer'
+    addInvoice: 'Invoice'
+    addIssue: 'Issue'
+    addIssueByCustomer: 'Issue'
+    addItem: 'Item'
+    addItemStatus: 'ItemStatus'
+    addOrder: 'Order'
+    addOrderCart: 'OrderCart'
+    addOrderPromotion: 'OrderPromotion'
+    addOrderStatus: 'OrderStatus'
+    addOrderTransport: 'OrderTransport'
+    addPaymentMethods: 'PaymentMethod'
+    addPaymentType: 'PaymentType'
+    addPosition: 'Position'
+    addProduct: 'Product'
+    addPromotion: 'Promotion'
+    addStaffInfo: 'StaffInfo'
+    addSubOrder: 'SubOrder'
+    addUserCart: 'Cart'
+    addUserOrder: 'Order'
+    addVehicleInfo: 'VehicleInfo'
+    addVehicleType: 'VehicleType'
+    deleteBilling: 'Billing'
+    deleteCart: 'Cart'
+    deleteCategory: 'Category'
+    deleteCategoryProblem: 'CategoryProblem'
+    deleteCustomer: 'Customer'
+    deleteInvoice: 'Invoice'
+    deleteIssue: 'Issue'
+    deleteItem: 'Item'
+    deleteItemStatus: 'ItemStatus'
+    deleteOrder: 'Order'
+    deleteOrderCart: 'OrderCart'
+    deleteOrderPromotion: 'OrderPromotion'
+    deleteOrderStatus: 'OrderStatus'
+    deleteOrderTransport: 'OrderTransport'
+    deletePaymentMethods: 'PaymentMethod'
+    deletePaymentType: 'PaymentType'
+    deletePosition: 'Position'
+    deleteProduct: 'Product'
+    deletePromotion: 'Promotion'
+    deleteStaffInfo: 'StaffInfo'
+    deleteSubOrder: 'SubOrder'
+    deleteVehicleInfo: 'VehicleInfo'
+    deleteVehicleType: 'VehicleType'
+    editTimeback: 'OrderTransport'
+    editTimego: 'OrderTransport'
+    editVehicleStatus: 'VehicleInfo'
+    login: 'AuthPayload'
+    loginstaff: 'AuthPayloadStaff'
+    signup: 'AuthPayload'
+    updateBilling: 'Billing'
+    updateCart: 'Cart'
+    updateCategory: 'Category'
+    updateCategoryProblem: 'CategoryProblem'
+    updateCustomer: 'Customer'
+    updateInvoice: 'Invoice'
+    updateIssue: 'Issue'
+    updateItem: 'Item'
+    updateItemStatus: 'ItemStatus'
+    updateItemstatusInItem: 'Item'
+    updateOrder: 'Order'
+    updateOrderStatus: 'OrderStatus'
+    updateOrderTransport: 'OrderTransport'
+    updatePaymentMethods: 'PaymentMethod'
+    updatePaymentType: 'PaymentType'
+    updatePosition: 'Position'
+    updateProduct: 'Product'
+    updatePromotion: 'Promotion'
+    updateStaffInfo: 'StaffInfo'
+    updateStatusOfIssue: 'Issue'
+    updateStatusinOrder: 'Order'
+    updateVehicleInfo: 'VehicleInfo'
+    updateVehicleType: 'VehicleType'
+  }
+  Order: { // field return type name
+    addressDetail: 'String'
+    customer: 'Customer'
+    invoices: 'Invoice'
+    issues: 'Issue'
+    latitude: 'Float'
+    longitude: 'Float'
+    orderCarts: 'OrderCart'
+    orderDate: 'DateTime'
+    orderId: 'ID'
+    orderPromotions: 'OrderPromotion'
+    orderTransports: 'OrderTransport'
+    receiver: 'String'
+    receiverTel: 'String'
+    returnDate: 'DateTime'
+    sendingDate: 'DateTime'
+    status: 'OrderStatus'
+    street: 'String'
+    subOrders: 'SubOrder'
+    subdistrict: 'String'
+    totalPrice: 'Float'
+    zipcode: 'String'
+  }
+  OrderCart: { // field return type name
+    cart: 'Cart'
+    order: 'Order'
+  }
+  OrderPromotion: { // field return type name
+    order: 'Order'
+    promotion: 'Promotion'
+  }
+  OrderStatus: { // field return type name
+    orders: 'Order'
+    statusCode: 'Int'
+    statusDef: 'String'
+  }
+  OrderTransport: { // field return type name
+    isReturn: 'Boolean'
+    license: 'VehicleInfo'
+    order: 'Order'
+    staff: 'StaffInfo'
+    timeAssign: 'DateTime'
+    timeBack: 'DateTime'
+    timeGo: 'DateTime'
+  }
+  PaymentMethod: { // field return type name
+    billings: 'Billing'
+    paymentMethodId: 'String'
+    paymentMethodName: 'String'
+  }
+  PaymentType: { // field return type name
+    interest: 'Float'
+    invoices: 'Invoice'
+    paymentTypeId: 'ID'
+    paymentTypeName: 'String'
+    times: 'Int'
+  }
+  Position: { // field return type name
+    categoryProblems: 'CategoryProblem'
+    positionId: 'String'
+    positionN: 'String'
+    staffInfos: 'StaffInfo'
+  }
+  Product: { // field return type name
+    carts: 'Cart'
+    category: 'Category'
+    color: 'String'
+    depth: 'Float'
+    description: 'String'
+    height: 'Float'
+    items: 'Item'
+    material: 'String'
+    pictureUrl: 'String'
+    pricePerDay: 'Float'
+    productId: 'String'
+    productName: 'String'
+    weight: 'Float'
+    width: 'Float'
+  }
+  Promotion: { // field return type name
+    discountPercent: 'Float'
+    endDate: 'DateTime'
+    maximumDiscount: 'Float'
+    minimumPrice: 'Float'
+    orderPromotions: 'OrderPromotion'
+    promotionCode: 'ID'
+    startDate: 'DateTime'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    Profile: 'Customer'
+    StaffProfile: 'StaffInfo'
+    SummaryAllproduct: 'CountItemA'
+    allBilling: 'Billing'
+    allCart: 'Cart'
+    allCategory: 'Category'
+    allCategoryProblem: 'CategoryProblem'
+    allCustomer: 'Customer'
+    allInvoice: 'Invoice'
+    allIssue: 'Issue'
+    allItem: 'Item'
+    allItemStatus: 'ItemStatus'
+    allOrder: 'Order'
+    allOrderCart: 'OrderCart'
+    allOrderPromotion: 'OrderPromotion'
+    allOrderStatus: 'OrderStatus'
+    allOrderTransport: 'OrderTransport'
+    allPaymentMethods: 'PaymentMethod'
+    allPaymentType: 'PaymentType'
+    allPosition: 'Position'
+    allProduct: 'Product'
+    allPromotion: 'Promotion'
+    allStaffInfo: 'StaffInfo'
+    allSubOrder: 'SubOrder'
+    allVehicleInfo: 'VehicleInfo'
+    allVehicleType: 'VehicleType'
+    searchBillingByBillingId: 'Billing'
+    searchBillingByPayerName: 'Billing'
+    searchCartByCartNo: 'Cart'
+    searchCartByCustomerId: 'Cart'
+    searchCartByStatus: 'Cart'
+    searchCartByproductId: 'Cart'
+    searchCategoryByCategoryId: 'Category'
+    searchCategoryByCategoryName: 'Category'
+    searchCategoryProbByCategoryProbId: 'CategoryProblem'
+    searchCategoryProbByCategoryProbName: 'CategoryProblem'
+    searchCustomerByCustomerID: 'Customer'
+    searchCustomerByCustomerName: 'Customer'
+    searchCustomerByEmail: 'Customer'
+    searchCustomerByOrderID: 'Order'
+    searchCustomerByTel: 'Customer'
+    searchInvoiceByCostAmount: 'Invoice'
+    searchInvoiceByInvoiceId: 'Invoice'
+    searchInvoiceByOrderId: 'Invoice'
+    searchIssueByCategoryProblemId: 'Issue'
+    searchIssueByIssueId: 'Issue'
+    searchIssueByIssueId_Status: 'Issue'
+    searchIssueByStaffId: 'Issue'
+    searchItemByItemId: 'Item'
+    searchItemByItemId_ProductId: 'Item'
+    searchItemByItemStatusId: 'Item'
+    searchItemStatusByItemStatusId: 'ItemStatus'
+    searchItemStatusByItemStatusName: 'ItemStatus'
+    searchOrderByCustomerId: 'Order'
+    searchOrderByOrderId: 'Order'
+    searchOrderBySenidingDate: 'Order'
+    searchOrderByStatusCode: 'Order'
+    searchOrderCartByPKs: 'OrderCart'
+    searchOrderPromotionByPKs: 'OrderPromotion'
+    searchOrderStatusByStatusCode: 'OrderStatus'
+    searchOrderStatusByStatusDef: 'OrderStatus'
+    searchOrderTransportByOrderId: 'OrderTransport'
+    searchOrderTransportByTimeAssign: 'OrderTransport'
+    searchPaymentMethodById: 'PaymentMethod'
+    searchPaymentTypeById: 'PaymentType'
+    searchPostionById: 'Position'
+    searchPostionByName: 'Position'
+    searchProduct: 'Product'
+    searchProductByProductId: 'Product'
+    searchProductByProductName: 'Product'
+    searchPromotionByPromotionCode: 'Promotion'
+    searchStaffInfoByName: 'StaffInfo'
+    searchStaffInfoByPostionId: 'StaffInfo'
+    searchStaffInfoByStaffId: 'StaffInfo'
+    searchSubOrderByPKs: 'SubOrder'
+    searchVehicleInfoByBrand_Model: 'VehicleInfo'
+    searchVehicleInfoByStatus: 'VehicleInfo'
+    searchVehicleInfoVehicleLicence: 'VehicleInfo'
+    searchVehicleTypeByVehicleTypeName: 'VehicleType'
+  }
+  StaffInfo: { // field return type name
+    dob: 'DateTime'
+    issues: 'Issue'
+    orderTransports: 'OrderTransport'
+    password: 'String'
+    position: 'Position'
+    prefix: 'String'
+    salary: 'Float'
+    staffFirstName: 'String'
+    staffId: 'String'
+    staffLastName: 'String'
+    startDate: 'DateTime'
+    tel: 'String'
+  }
+  SubOrder: { // field return type name
+    item: 'Item'
+    order: 'Order'
+  }
+  VehicleInfo: { // field return type name
+    brand: 'String'
+    model: 'String'
+    orderTransports: 'OrderTransport'
+    registerDate: 'DateTime'
+    status: 'Boolean'
+    vehicleLicence: 'ID'
+    vehicleType: 'VehicleType'
+  }
+  VehicleType: { // field return type name
+    vehicleInfos: 'VehicleInfo'
+    vehicleTypeId: 'ID'
+    vehicleTypeN: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    addBilling: { // args
+      billTimestamp: string; // String!
+      firstName: string; // String!
+      invoiceId: string; // String!
+      lastName: string; // String!
+      paidAmount: number; // Float!
+      paymentMethodId: string; // String!
+      paymentSlipUrl: string; // String!
+      tel: string; // String!
+    }
+    addCart: { // args
+      customerId: string; // String!
+      productId: string; // String!
+      quantity: number; // Int!
+      status: number; // Int!
+      timestamp: string; // String!
+    }
+    addCategory: { // args
+      categoryId: string; // String!
+      categoryName: string; // String!
+    }
+    addCategoryProblem: { // args
+      categoryProblemId: string; // String!
+      categoryProblemN: string; // String!
+      positionId: string; // String!
+    }
+    addCustomer: { // args
+      dob: string; // String!
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+      password: string; // String!
+      tel: string; // String!
+    }
+    addInvoice: { // args
+      costAmount: number; // Float!
+      deadlineDate: string; // String!
+      orderId: string; // String!
+      paymentTypeId: string; // String!
+    }
+    addIssue: { // args
+      categoryProblemId: string; // String!
+      customerId: string; // String!
+      description: string; // String!
+      orderId?: string | null; // String
+      staffId: string; // String!
+      status: number; // Int!
+      timestamp: string; // String!
+    }
+    addIssueByCustomer: { // args
+      categoryProblemId: string; // String!
+      description: string; // String!
+      staffId: string; // String!
+    }
+    addItem: { // args
+      itemId: string; // String!
+      itemRegisterDate: string; // String!
+      itemStatusId: string; // String!
+      productId: string; // String!
+      stockAddress: string; // String!
+    }
+    addItemStatus: { // args
+      itemStatusId: string; // String!
+      itemStatusName: string; // String!
+    }
+    addOrder: { // args
+      addressDetail: string; // String!
+      customerId: string; // String!
+      latitude: number; // Float!
+      longitude: number; // Float!
+      receiverTel: string; // String!
+      returnDate: string; // String!
+      sendingDate: string; // String!
+      statusCode: number; // Int!
+      street: string; // String!
+      subdistrict: string; // String!
+      totalPrice: number; // Float!
+      zipcode: string; // String!
+    }
+    addOrderCart: { // args
+      cartNo: string; // String!
+      orderId: string; // String!
+    }
+    addOrderPromotion: { // args
+      orderId: string; // String!
+      promotionCode: string; // String!
+    }
+    addOrderStatus: { // args
+      statusCode: number; // Int!
+      statusDef: string; // String!
+    }
+    addOrderTransport: { // args
+      isReturn: boolean; // Boolean!
+      orderId: string; // String!
+      staffId: string; // String!
+      timeAssign: string; // String!
+      vehicleLicense: string; // String!
+    }
+    addPaymentMethods: { // args
+      paymentMethodId: string; // String!
+      paymentMethodName: string; // String!
+    }
+    addPaymentType: { // args
+      interest: number; // Float!
+      paymentTypeId: string; // String!
+      paymentTypeName: string; // String!
+      times: number; // Int!
+    }
+    addPosition: { // args
+      positionId: string; // String!
+      positionN: string; // String!
+    }
+    addProduct: { // args
+      categoryId: string; // String!
+      color: string; // String!
+      depth: number; // Float!
+      description?: string | null; // String
+      height: number; // Float!
+      material: string; // String!
+      pictureUrl: string; // String!
+      pricePerDay: number; // Float!
+      productId: string; // String!
+      productName: string; // String!
+      weight: number; // Float!
+      width: number; // Float!
+    }
+    addPromotion: { // args
+      discountPercent: number; // Float!
+      endDate: string; // String!
+      maximumDiscount: number; // Float!
+      minimumPrice: number; // Float!
+      startDate: string; // String!
+    }
+    addStaffInfo: { // args
+      dob: string; // String!
+      password: string; // String!
+      positionId: string; // String!
+      prefix: string; // String!
+      salary: number; // Float!
+      staffFirstName: string; // String!
+      staffLastName: string; // String!
+      startDate: string; // String!
+      tel: string; // String!
+    }
+    addSubOrder: { // args
+      itemId: string; // String!
+      orderId: string; // String!
+    }
+    addUserCart: { // args
+      productId: string; // String!
+      quantity: number; // Int!
+      status: number; // Int!
+      timestamp: string; // String!
+    }
+    addUserOrder: { // args
+      addressDetail: string; // String!
+      latitude: number; // Float!
+      longitude: number; // Float!
+      receiverTel: string; // String!
+      returnDate: string; // String!
+      sendingDate: string; // String!
+      statusCode: number; // Int!
+      street: string; // String!
+      subdistrict: string; // String!
+      totalPrice: number; // Float!
+      zipcode: string; // String!
+    }
+    addVehicleInfo: { // args
+      brand: string; // String!
+      model: string; // String!
+      registerDate: string; // String!
+      status: boolean; // Boolean!
+      vehicleLicence: string; // String!
+      vehicleTypeId: string; // String!
+    }
+    addVehicleType: { // args
+      vehicleTypeId: string; // String!
+      vehicleTypeN: string; // String!
+    }
+    deleteBilling: { // args
+      billTimestamp: string; // String!
+      billingId: string; // String!
+    }
+    deleteCart: { // args
+      cartNo: string; // String!
+      customerId: string; // String!
+      productId: string; // String!
+    }
+    deleteCategory: { // args
+      categoryId: string; // String!
+    }
+    deleteCategoryProblem: { // args
+      categoryProblemId: string; // String!
+    }
+    deleteCustomer: { // args
+      customerId: string; // String!
+    }
+    deleteInvoice: { // args
+      invoiceId: string; // String!
+    }
+    deleteIssue: { // args
+      issueId: string; // String!
+    }
+    deleteItem: { // args
+      itemId: string; // String!
+    }
+    deleteItemStatus: { // args
+      itemStatusId: string; // String!
+    }
+    deleteOrder: { // args
+      orderId: string; // String!
+    }
+    deleteOrderCart: { // args
+      cartNo: string; // String!
+      orderId: string; // String!
+    }
+    deleteOrderPromotion: { // args
+      orderId: string; // String!
+      promotionCode: string; // String!
+    }
+    deleteOrderStatus: { // args
+      statusCode: number; // Int!
+    }
+    deleteOrderTransport: { // args
+      orderId: string; // String!
+      timeAssign: string; // String!
+    }
+    deletePaymentMethods: { // args
+      paymentMethodId: string; // String!
+    }
+    deletePaymentType: { // args
+      paymentTypeId: string; // String!
+    }
+    deletePosition: { // args
+      positionId: string; // String!
+    }
+    deleteProduct: { // args
+      productId: string; // String!
+    }
+    deletePromotion: { // args
+      promotionCode: string; // String!
+    }
+    deleteStaffInfo: { // args
+      staffId: string; // String!
+    }
+    deleteSubOrder: { // args
+      itemId: string; // String!
+      orderId: string; // String!
+    }
+    deleteVehicleInfo: { // args
+      vehicleLicence: string; // String!
+    }
+    deleteVehicleType: { // args
+      vehicleTypeId: string; // String!
+    }
+    editTimeback: { // args
+      orderId: string; // String!
+      timeAssign: string; // String!
+      timeBack: string; // String!
+    }
+    editTimego: { // args
+      orderId: string; // String!
+      timeAssign: string; // String!
+      timeGo: string; // String!
+    }
+    editVehicleStatus: { // args
+      status: boolean; // Boolean!
+      vehicleLicence: string; // String!
+    }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    loginstaff: { // args
+      password: string; // String!
+      staffId: string; // String!
+    }
+    signup: { // args
+      dob: string; // String!
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+      password: string; // String!
+      tel: string; // String!
+    }
+    updateBilling: { // args
+      billTimestamp: string; // String!
+      billingId: string; // String!
+      firstName: string; // String!
+      invoiceId: string; // String!
+      lastName: string; // String!
+      paidAmount: number; // Float!
+      paymentMethodId: string; // String!
+      paymentSlipUrl: string; // String!
+      tel: string; // String!
+    }
+    updateCart: { // args
+      cartNo: string; // String!
+      customerId: string; // String!
+      productId: string; // String!
+      quantity: number; // Int!
+      status: number; // Int!
+      timestamp: string; // String!
+    }
+    updateCategory: { // args
+      categoryId: string; // String!
+      categoryName: string; // String!
+    }
+    updateCategoryProblem: { // args
+      categoryProblemId: string; // String!
+      categoryProblemN: string; // String!
+      positionId: string; // String!
+    }
+    updateCustomer: { // args
+      customerId: string; // String!
+      dob: string; // String!
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+      password: string; // String!
+      tel: string; // String!
+    }
+    updateInvoice: { // args
+      costAmount: number; // Float!
+      deadlineDate: string; // String!
+      invoiceId: string; // String!
+      orderId: string; // String!
+      paymentTypeId: string; // String!
+    }
+    updateIssue: { // args
+      categoryProblemId: string; // String!
+      customerId: string; // String!
+      description: string; // String!
+      issueId: string; // String!
+      orderId?: string | null; // String
+      staffId: string; // String!
+      status: number; // Int!
+      timestamp: string; // String!
+    }
+    updateItem: { // args
+      itemId: string; // String!
+      itemRegisterDate: string; // String!
+      itemStatusId: string; // String!
+      productId: string; // String!
+      stockAddress: string; // String!
+    }
+    updateItemStatus: { // args
+      itemStatusId: string; // String!
+      itemStatusName: string; // String!
+    }
+    updateItemstatusInItem: { // args
+      itemId: string; // String!
+      itemStatusId: string; // String!
+    }
+    updateOrder: { // args
+      addressDetail: string; // String!
+      customerId: string; // String!
+      latitude: number; // Float!
+      longitude: number; // Float!
+      orderId: string; // String!
+      receiverTel: string; // String!
+      reciever: string; // String!
+      returnDate: string; // String!
+      sendingDate: string; // String!
+      statusCode: number; // Int!
+      street: string; // String!
+      subdistrict: string; // String!
+      totalPrice: number; // Float!
+      zipcode: string; // String!
+    }
+    updateOrderStatus: { // args
+      statusCode: number; // Int!
+      statusDef: string; // String!
+    }
+    updateOrderTransport: { // args
+      isReturn: boolean; // Boolean!
+      orderId: string; // String!
+      staffId: string; // String!
+      timeAssign: string; // String!
+      timeBack: string; // String!
+      timeGo: string; // String!
+      vehicleLicense: string; // String!
+    }
+    updatePaymentMethods: { // args
+      paymentMethodId: string; // String!
+      paymentMethodName: string; // String!
+    }
+    updatePaymentType: { // args
+      interest: number; // Float!
+      paymentTypeId: string; // String!
+      paymentTypeName: string; // String!
+      times: number; // Int!
+    }
+    updatePosition: { // args
+      positionId: string; // String!
+      positionN: string; // String!
+    }
+    updateProduct: { // args
+      categoryName: string; // String!
+      color: string; // String!
+      depth: number; // Float!
+      description?: string | null; // String
+      height: number; // Float!
+      material: string; // String!
+      pictureUrl: string; // String!
+      pricePerDay: number; // Float!
+      productId: string; // String!
+      productName: string; // String!
+      weight: number; // Float!
+      width: number; // Float!
+    }
+    updatePromotion: { // args
+      discountPercent: number; // Float!
+      endDate: string; // String!
+      maximumDiscount: number; // Float!
+      minimumPrice: number; // Float!
+      promotionCode: string; // String!
+      startDate: string; // String!
+    }
+    updateStaffInfo: { // args
+      dob: string; // String!
+      password: string; // String!
+      positionId: string; // String!
+      prefix: string; // String!
+      salary: number; // Float!
+      staffFirstName: string; // String!
+      staffId: string; // String!
+      staffLastName: string; // String!
+      startDate: string; // String!
+      tel: string; // String!
+    }
+    updateStatusOfIssue: { // args
+      issueId: string; // String!
+      status: number; // Int!
+    }
+    updateStatusinOrder: { // args
+      orderId: string; // String!
+      statusCode: number; // Int!
+    }
+    updateVehicleInfo: { // args
+      brand: string; // String!
+      model: string; // String!
+      registerDate: string; // String!
+      status: boolean; // Boolean!
+      vehicleLicence: string; // String!
+      vehicleTypeId: string; // String!
+    }
+    updateVehicleType: { // args
+      vehicleTypeId: string; // String!
+      vehicleTypeN: string; // String!
+    }
+  }
+  Query: {
+    searchBillingByBillingId: { // args
+      billingId?: string | null; // String
+    }
+    searchBillingByPayerName: { // args
+      firstName?: string | null; // String
+      lastName?: string | null; // String
+    }
+    searchCartByCartNo: { // args
+      cartNo?: string | null; // String
+    }
+    searchCartByCustomerId: { // args
+      customerId?: string | null; // String
+    }
+    searchCartByStatus: { // args
+      status?: number | null; // Int
+    }
+    searchCartByproductId: { // args
+      productId?: string | null; // String
+    }
+    searchCategoryByCategoryId: { // args
+      categoryId?: string | null; // String
+    }
+    searchCategoryByCategoryName: { // args
+      categoryName?: string | null; // String
+    }
+    searchCategoryProbByCategoryProbId: { // args
+      categoryProblemId?: string | null; // String
+    }
+    searchCategoryProbByCategoryProbName: { // args
+      categoryProblemN?: string | null; // String
+    }
+    searchCustomerByCustomerID: { // args
+      customerId?: string | null; // String
+    }
+    searchCustomerByCustomerName: { // args
+      firstName?: string | null; // String
+      lastName?: string | null; // String
+    }
+    searchCustomerByEmail: { // args
+      email?: string | null; // String
+    }
+    searchCustomerByOrderID: { // args
+      orderId?: string | null; // String
+    }
+    searchCustomerByTel: { // args
+      tel?: string | null; // String
+    }
+    searchInvoiceByCostAmount: { // args
+      maximum?: number | null; // Float
+      minimum?: number | null; // Float
+    }
+    searchInvoiceByInvoiceId: { // args
+      invoiceId?: string | null; // String
+      orderId?: string | null; // String
+    }
+    searchInvoiceByOrderId: { // args
+      orderId?: string | null; // String
+    }
+    searchIssueByCategoryProblemId: { // args
+      categoryProblemId?: string | null; // String
+    }
+    searchIssueByIssueId: { // args
+      issueId?: string | null; // String
+    }
+    searchIssueByIssueId_Status: { // args
+      issueId?: string | null; // String
+      status?: number | null; // Int
+    }
+    searchIssueByStaffId: { // args
+      staffId?: string | null; // String
+    }
+    searchItemByItemId: { // args
+      itemId?: string | null; // String
+    }
+    searchItemByItemId_ProductId: { // args
+      itemId?: string | null; // String
+      productId?: string | null; // String
+    }
+    searchItemByItemStatusId: { // args
+      itemStatusId?: string | null; // String
+    }
+    searchItemStatusByItemStatusId: { // args
+      itemStatusId?: string | null; // String
+    }
+    searchItemStatusByItemStatusName: { // args
+      itemStatusName?: string | null; // String
+    }
+    searchOrderByCustomerId: { // args
+      customerId?: string | null; // String
+    }
+    searchOrderByOrderId: { // args
+      orderId?: string | null; // String
+    }
+    searchOrderBySenidingDate: { // args
+      sendingDate?: string | null; // String
+    }
+    searchOrderByStatusCode: { // args
+      statusCode?: number | null; // Int
+    }
+    searchOrderCartByPKs: { // args
+      cartNo?: string | null; // String
+      orderId?: string | null; // String
+    }
+    searchOrderPromotionByPKs: { // args
+      orderId?: string | null; // String
+      promotionCode?: string | null; // String
+    }
+    searchOrderStatusByStatusCode: { // args
+      statusCode?: number | null; // Int
+    }
+    searchOrderStatusByStatusDef: { // args
+      statusDef?: string | null; // String
+    }
+    searchOrderTransportByOrderId: { // args
+      orderId?: string | null; // String
+    }
+    searchOrderTransportByTimeAssign: { // args
+      timeAssign?: string | null; // String
+    }
+    searchPaymentMethodById: { // args
+      paymentMethodId?: string | null; // String
+    }
+    searchPaymentTypeById: { // args
+      paymentTypeId?: string | null; // String
+    }
+    searchPostionById: { // args
+      positionId?: string | null; // String
+    }
+    searchPostionByName: { // args
+      positionN?: string | null; // String
+    }
+    searchProduct: { // args
+      filter?: string | null; // String
+    }
+    searchProductByProductId: { // args
+      productId?: string | null; // String
+    }
+    searchProductByProductName: { // args
+      productName?: string | null; // String
+    }
+    searchPromotionByPromotionCode: { // args
+      promotionCode?: string | null; // String
+    }
+    searchStaffInfoByName: { // args
+      staffFirstName?: string | null; // String
+      staffLastName?: string | null; // String
+    }
+    searchStaffInfoByPostionId: { // args
+      positionId?: string | null; // String
+    }
+    searchStaffInfoByStaffId: { // args
+      staffId?: string | null; // String
+    }
+    searchSubOrderByPKs: { // args
+      itemId?: string | null; // String
+      orderId?: string | null; // String
+    }
+    searchVehicleInfoByBrand_Model: { // args
+      brand?: string | null; // String
+      model?: string | null; // String
+    }
+    searchVehicleInfoByStatus: { // args
+      status?: boolean | null; // Boolean
+    }
+    searchVehicleInfoVehicleLicence: { // args
+      vehicleLicence?: string | null; // String
+    }
+    searchVehicleTypeByVehicleTypeName: { // args
+      vehicleTypeN?: string | null; // String
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -87,7 +1617,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
