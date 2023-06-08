@@ -24,29 +24,23 @@ yarn install
 
 ## Usage
 
-### Develop All Front-end Page
-
+### Develop
 ```bash
+yarn db:start     #docker compose up db
 yarn dev
 ```
+### Ports
+- **Port 3000** : Customer Page (Cart)
+- **Port 3001** : Admin Page (Staff)
+- **Port 4000** : Backend (Apollo Studio)
+- **Port 5555** : Prisma Studio (Database)
+- **Port 8081** : phpMyAdmin (Database)
+- **Port 3306** : MySQL (Database)
 
-### Develop Only Customer Page (Store)
 
-You can access customer page is in path '**[apps/frontend](apps/frontend)**'.
+## For Front-End Develop
 
-```bash
-yarn dev:frontend
-```
-
-### Develop Only Staff Page (Admin)
-
-You can access staff page is in path '**[apps/admin](apps/admin)**'.
-
-```bash
-yarn dev:admin
-```
-
-## Create UI Components
+### Create UI Components
 
 1. Create file {component_name}.jsx in [packages/shared/ui/components](packages/shared/ui/components)
 2. Export Component in [packages/shared/ui/index.js](packages/shared/ui/index.js)
@@ -62,6 +56,16 @@ yarn dev:admin
 - [Jōtai](https://jotai.org)
   - [tutorial](https://egghead.io/courses/manage-application-state-with-jotai-atoms-2c3a29f0)
 
+## Back-End Dependencies
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+- [Nexus](https://nexusjs.org/)
+- [GraphQL](https://graphql.org/)
+- [JSON Web Tokens (JWT)](https://jwt.io/)
+- [bcrypt.js](https://www.npmjs.com/package/bcryptjs)
+
+## Database ORM
+- [Prisma](https://www.prisma.io/)
+
 ## Format Code
 
 Please always format before commit code.
@@ -71,7 +75,7 @@ yarn lint
 yarn format
 ```
 
-## Recommend Extension for VScode
+## Recommend `VScode` Extension for `Development`
 
 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
@@ -82,6 +86,7 @@ yarn format
 - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
 
+---
 
 ## การทดลองใช้งานเบื้องต้น
 เนื่องจากเว็บไซต์นี้ มีการกำหนดสิทธิการเข้าถึงหน้าเว็บด้วย user role ที่แตกต่างกันไป ดังนั้น เพื่อความสะดวกในการทดลองระบบทั้งหมด <br>ทีมผู้พัฒนาได้เพิ่ม user role ที่มีชื่อว่า developer (DEV) เพื่อให้สามารถเข้าถึง form และ page ต่าง ๆ ได้ทั้งหมด
@@ -169,11 +174,6 @@ Category ID จะถูกสร้างขึ้นอัตโนมัต�
 
 ### 6. Issue: Issue analysis
 เป็นตารางที่ใช้วิเคราะห์ปริมาณของปัญหาแต่ละประเภทแล้วพนักงานได้แก้ไขเรียบร้อยแล้ว โดย **แบ่งตาม Staff ID** อ้างอิงข้อมูลจาก Issue ของลูกค้า, Issue ของพนักงานและ Category Problem แล้วนำข้อมูลของชนิดของปัญหาและพนักงานระดับต่าง ๆ มาหาวิเคราะห์ตามประเภทของปัญหา
-
-## More Information
-### สามารถดูข้อมูลเพิ่มเติมได้ที่
-
-[CHOW_CHOW_online_rental](https://github.com/Querians/chowchow-rental)
 
 ## Our Team
 

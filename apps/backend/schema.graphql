@@ -2,7 +2,6 @@
 ### Do not make changes to this file directly
 
 
-<<<<<<< HEAD
 type AuthPayload {
   customer: Customer!
   token: String!
@@ -407,8 +406,5 @@ type VehicleType {
   vehicleInfos: [VehicleInfo]
   vehicleTypeId: ID!
   vehicleTypeN: String!
-=======
-type Query {
-  ok: Boolean!
->>>>>>> 717ec021de9dc73d252743f765f56a05112fe4f5
+
 }
