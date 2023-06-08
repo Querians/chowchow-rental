@@ -406,4 +406,5 @@ type VehicleType {
   vehicleInfos: [VehicleInfo]
   vehicleTypeId: ID!
   vehicleTypeN: String!
+
 }
